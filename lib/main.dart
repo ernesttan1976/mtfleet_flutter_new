@@ -164,7 +164,7 @@ class _MyAppState extends State<MyApp> {
     flutterLocalNotificationsPlugin
         ?.resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestPermission();
+        ?.requestNotificationsPermission();
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -240,17 +240,6 @@ class _MyAppState extends State<MyApp> {
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
-      onDidReceiveLocalNotification:
-          (int id, String? title, String? body, String? payload) async {
-        didReceiveLocalNotificationStream.add(
-          ReceivedNotification(
-            id: id,
-            title: title,
-            body: body,
-            payload: payload,
-          ),
-        );
-      },
       notificationCategories: darwinNotificationCategories,
     );
     String? token = await messaging.getToken();
