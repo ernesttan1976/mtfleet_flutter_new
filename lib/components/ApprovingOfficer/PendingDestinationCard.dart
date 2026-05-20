@@ -12,32 +12,32 @@ class PendingDestinationCard extends StatelessWidget {
     var myList = [
       Text(
         "Date:",
-        style: Theme.of(context).textTheme.bodyText1,
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
       5.verticalSpace,
       Text(
         tripData.createdAt == null ? '--' : tripData.createdAt.formatDateTime('dd MMM yyyy'),
-        style: Theme.of(context).textTheme.bodyText2,
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
       5.verticalSpace,
       Text(
         "To:",
-        style: Theme.of(context).textTheme.bodyText1,
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
       5.verticalSpace,
       Text(
         tripData.to,
-        style: Theme.of(context).textTheme.bodyText2,
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
       5.verticalSpace,
       Text(
         "Requisitioner Purpose:",
-        style: Theme.of(context).textTheme.bodyText1,
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
       5.verticalSpace,
       Text(
         tripData.requisitionerPurpose,
-        style: Theme.of(context).textTheme.bodyText2,
+        style: Theme.of(context).textTheme.bodyMedium,
       ),
     ];
 

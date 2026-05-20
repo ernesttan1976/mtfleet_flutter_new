@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:transport_flutter/extensions/extensions.dart';
 import 'package:transport_flutter/models/models.dart';
@@ -30,7 +29,7 @@ class DestinationListCard extends StatelessWidget {
         children: <Widget>[
           Text(
             "${destinationData.to}",
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           Spacer(),
           destinationData.status == "Inactive"
@@ -99,7 +98,7 @@ class DestinationListCard extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Text(
             "Start time: ${destinationData.eLog?.startTime?.formatDateTime('HH:mm') ?? ''}",
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         )
       ];
@@ -111,7 +110,7 @@ class DestinationListCard extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Text(
             "Start time: ${destinationData.eLog?.startTime?.formatDateTime('HH:mm') ?? ''}",
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
         Container(
@@ -119,7 +118,7 @@ class DestinationListCard extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Text(
             "End time: ${destinationData.eLog?.endTime?.formatDateTime('HH:mm') ?? ''}",
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         )
       ];
