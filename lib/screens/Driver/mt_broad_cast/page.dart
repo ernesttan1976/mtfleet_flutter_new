@@ -49,7 +49,7 @@ class _MTBroadCastState extends State<MTBroadCast> {
             children: <Widget>[
               Text(
                 'MT BroadCast',
-                style: _themeData.textTheme.headlineSmall?.text244F4E.semiBold,
+                style: _themeData.textTheme.headline5?.text244F4E.semiBold,
               ).paddingOnly(left: 24),
               10.verticalSpace,
               Card(
@@ -91,7 +91,7 @@ class _MTBroadCastState extends State<MTBroadCast> {
                                   ? const SizedBox()
                                   : Text(
                                       '${snapshot2.data} %',
-                                      style: _themeData.textTheme.titleLarge?.semiBold.text244F4E,
+                                      style: _themeData.textTheme.headline6?.semiBold.text244F4E,
                                     ).paddingOnly(top: 20);
                             })
                       ],
@@ -151,7 +151,7 @@ class _MTBroadCastState extends State<MTBroadCast> {
       alignment: Alignment.center,
       child: Text(
         value,
-        style: _themeData.textTheme.titleMedium?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
+        style: _themeData.textTheme.subtitle1?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
       ),
     );
   }

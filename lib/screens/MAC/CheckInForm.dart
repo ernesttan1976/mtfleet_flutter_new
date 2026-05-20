@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -446,7 +447,6 @@ class _CheckInFormState extends State<CheckInForm> {
             padding: EdgeInsets.all(10),
             child: FormBuilderTypeAhead<dynamic>(
               name: "vehicleNumber",
-              textFieldConfiguration: TextFieldConfiguration(),
               suggestionsBoxController: _vehicleTA,
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(),
@@ -540,10 +540,10 @@ class _CheckInFormState extends State<CheckInForm> {
             padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: OutlinedButton(
               style: ButtonStyle(
-                shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 )),
-                side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
               ),
               onPressed: () {
                 addNewItem();
@@ -735,13 +735,11 @@ class _CheckInFormState extends State<CheckInForm> {
             padding: EdgeInsets.all(10),
             child: FormBuilderTypeAhead<dynamic>(
               name: "handedOverBy",
-              textFieldConfiguration: TextFieldConfiguration(),
               suggestionsBoxController: _handoverTA,
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(),
                 (val) {
                   if (handOverDriverID == null) return "Please enter a valid name. ";
-                  return null;
                 }
               ]),
               decoration: InputDecoration(
@@ -831,10 +829,10 @@ class _CheckInFormState extends State<CheckInForm> {
                   )
                 : OutlinedButton(
                     style: ButtonStyle(
-                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       )),
-                      side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                      side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                     ),
                     onPressed: () {
                       if (_checkInFormKey.currentState!.saveAndValidate()) {

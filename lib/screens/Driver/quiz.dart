@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -67,10 +68,10 @@ class _QuizScreenState extends State<QuizScreen> {
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all<Color>(
+                          backgroundColor: MaterialStateProperty.all<Color>(
                             Theme.of(context).primaryColor,
                           ),
-                          shape: WidgetStateProperty.all(
+                          shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -92,10 +93,10 @@ class _QuizScreenState extends State<QuizScreen> {
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -146,7 +147,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               "${widget.quiz['title']}",
                               style: Theme.of(context)
                                   .textTheme
-                                  .headlineMedium
+                                  .headline4
                                   ?.copyWith(color: Theme.of(context).primaryColor),
                             )),
                           ),
@@ -159,7 +160,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             child: Flexible(
                                 child: Text('Qn ${widget.index! + 1} of ${widget.totalQuiz}',
                                     style:
-                                        Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                                        Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
                           ),
                         ],
                       ),
@@ -169,7 +170,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           Container(
                             child: Flexible(
                                 child:
-                                    Text("${widget.quiz['question']}", style: Theme.of(context).textTheme.bodyLarge)),
+                                    Text("${widget.quiz['question']}", style: Theme.of(context).textTheme.bodyText1)),
                           ),
                         ],
                       ),
@@ -214,10 +215,10 @@ class _QuizScreenState extends State<QuizScreen> {
                         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                         child: OutlinedButton(
                           style: ButtonStyle(
-                            shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             )),
-                            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                           ),
                           onPressed: () {
                             if (_quizFormKey.currentState!.saveAndValidate()) {

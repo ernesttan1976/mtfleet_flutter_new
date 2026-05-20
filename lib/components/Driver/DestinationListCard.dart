@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:transport_flutter/extensions/extensions.dart';
 import 'package:transport_flutter/models/models.dart';
@@ -29,7 +30,7 @@ class DestinationListCard extends StatelessWidget {
         children: <Widget>[
           Text(
             "${destinationData.to}",
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
           Spacer(),
           destinationData.status == "Inactive"
@@ -43,7 +44,7 @@ class DestinationListCard extends StatelessWidget {
                         'Start',
                         style: Theme.of(context)
                             .textTheme
-                            .bodyLarge
+                            .bodyText1
                             ?.copyWith(decoration: TextDecoration.underline, letterSpacing: 1.0),
                       ),
                     )
@@ -82,7 +83,7 @@ class DestinationListCard extends StatelessWidget {
                                 : "Completed",
                     style: Theme.of(context)
                         .textTheme
-                        .bodyLarge
+                        .bodyText1
                         ?.copyWith(decoration: TextDecoration.underline, letterSpacing: 1.0),
                   ),
                 ),
@@ -98,7 +99,7 @@ class DestinationListCard extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Text(
             "Start time: ${destinationData.eLog?.startTime?.formatDateTime('HH:mm') ?? ''}",
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyText2,
           ),
         )
       ];
@@ -110,7 +111,7 @@ class DestinationListCard extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Text(
             "Start time: ${destinationData.eLog?.startTime?.formatDateTime('HH:mm') ?? ''}",
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyText2,
           ),
         ),
         Container(
@@ -118,7 +119,7 @@ class DestinationListCard extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Text(
             "End time: ${destinationData.eLog?.endTime?.formatDateTime('HH:mm') ?? ''}",
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyText2,
           ),
         )
       ];

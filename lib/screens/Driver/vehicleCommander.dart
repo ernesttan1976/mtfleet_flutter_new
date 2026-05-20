@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -32,7 +33,7 @@ class _VehicleCommanderScreenState extends State<VehicleCommanderScreen> with Au
           Container(
             child: Flexible(
                 child: Text('Overall Risk:',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -44,7 +45,7 @@ class _VehicleCommanderScreenState extends State<VehicleCommanderScreen> with Au
               child: Flexible(
                   child: Text(
             '${widget.overAllRisk}',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: myColor),
+            style: Theme.of(context).textTheme.headline4?.copyWith(color: myColor),
           ))),
         ],
       ),
@@ -54,7 +55,7 @@ class _VehicleCommanderScreenState extends State<VehicleCommanderScreen> with Au
           Container(
             child: Flexible(
                 child: Text('Checklist:',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -110,10 +111,10 @@ class _VehicleCommanderScreenState extends State<VehicleCommanderScreen> with Au
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: WidgetStateProperty.all(RoundedRectangleBorder(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             if (_vehicleCommanderFormKey.currentState!.saveAndValidate()) {

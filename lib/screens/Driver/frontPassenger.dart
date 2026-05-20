@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -35,7 +36,7 @@ class _FrontPassengerScreenState extends State<FrontPassengerScreen> with Automa
           Container(
             child: Flexible(
                 child: Text('Overall Risk:',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -47,7 +48,7 @@ class _FrontPassengerScreenState extends State<FrontPassengerScreen> with Automa
               child: Flexible(
                   child: Text(
             '${widget.overAllRisk}',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: myColor),
+            style: Theme.of(context).textTheme.headline4?.copyWith(color: myColor),
           ))),
         ],
       ),
@@ -57,7 +58,7 @@ class _FrontPassengerScreenState extends State<FrontPassengerScreen> with Automa
           Container(
             child: Flexible(
                 child: Text('Checklist:',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -91,10 +92,10 @@ class _FrontPassengerScreenState extends State<FrontPassengerScreen> with Automa
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: WidgetStateProperty.all(RoundedRectangleBorder(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             if (_frontPassengerFormKey.currentState!.saveAndValidate()) {

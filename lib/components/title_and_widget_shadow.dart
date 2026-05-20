@@ -53,14 +53,14 @@ class TitleAndWidgetShadow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          if (isTitle) Text(title ?? '', style: _themeData.textTheme.titleSmall?.semiBold).paddingFromLTRB(0, 0, 0, 10),
+          if (isTitle) Text(title ?? '', style: _themeData.textTheme.subtitle2?.semiBold).paddingFromLTRB(0, 0, 0, 10),
           if (isShadow) child.shadow() else child
         ],
       ),
     );
   }
 
-  Widget? _buildInputTitle({required String title, required Widget child}) {
+  Widget? _buildInputTitle({required String title, required Widget child, bool isShadow = true}) {
     return null;
   }
 }

@@ -61,7 +61,7 @@ class _AppLoadingScreenState extends State<AppLoadingScreen> {
           Navigator.pushReplacementNamed(context, '/login');
           return;
         }
-      } on DioClient.DioException catch (error) {
+      } on DioClient.DioError catch (error) {
         print('DIO Error: $error');
         onError();
         Navigator.pushReplacementNamed(context, '/login');

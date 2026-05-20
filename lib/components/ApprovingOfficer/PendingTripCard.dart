@@ -29,44 +29,44 @@ class PendingTripCard extends StatelessWidget {
     var myList = [
       Text(
         "Driver Name:",
-        style: Theme.of(context).textTheme.bodyLarge,
+        style: Theme.of(context).textTheme.bodyText1,
       ),
       5.verticalSpace,
       Text(
         "${tripData.driverName}",
-        style: Theme.of(context).textTheme.bodyMedium,
+        style: Theme.of(context).textTheme.bodyText2,
       ),
       10.verticalSpace,
       Text(
         "Vehicle Number Plate:",
-        style: Theme.of(context).textTheme.bodyLarge,
+        style: Theme.of(context).textTheme.bodyText1,
       ),
       5.verticalSpace,
       Text(
         "${tripData.vehicleNumber}",
-        style: Theme.of(context).textTheme.bodyMedium,
+        style: Theme.of(context).textTheme.bodyText2,
       ),
       10.verticalSpace,
       Text(
         "Date:",
-        style: Theme.of(context).textTheme.bodyLarge,
+        style: Theme.of(context).textTheme.bodyText1,
       ),
       5.verticalSpace,
       Text(
         tripData.tripDate!.formatDateTime('yyyy-MM-dd'),
-        style: Theme.of(context).textTheme.bodyMedium,
+        style: Theme.of(context).textTheme.bodyText2,
       ),
       10.verticalSpace,
       if (tripData.riskAssessment != null)
         Text(
           "Risk Assesment:",
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.bodyText1,
         ),
       5.verticalSpace,
       if (tripData.riskAssessment != null)
         Text(
           tripData.riskAssessment!,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: riskColor),
+          style: Theme.of(context).textTheme.subtitle1?.copyWith(fontWeight: FontWeight.w600, color: riskColor),
         ),
     ];
 

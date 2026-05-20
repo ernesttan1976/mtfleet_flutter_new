@@ -163,7 +163,8 @@ class _MyAppState extends State<MyApp> {
     }
     flutterLocalNotificationsPlugin
         ?.resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>();
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestPermission();
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -239,6 +240,17 @@ class _MyAppState extends State<MyApp> {
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
+      onDidReceiveLocalNotification:
+          (int id, String? title, String? body, String? payload) async {
+        didReceiveLocalNotificationStream.add(
+          ReceivedNotification(
+            id: id,
+            title: title,
+            body: body,
+            payload: payload,
+          ),
+        );
+      },
       notificationCategories: darwinNotificationCategories,
     );
     String? token = await messaging.getToken();
@@ -254,6 +266,11 @@ class _MyAppState extends State<MyApp> {
         logger.e("onMessage Listen Done");
       },
     );
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
+      iOS: initializationSettingsDarwin,
+    );
+
     FirebaseMessaging.onMessageOpenedApp.listen(_handleNotifiesClicked);
 
     FirebaseMessaging.instance
@@ -298,18 +315,17 @@ class _MyAppState extends State<MyApp> {
     logger.e("HandleNotifies ${message?.data} ${message?.notification} ");
     if (notification != null && android != null) {
       flutterLocalNotificationsPlugin?.show(
-        id: notification.hashCode,
-        title: notification.title,
-        body: notification.body,
-        notificationDetails: NotificationDetails(
-          android: AndroidNotificationDetails(
-            channel.id,
-            channel.name,
-            channelDescription: channel.description,
-            icon: '@mipmap/ic_launcher',
-          ),
-          iOS: DarwinNotificationDetails(),
-        ),
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              channelDescription: channel.description,
+              icon: '@mipmap/ic_launcher',
+            ),
+            iOS: DarwinNotificationDetails()),
       );
     }
   }

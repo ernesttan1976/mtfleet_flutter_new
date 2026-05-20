@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:transport_flutter/components/AlertDialog.dart';
@@ -62,7 +63,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                     widget.service!.maintenanceType == "AVI"
                         ? 'Type of Maintenance : Annual Vehicle Inspection '
                         : 'Type of Maintenance : ${widget.service!.maintenanceType}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -72,7 +73,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text("Work Center",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -81,7 +82,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text('${model.workCenter}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -91,7 +92,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text("Telephone No",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -100,7 +101,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text('${model.telephoneNo}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -110,7 +111,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text('Vehicle Number:',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -119,7 +120,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text('${widget.service!.vehicle!.vehicleNumber}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -129,7 +130,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child:
-                    Text('Model', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    Text('Model', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -138,7 +139,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text('${widget.service!.vehicle!.model}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -152,7 +153,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
             Container(
               child: Flexible(
                   child: Text('Type of Preventive Maintenance',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
             ),
           ],
         ),
@@ -161,7 +162,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
             Container(
               child: Flexible(
                   child: Text('${widget.service!.maintenanceType}',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
             ),
           ],
         )
@@ -175,7 +176,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text("Fuel Sensor Tag",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -184,7 +185,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text('${model.frontSensorTag}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -194,7 +195,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text("Basic Issue Tools:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -205,7 +206,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
               Container(
                 child: Flexible(
                     child: Text('${tool.name}: ${tool.quantity}',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                        style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
               ),
             ],
           ),
@@ -215,7 +216,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
             Container(
               child: Flexible(
                   child: Text('None',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
             ),
           ],
         ),
@@ -225,7 +226,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text("Condition of Vehicle:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -255,7 +256,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                   Container(
                     child: Flexible(
                         child: Text('No Images Found!',
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                            style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
                   ),
                 ],
               ),
@@ -266,7 +267,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text(widget.service!.maintenanceType == "Corrective" ? "Corrective Maintenance:" : "Defect:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -278,7 +279,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                     widget.service!.maintenanceType == "Corrective"
                         ? model.correctiveMaintenance?.correctiveMaintenance ?? '--'
                         : "s",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -288,7 +289,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text("Date In:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -297,7 +298,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text(model.dateIn == null ? '--' : '${model.dateIn!.formatDateddMMyyyy}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -307,7 +308,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text("Expected Check-out Date:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -317,7 +318,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
             child: Flexible(
                 child: Text(
                     model.expectedCheckoutDate != null ? '${model.expectedCheckoutDate!.formatDateddMMyyyy}' : '--',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -327,7 +328,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text("Speedo Reading:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -336,7 +337,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text('${model.speedoReading}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -346,7 +347,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text("SWD Reading:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -355,7 +356,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text('${model.swdReading}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -365,7 +366,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text("Handed Over By:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -374,7 +375,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text('${model.handedBy}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -384,7 +385,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child:
-                    Text('Time:', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    Text('Time:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -396,7 +397,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                     model.expectedCheckoutTime == null
                         ? '--'
                         : '${model.expectedCheckoutTime?.formatDateTime('hh:mm a')}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -406,7 +407,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text('Attended By:',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -415,7 +416,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text('${model.attender}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -425,10 +426,10 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: TextButton(
           style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all<Color>(
+            backgroundColor: MaterialStateProperty.all<Color>(
               Theme.of(context).primaryColor,
             ),
-            shape: WidgetStateProperty.all(
+            shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               ),
@@ -458,10 +459,10 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: WidgetStateProperty.all(RoundedRectangleBorder(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             final servicingId = widget.service!.id;
@@ -485,10 +486,10 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: WidgetStateProperty.all(RoundedRectangleBorder(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             print("Maintenance Type: ${widget.service!.maintenanceType}");

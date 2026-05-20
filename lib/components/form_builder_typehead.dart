@@ -4,21 +4,6 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 export 'package:flutter_typeahead/flutter_typeahead.dart';
 
-// Compatibility aliases for flutter_typeahead 6.x API changes
-// These allow older code that referenced the previous API names to continue
-// working while we migrate callers incrementally.
-// Legacy alias kept for backwards compatibility was removed because it conflicted with the
-// new SuggestionsBoxDecoration type in flutter_typeahead 6.x. Use the upstream type directly.
-typedef SuggestionsBoxController = SuggestionsController;
-typedef ErrorBuilder = SuggestionsErrorBuilder;
-
-class TextFieldConfiguration {
-  final TextStyle? style;
-  final bool autofocus;
-  TextFieldConfiguration({this.style, this.autofocus = false});
-}
-
-
 typedef SelectionToTextTransformer<T> = String Function(T suggestion);
 
 /// Text field that auto-completes user input from a list of items
@@ -81,11 +66,13 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
   ///   );
   /// }
   /// ```
-  final Widget Function(BuildContext, T) itemBuilder;
+  final ItemBuilder<T> itemBuilder;
 
   /// The decoration of the material sheet that contains the suggestions.
   ///
   /// If null, default decoration with an elevation of 4.0 is used
+  final SuggestionsBoxDecoration suggestionsBoxDecoration;
+
   /// Used to control the `_SuggestionsBox`. Allows manual control to
   /// open, close, toggle, or resize the `_SuggestionsBox`.
   final SuggestionsBoxController? suggestionsBoxController;
@@ -164,7 +151,7 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
   /// To fully remove the animation, just return `suggestionsBox`
   ///
   /// If not specified, a [SizeTransition](https://docs.flutter.io/flutter/widgets/SizeTransition-class.html) is shown.
-  final SuggestionsAnimationBuilder? transitionBuilder;
+  final AnimationTransitionBuilder? transitionBuilder;
 
   /// The duration that [transitionBuilder] animation takes.
   ///
@@ -174,16 +161,16 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
   /// Defaults to 500 milliseconds.
   final Duration animationDuration;
 
-  /// Determine the [SuggestionBox]'s vertical direction.
+  /// Determine the [SuggestionBox]'s direction.
   ///
-  /// If [VerticalDirection.down], the [SuggestionBox] will be below the [TextField]
+  /// If [AxisDirection.down], the [SuggestionBox] will be below the [TextField]
   /// and the [_SuggestionsList] will grow **down**.
   ///
-  /// If [VerticalDirection.up], the [SuggestionBox] will be above the [TextField]
+  /// If [AxisDirection.up], the [SuggestionBox] will be above the [TextField]
   /// and the [_SuggestionsList] will grow **up**.
   ///
-  /// Only [VerticalDirection.up] and [VerticalDirection.down] are allowed.
-  final VerticalDirection direction;
+  /// [AxisDirection.left] and [AxisDirection.right] are not allowed.
+  final AxisDirection direction;
 
   /// The value at which the [transitionBuilder] animation starts.
   ///
@@ -196,9 +183,6 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
   /// The configuration of the [TextField](https://docs.flutter.io/flutter/material/TextField-class.html)
   /// that the TypeAhead widget displays
   final TextFieldConfiguration textFieldConfiguration;
-
-  /// The decoration for the TextField shown by the widget
-  final InputDecoration decoration;
 
   /// How far below the text field should the suggestions box be
   ///
@@ -280,7 +264,7 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
     required String name,
     required FormFieldValidator<T> validator,
     T? initialValue,
-    this.decoration = const InputDecoration(),
+    InputDecoration decoration = const InputDecoration(),
     ValueChanged<T?>? onChanged,
     ValueTransformer<T?>? valueTransformer,
     bool enabled = true,
@@ -296,12 +280,13 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
     this.noItemsFoundBuilder,
     this.loadingBuilder,
     this.debounceDuration = const Duration(milliseconds: 300),
+    this.suggestionsBoxDecoration = const SuggestionsBoxDecoration(),
     this.suggestionsBoxVerticalOffset = 5.0,
-    required this.textFieldConfiguration,
+    this.textFieldConfiguration = const TextFieldConfiguration(),
     this.transitionBuilder,
     this.animationDuration = const Duration(milliseconds: 500),
     this.animationStart = 0.25,
-    this.direction = VerticalDirection.down,
+    this.direction = AxisDirection.down,
     this.hideOnLoading = false,
     this.hideOnEmpty = false,
     this.hideOnError = false,
@@ -324,57 +309,53 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
           onSaved: onSaved,
           enabled: enabled,
           onReset: onReset,
+          decoration: decoration,
           focusNode: focusNode,
           builder: (FormFieldState<T> field) {
             final state = field as _FormBuilderTypeAheadState<T>;
             final theme = Theme.of(state.context);
 
             return TypeAheadField<T>(
-              controller: state._typeAheadController,
-              suggestionsCallback: suggestionsCallback,
-              itemBuilder: itemBuilder,
-              builder: (context, textEditingController, focusNode) {
-                final effectiveController = state._typeAheadController;
-                return TextField(
-                  controller: effectiveController,
-                  focusNode: state.effectiveFocusNode,
+              textFieldConfiguration: textFieldConfiguration.copyWith(
                   enabled: state.enabled,
-                  decoration: state.widget.decoration.copyWith(
-                        errorText: field.errorText,
-                      ),
+                  controller: state._typeAheadController,
                   style: state.enabled
                       ? textFieldConfiguration.style
-                      : theme.textTheme.titleMedium?.copyWith(
+                      : theme.textTheme.subtitle1?.copyWith(
                           color: theme.disabledColor,
                         ),
-                );
-              },
-              onSelected: (T suggestion) {
+                  focusNode: state.effectiveFocusNode,
+                  decoration: state.decoration),
+              // HACK to satisfy strictness
+              suggestionsCallback: suggestionsCallback,
+              itemBuilder: itemBuilder,
+              transitionBuilder: (context, suggestionsBox, controller) => suggestionsBox,
+              onSuggestionSelected: (T suggestion) {
                 if (selectionToTextTransformer != null) {
                   state._typeAheadController.text = selectionToTextTransformer(suggestion);
                 } else {
-                  state._typeAheadController.text = suggestion.toString();
+                  state._typeAheadController.text = suggestion != null ? suggestion.toString() : '';
                 }
                 onSuggestionSelected?.call(suggestion);
               },
+              getImmediateSuggestions: getImmediateSuggestions,
+              errorBuilder: errorBuilder,
+              noItemsFoundBuilder: noItemsFoundBuilder,
+              loadingBuilder: loadingBuilder,
+              debounceDuration: debounceDuration,
+              suggestionsBoxDecoration: suggestionsBoxDecoration,
+              suggestionsBoxVerticalOffset: suggestionsBoxVerticalOffset,
+              animationDuration: animationDuration,
+              animationStart: animationStart,
+              direction: direction,
+              hideOnLoading: hideOnLoading,
               hideOnEmpty: hideOnEmpty,
               hideOnError: hideOnError,
-              hideOnLoading: hideOnLoading,
-              debounceDuration: debounceDuration,
-              // suggestionsBoxDecoration is no longer supported in flutter_typeahead 6.x
-              // suggestionsBoxVerticalOffset is not a parameter on TypeAheadField in 6.x, handled internally.
-              // getImmediateSuggestions is no longer a supported parameter in flutter_typeahead 6.x
-              transitionBuilder: transitionBuilder,
-              animationDuration: animationDuration,
-              direction: direction,
-              // hideSuggestionsOnKeyboardHide: hideSuggestionsOnKeyboardHide,
-              // keepSuggestionsOnLoading: keepSuggestionsOnLoading,
+              hideSuggestionsOnKeyboardHide: hideSuggestionsOnKeyboardHide,
+              keepSuggestionsOnLoading: keepSuggestionsOnLoading,
               autoFlipDirection: autoFlipDirection,
-              // suggestionsBoxController: suggestionsBoxController,
-              // keepSuggestionsOnSuggestionSelected: keepSuggestionsOnSuggestionSelected,
-              // noItemsFoundBuilder: noItemsFoundBuilder,
-              loadingBuilder: loadingBuilder,
-              errorBuilder: errorBuilder,
+              suggestionsBoxController: suggestionsBoxController,
+              keepSuggestionsOnSuggestionSelected: keepSuggestionsOnSuggestionSelected,
             );
           },
         );
@@ -417,10 +398,16 @@ class _FormBuilderTypeAheadState<T> extends FormBuilderFieldState<FormBuilderTyp
 
   @override
   void dispose() {
-    _typeAheadController.removeListener(_handleControllerChanged);
+    // Dispose the _typeAheadController when initState created it
     if (null == widget.controller) {
       _typeAheadController.dispose();
     }
     super.dispose();
+  }
+
+  @override
+  void reset() {
+    super.reset();
+    _typeAheadController.text = initialValue!.toString();
   }
 }

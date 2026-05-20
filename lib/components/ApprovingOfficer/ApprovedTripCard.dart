@@ -52,7 +52,7 @@ class ApprovedTripCard extends StatelessWidget {
           children: <Widget>[
             Text(
               "Driver Name:",
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             Spacer(),
             Text(
@@ -66,14 +66,14 @@ class ApprovedTripCard extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
         child: Text(
           "${tripData['driver']['name']}",
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       ),
       Container(
         padding: EdgeInsets.fromLTRB(10, 0, 10, 5),
         child: Text(
           "Vehicle Number Plate:",
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.bodyText1,
         ),
       ),
       Container(
@@ -86,14 +86,14 @@ class ApprovedTripCard extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(10, 0, 10, 5),
         child: Text(
           "Date:",
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.bodyText1,
         ),
       ),
       Container(
         padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
         child: Text(
           "${tripData['tripDate']}",
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       ),
     ];
@@ -112,13 +112,13 @@ class ApprovedTripCard extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
           child: Text(
             "Risk Assesment",
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyText1,
           ),
         ),
         Container(
           padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
           child: Text("${tripData['mt_rac_form']['overallRisk']}",
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: myColor, fontWeight: FontWeight.bold)),
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(color: myColor, fontWeight: FontWeight.bold)),
         )
       ]);
     }

@@ -72,7 +72,7 @@ class _ViewLogScreenState extends State<ViewLogScreen> {
                         Container(
                           child: Flexible(
                               child: Text('Update Logs: ',
-                                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                                  style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
                         ),
                       ],
                     ),
@@ -114,10 +114,10 @@ class _ViewLogScreenState extends State<ViewLogScreen> {
                       padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () async {
                           await Navigator.push(

@@ -368,10 +368,10 @@ class _TripFormScreenState extends State<TripFormScreen> {
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all<Color>(
+                          backgroundColor: MaterialStateProperty.all<Color>(
                             Theme.of(context).primaryColor,
                           ),
-                          shape: WidgetStateProperty.all(
+                          shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -393,10 +393,10 @@ class _TripFormScreenState extends State<TripFormScreen> {
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -455,7 +455,6 @@ class _TripFormScreenState extends State<TripFormScreen> {
               Expanded(
                 child: FormBuilderTypeAhead<dynamic>(
                   name: "vehicle",
-                  textFieldConfiguration: TextFieldConfiguration(),
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(),
                     (val) {
@@ -571,10 +570,10 @@ class _TripFormScreenState extends State<TripFormScreen> {
             padding: const EdgeInsets.only(top: 20),
             child: OutlinedButton(
               style: ButtonStyle(
-                shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 )),
-                side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
               ),
               onPressed: () {
                 addNewDestination();
@@ -589,10 +588,10 @@ class _TripFormScreenState extends State<TripFormScreen> {
           padding: const EdgeInsets.only(top: 20),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: WidgetStateProperty.all(RoundedRectangleBorder(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               )),
-              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
             ),
             onPressed: () {
               // Navigator.pushNamed(
@@ -636,7 +635,6 @@ class _TripFormScreenState extends State<TripFormScreen> {
           title: 'Approving Officer',
           child: FormBuilderTypeAhead<dynamic>(
             name: "approvingOfficer",
-            textFieldConfiguration: TextFieldConfiguration(),
             decoration: InputDecoration(hintText: 'System Lookup', suffixIcon: const Icon(Icons.expand_more, size: 30)),
             suggestionsBoxController: _approvingOfficerTA,
             validator: FormBuilderValidators.compose([
@@ -679,7 +677,6 @@ class _TripFormScreenState extends State<TripFormScreen> {
               Expanded(
                 child: FormBuilderTypeAhead<dynamic>(
                   name: "vehicle",
-                  textFieldConfiguration: TextFieldConfiguration(),
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(),
                     (val) {
@@ -795,10 +792,10 @@ class _TripFormScreenState extends State<TripFormScreen> {
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: WidgetStateProperty.all(RoundedRectangleBorder(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               )),
-              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
             ),
             onPressed: () {
               addNewDestination();
@@ -814,10 +811,10 @@ class _TripFormScreenState extends State<TripFormScreen> {
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: WidgetStateProperty.all(RoundedRectangleBorder(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               )),
-              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
             ),
             onPressed: () {
               // Navigator.pushNamed(

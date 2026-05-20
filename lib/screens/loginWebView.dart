@@ -24,84 +24,80 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
   final _storage = FlutterSecureStorage();
   final dio = DioClient.Dio();
   final logger = Logger();
-  late final WebViewController _controller;
 
   @override
   void initState() {
     super.initState();
+    //demo_transport3@swiftoffice.org
+    //b2jr2ngb2l!
 
-    final String loginUrl = '${Constants.SERVER_URI_API}/auth/microsoft/login';
+    // Enable virtual display.
+    if (Platform.isAndroid) WebView.platform = AndroidWebView();
+  }
 
-    _controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onPageFinished: (url) async {
-            if (mounted) {
-              if (url.startsWith(Constants.AUTH_CALLBACK)) {
-                try {
-                  var token = url.split("access_token=")[1];
-                  await _storage.write(key: Constants.storageBearer, value: token);
-                  var request = Request.Request();
-                  var data = json.decode((await request.get(Uri.parse("users/me"))).body);
-                  logger.e("loginData-> $data");
-                  final _roles = <String>[];
-                  (data['roles'] as List).forEach((element) {
-                    if (SUPPORTED_ROLES.contains(element)) {
-                      _roles.add(element);
-                    }
-                  });
-                  if (_roles.isNotEmpty) {
-                    var currentRole = _roles.first;
-                    var authData = {
-                      "user": {...data, "otherRoles": []}
-                    };
-                    await _storage.write(key: "auth", value: json.encode(authData));
-                    await _storage.write(key: "currentRole", value: currentRole);
-                    if (_roles.contains("APPROVING_OFFICER")) {
-                      _setFirebaseToken(data);
-                    } else {
-                      _deleteFirebaseToken(data);
-                    }
-
-                    Navigator.pushReplacementNamed(context, '/appLoading');
-                  } else {
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LoginScreen(
-                                  error:
-                                      "You don't have a proper role to access the application. Please contact the administration.",
-                                )));
+  @override
+  Widget build(BuildContext context) {
+    String loginUrl = '${Constants.SERVER_URI_API}/auth/microsoft/login';
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Sign In Using Microsoft"),
+      ),
+      body: WebView(
+        initialUrl: loginUrl,
+        javascriptMode: JavascriptMode.unrestricted,
+        onPageFinished: (url) async {
+          if (mounted) {
+            if (url.startsWith(Constants.AUTH_CALLBACK)) {
+              try {
+                var token = url.split("access_token=")[1];
+                await _storage.write(key: Constants.storageBearer, value: token);
+                var request = Request.Request();
+                var data = json.decode((await request.get(Uri.parse("users/me"))).body);
+                logger.e("loginData-> $data");
+                final _roles = <String>[];
+                (data['roles'] as List).forEach((element) {
+                  if (SUPPORTED_ROLES.contains(element)) {
+                    _roles.add(element);
                   }
-                } catch (e, trace) {
-                  logger.e("Error In Login $e $trace");
-                  await Sentry.captureException(e, stackTrace: trace);
+                });
+                if (_roles.isNotEmpty) {
+                  var currentRole = _roles.first;
+                  var authData = {
+                    "user": {...data, "otherRoles": []}
+                  };
+                  await _storage.write(key: "auth", value: json.encode(authData));
+                  await _storage.write(key: "currentRole", value: currentRole);
+                  if (_roles.contains("APPROVING_OFFICER")) {
+                    _setFirebaseToken(data);
+                  } else {
+                    _deleteFirebaseToken(data);
+                  }
+
+                  Navigator.pushReplacementNamed(context, '/appLoading');
+                } else {
                   Navigator.of(context).popUntil((route) => route.isFirst);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => LoginScreen(
-                                error: "There was some internal error while logging you in. Please try again!",
+                                error:
+                                    "You don't have a proper role to access the application. Please contact the administration.",
                               )));
                 }
+              } catch (e, trace) {
+                logger.e("Error In Login $e $trace");
+                await Sentry.captureException(e, stackTrace: trace);
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => LoginScreen(
+                              error: "There was some internal error while logging you in. Please try again!",
+                            )));
               }
             }
-          },
-        ),
-      )
-      ..loadRequest(Uri.parse(loginUrl));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Sign In Using Microsoft"),
-      ),
-      body: WebViewWidget(
-        controller: _controller,
+          }
+        },
       ),
     );
   }

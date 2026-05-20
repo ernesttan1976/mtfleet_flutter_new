@@ -86,14 +86,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .displaySmall
+                                    .headline3
                                     ?.copyWith(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold)),
                           ),
                           Container(
                               alignment: Alignment.topLeft,
                               padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                               child: Text('Please click the button below to login to the app',
-                                  textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyLarge)),
+                                  textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyText1)),
                           Container(
                               child: Form(
                                   key: _formKey,
@@ -105,15 +105,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                         // height: 60,
                                         child: ElevatedButton(
                                           style: ButtonStyle(
-                                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                               RoundedRectangleBorder(
                                                 borderRadius: new BorderRadius.circular(30.0),
                                               ),
                                             ),
-                                            padding: WidgetStateProperty.all(EdgeInsets.all(8.0)),
+                                            padding: MaterialStateProperty.all(EdgeInsets.all(8.0)),
                                             backgroundColor:
-                                                WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
-                                            textStyle: WidgetStateProperty.all<TextStyle>(TextStyle(
+                                                MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+                                            textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(
                                               color: Colors.white,
                                             )),
                                           ),
@@ -131,14 +131,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                                         child: Text(
                                             'Not registered? Please contact your company for your login details.',
-                                            style: Theme.of(context).textTheme.bodyMedium,
+                                            style: Theme.of(context).textTheme.bodyText2,
                                             textAlign: TextAlign.center)),
                                     Container(
                                         alignment: Alignment.topLeft,
                                         padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
                                         child: Text(
                                             'To reset your password, please contact your company for more details. Thank you.',
-                                            style: Theme.of(context).textTheme.bodyMedium,
+                                            style: Theme.of(context).textTheme.bodyText2,
                                             textAlign: TextAlign.center)),
                                   ])))
                         ],

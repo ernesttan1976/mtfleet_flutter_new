@@ -25,7 +25,7 @@ class MTRACApprovalThirdScreen extends StatelessWidget {
           Container(
             child: Flexible(
                 child: Text('Overall Risk:',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -37,7 +37,7 @@ class MTRACApprovalThirdScreen extends StatelessWidget {
               child: Flexible(
                   child: Text(
             "${tripModel?.mtracForm?.overAllRisk}",
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            style: Theme.of(context).textTheme.headline4?.copyWith(
                   color: myColor,
                 ),
           ))),
@@ -69,10 +69,10 @@ class MTRACApprovalThirdScreen extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: WidgetStateProperty.all(RoundedRectangleBorder(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             Navigator.push(
@@ -108,7 +108,7 @@ class MTRACApprovalThirdScreen extends StatelessWidget {
           children: <Widget>[
             Text(
               'MT RAC Form Approval',
-              style: Theme.of(context).textTheme.headlineSmall?.text244F4E.semiBold,
+              style: Theme.of(context).textTheme.headline5?.text244F4E.semiBold,
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -128,8 +128,8 @@ class MTRACApprovalThirdScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('$title:', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
-        Text('${content}', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal)),
+        Text('$title:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold)),
+        Text('${content}', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal)),
         const SizedBox(
           height: 15,
         ),

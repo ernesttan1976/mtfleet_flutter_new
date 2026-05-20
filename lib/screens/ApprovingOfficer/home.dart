@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:transport_flutter/screens/ApprovingOfficer/ApprovedTrip.dart';
@@ -54,12 +55,12 @@ class _ApprovingOfficerHomeState extends State<ApprovingOfficerHome> {
                     ? Text(
                         'Hi $username,',
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Theme.of(context).primaryColor),
+                        style: Theme.of(context).textTheme.headline5?.copyWith(color: Theme.of(context).primaryColor),
                       )
                     : Text(
                         'Hi,',
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Theme.of(context).primaryColor),
+                        style: Theme.of(context).textTheme.headline5?.copyWith(color: Theme.of(context).primaryColor),
                       ),
                 backgroundColor: Colors.white,
                 bottom: TabBar(isScrollable: true, indicatorColor: Theme.of(context).primaryColor, tabs: [
@@ -67,7 +68,7 @@ class _ApprovingOfficerHomeState extends State<ApprovingOfficerHome> {
                     child: Tab(
                         child: Text(
                       'Pending Trips',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).primaryColor),
+                      style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Theme.of(context).primaryColor),
                     )),
                   ),
                   // Container(
@@ -86,7 +87,7 @@ class _ApprovingOfficerHomeState extends State<ApprovingOfficerHome> {
                     child: Tab(
                       child: Text(
                         'Approved Trips',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).primaryColor),
+                        style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Theme.of(context).primaryColor),
                       ),
                     ),
                   ),

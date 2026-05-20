@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -383,16 +384,9 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
                   return null;
                 }
               ]),
-              textFieldConfiguration: TextFieldConfiguration(
-                decoration: InputDecoration(
+              decoration: InputDecoration(
                   labelText: "Vehicle Number",
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
+                  labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
               itemBuilder: (context, itemData) {
                 return itemData != null || itemData.length != 0
                     ? ListTile(title: Text("${itemData['vehicleNumber']}"))
@@ -475,10 +469,10 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
             padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: OutlinedButton(
               style: ButtonStyle(
-                shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 )),
-                side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
               ),
               onPressed: () {
                 addNewItem();
@@ -654,10 +648,10 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
                   )
                 : OutlinedButton(
                     style: ButtonStyle(
-                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       )),
-                      side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                      side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                     ),
                     onPressed: () {
                       if (_preventiveCheckInFormKey.currentState!.saveAndValidate()) {

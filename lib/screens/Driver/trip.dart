@@ -89,10 +89,10 @@ class _TripScreenState extends State<TripScreen> {
                   padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
                   child: OutlinedButton(
                     style: ButtonStyle(
-                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       )),
-                      side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                      side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -257,10 +257,10 @@ class _TripScreenState extends State<TripScreen> {
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: OutlinedButton(
                 style: ButtonStyle(
-                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   )),
-                  side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                 ),
                 onPressed: () async {
                   if (currentMeterReading.isNotEmpty) {

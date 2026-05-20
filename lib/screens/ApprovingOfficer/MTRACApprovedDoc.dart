@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:transport_flutter/models/trip_detail_model.dart';
 
@@ -25,7 +26,7 @@ class MTRACTripDocScreen extends StatelessWidget {
             Container(
               child: Flexible(
                   child: Text('Overall Risk:',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
             ),
           ],
         ),
@@ -37,7 +38,7 @@ class MTRACTripDocScreen extends StatelessWidget {
                 child: Flexible(
                     child: Text(
               "${approvedMTRACData.mtracForm?.overAllRisk}",
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              style: Theme.of(context).textTheme.headline4?.copyWith(
                     color: myColor,
                   ),
             ))),
@@ -55,7 +56,7 @@ class MTRACTripDocScreen extends StatelessWidget {
             Container(
               child: Flexible(
                   child: Text("Despatch Date",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
             ),
           ],
         ),
@@ -64,7 +65,7 @@ class MTRACTripDocScreen extends StatelessWidget {
             Container(
               child: Flexible(
                   child: Text("${approvedMTRACData.mtracForm?.despatchDate}",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
             ),
           ],
         ),
@@ -74,7 +75,7 @@ class MTRACTripDocScreen extends StatelessWidget {
             Container(
               child: Flexible(
                   child: Text("Despatch Time",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
             ),
           ],
         ),
@@ -83,7 +84,7 @@ class MTRACTripDocScreen extends StatelessWidget {
             Container(
               child: Flexible(
                   child: Text("${approvedMTRACData.mtracForm?.despatchTime?.toIso8601String().substring(0, 5)}",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
             ),
           ],
         ),
@@ -93,7 +94,7 @@ class MTRACTripDocScreen extends StatelessWidget {
             Container(
               child: Flexible(
                   child: Text("Release Date:",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
             ),
           ],
         ),
@@ -102,7 +103,7 @@ class MTRACTripDocScreen extends StatelessWidget {
             Container(
               child: Flexible(
                   child: Text("${approvedMTRACData.mtracForm?.relaseDate}",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
             ),
           ],
         ),
@@ -112,7 +113,7 @@ class MTRACTripDocScreen extends StatelessWidget {
             Container(
               child: Flexible(
                   child: Text("Release Time:",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
             ),
           ],
         ),
@@ -121,7 +122,7 @@ class MTRACTripDocScreen extends StatelessWidget {
             Container(
               child: Flexible(
                   child: Text("${approvedMTRACData.mtracForm?.relaseTime?.toIso8601String().substring(0, 5)}",
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
             ),
           ],
         )
@@ -135,7 +136,7 @@ class MTRACTripDocScreen extends StatelessWidget {
           Container(
             child: Flexible(
                 child: Text("Vehicle Commander:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -145,7 +146,7 @@ class MTRACTripDocScreen extends StatelessWidget {
             child: Flexible(
                 child: Text(
                     approvedMTRACData.vehicle == null ? "No Vehicle Commander" : "${approvedMTRACData.vehicle?.model}",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -155,7 +156,7 @@ class MTRACTripDocScreen extends StatelessWidget {
           Container(
             child: Flexible(
                 child: Text("Safety Measure:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -167,7 +168,7 @@ class MTRACTripDocScreen extends StatelessWidget {
                     approvedMTRACData.mtracForm?.safetyMeasures == null
                         ? "No Safety Measures"
                         : "${approvedMTRACData.mtracForm?.safetyMeasures}",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),

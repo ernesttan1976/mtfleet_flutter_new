@@ -58,8 +58,8 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
-                          shape: WidgetStateProperty.all(
+                          backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+                          shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -84,10 +84,10 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -125,7 +125,7 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
                 Container(
                   child: Flexible(
                       child: Text('Overall Risk:',
-                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold))),
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold))),
                 ),
               ],
             ),
@@ -137,7 +137,7 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
                     child: Flexible(
                         child: Text(
                   '${widget.overAllRisk}',
-                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: myColor),
+                  style: Theme.of(context).textTheme.headline4!.copyWith(color: myColor),
                 ))),
               ],
             ),
@@ -147,7 +147,7 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
                 Container(
                   child: Flexible(
                       child: Text('Checklist:',
-                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold))),
+                          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold))),
                 ),
               ],
             ),
@@ -181,10 +181,10 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
         child: !isLoading
             ? OutlinedButton(
                 style: ButtonStyle(
-                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   )),
-                  side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                 ),
                 onPressed: () {
                   if (_driverFormKey.currentState!.saveAndValidate()) {
@@ -207,10 +207,10 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
         child: !isLoading
             ? OutlinedButton(
                 style: ButtonStyle(
-                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   )),
-                  side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                 ),
                 onPressed: () {
                   if (_driverFormKey.currentState!.saveAndValidate()) {

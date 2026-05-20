@@ -95,10 +95,10 @@ class _DriverHomeState extends State<DriverHome> {
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child:TextButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all<Color>(
+                          backgroundColor: MaterialStateProperty.all<Color>(
                             Theme.of(context).primaryColor,
                           ),
-                          shape: WidgetStateProperty.all(
+                          shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -117,10 +117,10 @@ class _DriverHomeState extends State<DriverHome> {
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -176,10 +176,10 @@ class _DriverHomeState extends State<DriverHome> {
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all<Color>(
+                          backgroundColor: MaterialStateProperty.all<Color>(
                             Theme.of(context).primaryColor,
                           ),
-                          shape: WidgetStateProperty.all(
+                          shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -206,10 +206,10 @@ class _DriverHomeState extends State<DriverHome> {
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () => {
                           Navigator.of(context).pop(),
@@ -257,14 +257,14 @@ class _DriverHomeState extends State<DriverHome> {
                                             'Hi, $name,',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headlineMedium
+                                                .headline4
                                                 ?.copyWith(color: Theme.of(context).primaryColor),
                                           )
                                         : Text(
                                             'Hi,',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headlineMedium
+                                                .headline4
                                                 ?.copyWith(color: Theme.of(context).primaryColor),
                                           )),
                               ),
@@ -297,11 +297,11 @@ class _DriverHomeState extends State<DriverHome> {
                                   height: 60,
                                   child: OutlinedButton(
                                     style: ButtonStyle(
-                                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30.0),
                                       )),
                                       side:
-                                          WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                                          MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                                     ),
                                     onPressed: () async {
                                       var roleString = await getCurrentRole();
@@ -334,11 +334,11 @@ class _DriverHomeState extends State<DriverHome> {
                                   height: 60,
                                   child: OutlinedButton(
                                     style: ButtonStyle(
-                                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30.0),
                                       )),
                                       side:
-                                          WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                                          MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                                     ),
                                     onPressed: () => {
                                       Navigator.push(

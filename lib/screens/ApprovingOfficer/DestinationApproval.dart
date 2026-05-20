@@ -76,7 +76,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
             Container(
               child: Flexible(
                   child: Text('Overall Risk:',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
             ),
           ],
         ),
@@ -88,7 +88,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                 child: Flexible(
                     child: Text(
               "${trip.mtracForm?.overAllRisk}",
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              style: Theme.of(context).textTheme.headline4?.copyWith(
                     color: myColor,
                   ),
             ))),
@@ -104,7 +104,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           Container(
             child: Flexible(
                 child:
-                    Text('Date:', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    Text('Date:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -113,7 +113,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           Container(
             child: Flexible(
                 child: Text(trip.tripDate!.formatDateddMMMMHHmma,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -148,7 +148,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           Container(
             child: Flexible(
                 child:
-                    Text('To:', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    Text('To:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -156,7 +156,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
 
     for (var destination in trip.destinations) {
       myList.add(
-          Text(destination.to, style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal)));
+          Text(destination.to, style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal)));
     }
 
     // for (var ad_destination in trip['ad_hoc_destinations']) {
@@ -183,19 +183,19 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           Container(
             child: Flexible(
                 child: Text("Requisitioner's Purpose",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
       ...trip.destinations.map((e) => Text(e.requisitionerPurpose,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
           Container(
             child: Flexible(
                 child: Text("Approved Documents:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -225,7 +225,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text("Trip Approval",
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal)),
+                            style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal)),
                         Spacer(),
                         InkWell(
                           onTap: () {
@@ -241,7 +241,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                             "VIEW",
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyLarge
+                                .bodyText1
                                 ?.copyWith(fontWeight: FontWeight.normal, decoration: TextDecoration.underline),
                           ),
                         ),
@@ -253,7 +253,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                       children: <Widget>[
                         Text(
                           "MTRAC",
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal),
+                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal),
                         ),
                         Spacer(),
                         InkWell(
@@ -270,7 +270,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                             "VIEW",
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyLarge
+                                .bodyText1
                                 ?.copyWith(fontWeight: FontWeight.normal, decoration: TextDecoration.underline),
                           ),
                         ),
@@ -287,8 +287,8 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: TextButton(
             style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
-              shape: WidgetStateProperty.all(
+              backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+              shape: MaterialStateProperty.all(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
@@ -306,7 +306,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: WidgetStateProperty.all(
+              shape: MaterialStateProperty.all(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                   side: BorderSide(color: Theme.of(context).primaryColor),
@@ -345,7 +345,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text("Trip Approval",
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal)),
+                            style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal)),
                         Spacer(),
                         InkWell(
                           onTap: () {
@@ -361,7 +361,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                             "VIEW",
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyLarge
+                                .bodyText1
                                 ?.copyWith(fontWeight: FontWeight.normal, decoration: TextDecoration.underline),
                           ),
                         ),
@@ -378,8 +378,8 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: TextButton(
             style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
-              shape: WidgetStateProperty.all(
+              backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+              shape: MaterialStateProperty.all(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
@@ -397,10 +397,10 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: WidgetStateProperty.all(RoundedRectangleBorder(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               )),
-              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
             ),
             onPressed: () {
               denyAlert();
@@ -494,8 +494,8 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
-                          shape: WidgetStateProperty.all(
+                          backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+                          shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -517,10 +517,10 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();

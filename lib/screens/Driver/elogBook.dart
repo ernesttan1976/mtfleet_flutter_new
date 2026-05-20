@@ -85,7 +85,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
       } else {
         showAlertDialog(context, 'Error', res.reasonPhrase);
       }
-    } on DioException catch (e) {
+    } on DioError catch (e) {
       showAlertDialog(context, 'Error', e.response!.data["message"].toString());
     }
     setState(() {
@@ -108,7 +108,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
       } else {
         showAlertDialog(context, 'Error', res.statusMessage, isPop: false);
       }
-    } on DioException catch (e) {
+    } on DioError catch (e) {
       showAlertDialog(context, 'Error', e.response!.data, isPop: false);
     }
     setState(() {
@@ -275,10 +275,10 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -566,10 +566,10 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
                           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                           child: OutlinedButton(
                             style: ButtonStyle(
-                              shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
                               )),
-                              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                             ),
                             onPressed: () async {
                               if (_initialMeterReadingFormKey.currentState!.validate()) {
@@ -709,7 +709,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
         children: <Widget>[
           Container(
             child:
-                Text('Trip Date', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
+                Text('Trip Date', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -717,7 +717,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
         children: <Widget>[
           Container(
               child:
-                  Text(myTripData.tripDate!.formatDateddMMMyyyyHHmmaa, style: Theme.of(context).textTheme.bodyLarge)),
+                  Text(myTripData.tripDate!.formatDateddMMMyyyyHHmmaa, style: Theme.of(context).textTheme.bodyText1)),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
@@ -725,14 +725,14 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
         children: <Widget>[
           Container(
             child: Text('Vehicle Number',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
+                style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
       Row(
         children: <Widget>[
           Container(
-              child: Text("${myTripData.vehicle?.vehicleNumber ?? ''}", style: Theme.of(context).textTheme.bodyLarge)),
+              child: Text("${myTripData.vehicle?.vehicleNumber ?? ''}", style: Theme.of(context).textTheme.bodyText1)),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
@@ -741,7 +741,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
           Container(
             child: Flexible(
                 child: Text('Safety Measure',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -755,7 +755,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
                         : myTripData.mtracForm?.safetyMeasures == null
                             ? "There is no safety measure for this trip"
                             : myTripData.mtracForm!.safetyMeasures!,
-                    style: Theme.of(context).textTheme.bodyLarge)),
+                    style: Theme.of(context).textTheme.bodyText1)),
           ),
         ],
       ),
@@ -765,7 +765,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
           Container(
             child: Flexible(
                 child: Text('Destination List',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -828,8 +828,8 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: TextButton(
                 style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all<Color>(Color(0xffff0033)),
-                  shape: WidgetStateProperty.all(
+                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xffff0033)),
+                  shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),

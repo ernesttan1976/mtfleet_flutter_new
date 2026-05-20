@@ -1,4 +1,5 @@
 // Create a Form widget.
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -176,7 +177,23 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
                               ),
                               TitleAndWidgetShadow(
                                 title: 'Vehicle Next AVI Date Due',
-                                child: FormBuilderDateTimePicker(
+                                child: nextAVIDate != null
+                                    ? FormBuilderDateTimePicker(
+                                        key: Key("nextAviDateKey"),
+                                        name: "aviDate",
+                                        validator: FormBuilderValidators.required(),
+                                        inputType: InputType.date,
+                                        initialValue: DateTime.tryParse(nextAVIDate),
+                                        decoration: InputDecoration(
+                                            hintText: "DD-MMM-YYYY",
+                                            suffixIcon: Padding(
+                                              padding: const EdgeInsetsDirectional.only(end: 12.0),
+                                              child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
+                                            )),
+                                        format: new DateFormat('dd MMMM yyyy')
+                                        // readonly: true,
+                                        )
+                                    : FormBuilderDateTimePicker(
                                         name: "aviDate",
                                         validator: FormBuilderValidators.required(),
                                         inputType: InputType.date,
@@ -195,10 +212,10 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
                                 padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                                 child: OutlinedButton(
                                   style: ButtonStyle(
-                                    shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                     )),
-                                    side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                                    side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                                   ),
                                   onPressed: () {
                                     if (_additionalDetailFormKey.currentState!.saveAndValidate()) {

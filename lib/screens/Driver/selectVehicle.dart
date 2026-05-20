@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -149,7 +150,7 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
       var dio = await dioClient;
       print("Can Access: $canAccessAllVehicles");
 
-      String query = !canAccessAllVehicles
+      String query = canAccessAllVehicles == null || !canAccessAllVehicles
           ? "/vehicles?_limit=5&sub_unit.id=$subUnitID&vehicleNumber=$pattern$platformQuery"
           : "/vehicles?_limit=5&sub_unit.base=$baseID&vehicleNumber=$pattern$platformQuery";
       var result = await dio.get(query);
@@ -225,7 +226,7 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
       } else {
         showAlertDialog(context, "Failure", response.statusMessage, isPop: false);
       }
-    } on DioException catch (e) {
+    } on DioError catch (e) {
       if (e.response!.statusCode! >= 400 || e.response!.statusCode! < 500) {
         logger.e("Response is 400 ${e.response!.data!}");
       }
@@ -266,7 +267,6 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
             Expanded(
               child: FormBuilderTypeAhead<dynamic>(
                 name: "vehicle",
-                textFieldConfiguration: TextFieldConfiguration(),
                 suggestionsBoxController: _vehicleTA,
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(),
@@ -446,10 +446,10 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
         child: !submitButtonLoading
             ? OutlinedButton(
                 style: ButtonStyle(
-                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   )),
-                  side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                 ),
                 onPressed: () {
                   if (_selectVehicleFormKey.currentState!.saveAndValidate()) {
@@ -490,7 +490,7 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
                 children: <Widget>[
                   Text(
                     'Select Your Vehicle',
-                    style: Theme.of(context).textTheme.headlineSmall!.text244F4E.semiBold,
+                    style: Theme.of(context).textTheme.headline5!.text244F4E.semiBold,
                   ),
                   10.verticalSpace,
                   Expanded(

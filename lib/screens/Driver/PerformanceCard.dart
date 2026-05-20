@@ -109,10 +109,10 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                           child: OutlinedButton(
                             style: ButtonStyle(
-                              shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
                               )),
-                              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                             ),
                             onPressed: () async {
                               if (_durationFormKey.currentState!.validate()) {
@@ -188,7 +188,7 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Expanded(
-                    child: Text('My Performance Card ', style: Theme.of(context).textTheme.titleLarge),
+                    child: Text('My Performance Card ', style: Theme.of(context).textTheme.headline6),
                   ),
                   // Spacer(),
                 ],
@@ -207,7 +207,7 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                       "Download",
                       style: Theme.of(context)
                           .textTheme
-                          .bodyLarge
+                          .bodyText1
                           ?.copyWith(letterSpacing: 1.5, decoration: TextDecoration.underline),
                     ),
                   ),
@@ -355,7 +355,7 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Expanded(
-                    child: Text('My Performance Card ', style: Theme.of(context).textTheme.titleLarge),
+                    child: Text('My Performance Card ', style: Theme.of(context).textTheme.headline6),
                   ),
                   // Spacer(),
                 ],
@@ -370,7 +370,7 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                       "Download",
                       style: Theme.of(context)
                           .textTheme
-                          .bodyLarge
+                          .bodyText1
                           ?.copyWith(letterSpacing: 1.5, decoration: TextDecoration.underline),
                     ),
                   ),

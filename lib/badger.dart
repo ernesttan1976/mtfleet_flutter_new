@@ -1,4 +1,4 @@
-import 'package:app_badge_plus/app_badge_plus.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 
 class Badger {
   Badger._init();
@@ -10,9 +10,9 @@ class Badger {
 
   int get badgeCount => _badgeCount;
 
-  static Future<void> changeBadgeCount({int count = 1}) async {
+  static void changeBadgeCount({int count = 1}) {
     _instance._badgeCount += count;
     if (_instance._badgeCount < 0) _instance._badgeCount = 0;
-    await AppBadgePlus.updateBadge(_instance._badgeCount);
+    FlutterAppBadger.updateBadgeCount(_instance._badgeCount);
   }
 }

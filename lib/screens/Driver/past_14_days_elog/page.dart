@@ -59,7 +59,7 @@ class _Past14DaysELogState extends State<Past14DaysELog> with SingleTickerProvid
             children: <Widget>[
               Text(
                 'Past 14 days eLogs',
-                style: _themeData.textTheme.headlineSmall!.text244F4E.semiBold,
+                style: _themeData.textTheme.headline5!.text244F4E.semiBold,
               ).paddingOnly(left: 24),
               10.verticalSpace,
               Expanded(
@@ -113,9 +113,9 @@ class _Past14DaysELogState extends State<Past14DaysELog> with SingleTickerProvid
       decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2), borderRadius: BorderRadius.circular(12)),
       child: TabBar(
         controller: _tabController,
-        unselectedLabelStyle: _themeData.textTheme.titleMedium!.medium,
+        unselectedLabelStyle: _themeData.textTheme.subtitle1!.medium,
         unselectedLabelColor: _themeData.hintColor,
-        labelStyle: _themeData.textTheme.titleMedium!.semiBold,
+        labelStyle: _themeData.textTheme.subtitle1!.semiBold,
         labelColor: Colors.black,
         indicatorWeight: 0,
         labelPadding: const EdgeInsets.symmetric(horizontal: 10),

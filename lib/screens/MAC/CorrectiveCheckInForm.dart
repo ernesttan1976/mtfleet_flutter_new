@@ -383,14 +383,12 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
                   return null;
                 }
               ]),
-              textFieldConfiguration: TextFieldConfiguration(
-                decoration: InputDecoration(
-                  labelText: "Vehicle Number",
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    color: Colors.black,
-                  ),
+              decoration: InputDecoration(
+                labelText: "Vehicle Number",
+                labelStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                  color: Colors.black,
                 ),
               ),
               itemBuilder: (context, itemData) {
@@ -475,10 +473,10 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
             padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: OutlinedButton(
               style: ButtonStyle(
-                shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 )),
-                side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
               ),
               onPressed: () {
                 addNewItem();
@@ -654,10 +652,10 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
                   )
                 : OutlinedButton(
                     style: ButtonStyle(
-                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       )),
-                      side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                      side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                     ),
                     onPressed: () {
                       if (_preventiveCheckInFormKey.currentState!.saveAndValidate()) {

@@ -54,7 +54,7 @@ class TripCard extends StatelessWidget {
         children: <Widget>[
           Text(
             "Date:",
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+            style: Theme.of(context).textTheme.subtitle1?.copyWith(fontWeight: FontWeight.w600),
           ),
           const Spacer(),
           Text(
@@ -66,30 +66,30 @@ class TripCard extends StatelessWidget {
       ),
       Text(
         (tripData.tripDate ?? DateTime.now()).formatDateTime('dd MMM yyyy'),
-        style: Theme.of(context).textTheme.bodyLarge,
+        style: Theme.of(context).textTheme.bodyText1,
       ),
       20.verticalSpace,
       Text(
         "Destination",
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+        style: Theme.of(context).textTheme.subtitle1?.copyWith(fontWeight: FontWeight.w600),
       ),
       ...tripData.destinations.map(
         (e) => Text(
           e.to,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.bodyText1,
         ),
       ),
       20.verticalSpace,
       if (tripData.riskAssessment != null)
         Text(
           "Risk Assessment",
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+          style: Theme.of(context).textTheme.subtitle1?.copyWith(fontWeight: FontWeight.w600),
         ),
       5.verticalSpace,
       if (tripData.riskAssessment != null)
         Text(
           tripData.riskAssessment!,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: riskColor),
+          style: Theme.of(context).textTheme.subtitle1?.copyWith(fontWeight: FontWeight.w600, color: riskColor),
         ),
     ];
     // if (tripData['mt_rac_form'] != null) {

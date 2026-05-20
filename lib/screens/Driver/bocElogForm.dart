@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -87,7 +88,7 @@ class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
           children: <Widget>[
             Text(
               'ELogbook',
-              style: _themeData.textTheme.headlineSmall!.text244F4E.semiBold,
+              style: _themeData.textTheme.headline5!.text244F4E.semiBold,
             ).paddingHorizontal(24),
             10.verticalSpace,
             Expanded(
@@ -102,14 +103,14 @@ class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Trip Date', style: _themeData.textTheme.titleSmall!.semiBold),
-          Text("${DateTime.now().toString().substring(0, 10)}", style: _themeData.textTheme.bodyLarge),
+          Text('Trip Date', style: _themeData.textTheme.subtitle2!.semiBold),
+          Text("${DateTime.now().toString().substring(0, 10)}", style: _themeData.textTheme.bodyText1),
           20.verticalSpace,
-          Text('Time Started', style: _themeData.textTheme.titleSmall!.semiBold),
-          Text("${DateTime.now().toString().substring(11, 16)}", style: _themeData.textTheme.bodyLarge),
+          Text('Time Started', style: _themeData.textTheme.subtitle2!.semiBold),
+          Text("${DateTime.now().toString().substring(11, 16)}", style: _themeData.textTheme.bodyText1),
           20.verticalSpace,
-          Text('Time Arrived', style: _themeData.textTheme.titleSmall!.semiBold),
-          Text("${DateTime.now().toString().substring(11, 16)}", style: _themeData.textTheme.bodyLarge),
+          Text('Time Arrived', style: _themeData.textTheme.subtitle2!.semiBold),
+          Text("${DateTime.now().toString().substring(11, 16)}", style: _themeData.textTheme.bodyText1),
           20.verticalSpace,
           FormBuilder(
             key: _bOCElogbookFormKey,
@@ -243,10 +244,10 @@ class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
                   child: !submitButtonLoading
                       ? OutlinedButton(
                           style: ButtonStyle(
-                            shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             )),
-                            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                           ),
                           onPressed: () {
                             if (_bOCElogbookFormKey.currentState!.validate()) {

@@ -80,10 +80,10 @@ class _MACHomeState extends State<MACHome> {
                   margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: OutlinedButton(
                     style: ButtonStyle(
-                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       )),
-                      side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                      side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                     ),
                     onPressed: () async {
                       Navigator.of(context).pop();
@@ -106,10 +106,10 @@ class _MACHomeState extends State<MACHome> {
                     margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                     child: OutlinedButton(
                       style: ButtonStyle(
-                        shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         )),
-                        side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                        side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                       ),
                       onPressed: () async {
                         Navigator.of(context).pop();
@@ -130,10 +130,10 @@ class _MACHomeState extends State<MACHome> {
                   margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: OutlinedButton(
                     style: ButtonStyle(
-                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       )),
-                      side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                      side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                     ),
                     onPressed: () async {
                       Navigator.of(context).pop();
@@ -191,14 +191,14 @@ class _MACHomeState extends State<MACHome> {
                                             'Hi, $name,',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headlineMedium
+                                                .headline4
                                                 ?.copyWith(color: Theme.of(context).primaryColor),
                                           )
                                         : Text(
                                             'Hi,',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headlineMedium
+                                                .headline4
                                                 ?.copyWith(color: Theme.of(context).primaryColor),
                                           )),
                               ),
@@ -209,7 +209,7 @@ class _MACHomeState extends State<MACHome> {
                             children: <Widget>[
                               Container(
                                 child: Flexible(
-                                    child: Text('Vehicle In Workshop', style: Theme.of(context).textTheme.titleLarge)),
+                                    child: Text('Vehicle In Workshop', style: Theme.of(context).textTheme.headline6)),
                               ),
                             ],
                           ),
@@ -229,10 +229,10 @@ class _MACHomeState extends State<MACHome> {
                                 height: 60,
                                 child: OutlinedButton(
                                   style: ButtonStyle(
-                                    shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                     )),
-                                    side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                                    side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                                   ),
                                   onPressed: _selectionOptionAlert,
                                   child: Text(

@@ -379,7 +379,7 @@ class _TripPageViewState extends State<TripPageView> {
       } else {
         showAlertDialog(context, "Error", response.data['message'], isPop: false);
       }
-    } on DioException catch (e) {
+    } on DioError catch (e) {
       logger.e(" Catch Error ${e.response?.data}");
       showAlertDialog(context, "Error", e.response!.data["message"]);
     }
@@ -506,7 +506,7 @@ class _TripPageViewState extends State<TripPageView> {
       } else {
         showAlertDialog(context, "Error", response.data['message'], isPop: false);
       }
-    } on DioException catch (e) {
+    } on DioError catch (e) {
       showAlertDialog(
         context,
         "Error Catch",

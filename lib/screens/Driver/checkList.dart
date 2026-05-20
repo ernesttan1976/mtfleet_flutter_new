@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -66,8 +67,8 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
-                          shape: WidgetStateProperty.all(
+                          backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+                          shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -92,10 +93,10 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -146,18 +147,18 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
             20.verticalSpace,
             Row(
               children: <Widget>[
-                Text('Overall Risk:', style: _themeData.textTheme.bodyLarge!.semiBold),
+                Text('Overall Risk:', style: _themeData.textTheme.bodyText1!.semiBold),
               ],
             ),
             20.verticalSpace,
             Text(
               '${widget.overAllRisk}',
-              style: _themeData.textTheme.headlineMedium?.copyWith(color: myColor),
+              style: _themeData.textTheme.headline4?.copyWith(color: myColor),
             ),
             20.verticalSpace,
             Row(
               children: <Widget>[
-                Text('Checklist:', style: _themeData.textTheme.bodyLarge!.semiBold),
+                Text('Checklist:', style: _themeData.textTheme.bodyText1!.semiBold),
               ],
             ),
             16.verticalSpace,
@@ -213,10 +214,10 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: WidgetStateProperty.all(RoundedRectangleBorder(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               )),
-              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
             ),
             onPressed: () {
               if (_frontPassengerCheckListFormKey.currentState!.saveAndValidate()) {
@@ -264,7 +265,7 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
             20.verticalSpace,
             Row(
               children: <Widget>[
-                Text('Overall Risk:', style: _themeData.textTheme.bodyLarge!.semiBold),
+                Text('Overall Risk:', style: _themeData.textTheme.bodyText1!.semiBold),
               ],
             ),
             20.verticalSpace,
@@ -273,14 +274,14 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
               children: <Widget>[
                 Text(
                   '${widget.overAllRisk}',
-                  style: _themeData.textTheme.headlineMedium?.copyWith(color: myColor),
+                  style: _themeData.textTheme.headline4?.copyWith(color: myColor),
                 ),
               ],
             ),
             20.verticalSpace,
             Row(
               children: <Widget>[
-                Text('Checklist:', style: _themeData.textTheme.bodyLarge!.semiBold),
+                Text('Checklist:', style: _themeData.textTheme.bodyText1!.semiBold),
               ],
             ),
             16.verticalSpace,
@@ -351,10 +352,10 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
         child: !isLoading
             ? OutlinedButton(
                 style: ButtonStyle(
-                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   )),
-                  side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                 ),
                 onPressed: () {
                   if (_vehicleCommanderFormKey.currentState!.saveAndValidate()) {
@@ -399,7 +400,7 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
             if (checkListFor != null)
               Text(
                 'For $checkListFor',
-                style: _themeData.textTheme.headlineSmall!.text244F4E.semiBold,
+                style: _themeData.textTheme.headline5!.text244F4E.semiBold,
               ),
             15.verticalSpace,
             Expanded(

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:transport_flutter/models/models.dart';
 import 'package:transport_flutter/screens/MAC/Maintenance.dart';
@@ -36,7 +37,7 @@ class _MaintenanceCardState extends State<MaintenanceCard> {
                         children: <Widget>[
                           Text(
                             "MID ${item.vehicle != null ? item.vehicle?.vehicleNumber : ''}",
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(letterSpacing: 1.5),
+                            style: Theme.of(context).textTheme.bodyText1?.copyWith(letterSpacing: 1.5),
                           ),
                           const Spacer(),
                           InkWell(
@@ -50,7 +51,7 @@ class _MaintenanceCardState extends State<MaintenanceCard> {
                               "View",
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyLarge
+                                  .bodyText1
                                   ?.copyWith(letterSpacing: 1.5, decoration: TextDecoration.underline),
                             ),
                           ),

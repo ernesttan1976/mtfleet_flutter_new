@@ -86,7 +86,7 @@ class TableELogOne extends StatelessWidget {
         height: 35,
         child: Text(
           value,
-          style: _themeData.textTheme.titleMedium?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
+          style: _themeData.textTheme.subtitle1?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
         ),
       ),
     );

@@ -67,14 +67,6 @@ void showAlertDialogNotification(BuildContext context, RemoteMessage message) as
       );
     },
   ).then((value) {
-    try {
-      // Newer plugin API requires named parameters; cancel by id
-      final id = message.notification?.hashCode;
-      if (id != null) {
-        flutterLocalNotificationsPlugin?.cancel(id: id);
-      }
-    } catch (e) {
-      // ignore cancel errors
-    }
+    flutterLocalNotificationsPlugin?.cancel(message.notification.hashCode);
   });
 }

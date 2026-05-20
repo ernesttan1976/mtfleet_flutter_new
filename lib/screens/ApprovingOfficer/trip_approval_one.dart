@@ -68,7 +68,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
           Container(
             child: Flexible(
                 child:
-                    Text('Date:', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    Text('Date:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -77,7 +77,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
           Container(
             child: Flexible(
                 child: Text(tripData.tripDate!.formatDateTime('dd MMM yyyy'),
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -87,7 +87,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
           Container(
             child: Flexible(
                 child: Text('Vehicle License Number:',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -96,7 +96,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
           Container(
             child: Flexible(
                 child: Text("${tripData.vehicle != null ? tripData.vehicle?.vehicleNumber : 'N/A'}",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -106,7 +106,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
           Container(
             child: Flexible(
                 child:
-                    Text('Type:', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                    Text('Type:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -115,7 +115,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
           Container(
             child: Flexible(
                 child: Text("${tripData.vehicle?.model}",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -128,7 +128,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
                 Container(
                   child: Flexible(
                       child: Text('To:',
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
                 ),
               ],
             ),
@@ -137,7 +137,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
                 Container(
                   child: Flexible(
                       child: Text("${item.to}",
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
                 ),
               ],
             ),
@@ -147,7 +147,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
                 Container(
                   child: Flexible(
                       child: Text("Requisitioner's Purpose",
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
                 ),
               ],
             ),
@@ -156,7 +156,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
                 Container(
                   child: Flexible(
                       child: Text("${item.requisitionerPurpose}",
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
                 ),
               ],
             ),
@@ -168,10 +168,10 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
         padding: const EdgeInsets.only(top: 10),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: WidgetStateProperty.all(RoundedRectangleBorder(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             if (tripData.mtracForm != null)
@@ -219,7 +219,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
         children: <Widget>[
           Text(
             'Trip Approval',
-            style: Theme.of(context).textTheme.headlineSmall?.text244F4E.semiBold,
+            style: Theme.of(context).textTheme.headline5?.text244F4E.semiBold,
           ).paddingOnly(left: 25),
           15.verticalSpace,
           Expanded(
