@@ -726,9 +726,9 @@ class _TimePickerHeader extends StatelessWidget {
     // screen shots of the time picker in the spec.
     switch (orientation) {
       case Orientation.portrait:
-        return headerTextTheme.headline2!.copyWith(fontSize: 60.0);
+        return headerTextTheme.displayMedium!.copyWith(fontSize: 60.0);
       case Orientation.landscape:
-        return headerTextTheme.headline3!.copyWith(fontSize: 50.0);
+        return headerTextTheme.displaySmall!.copyWith(fontSize: 50.0);
     }
   }
 
@@ -761,13 +761,13 @@ class _TimePickerHeader extends StatelessWidget {
         backgroundColor = themeData.primaryColor;
         break;
       case Brightness.dark:
-        backgroundColor = themeData.backgroundColor;
+        backgroundColor = themeData.colorScheme.background;
         break;
     }
 
     Color activeColor;
     Color inactiveColor;
-    switch (themeData.primaryColorBrightness) {
+    switch (themeData.colorScheme.brightness) {
       case Brightness.light:
         activeColor = Colors.black87;
         inactiveColor = Colors.black54;
@@ -1363,7 +1363,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
         backgroundColor = Colors.grey[200];
         break;
       case Brightness.dark:
-        backgroundColor = themeData?.backgroundColor;
+        backgroundColor = themeData?.colorScheme.background;
         break;
     }
 
@@ -1378,20 +1378,20 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
         if (widget.use24HourDials) {
           selectedDialValue = widget.selectedTime.hour;
           primaryOuterLabels = _build24HourOuterRing(theme.textTheme);
-          secondaryOuterLabels = _build24HourOuterRing(theme.accentTextTheme);
+          secondaryOuterLabels = _build24HourOuterRing(theme.textTheme);
           primaryInnerLabels = _build24HourInnerRing(theme.textTheme);
-          secondaryInnerLabels = _build24HourInnerRing(theme.accentTextTheme);
+          secondaryInnerLabels = _build24HourInnerRing(theme.textTheme);
         } else {
           selectedDialValue = widget.selectedTime.hourOfPeriod;
           primaryOuterLabels = _build12HourOuterRing(theme.textTheme);
-          secondaryOuterLabels = _build12HourOuterRing(theme.accentTextTheme);
+          secondaryOuterLabels = _build12HourOuterRing(theme.textTheme);
         }
         break;
       case _TimePickerMode.minute:
         selectedDialValue = widget.selectedTime.minute;
         primaryOuterLabels = _buildMinutes(theme.textTheme);
         primaryInnerLabels = null;
-        secondaryOuterLabels = _buildMinutes(theme.accentTextTheme);
+        secondaryOuterLabels = _buildMinutes(theme.textTheme);
         secondaryInnerLabels = null;
         break;
     }
@@ -1411,7 +1411,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
           secondaryOuterLabels: secondaryOuterLabels,
           secondaryInnerLabels: secondaryInnerLabels,
           backgroundColor: backgroundColor,
-          accentColor: themeData?.accentColor,
+          accentColor: themeData?.colorScheme.secondary,
           theta: _theta!.value,
           activeRing: _activeRing,
           textDirection: Directionality.of(context),
