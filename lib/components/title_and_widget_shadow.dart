@@ -11,7 +11,7 @@ class TitleAndWidgetShadow extends StatelessWidget {
 
   TitleAndWidgetShadow({this.title, required this.child, this.isShadow = true, this.isTitle = true});
 
-  late ThemeData _themeData;
+  late final ThemeData _themeData;
   static final InputBorder _inputBorder = OutlineInputBorder(
     borderSide: BorderSide(color: Colors.transparent),
     borderRadius: BorderRadius.circular(12),
@@ -53,7 +53,7 @@ class TitleAndWidgetShadow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          if (isTitle) Text(title ?? '', style: _themeData.textTheme.subtitle2?.semiBold).paddingFromLTRB(0, 0, 0, 10),
+          if (isTitle) Text(title ?? '', style: _themeData.textTheme.titleSmall?.semiBold).paddingFromLTRB(0, 0, 0, 10),
           if (isShadow) child.shadow() else child
         ],
       ),

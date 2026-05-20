@@ -8,7 +8,7 @@ class TableELogOne extends StatelessWidget {
 
   TableELogOne({required this.onTapItem, required this.stream});
 
-  late ThemeData _themeData;
+  late final ThemeData _themeData;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +86,7 @@ class TableELogOne extends StatelessWidget {
         height: 35,
         child: Text(
           value,
-          style: _themeData.textTheme.subtitle1?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
+          style: _themeData.textTheme.titleMedium?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
         ),
       ),
     );
