@@ -8,10 +8,10 @@ class MaintenanceCard extends StatefulWidget {
   const MaintenanceCard({Key? key, required this.vehicleServicings}) : super(key: key);
 
   @override
-  _MaintenanceCardState createState() => new _MaintenanceCardState();
+  MaintenanceCardState createState() => MaintenanceCardState();
 }
 
-class _MaintenanceCardState extends State<MaintenanceCard> {
+class MaintenanceCardState extends State<MaintenanceCard> {
   // QuizCard()
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class _MaintenanceCardState extends State<MaintenanceCard> {
                               "View",
                               style: Theme.of(context)
                                   .textTheme
-                                  .bodyText1
+                                  .bodyLarge
                                   ?.copyWith(letterSpacing: 1.5, decoration: TextDecoration.underline),
                             ),
                           ),
