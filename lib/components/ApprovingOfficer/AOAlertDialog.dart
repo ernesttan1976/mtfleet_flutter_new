@@ -5,11 +5,11 @@ dynamic showAOAlertDialog = (context, title, description) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: new Text("$title"),
-        content: new Text("$description"),
+        title: Text(title),
+        content: Text(description),
         actions: <Widget>[
-          new TextButton(
-            child: new Text("Close"),
+          TextButton(
+            child: const Text("Close"),
             onPressed: () {
               Navigator.of(context).pop();
               Navigator.of(context).pop();

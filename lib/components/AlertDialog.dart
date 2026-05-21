@@ -9,11 +9,11 @@ Future<void> showAlertDialog(BuildContext context, String title, String descript
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: new Text("$title"),
-        content: new Text("$description"),
+        title: Text(title),
+        content: Text(description),
         actions: <Widget>[
-          new TextButton(
-            child: new Text("Close"),
+          TextButton(
+            child: const Text("Close"),
             onPressed: () {
               if (isPop) Navigator.of(context).pop();
               Navigator.of(context).pop();
@@ -32,33 +32,36 @@ void showAlertDialogNotification(BuildContext context, RemoteMessage message) as
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: new Text('Notification'),
+        title: const Text('Notification'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            new Text("${message.notification?.title}"),
+            if (message.notification?.title != null)
+              Text(message.notification!.title!),
             const SizedBox(height: 10),
-            new Text("${message.notification?.body}"),
+            if (message.notification?.body != null)
+              Text(message.notification!.body!),
           ],
         ),
         actions: <Widget>[
-          new TextButton(
-            child: new Text("OK"),
+          TextButton(
+            child: const Text("OK"),
             onPressed: () {
               Navigator.pop(context);
               final tripId = message.data['tripId'];
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TripApprovalScreen(
-                      tripID: tripId,
-                    ),
-                  ));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TripApprovalScreen(
+                    tripID: tripId,
+                  ),
+                ),
+              );
             },
           ),
-          new TextButton(
-            child: new Text("Close"),
+          TextButton(
+            child: const Text("Close"),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -67,6 +70,9 @@ void showAlertDialogNotification(BuildContext context, RemoteMessage message) as
       );
     },
   ).then((value) {
-    flutterLocalNotificationsPlugin?.cancel(message.notification.hashCode);
+    final id = message.notification?.hashCode;
+    if (id != null) {
+      flutterLocalNotificationsPlugin?.cancel(id);
+    }
   });
 }
