@@ -56,7 +56,7 @@ class ApprovedTripCard extends StatelessWidget {
             ),
             Spacer(),
             Text(
-              "$tripStatus",
+              tripStatus,
               style: TextStyle(color: statusColor),
             )
           ],
