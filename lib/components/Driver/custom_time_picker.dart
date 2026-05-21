@@ -1282,13 +1282,14 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
 
   _TappableLabel _buildTappableLabel(TextTheme textTheme, int value, String label, VoidCallback onTap) {
     final TextStyle? style = textTheme.titleMedium;
-    final double labelScaleFactor = math.min(MediaQuery.of(context).textScaleFactor, 2.0);
+    final TextScaler textScaler = MediaQuery.of(context).textScaler;
+    final double labelScaleFactor = math.min(textScaler.scale(1.0), 2.0);
     return _TappableLabel(
       value: value,
       painter: TextPainter(
         text: TextSpan(style: style, text: label),
         textDirection: TextDirection.ltr,
-        textScaleFactor: labelScaleFactor,
+        textScaler: TextScaler.linear(labelScaleFactor),
       )..layout(),
       onTap: onTap,
     );
@@ -1575,12 +1576,12 @@ class _TimePickerDialogState extends State<_TimePickerDialogCustom> {
     final Widget actions = OverflowBar(
       children: <Widget>[
         TextButton(
-          child: Text(localizations.cancelButtonLabel),
           onPressed: _handleCancel,
+          child: Text(localizations.cancelButtonLabel),
         ),
         TextButton(
-          child: Text(localizations.okButtonLabel),
           onPressed: _handleOk,
+          child: Text(localizations.okButtonLabel),
         ),
       ],
     );
