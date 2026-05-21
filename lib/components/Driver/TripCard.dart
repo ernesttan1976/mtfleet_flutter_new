@@ -6,7 +6,7 @@ import 'package:transport_flutter/models/models.dart';
 class TripCard extends StatelessWidget {
   final TripDriverModel tripData;
 
-  TripCard({Key? key, required this.tripData}) : super(key: key);
+  const TripCard({Key? key, required this.tripData}) : super(key: key);
 
   // Approved
   // Rejected
@@ -58,7 +58,7 @@ class TripCard extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            "${(tripData.approvalStatus == 'Approved' && tripData.tripStatus != 'Inactive' ? tripData.tripStatus : tripData.approvalStatus)}"
+            (tripData.approvalStatus == 'Approved' && tripData.tripStatus != 'Inactive' ? tripData.tripStatus : tripData.approvalStatus)
                 .toUpperCase(),
             style: TextStyle(color: statusColor, fontWeight: FontWeight.w500),
           )
@@ -92,37 +92,6 @@ class TripCard extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: riskColor),
         ),
     ];
-    // if (tripData['mt_rac_form'] != null) {
-    //   Color overAllRiskColor;
-    //
-    //   if (tripData['mt_rac_form']['overallRisk'] == "MEDIUM") {
-    //     overAllRiskColor = Colors.orange[500];
-    //   } else if (tripData['mt_rac_form']['overallRisk'] == "LOW") {
-    //     overAllRiskColor = Colors.green;
-    //   } else {
-    //     overAllRiskColor = Colors.red[500];
-    //   }
-    //
-    //   myData.addAll([
-    //     Container(
-    //       padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-    //       child: Text(
-    //         "Risk Assesment",
-    //         style: Theme.of(context).textTheme.bodyLarge,
-    //       ),
-    //     ),
-    //     Container(
-    //       padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-    //       child: Text(
-    //         "${tripData['mt_rac_form']['overallRisk']}",
-    //         style: TextStyle(
-    //             color: overAllRiskColor,
-    //             fontWeight: FontWeight.bold,
-    //             letterSpacing: 1.0),
-    //       ),
-    //     )
-    //   ]);
-    // }
 
     return myData;
   }
