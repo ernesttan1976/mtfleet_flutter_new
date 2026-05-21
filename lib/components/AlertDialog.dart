@@ -4,8 +4,8 @@ import 'package:transport_flutter/screens/ApprovingOfficer/trip_approval_one.dar
 
 import '../main.dart';
 
-Future showAlertDialog(context, title, description, {bool isPop = true, VoidCallback? callBack}) {
-  return showDialog(
+Future<void> showAlertDialog(BuildContext context, String title, String description, {bool isPop = true, VoidCallback? callBack}) {
+  return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
