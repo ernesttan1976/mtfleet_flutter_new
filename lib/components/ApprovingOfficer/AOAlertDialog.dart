@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-dynamic showAOAlertDialog = (context, title, description) {
-  return showDialog(
+void showAOAlertDialog(BuildContext context, String title, String description, {bool popAll = false}) {
+  return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
@@ -11,10 +11,11 @@ dynamic showAOAlertDialog = (context, title, description) {
           TextButton(
             child: const Text("Close"),
             onPressed: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pop();
-              Navigator.of(context).pop();
-              Navigator.of(context).pop();
+              if (popAll) {
+                while (Navigator.of(context).canPop()) Navigator.of(context).pop();
+              } else {
+                Navigator.of(context).pop();
+              }
             },
           ),
         ],
