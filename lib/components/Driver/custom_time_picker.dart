@@ -7,6 +7,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 
 // Examples can assume:
 // BuildContext context;
@@ -142,6 +143,11 @@ class _DayPeriodControl extends StatelessWidget {
 
   final _TimePickerFragmentContext fragmentContext;
   final Orientation orientation;
+
+  void _announceToAccessibility(BuildContext context, String message) {
+    // Announce changes to assistive technologies.
+    SemanticsService.announce(message, Directionality.of(context));
+  }
 
   void _togglePeriod() {
     final int newHour = (fragmentContext.selectedTime.hour + TimeOfDay.hoursPerPeriod) % TimeOfDay.hoursPerDay;
