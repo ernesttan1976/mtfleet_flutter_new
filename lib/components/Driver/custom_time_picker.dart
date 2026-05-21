@@ -362,7 +362,7 @@ class _HourControl extends StatelessWidget {
               formattedHour,
               style: hourStyle,
               textAlign: TextAlign.end,
-              textScaler: TextScaler.noScaling(),
+              textScaler: TextScaler.noScaling,
             ),
           ),
         ),
@@ -384,7 +384,7 @@ class _StringFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExcludeSemantics(
-      child: Text(value, style: fragmentContext.inactiveStyle, textScaler: TextScaler.noScaling()),
+      child: Text(value, style: fragmentContext.inactiveStyle, textScaler: TextScaler.noScaling),
     );
   }
 }
@@ -432,7 +432,7 @@ class _MinuteControl extends StatelessWidget {
           type: MaterialType.transparency,
           child: InkWell(
             onTap: Feedback.wrapForTap(() => fragmentContext.onModeChange(_TimePickerMode.minute), context),
-            child: Text(formattedMinute, style: minuteStyle, textAlign: TextAlign.start, textScaler: TextScaler.noScaling()),
+            child: Text(formattedMinute, style: minuteStyle, textAlign: TextAlign.start, textScaler: TextScaler.noScaling),
           ),
         ),
       ),
