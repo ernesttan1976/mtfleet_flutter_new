@@ -71,8 +71,6 @@ void showAlertDialogNotification(BuildContext context, RemoteMessage message) as
     },
   ).then((value) {
     final id = message.notification?.hashCode ?? message.data.hashCode;
-    if (id != null) {
-      flutterLocalNotificationsPlugin?.cancel(id: id);
-    }
+    flutterLocalNotificationsPlugin?.cancel(id: id);
   });
 }
