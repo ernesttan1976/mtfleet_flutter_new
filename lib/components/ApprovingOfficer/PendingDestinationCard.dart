@@ -16,7 +16,11 @@ class PendingDestinationCard extends StatelessWidget {
       ),
       5.verticalSpace,
       Text(
-        tripData.createdAt == null ? '--' : tripData.createdAt.formatDateTime('dd MMM yyyy'),
+        tripData.createdAt.formatDateTime('dd MMM yyyy'),
+        style: Theme.of(context).textTheme.bodyMedium,
+      ),
+      Text(
+        tripData.createdAt.formatDateTime('dd MMM yyyy'),
         style: Theme.of(context).textTheme.bodyMedium,
       ),
       5.verticalSpace,
