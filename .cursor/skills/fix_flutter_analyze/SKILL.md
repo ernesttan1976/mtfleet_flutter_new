@@ -33,17 +33,54 @@ Repeat this loop until the user stops you or no actionable errors remain.
    - Focus only on that one error type in that one file for this iteration.
    - Ignore other files and error types until the next loop iteration.
 
-#### Step 3 – Create and get approval for a fix plan
+#### Step 3 – Create and get approval for a Cursor-readable fix plan
 1. Read the target Dart file completely (or at least the relevant regions) before editing.
-2. For the chosen error type in that file, collect the first few occurrences (e.g., 3–10 instances, depending on complexity).
+2. For the chosen error type in that file, collect the first few occurrences (e.g., 3–10 instances, depending on complexity). Record exact line ranges for each occurrence when possible.
 3. Draft a short, concrete plan of **minimal** code changes that would resolve those occurrences. For example:
    - `unused_import` → remove the unused import.
    - `avoid_print` → replace `print` with a proper logger or remove debug logging, based on project conventions.
    - `dead_code` → remove or refactor unreachable code.
    - `invalid_assignment` / `type` errors → adjust types, nullability, or control flow with minimal change.
-4. Write this plan into a markdown file at the project root (e.g. `flutter_analyze_plan.md`), clearly listing the file, error type, and the specific minimal changes you intend to make.
-5. Present the contents of `flutter_analyze_plan.md` to the user and explicitly ask them to approve, request changes, or reject the plan.
-6. Only proceed to the next step after the user has approved the plan. If the plan is ambiguous, risky, or the user requests adjustments, update the plan in `flutter_analyze_plan.md` and re-seek approval.
+4. The generated plan must be written in a structured, Cursor-readable markdown format and saved at the project root (example filename: `flutter_analyze_plan.md`). Use the template below so downstream Cursor tooling or agents can parse the plan automatically.
+
+Recommended `flutter_analyze_plan.md` template (machine- and human-readable):
+
+---
+YAML metadata block (required):
+
+```yaml
+---
+target_file: "lib/components/Driver/custom_time_picker.dart"
+error_type: "unused_import"
+instances:
+  - start_line: 1
+    end_line: 3
+  - start_line: 120
+    end_line: 120
+risk: low
+agent: fix-flutter-analyze
+created_on: 2026-05-21T12:00:00Z
+---
+```
+
+Human-friendly plan body (required):
+
+- Summary: Short description of the issue and the minimal changes to make.
+- Changes: For each instance above, list the exact change. Where possible include an exact code reference to the source file using Cursor's code-reference style or a small code snippet. Example code-reference usage (replace numbers with the real line ranges you observed):
+
+```
+```12:14:lib/components/Driver/custom_time_picker.dart
+// ... example lines to be removed or changed ...
+```
+```
+
+- Proposed edits (explicit): show either the exact lines to remove/replace or a unified diff patch snippet. Keep edits minimal.
+- Risk assessment: low/medium/high and short rationale.
+- Test suggestions: commands or steps the user should run after edits (e.g., `dart format <file>`, `flutter analyze`).
+- Approval: `pending` (agent must prompt user to approve)
+
+5. Write this plan into `flutter_analyze_plan.md` and present it to the user for approval. The agent must not modify any source files until the user explicitly approves the plan in the chat.
+6. If the user requests changes to the plan, update `flutter_analyze_plan.md` and re-present it for approval.
 7. Ensure the final approved plan does **not** change runtime behavior beyond what is required to fix the error, unless clearly safe and agreed with the user.
 
 #### Step 4 – Apply the fixes
