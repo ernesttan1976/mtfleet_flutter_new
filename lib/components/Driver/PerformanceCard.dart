@@ -1,16 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PerformanceCard extends StatefulWidget {
   const PerformanceCard({Key? key}) : super(key: key);
 
   @override
-  _PerformanceCardState createState() => new _PerformanceCardState();
+  State<PerformanceCard> createState() => _PerformanceCardState();
 }
 
 class _PerformanceCardState extends State<PerformanceCard> {
-  // QuizCard()
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,8 +23,7 @@ class _PerformanceCardState extends State<PerformanceCard> {
           width: MediaQuery.of(context).size.width * 1.0,
           child: Row(
             children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width * 0.25,
+              SizedBox(width: MediaQuery.of(context).size.width * 0.25,
                 child: Row(
                   children: <Widget>[
                     Column(
@@ -47,8 +43,7 @@ class _PerformanceCardState extends State<PerformanceCard> {
                   ],
                 ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.25,
+              SizedBox(width: MediaQuery.of(context).size.width * 0.25,
                 child: Row(
                   children: <Widget>[
                     Column(
@@ -68,8 +63,7 @@ class _PerformanceCardState extends State<PerformanceCard> {
                   ],
                 ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.25,
+              SizedBox(width: MediaQuery.of(context).size.width * 0.25,
                 child: Row(
                   children: <Widget>[
                     Column(
