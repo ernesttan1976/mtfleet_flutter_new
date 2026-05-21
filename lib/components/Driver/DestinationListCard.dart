@@ -28,7 +28,7 @@ class DestinationListCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "${destinationData.to}",
+            destinationData.to,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           Spacer(),
@@ -37,13 +37,13 @@ class DestinationListCard extends StatelessWidget {
                   ? InkWell(
                       onTap: () {
                         debugPrint("Start Called");
-                        return startDestination();
+                        startDestination.call();
                       },
                       child: Text(
                         'Start',
                         style: Theme.of(context)
                             .textTheme
-                            .bodyText1
+                            .bodyMedium
                             ?.copyWith(decoration: TextDecoration.underline, letterSpacing: 1.0),
                       ),
                     )
@@ -82,7 +82,7 @@ class DestinationListCard extends StatelessWidget {
                                 : "Completed",
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText1
+                        .bodyMedium
                         ?.copyWith(decoration: TextDecoration.underline, letterSpacing: 1.0),
                   ),
                 ),
