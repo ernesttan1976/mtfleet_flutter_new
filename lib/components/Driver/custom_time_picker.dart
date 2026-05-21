@@ -616,9 +616,11 @@ class _TimePickerHeaderLayout extends MultiChildLayoutDelegate {
         fragmentsFlattened.add(fragment);
       }
 
-      if (pieceIndex == format.centerpieceIndex)
+      if (pieceIndex == format.centerpieceIndex) {
         pivotIndex += format.pieces[format.centerpieceIndex].pivotIndex;
-      else if (pieceIndex < format.centerpieceIndex) pivotIndex += piece.fragments.length;
+      } else if (pieceIndex < format.centerpieceIndex) {
+        pivotIndex += piece.fragments.length;
+      }
     }
 
     _positionPivoted(size.width, size.height / 2.0, childSizes, fragmentsFlattened, pivotIndex);
