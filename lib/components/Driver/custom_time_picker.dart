@@ -648,10 +648,11 @@ class _TimePickerHeaderLayout extends MultiChildLayoutDelegate {
     double y = (size.height - height) / 2.0;
     for (int pieceIndex = 0; pieceIndex < format.pieces.length; pieceIndex += 1) {
       final double pieceVerticalCenter = y + pieceHeights[pieceIndex] / 2.0;
-      if (pieceIndex != format.centerpieceIndex)
+      if (pieceIndex != format.centerpieceIndex) {
         _positionPiece(size.width, pieceVerticalCenter, childSizes, format.pieces[pieceIndex].fragments);
-      else
+      } else {
         _positionPivoted(size.width, pieceVerticalCenter, childSizes, centerpiece.fragments, centerpiece.pivotIndex);
+      }
 
       y += pieceHeights[pieceIndex] + format.pieces[pieceIndex].bottomMargin;
     }
@@ -763,7 +764,7 @@ class _TimePickerHeader extends StatelessWidget {
         backgroundColor = themeData.primaryColor;
         break;
       case Brightness.dark:
-        backgroundColor = themeData.colorScheme.background;
+        backgroundColor = themeData.colorScheme.surface;
         break;
     }
 
