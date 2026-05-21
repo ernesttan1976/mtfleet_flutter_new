@@ -70,9 +70,9 @@ void showAlertDialogNotification(BuildContext context, RemoteMessage message) as
       );
     },
   ).then((value) {
-    final id = message.notification?.hashCode ?? message.data.hashCode;
+    final id = message.notification?.hashCode ?? message.data.hashCode; // ignore: unnecessary_null_comparison
     if (id != null) {
-      flutterLocalNotificationsPlugin?.cancel(id);
+      flutterLocalNotificationsPlugin?.cancel(id: id);
     }
   });
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-void showAOAlertDialog(BuildContext context, String title, String description, {bool popAll = false}) {
-  return showDialog<void>(
+Future<void> showAOAlertDialog(BuildContext context, String title, String description, {bool popAll = false}) {
+  return showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
