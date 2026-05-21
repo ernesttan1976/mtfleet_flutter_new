@@ -210,11 +210,11 @@ class _DayPeriodControl extends StatelessWidget {
     final Color activeColor = fragmentContext.activeColor;
     final Color inactiveColor = fragmentContext.inactiveColor;
     final bool amSelected = selectedTime.period == DayPeriod.am;
-    final TextStyle amStyle = headerTextTheme.subtitle1!.copyWith(color: amSelected ? activeColor : inactiveColor);
-    final TextStyle pmStyle = headerTextTheme.subtitle1!.copyWith(color: !amSelected ? activeColor : inactiveColor);
+    final TextStyle amStyle = headerTextTheme.titleMedium!.copyWith(color: amSelected ? activeColor : inactiveColor);
+    final TextStyle pmStyle = headerTextTheme.titleMedium!.copyWith(color: !amSelected ? activeColor : inactiveColor);
     final bool layoutPortrait = orientation == Orientation.portrait;
 
-    final double buttonTextScaleFactor = math.min(MediaQuery.of(context).textScaleFactor, 2.0);
+    final double buttonTextScaleFactor = math.min(MediaQuery.textScalerOf(context).scale(1.0), 2.0);
 
     final Widget amButton = ConstrainedBox(
       constraints: _kMinTappableRegion,
@@ -233,7 +233,7 @@ class _DayPeriodControl extends StatelessWidget {
                 child: Text(
                   materialLocalizations.anteMeridiemAbbreviation,
                   style: amStyle,
-                  textScaleFactor: buttonTextScaleFactor,
+                  textScaler: TextScaler.linear(buttonTextScaleFactor),
                 ),
               ),
             ),
@@ -260,7 +260,7 @@ class _DayPeriodControl extends StatelessWidget {
                 child: Text(
                   materialLocalizations.postMeridiemAbbreviation,
                   style: pmStyle,
-                  textScaleFactor: buttonTextScaleFactor,
+                  textScaler: TextScaler.linear(buttonTextScaleFactor),
                 ),
               ),
             ),
@@ -362,7 +362,7 @@ class _HourControl extends StatelessWidget {
               formattedHour,
               style: hourStyle,
               textAlign: TextAlign.end,
-              textScaleFactor: 1.0,
+              textScaler: TextScaler.noScaling(),
             ),
           ),
         ),
@@ -384,7 +384,7 @@ class _StringFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExcludeSemantics(
-      child: Text(value, style: fragmentContext.inactiveStyle, textScaleFactor: 1.0),
+      child: Text(value, style: fragmentContext.inactiveStyle, textScaler: TextScaler.noScaling()),
     );
   }
 }
@@ -432,7 +432,7 @@ class _MinuteControl extends StatelessWidget {
           type: MaterialType.transparency,
           child: InkWell(
             onTap: Feedback.wrapForTap(() => fragmentContext.onModeChange(_TimePickerMode.minute), context),
-            child: Text(formattedMinute, style: minuteStyle, textAlign: TextAlign.start, textScaleFactor: 1.0),
+            child: Text(formattedMinute, style: minuteStyle, textAlign: TextAlign.start, textScaler: TextScaler.noScaling()),
           ),
         ),
       ),
@@ -1147,10 +1147,11 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
       final RenderBox box = context.findRenderObject() as RenderBox;
       final double radius = box.size.shortestSide / 2.0;
       if (widget.mode == _TimePickerMode.hour && widget.use24HourDials) {
-        if (offset.distance * 1.5 < radius)
+        if (offset.distance * 1.5 < radius) {
           _activeRing = _DialRing.inner;
-        else
+        } else {
           _activeRing = _DialRing.outer;
+        }
       }
     });
   }
@@ -1277,7 +1278,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
   ];
 
   _TappableLabel _buildTappableLabel(TextTheme textTheme, int value, String label, VoidCallback onTap) {
-    final TextStyle? style = textTheme.subtitle1;
+    final TextStyle? style = textTheme.titleMedium;
     final double labelScaleFactor = math.min(MediaQuery.of(context).textScaleFactor, 2.0);
     return _TappableLabel(
       value: value,
@@ -1327,7 +1328,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
       ];
 
   List<_TappableLabel> _buildMinutes(TextTheme textTheme) {
-    const List<TimeOfDay> _minuteMarkerValues = <TimeOfDay>[
+    const List<TimeOfDay> minuteMarkerValues = <TimeOfDay>[
       TimeOfDay(hour: 0, minute: 0),
       TimeOfDay(hour: 0, minute: 5),
       TimeOfDay(hour: 0, minute: 10),
@@ -1343,7 +1344,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
     ];
 
     return <_TappableLabel>[
-      for (final TimeOfDay timeOfDay in _minuteMarkerValues)
+      for (final TimeOfDay timeOfDay in minuteMarkerValues)
         _buildTappableLabel(
           textTheme,
           timeOfDay.minute,
@@ -1363,7 +1364,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
         backgroundColor = Colors.grey[200];
         break;
       case Brightness.dark:
-        backgroundColor = themeData?.colorScheme.background;
+        backgroundColor = themeData?.colorScheme.surface;
         break;
     }
 
@@ -1568,7 +1569,7 @@ class _TimePickerDialogState extends State<_TimePickerDialogCustom> {
       ),
     );
 
-    final Widget actions = ButtonBar(
+    final Widget actions = OverflowBar(
       children: <Widget>[
         TextButton(
           child: Text(localizations.cancelButtonLabel),
@@ -1684,7 +1685,9 @@ class _TimePickerDialogState extends State<_TimePickerDialogCustom> {
 
     return Theme(
       data: theme.copyWith(
-        dialogBackgroundColor: Colors.transparent,
+        dialogTheme: theme.dialogTheme.copyWith(
+          backgroundColor: Colors.transparent,
+        ),
       ),
       child: dialog,
     );
@@ -1780,5 +1783,5 @@ Future<TimeOfDay?> showTimePickerCustom({
 }
 
 void _announceToAccessibility(BuildContext context, String message) {
-  SemanticsService.announce(message, Directionality.of(context));
+  SemanticsService.sendAnnouncement(message, Directionality.of(context));
 }
