@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:transport_flutter/screens/ApprovingOfficer/trip_approval_one.dart'; // ignore: file_names
+import 'package:transport_flutter/screens/ApprovingOfficer/trip_approval_one.dart';
 
 import '../main.dart';
 
@@ -26,7 +26,7 @@ Future<void> showAlertDialog(BuildContext context, String title, String descript
   );
 }
 
-void showAlertDialogNotification(BuildContext context, RemoteMessage message) async { // ignore: avoid_print
+void showAlertDialogNotification(BuildContext context, RemoteMessage message) async {
   print(message.toString());
   await showDialog(
     context: context,
@@ -70,7 +70,7 @@ void showAlertDialogNotification(BuildContext context, RemoteMessage message) as
       );
     },
   ).then((value) {
-    final id = message.notification?.hashCode ?? message.data.hashCode; // ignore: unnecessary_null_comparison
+    final id = message.notification?.hashCode ?? message.data.hashCode;
     if (id != null) {
       flutterLocalNotificationsPlugin?.cancel(id: id);
     }
