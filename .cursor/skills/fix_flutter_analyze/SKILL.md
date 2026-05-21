@@ -25,7 +25,7 @@ Repeat this loop until the user stops you or no actionable errors remain.
 2. If the command fails for non-analysis reasons (e.g., missing SDK, build issues), stop and ask the user for guidance.
 
 #### Step 2 – Identify the first repeated error type in one file
-1. Open `flutter_analyze.md` and parse from the top.
+1. Open `flutter_analyze.md` max 20 lines and parse from the top.
 2. Find the first error type and file combination that appears **more than once** near the top of the report, for example:
    - Same error code (e.g., `avoid_print`, `unused_import`, `invalid_assignment`, etc.)
    - Same Dart file path.
@@ -33,19 +33,21 @@ Repeat this loop until the user stops you or no actionable errors remain.
    - Focus only on that one error type in that one file for this iteration.
    - Ignore other files and error types until the next loop iteration.
 
-#### Step 3 – Plan fixes for that error cluster
+#### Step 3 – Create and get approval for a fix plan
 1. Read the target Dart file completely (or at least the relevant regions) before editing.
 2. For the chosen error type in that file, collect the first few occurrences (e.g., 3–10 instances, depending on complexity).
-3. For each occurrence, create a short plan of **minimal** code changes that would resolve it. Examples:
+3. Draft a short, concrete plan of **minimal** code changes that would resolve those occurrences. For example:
    - `unused_import` → remove the unused import.
    - `avoid_print` → replace `print` with a proper logger or remove debug logging, based on project conventions.
    - `dead_code` → remove or refactor unreachable code.
    - `invalid_assignment` / `type` errors → adjust types, nullability, or control flow with minimal change.
-4. Ensure the plan does **not** change runtime behavior beyond what is required to fix the error, unless clearly safe.
-5. If the fix is ambiguous or risky (e.g., unclear business logic), stop and ask the user before editing.
+4. Write this plan into a markdown file at the project root (e.g. `flutter_analyze_plan.md`), clearly listing the file, error type, and the specific minimal changes you intend to make.
+5. Present the contents of `flutter_analyze_plan.md` to the user and explicitly ask them to approve, request changes, or reject the plan.
+6. Only proceed to the next step after the user has approved the plan. If the plan is ambiguous, risky, or the user requests adjustments, update the plan in `flutter_analyze_plan.md` and re-seek approval.
+7. Ensure the final approved plan does **not** change runtime behavior beyond what is required to fix the error, unless clearly safe and agreed with the user.
 
 #### Step 4 – Apply the fixes
-1. Implement the planned changes as minimal, targeted edits in the chosen Dart file.
+1. Implement the user-approved changes as minimal, targeted edits in the chosen Dart file.
 2. Avoid broad refactors or style-only changes that are unrelated to the targeted error.
 3. After editing, run any relevant format/lint commands for that file if available (e.g., `dart format <file>`), or rely on project conventions.
 
@@ -81,7 +83,7 @@ Repeat this loop until the user stops you or no actionable errors remain.
 
 1. Run `flutter analyze > flutter_analyze.md`.
 2. Identify repeated `unused_import` errors in `lib/components/Driver/custom_time_picker.dart`.
-3. Plan to remove specific unused imports at the top of that file.
+3. Draft `flutter_analyze_plan.md` describing the specific unused imports to remove from that file and get user approval.
 4. Edit `custom_time_picker.dart` to remove those imports and format the file if needed.
 5. Re-run `flutter analyze` and confirm those `unused_import` errors are gone.
 6. Commit with a message like:
