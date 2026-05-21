@@ -9,23 +9,7 @@ import 'package:flutter/material.dart';
 // Examples can assume:
 // BuildContext context;
 
-const Duration _kDialAnimateDuration = Duration(milliseconds: 200);
-const double _kTwoPi = 2 * math.pi;
-const Duration _kVibrateCommitDelay = Duration(milliseconds: 100);
-
 enum _TimePickerMode { hour, minute }
-
-const double _kTimePickerHeaderPortraitHeight = 96.0;
-const double _kTimePickerHeaderLandscapeWidth = 168.0;
-
-const double _kTimePickerWidthPortrait = 328.0;
-const double _kTimePickerWidthLandscape = 512.0;
-
-const double _kTimePickerHeightPortrait = 496.0;
-const double _kTimePickerHeightLandscape = 316.0;
-
-const double _kTimePickerHeightPortraitCollapsed = 484.0;
-const double _kTimePickerHeightLandscapeCollapsed = 304.0;
 
 const BoxConstraints _kMinTappableRegion = BoxConstraints(minWidth: 48, minHeight: 48);
 
