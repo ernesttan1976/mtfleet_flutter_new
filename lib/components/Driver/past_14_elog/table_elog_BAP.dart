@@ -5,34 +5,33 @@ import 'package:transport_flutter/models/models.dart';
 class TableELogBAP extends StatelessWidget {
   final Stream<List<ELogBapVehicleModel>> stream;
   final Function(ELogBapVehicleModel) onTapItem;
-  late final ThemeData _themeData;
 
-  TableELogBAP({required this.onTapItem, required this.stream});
+  const TableELogBAP({Key? key, required this.onTapItem, required this.stream}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    _themeData = Theme.of(context);
+    final themeData = Theme.of(context);
     return StreamBuilder<List<ELogBapVehicleModel>>(
-        initialData: [],
+        initialData: const [],
         stream: stream,
         builder: (context, snapshot) {
           return Table(
-            defaultColumnWidth: IntrinsicColumnWidth(),
+            defaultColumnWidth: const IntrinsicColumnWidth(),
             border: TableBorder.all(color: Colors.grey),
             children: [
-              _buildHeaderTable(),
+              _buildHeaderTable(themeData),
               ...?snapshot.data
-                  ?.map((element) => _dataRowTables(model: element, onTap: () => onTapItem(element)))
+                  ?.map((element) => _dataRowTables(model: element, onTap: () => onTapItem(element), themeData: themeData))
                   .toList(),
             ],
           );
         });
   }
 
-  TableRow _buildHeaderTable() {
+  TableRow _buildHeaderTable(ThemeData themeData) {
     return TableRow(
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.3),
+          color: Colors.grey.withValues(alpha: 0.3),
         ),
         children: [
           'Date',
@@ -43,24 +42,24 @@ class TableELogBAP extends StatelessWidget {
           'Driver Name',
         ]
             .map(
-              (e) => _buildItem(value: e, isHeader: true, onTap: () {}),
+              (e) => _buildItem(value: e, isHeader: true, onTap: () {}, themeData: themeData),
             )
             .toList());
   }
 
-  TableRow _dataRowTables({required VoidCallback onTap, required ELogBapVehicleModel model}) {
+  TableRow _dataRowTables({required VoidCallback onTap, required ELogBapVehicleModel model, required ThemeData themeData}) {
     return TableRow(children: [
-      _buildItem(value: model.tripDate != null ? model.tripDate!.toLocal().formatDateTime('dd, MMMM') : '', onTap: onTap),
+      _buildItem(value: model.tripDate != null ? model.tripDate!.toLocal().formatDateTime('dd, MMMM') : '', onTap: onTap, themeData: themeData),
       _buildItem(
-          value: model.startTime != null ? model.startTime!.toLocal().formatDateTime('HH:mm a') : '', onTap: onTap),
-      _buildItem(value: model.endTime != null ? model.endTime!.toLocal().formatDateTime('HH:mm a') : '', onTap: onTap),
-      _buildItem(value: '${model.meterReading}KM', onTap: onTap),
-      _buildItem(value: model.requisitionerPurpose, onTap: onTap),
-      _buildItem(value: model.driverName, onTap: onTap),
+          value: model.startTime != null ? model.startTime!.toLocal().formatDateTime('HH:mm a') : '', onTap: onTap, themeData: themeData),
+      _buildItem(value: model.endTime != null ? model.endTime!.toLocal().formatDateTime('HH:mm a') : '', onTap: onTap, themeData: themeData),
+      _buildItem(value: '${model.meterReading}KM', onTap: onTap, themeData: themeData),
+      _buildItem(value: model.requisitionerPurpose, onTap: onTap, themeData: themeData),
+      _buildItem(value: model.driverName, onTap: onTap, themeData: themeData),
     ]);
   }
 
-  Widget _buildItem({required VoidCallback onTap, required String value, bool isHeader = false}) {
+  Widget _buildItem({required VoidCallback onTap, required String value, bool isHeader = false, required ThemeData themeData}) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -69,7 +68,7 @@ class TableELogBAP extends StatelessWidget {
         height: 35,
         child: Text(
           value,
-          style: _themeData.textTheme.titleMedium?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
+          style: themeData.textTheme.titleMedium?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
         ),
       ),
     );
