@@ -6,78 +6,99 @@ class TableELogOne extends StatelessWidget {
   final Stream<List<ELogVehicleModel>> stream;
   final Function(ELogVehicleModel) onTapItem;
 
-  TableELogOne({required this.onTapItem, required this.stream});
+  const TableELogOne({Key? key, required this.onTapItem, required this.stream}) : super(key: key);
 
-  late final ThemeData _themeData;
+  static const List<String> _headers = [
+    'Vehicle Number',
+    'Trip Date',
+    // 'To Destination',
+    'Requisition Purpose',
+    'Trip Status',
+    'Start Time',
+    'End Time',
+    // 'Start Meter',
+    'End Meter',
+    'Total Distance',
+    'Driver',
+    'Approving Officer',
+  ];
 
   @override
   Widget build(BuildContext context) {
-    _themeData = Theme.of(context);
+    final themeData = Theme.of(context);
     return StreamBuilder<List<ELogVehicleModel>>(
-        initialData: [],
+        initialData: const [],
         stream: stream,
         builder: (context, snapshot) {
           return Table(
-            defaultColumnWidth: IntrinsicColumnWidth(),
+            defaultColumnWidth: const IntrinsicColumnWidth(),
             border: TableBorder.all(color: Colors.grey),
             children: [
-              _buildHeaderTable(),
+              _buildHeaderTable(themeData),
               ...?snapshot.data
                   ?.map((element) => _dataRowTables(
                       model: element,
                       onTap: () {
                         onTapItem.call(element);
-                      }))
+                      },
+                      themeData: themeData))
                   .toList(),
             ],
           );
         });
   }
 
-  TableRow _buildHeaderTable() {
+  TableRow _buildHeaderTable(ThemeData themeData) {
     return TableRow(
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.3),
+          color: Colors.grey.withAlpha((0.3 * 255).round()),
         ),
-        children: [
-          'Vehicle Number',
-          'Trip Date',
-          // 'To Destination',
-          'Requisition Purpose',
-          'Trip Status',
-          'Start Time',
-          'End Time',
-          // 'Start Meter',
-          'End Meter',
-          'Total Distance',
-          'Driver',
-          'Approving Officer',
-        ]
+        children: _headers
             .map(
-              (e) => _buildItem(value: e, isHeader: true, onTap: () {}),
+              (e) => _buildItem(value: e, isHeader: true, onTap: () {}, themeData: themeData),
             )
             .toList());
   }
 
-  TableRow _dataRowTables({required VoidCallback onTap, required ELogVehicleModel model}) {
+  TableRow _dataRowTables({
+    required VoidCallback onTap,
+    required ELogVehicleModel model,
+    required ThemeData themeData,
+  }) {
     return TableRow(children: [
-      _buildItem(value: model.vehicleNumber, onTap: onTap),
-      _buildItem(value: model.tripDate != null ? model.tripDate!.toLocal().formatDateddMMyyyy : '', onTap: onTap),
-      // _buildItem(value: 'ABC', onTap: onTap),
-      _buildItem(value: model.requisitionerPurpose, onTap: onTap),
-      _buildItem(value: model.tripStatus, onTap: onTap),
+      _buildItem(value: model.vehicleNumber, onTap: onTap, themeData: themeData),
       _buildItem(
-          value: model.startTime != null ? model.startTime!.toLocal().formatDateTime('HH:mm a') : '', onTap: onTap),
-      _buildItem(value: model.endTime != null ? model.endTime!.toLocal().formatDateTime('HH:mm a') : '', onTap: onTap),
-      _buildItem(value: '${model.meterReading}KM', onTap: onTap),
+          value: model.tripDate != null ? model.tripDate!.toLocal().formatDateddMMyyyy : '',
+          onTap: onTap,
+          themeData: themeData),
+      // _buildItem(value: 'ABC', onTap: onTap),
+      _buildItem(value: model.requisitionerPurpose, onTap: onTap, themeData: themeData),
+      _buildItem(value: model.tripStatus, onTap: onTap, themeData: themeData),
+      _buildItem(
+          value: model.startTime != null ? model.startTime!.toLocal().formatDateTime('HH:mm a') : '',
+          onTap: onTap,
+          themeData: themeData),
+      _buildItem(
+          value: model.endTime != null ? model.endTime!.toLocal().formatDateTime('HH:mm a') : '',
+          onTap: onTap,
+          themeData: themeData),
+      _buildItem(value: '${model.meterReading}KM', onTap: onTap, themeData: themeData),
       // _buildItem(value: '123KM', onTap: onTap),
-      _buildItem(value: '${model.totalDistance}KM', onTap: onTap),
-      _buildItem(value: model.driverName, onTap: onTap),
-      _buildItem(value: model.approvingOfficer != null ? model.approvingOfficer! : "N/A", onTap: onTap),
+      _buildItem(value: '${model.totalDistance}KM', onTap: onTap, themeData: themeData),
+      _buildItem(value: model.driverName, onTap: onTap, themeData: themeData),
+      _buildItem(
+          value: model.approvingOfficer != null ? model.approvingOfficer! : "N/A",
+          onTap: onTap,
+          themeData: themeData),
     ]);
   }
 
-  Widget _buildItem({required VoidCallback onTap, required String value, bool isHeader = false}) {
+  Widget _buildItem({
+    required VoidCallback onTap,
+    required String value,
+    bool isHeader = false,
+    required ThemeData themeData,
+  }) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -86,7 +107,7 @@ class TableELogOne extends StatelessWidget {
         height: 35,
         child: Text(
           value,
-          style: _themeData.textTheme.titleMedium?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
+          style: themeData.textTheme.titleMedium?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
         ),
       ),
     );
