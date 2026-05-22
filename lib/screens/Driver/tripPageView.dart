@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/config/dio.dart';
-import 'package:transport_flutter/constants.dart' as Constants;
+import 'package:transport_flutter/constants.dart' as constants;
 import 'package:transport_flutter/screens/Driver/additionalDetail.dart';
 import 'package:transport_flutter/screens/Driver/checkList.dart';
 import 'package:transport_flutter/screens/Driver/driverCheckList.dart';
@@ -21,10 +21,10 @@ class TripPageView extends StatefulWidget {
   final bool mtrcApprovalRequired;
   final bool isVehicleCommander;
 
-  TripPageView(this.mtrcApprovalRequired, this.isVehicleCommander, {Key? key}) : super(key: key);
+  const TripPageView(this.mtrcApprovalRequired, this.isVehicleCommander, {Key? key}) : super(key: key);
 
   @override
-  _TripPageViewState createState() => _TripPageViewState();
+  State<TripPageView> createState() => _TripPageViewState();
 }
 
 class _TripPageViewState extends State<TripPageView> {
@@ -32,19 +32,19 @@ class _TripPageViewState extends State<TripPageView> {
   final _client = AuthedDio.instance.dio;
 
   // TripForm Variable
-  var tripFormData;
+  Map<String, dynamic>? tripFormData;
 
   // Quiz Screen Variables
-  late List answers;
-  List quizzes = [];
+  late List<String> answers;
+  List<Map<String, dynamic>> quizzes = [];
 
   // Additional Form Data
-  var additionalDetailsFormData;
+  Map<String, dynamic>? additionalDetailsFormData;
 
   // When Vehicle Commander the CheckList and Email Data
-  var checkListFormData;
-  var driverCheckListData;
-  var vehicleCommanderChechListFormData;
+  Map<String, dynamic>? checkListFormData;
+  List<Map<String, dynamic>>? driverCheckListData;
+  Map<String, dynamic>? vehicleCommanderChechListFormData;
   String overAllRisk = "LOW";
   var logger = Logger(
     printer: PrettyPrinter(
@@ -54,23 +54,23 @@ class _TripPageViewState extends State<TripPageView> {
   );
 
   // Trip Form Data Functions
-  void setTripData(index, formDataObject) {
+  void setTripData(int index, Map<String, dynamic> formDataObject) {
     print(formDataObject);
     if (formDataObject['vehicleDropDown'] == "Motorcycle") {
       if (widget.isVehicleCommander) {
         print("Vehicle Commander HA");
         setState(() {
-          quizzes = motorcycleQuizArray;
-          var rng = new Random();
-          answers = new List.generate(quizzes.length, (_) => rng.nextInt(1));
+          quizzes = List<Map<String, dynamic>>.from(motorcycleQuizArray);
+          var rng = Random();
+          answers = List<String>.generate(quizzes.length, (_) => rng.nextInt(1).toString());
         });
       } else {
         print("Vehicle Commander NHI HA");
 
         setState(() {
-          quizzes = motorcycleQuizArrayWithOutCommander;
-          var rng = new Random();
-          answers = new List.generate(quizzes.length, (_) => rng.nextInt(1));
+          quizzes = List<Map<String, dynamic>>.from(motorcycleQuizArrayWithOutCommander);
+          var rng = Random();
+          answers = List<String>.generate(quizzes.length, (_) => rng.nextInt(1).toString());
         });
       }
     } else {
@@ -78,67 +78,67 @@ class _TripPageViewState extends State<TripPageView> {
         print("Vehicle Commander HA");
 
         setState(() {
-          quizzes = quizArray;
-          var rng = new Random();
-          answers = new List.generate(quizzes.length, (_) => rng.nextInt(1));
+          quizzes = List<Map<String, dynamic>>.from(quizArray);
+          var rng = Random();
+          answers = List<String>.generate(quizzes.length, (_) => rng.nextInt(1).toString());
         });
       } else {
         print("Vehicle Commander NHI HA");
 
         setState(() {
-          quizzes = quizArrayWithOutCommander;
-          var rng = new Random();
-          answers = new List.generate(quizzes.length, (_) => rng.nextInt(1));
+          quizzes = List<Map<String, dynamic>>.from(quizArrayWithOutCommander);
+          var rng = Random();
+          answers = List<String>.generate(quizzes.length, (_) => rng.nextInt(1).toString());
         });
       }
     }
 
     setState(() {
-      tripFormData = formDataObject;
+      tripFormData = Map<String, dynamic>.from(formDataObject);
     });
     print("Data: $tripFormData");
 
-    pageViewController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+    pageViewController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
   // Quiz Screens Functions
-  void setQuizAnswer(index, answer) {
+  void setQuizAnswer(int index, String answer) {
     setState(() {
-      final newAnswers = answers;
+      final newAnswers = List<String>.from(answers);
       newAnswers[index] = answer;
       answers = newAnswers;
     });
     print("Answers: $answers");
   }
 
-  void onNextQuiz(index) {
-    pageViewController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+  void onNextQuiz(int index) {
+    pageViewController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
-  void onPrevQuiz(index) {
-    pageViewController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+  void onPrevQuiz(int index) {
+    pageViewController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
-  void onDriverNext(index, checklist) {
-    var newCheckList = [];
+  void onDriverNext(int index, Map<String, dynamic> checklist) {
+    var newCheckList = <Map<String, String>>[];
     for (var i = 0; i < checklist['driver_checklist'].length; i++) {
       newCheckList.add({'title': "${checklist['driver_checklist'][i]}"});
     }
     setState(() {
-      driverCheckListData = newCheckList;
+      driverCheckListData = List<Map<String, dynamic>>.from(newCheckList);
     });
     print("Driver: $newCheckList");
     onNextQuiz(index);
   }
 
   void calculateRisk() {
-    int low = 0;
-    int medium = 0;
-    int high = 0;
-    int noMove = 0;
+    var low = 0;
+    var medium = 0;
+    var high = 0;
+    var noMove = 0;
     print("Answers: $answers");
 
-    if (tripFormData['vehicleDropDown'] == "Motorcycle") {
+    if (tripFormData?['vehicleDropDown'] == "Motorcycle") {
       if (widget.isVehicleCommander) {
         for (var i = 0; i < answers.length; i++) {
           var options = motorcycleQuizArray[i]['options'];
@@ -224,7 +224,7 @@ class _TripPageViewState extends State<TripPageView> {
       }
     }
 
-    List<int> mList = [low, medium, high, noMove];
+    var mList = [low, medium, high, noMove];
     print("mLIST: $mList");
     // int maxNumber = mList.reduce((curr, next) => curr > next ? curr : next);
     if (mList[2] > 0) {
@@ -243,40 +243,40 @@ class _TripPageViewState extends State<TripPageView> {
   }
 
   // Additional Form Details Functions
-  void setAdditionalFormData(index, formDataObject) {
+  void setAdditionalFormData(int index, Map<String, dynamic> formDataObject) {
     calculateRisk();
     print("Index");
     setState(() {
-      additionalDetailsFormData = formDataObject;
+      additionalDetailsFormData = Map<String, dynamic>.from(formDataObject);
     });
     print("Data: $additionalDetailsFormData");
-    pageViewController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+    pageViewController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
-  void onSubmitCheckListForm(formDataObject) {
+  void onSubmitCheckListForm(Map<String, dynamic> formDataObject) {
     setState(() {
-      checkListFormData = formDataObject;
+      checkListFormData = Map<String, dynamic>.from(formDataObject);
     });
     vehicleCommanderFormSubmission();
   }
 
   // Vehicle Commander  Form Data Functions
-  void onSubmitVehicleCommanderForm(formDataObject) {
+  void onSubmitVehicleCommanderForm(Map<String, dynamic> formDataObject) {
     setState(() {
-      vehicleCommanderChechListFormData = formDataObject;
+      vehicleCommanderChechListFormData = Map<String, dynamic>.from(formDataObject);
     });
     print("Data: $vehicleCommanderChechListFormData");
   }
 
   // Full Form Submission Functions
 
-  void submitMTRACFormWithNoVehicleCommander(driverChecklist) async {
+  void submitMTRACFormWithNoVehicleCommander(List<Map<String, dynamic>> driverChecklist) async {
     try {
-      String? token = await storage.read(key: Constants.storageBearer);
+      String? token = await storage.read(key: constants.storageBearer);
       logger.e("Form Submit | Vehicle Commander $token");
       var currentRole = await getCurrentRole();
-      var rng = new Random();
-      List myQuizzes = new List.generate(quizzes.length, (_) => rng.nextInt(1));
+      List<Map<String, dynamic>> myQuizzes =
+          List<Map<String, dynamic>>.generate(quizzes.length, (_) => {'question': '', 'answer': ''});
 
       // Quizzes Array Formation
       for (var i = 0; i < quizzes.length; i++) {
@@ -285,9 +285,8 @@ class _TripPageViewState extends State<TripPageView> {
         myQuizzes[i] = {"question": title, "answer": answer};
       }
 
-      var mtracForm = Map.of(additionalDetailsFormData);
-      mtracForm['isAdditionalDetailsApplicable'] =
-          mtracForm['isAdditionalDetailsApplicable'] == null ? false : mtracForm['isAdditionalDetailsApplicable'];
+      var mtracForm = Map<String, dynamic>.from(additionalDetailsFormData ?? {});
+      mtracForm['isAdditionalDetailsApplicable'] = mtracForm['isAdditionalDetailsApplicable'] ?? false;
       mtracForm['quizzes'] = myQuizzes;
       mtracForm['overAllRisk'] = overAllRisk;
       //
@@ -317,28 +316,28 @@ class _TripPageViewState extends State<TripPageView> {
       //   mtracForm["filledBy"] = "VehicleCommander";
       // }
       mtracForm['driverRiskAssessmentChecklist'] = driverCheckListData;
-      tripFormData['aviDate'] = mtracForm['aviDate'];
-      tripFormData['MTRACForm'] = mtracForm;
+      tripFormData?['aviDate'] = mtracForm['aviDate'];
+      tripFormData?['MTRACForm'] = mtracForm;
 
-      final _map = {
-        "tripDate": tripFormData['tripDate'].toUtc().toIso8601String(),
+      final map = {
+        "tripDate": (tripFormData?['tripDate'] as DateTime).toUtc().toIso8601String(),
         // TODO : get dateTime now
         "endedAt": DateTime.now().toUtc().toIso8601String(),
 
-        "vehicle": int.parse(tripFormData['vehicle']),
-        "aviDate": mtracForm['aviDate'].toUtc().toIso8601String(),
+        "vehicle": int.parse(tripFormData?['vehicle'] as String),
+        "aviDate": (mtracForm['aviDate'] as DateTime).toUtc().toIso8601String(),
         // TODO : đang lấy mặc định
         "currentMeterReading": 22, //
         "isTripFromPreApprovedDriver": currentRole != 'DRIVER', //
-        "approvingOfficer": int.parse(tripFormData['approvingOfficer'].toString()),
-        "destinations": (tripFormData['destinations'] as List)
+        "approvingOfficer": int.parse(tripFormData?['approvingOfficer'] as String),
+        "destinations": (tripFormData?['destinations'] as List)
             .map((e) => {"to": e['to'], "requisitionerPurpose": e['requisitionerPurpose']})
             .toList(),
       };
 
-      final _mtracForm = {
+      final mtracFormPayload = {
         "overAllRisk": mtracForm['overAllRisk'],
-        "isAdditionalDetailApplicable": !mtracForm['isAdditionalDetailsApplicable'],
+        "isAdditionalDetailApplicable": !(mtracForm['isAdditionalDetailsApplicable'] as bool),
         "safetyMeasures": "string",
         // "rankAndName": mtracForm["rankAndName"],
         // "personalPin": mtracForm["personalPin"],
@@ -352,24 +351,30 @@ class _TripPageViewState extends State<TripPageView> {
         "quizzes": mtracForm['quizzes']
       };
 
-      var today = new DateFormat('yyyy-MM-dd').format(DateTime.now());
-      if (!mtracForm['isAdditionalDetailsApplicable']) {
-        _mtracForm.addAll({
-          "dispatchDate": mtracForm['despatchDate'].toUtc().toIso8601String(),
-          "dispatchTime":
-              mtracForm['despatchTime'].toUtc().toIso8601String().toString().replaceAll('0001-01-01', today.toString()),
-          "releaseDate": mtracForm['releaseDate'].toUtc().toIso8601String(),
-          "releaseTime":
-              mtracForm['releaseTime'].toUtc().toIso8601String().toString().replaceAll('0001-01-01', today.toString()),
+      var today = DateFormat('yyyy-MM-dd').format(DateTime.now());
+      if (!(mtracForm['isAdditionalDetailsApplicable'] as bool)) {
+        mtracFormPayload.addAll({
+          "dispatchDate": (mtracForm['despatchDate'] as DateTime).toUtc().toIso8601String(),
+          "dispatchTime": (mtracForm['despatchTime'] as DateTime)
+              .toUtc()
+              .toIso8601String()
+              .toString()
+              .replaceAll('0001-01-01', today.toString()),
+          "releaseDate": (mtracForm['releaseDate'] as DateTime).toUtc().toIso8601String(),
+          "releaseTime": (mtracForm['releaseTime'] as DateTime)
+              .toUtc()
+              .toIso8601String()
+              .toString()
+              .replaceAll('0001-01-01', today.toString()),
         });
       }
 
-      _map.addAll({'MTRACForm': _mtracForm});
+      map.addAll({'MTRACForm': mtracFormPayload});
 
-      var dataJSON = jsonEncode(_map, toEncodable: myEncode);
+      var dataJSON = jsonEncode(map, toEncodable: myEncode);
       logger.e(dataJSON);
-      final _dio = await _client;
-      var response = await _dio.post("/trips/mtrac-form", data: dataJSON);
+      final dio = await _client;
+      var response = await dio.post("/trips/mtrac-form", data: dataJSON);
 
       print(response.data);
       if (response.statusCode == 201) {
@@ -379,22 +384,22 @@ class _TripPageViewState extends State<TripPageView> {
       } else {
         showAlertDialog(context, "Error", response.data['message'], isPop: false);
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       logger.e(" Catch Error ${e.response?.data}");
       showAlertDialog(context, "Error", e.response!.data["message"]);
     }
   }
 
-  void submitMTRACFormWithNoVechileCommanderAndDriverChecklist(formDataObject) {
+  void submitMTRACFormWithNoVechileCommanderAndDriverChecklist(Map<String, dynamic> formDataObject) {
     print("Driver Check List DATA!: $formDataObject");
-    var newCheckList = [];
+    var newCheckList = <Map<String, String>>[];
     for (var i = 0; i < formDataObject['driver_checklist'].length; i++) {
       newCheckList.add({'title': "${formDataObject['driver_checklist'][i]}"});
     }
     setState(() {
-      driverCheckListData = newCheckList;
+      driverCheckListData = List<Map<String, dynamic>>.from(newCheckList);
     });
-    submitMTRACFormWithNoVehicleCommander(newCheckList);
+    submitMTRACFormWithNoVehicleCommander(List<Map<String, dynamic>>.from(newCheckList));
   }
 
   dynamic myEncode(dynamic item) {
@@ -406,11 +411,11 @@ class _TripPageViewState extends State<TripPageView> {
 
   void vehicleCommanderFormSubmission() async {
     try {
-      String? token = await storage.read(key: Constants.storageBearer);
+      String? token = await storage.read(key: constants.storageBearer);
       print("Form Submit | Vehicle Commander $token");
-      var rng = new Random();
       var currentRole = await getCurrentRole();
-      List myQuizzes = new List.generate(quizzes.length, (_) => rng.nextInt(1));
+      List<Map<String, dynamic>> myQuizzes =
+          List<Map<String, dynamic>>.generate(quizzes.length, (_) => {'question': '', 'answer': ''});
 
       // Quizzes Array Formation
       for (var i = 0; i < quizzes.length; i++) {
@@ -419,54 +424,53 @@ class _TripPageViewState extends State<TripPageView> {
         myQuizzes[i] = {"question": title, "answer": answer};
       }
 
-      var mtracForm = Map.of(additionalDetailsFormData);
-      mtracForm['isAdditionalDetailsApplicable'] =
-          mtracForm['isAdditionalDetailsApplicable'] == null ? false : mtracForm['isAdditionalDetailsApplicable'];
+      var mtracForm = Map<String, dynamic>.from(additionalDetailsFormData ?? {});
+      mtracForm['isAdditionalDetailsApplicable'] = mtracForm['isAdditionalDetailsApplicable'] ?? false;
       mtracForm['quizzes'] = myQuizzes;
       mtracForm['overAllRisk'] = overAllRisk;
 
-      if (checkListFormData['filledBy'] == "Front Passenger") {
-        var newCheckList = [];
-        for (var i = 0; i < checkListFormData['passenger_checklist'].length; i++) {
-          newCheckList.add({'title': "${checkListFormData['passenger_checklist'][i]}"});
+      if (checkListFormData?['filledBy'] == "Front Passenger") {
+        var newCheckList = <Map<String, String>>[];
+        for (var i = 0; i < (checkListFormData?['passenger_checklist'] as List).length; i++) {
+          newCheckList.add({'title': "${checkListFormData?['passenger_checklist'][i]}"});
         }
         mtracForm['otherRiskAssessmentChecklist'] = newCheckList;
-        mtracForm["rankAndName"] = checkListFormData['rankAndName'];
-        mtracForm["personalPin"] = checkListFormData['personalPin'];
+        mtracForm["rankAndName"] = checkListFormData?['rankAndName'];
+        mtracForm["personalPin"] = checkListFormData?['personalPin'];
         mtracForm["filledBy"] = "FrontPassenger";
       } else {
-        var newCheckList = [];
-        for (var i = 0; i < checkListFormData['commander_checklist'].length; i++) {
-          newCheckList.add({'title': "${checkListFormData['commander_checklist'][i]}"});
+        var newCheckList = <Map<String, String>>[];
+        for (var i = 0; i < (checkListFormData?['commander_checklist'] as List).length; i++) {
+          newCheckList.add({'title': "${checkListFormData?['commander_checklist'][i]}"});
         }
         mtracForm['otherRiskAssessmentChecklist'] = newCheckList;
-        mtracForm["rankAndName"] = checkListFormData['rankAndName'];
-        mtracForm["personalPin"] = checkListFormData['personalPin'];
+        mtracForm["rankAndName"] = checkListFormData?['rankAndName'];
+        mtracForm["personalPin"] = checkListFormData?['personalPin'];
         mtracForm["filledBy"] = "VehicleCommander";
       }
       mtracForm['driverRiskAssessmentChecklist'] = driverCheckListData;
-      tripFormData['aviDate'] = mtracForm['aviDate'];
-      tripFormData['MTRACForm'] = mtracForm;
+      tripFormData?['aviDate'] = mtracForm['aviDate'];
+      tripFormData?['MTRACForm'] = mtracForm;
 
-      final _map = {
-        "tripDate": tripFormData['tripDate'].toUtc().toIso8601String(),
+      final map = {
+        "tripDate": (tripFormData?['tripDate'] as DateTime).toUtc().toIso8601String(),
         // TODO : get dateTime now
         "endedAt": DateTime.now().toUtc().toIso8601String(),
 
-        "vehicle": int.parse(tripFormData['vehicle']),
-        "aviDate": mtracForm['aviDate'].toUtc().toIso8601String(),
+        "vehicle": int.parse(tripFormData?['vehicle'] as String),
+        "aviDate": (mtracForm['aviDate'] as DateTime).toUtc().toIso8601String(),
         // TODO : đang lấy mặc định
         "currentMeterReading": 22, //
         "isTripFromPreApprovedDriver": currentRole != 'DRIVER', //
-        "approvingOfficer": int.parse(tripFormData['approvingOfficer'].toString()),
-        "destinations": (tripFormData['destinations'] as List)
+        "approvingOfficer": int.parse(tripFormData?['approvingOfficer'] as String),
+        "destinations": (tripFormData?['destinations'] as List)
             .map((e) => {"to": e['to'], "requisitionerPurpose": e['requisitionerPurpose']})
             .toList(),
       };
 
-      final _mtracForm = {
+      final mtracFormPayload = {
         "overAllRisk": mtracForm['overAllRisk'],
-        "isAdditionalDetailApplicable": !mtracForm['isAdditionalDetailsApplicable'],
+        "isAdditionalDetailApplicable": !(mtracForm['isAdditionalDetailsApplicable'] as bool),
         "safetyMeasures": "string",
         "rankAndName": mtracForm["rankAndName"],
         "personalPin": mtracForm["personalPin"],
@@ -478,23 +482,29 @@ class _TripPageViewState extends State<TripPageView> {
         "quizzes": mtracForm['quizzes']
       };
 
-      if (!mtracForm['isAdditionalDetailsApplicable']) {
-        var today = new DateFormat('yyyy-MM-dd').format(DateTime.now());
-        _mtracForm.addAll({
-          "dispatchDate": mtracForm['despatchDate'].toUtc().toIso8601String(),
-          "dispatchTime":
-              mtracForm['despatchTime'].toUtc().toIso8601String().toString().replaceAll('0001-01-01', today.toString()),
-          "releaseDate": mtracForm['releaseDate'].toUtc().toIso8601String(),
-          "releaseTime":
-              mtracForm['releaseTime'].toUtc().toIso8601String().toString().replaceAll('0001-01-01', today.toString()),
+      if (!(mtracForm['isAdditionalDetailsApplicable'] as bool)) {
+        var today = DateFormat('yyyy-MM-dd').format(DateTime.now());
+        mtracFormPayload.addAll({
+          "dispatchDate": (mtracForm['despatchDate'] as DateTime).toUtc().toIso8601String(),
+          "dispatchTime": (mtracForm['despatchTime'] as DateTime)
+              .toUtc()
+              .toIso8601String()
+              .toString()
+              .replaceAll('0001-01-01', today.toString()),
+          "releaseDate": (mtracForm['releaseDate'] as DateTime).toUtc().toIso8601String(),
+          "releaseTime": (mtracForm['releaseTime'] as DateTime)
+              .toUtc()
+              .toIso8601String()
+              .toString()
+              .replaceAll('0001-01-01', today.toString()),
         });
       }
 
-      _map.addAll({'MTRACForm': _mtracForm});
-      var dataJSON = jsonEncode(_map, toEncodable: myEncode);
+      map.addAll({'MTRACForm': mtracFormPayload});
+      var dataJSON = jsonEncode(map, toEncodable: myEncode);
       debugPrint(dataJSON, wrapWidth: 1024);
-      final _dio = await _client;
-      var response = await _dio.post("/trips/mtrac-form", data: dataJSON);
+      final dio = await _client;
+      var response = await dio.post("/trips/mtrac-form", data: dataJSON);
 
       logger.e(response.data);
       if (response.statusCode == 201) {
@@ -506,7 +516,7 @@ class _TripPageViewState extends State<TripPageView> {
       } else {
         showAlertDialog(context, "Error", response.data['message'], isPop: false);
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       showAlertDialog(
         context,
         "Error Catch",
@@ -518,17 +528,17 @@ class _TripPageViewState extends State<TripPageView> {
 
   @override
   void initState() {
-    quizzes = quizArray;
-    var rng = new Random();
-    answers = new List.generate(quizzes.length, (_) => rng.nextInt(1));
     super.initState();
+    quizzes = List<Map<String, dynamic>>.from(quizArray);
+    var rng = Random();
+    answers = List<String>.generate(quizzes.length, (_) => rng.nextInt(1).toString());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView.builder(
-        physics: new NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: pageViewController,
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
@@ -575,7 +585,7 @@ class _TripPageViewState extends State<TripPageView> {
               overAllRisk: overAllRisk,
             );
           } else {
-            return Text("Nothing");
+            return const Text("Nothing");
           }
         },
         itemCount: 1 + quizzes.length + 4,
