@@ -12,13 +12,13 @@ import 'package:transport_flutter/components/form_builder_typehead.dart';
 import 'package:transport_flutter/config/dio.dart';
 import 'package:transport_flutter/extensions/extensions.dart';
 import 'package:transport_flutter/util/currentUserData.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request_api;
 
 class TripFormScreen extends StatefulWidget {
   final bool mtrcApprovalRequired;
   final bool isVehicleCommander;
 
-  TripFormScreen(this.mtrcApprovalRequired, this.isVehicleCommander, {Key? key}) : super(key: key);
+  const TripFormScreen(this.mtrcApprovalRequired, this.isVehicleCommander, {Key? key}) : super(key: key);
 
   @override
   _TripFormScreenState createState() => _TripFormScreenState();
@@ -27,8 +27,8 @@ class TripFormScreen extends StatefulWidget {
 class _TripFormScreenState extends State<TripFormScreen> {
   final GlobalKey<FormBuilderState> _tripFormKey = GlobalKey<FormBuilderState>();
 
-  final _approvingOfficerTA = SuggestionsBoxController();
-  final _vehicleTA = SuggestionsBoxController();
+  final SuggestionsController _approvingOfficerTA = SuggestionsController();
+  final SuggestionsController _vehicleTA = SuggestionsController();
 
   final dioClient = AuthedDio.instance.dio;
 
@@ -47,7 +47,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
   List listOfDestinations = [];
   var platformQuery = "?platform.id_in=";
   final logger = Logger();
-  var request = new Request.Request();
+  var request = request_api.Request();
 
   String? nextAVIDate;
 
@@ -78,10 +78,11 @@ class _TripFormScreenState extends State<TripFormScreen> {
       for (var i = 0; i < licenseClasses.length; i++) {
         var cls = licenseClasses[i];
         var id = cls['id'];
-        if (i == 0)
-          query = query + "?id_in=$id";
-        else
-          query = query + "&id_in=$id";
+        if (i == 0) {
+          query = "?id_in=$id";
+        } else {
+          query = "$query&id_in=$id";
+        }
       }
     }
 
@@ -90,19 +91,20 @@ class _TripFormScreenState extends State<TripFormScreen> {
       var result = await dio.get("/license-classes$query");
       var licenseClasses = result.data;
       var pQuery = "";
-      licenseClasses.forEach((c) {
+      for (var c in licenseClasses) {
         var vp = c['vehicles_platforms'];
-        vp.forEach((v) {
-          pQuery = pQuery + "&platform.id_in=${v['id']}";
-        });
-      });
+        for (var v in vp) {
+          pQuery = "$pQuery&platform.id_in=${v['id']}";
+        }
+      }
 
       print("Got DATA: $pQuery");
 
-      if (pQuery != "")
+      if (pQuery.isNotEmpty) {
         setState(() {
           platformQuery = pQuery;
         });
+      }
       return "";
     }
   }
@@ -180,7 +182,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
     try {
       var result1 = json.decode((await request.get(Uri.parse("users/approving-officers?name=$pattern"))).body);
       list = [...result1];
-      if (list.length == 0) {
+      if (list.isEmpty) {
         setState(() {
           approvingOfficerID = null;
         });
@@ -217,23 +219,24 @@ class _TripFormScreenState extends State<TripFormScreen> {
         submitButtonLoading = true;
       });
 
-      List tos = [];
-      List requisitionerPurposes = [];
+      final List<dynamic> tos = [];
+      final List<dynamic> requisitionerPurposes = [];
       print('1');
-      data.entries.forEach((e) {
+      for (final e in data.entries) {
         if (e.key.contains("to")) {
           tos.add(e.value);
         } else if (e.key.contains("requisitionerPurpose")) {
           requisitionerPurposes.add(e.value);
         }
-      });
+      }
 
       // List of Tools
       List destinations = [];
 
       for (var i = 0; i < tos.length; i++) {
-        if (listOfDestinations[i] != null)
+        if (listOfDestinations[i] != null) {
           destinations.add({"to": tos[i], "requisitionerPurpose": requisitionerPurposes[i]});
+        }
       }
 
       // data.addAll({'vehicle': vehicleID, 'driver': driverID});
@@ -244,7 +247,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
       // } else {
       //   data['approvingOfficer'] = int.parse(approvingOfficerID);
       // }
-      final _map = {
+      final Map<String, dynamic> payload = {
         "tripDate": data['tripDate'].toUtc().toIso8601String(),
         "endedAt": DateTime.now().toUtc().toIso8601String(),
         //"aviDate": data['aviDate'].toUtc().toIso8601String(),
@@ -279,10 +282,10 @@ class _TripFormScreenState extends State<TripFormScreen> {
         //   ]
         // }
       };
-      var dataJSON = jsonEncode(_map, toEncodable: myEncode);
+      var dataJSON = jsonEncode(payload, toEncodable: myEncode);
       print(dataJSON);
-      final _dio = await dioClient;
-      var response = await _dio.post("/trips", data: dataJSON);
+      final dio = await dioClient;
+      var response = await dio.post("/trips", data: dataJSON);
 
       print(response.data);
       setState(() {
@@ -297,7 +300,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
       setState(() {
         submitButtonLoading = false;
       });
-      showAlertDialog(context, "Error", e, isPop: false);
+      showAlertDialog(context, "Error", e.toString(), isPop: false);
     }
   }
 
@@ -331,7 +334,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
     }
   }
 
-  ValueChanged _onChanged = (val) => print(val);
+  void _onChanged(dynamic val) => print(val);
 
   // Submission Form Alert
 
@@ -339,7 +342,6 @@ class _TripFormScreenState extends State<TripFormScreen> {
     showDialog(
       context: context,
       // barrierDismissible: false, // user must tap button!
-
       builder: (BuildContext context) {
         return AlertDialog(
           // title: new Text('You clicked on'),
@@ -347,68 +349,71 @@ class _TripFormScreenState extends State<TripFormScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
-            child: Text(
-              currentRole == "PRE_APPROVED_DRIVER"
-                  ? "Are you sure to send the trip form?"
-                  : "The trip approval will now be submitted to the Approving Officer Proceed?",
-              textAlign: TextAlign.center,
-            ),
+          content: Text(
+            currentRole == "PRE_APPROVED_DRIVER"
+                ? "Are you sure to send the trip form?"
+                : "The trip approval will now be submitted to the Approving Officer Proceed?",
+            textAlign: TextAlign.center,
           ),
           actions: [
             Container(
-                color: Colors.transparent,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                width: MediaQuery.of(context).size.width * 1.0,
-                height: 50,
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: TextButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            Theme.of(context).primaryColor,
-                          ),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                          ),
+              color: Colors.transparent,
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+              width: MediaQuery.of(context).size.width * 1.0,
+              height: 50,
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    child: TextButton(
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll<Color>(
+                          Theme.of(context).primaryColor,
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          onSubmitTripForm(tripFormData);
-                        },
-                        child: Text(
-                          "Yes",
-                          style: TextStyle(color: Colors.white),
+                        shape: const WidgetStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          ),
                         ),
                       ),
-                    ),
-                    Spacer(),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      child: OutlinedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          )),
-                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          "No",
-                          style: TextStyle(color: Colors.black),
-                        ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        onSubmitTripForm(tripFormData);
+                      },
+                      child: const Text(
+                        "Yes",
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
-                  ],
-                ))
+                  ),
+                  const Spacer(),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    child: OutlinedButton(
+                      style: ButtonStyle(
+                        shape: const WidgetStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                        ),
+                        side: WidgetStatePropertyAll(
+                          BorderSide(color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text(
+                        "No",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         );
       },
@@ -417,8 +422,8 @@ class _TripFormScreenState extends State<TripFormScreen> {
 
   @override
   void dispose() {
-    _approvingOfficerTA.close();
-    _vehicleTA.close();
+    _approvingOfficerTA.dispose();
+    _vehicleTA.dispose();
     super.dispose();
   }
 
@@ -442,7 +447,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
               // validator: (val) => null,
               // initialTime: TimeOfDay(hour: 8, minute: 0),
               initialValue: DateTime.now(),
-              format: new DateFormat('dd MMMM yyyy')
+              format: DateFormat('dd MMMM yyyy')
               // readonly: true,
               ),
         ).paddingAll(10),
@@ -466,7 +471,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
                       return null;
                     }
                   ]),
-                  suggestionsBoxController: _vehicleTA,
+                  suggestionsController: _vehicleTA,
                   decoration:
                       InputDecoration(hintText: 'System Lookup', suffixIcon: const Icon(Icons.expand_more, size: 30)),
                   itemBuilder: (context, itemData) {
@@ -514,7 +519,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
           title: 'Vehicle / Motorcycle',
           child: TextFormField(
             enabled: false,
-            controller: new TextEditingController(
+            controller: TextEditingController(
               text: "$vehicleTypeENUM ($vehicleType)",
             ),
           ),
@@ -535,7 +540,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
         //                   padding: const EdgeInsetsDirectional.only(end: 12.0),
         //                   child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
         //                 )),
-        //             format: new DateFormat('dd MMMM yyyy')
+        //             format: DateFormat('dd MMMM yyyy')
         //             // readonly: true,
         //             ),
         //       ).paddingAll(10)
@@ -552,7 +557,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
         //                   padding: const EdgeInsetsDirectional.only(end: 12.0),
         //                   child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
         //                 )),
-        //             format: new DateFormat('dd MMMM yyyy')
+        //             format: DateFormat('dd MMMM yyyy')
         //             // readonly: true,
         //             ),
         //       ).paddingAll(10)
@@ -570,10 +575,12 @@ class _TripFormScreenState extends State<TripFormScreen> {
             padding: const EdgeInsets.only(top: 20),
             child: OutlinedButton(
               style: ButtonStyle(
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                )),
-                side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                shape: const WidgetStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                  ),
+                ),
+                side: WidgetStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
               ),
               onPressed: () {
                 addNewDestination();
@@ -588,15 +595,17 @@ class _TripFormScreenState extends State<TripFormScreen> {
           padding: const EdgeInsets.only(top: 20),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              )),
-              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+              shape: const WidgetStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                ),
+              ),
+              side: WidgetStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
             ),
             onPressed: () {
               // Navigator.pushNamed(
               //     context, "/driver/quiz");
-              if (_tripFormKey.currentState!.saveAndValidate()) {
+              if (_tripFormKey.currentState?.saveAndValidate() ?? false) {
                 submissionFormAlert(_tripFormKey.currentState!.value);
               }
             },
@@ -627,7 +636,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
                 ),
               ),
               initialValue: DateTime.now(),
-              format: new DateFormat('dd MMMM yyyy')
+              format: DateFormat('dd MMMM yyyy')
               // readonly: true,
               ),
         ).paddingAll(10),
@@ -636,7 +645,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
           child: FormBuilderTypeAhead<dynamic>(
             name: "approvingOfficer",
             decoration: InputDecoration(hintText: 'System Lookup', suffixIcon: const Icon(Icons.expand_more, size: 30)),
-            suggestionsBoxController: _approvingOfficerTA,
+            suggestionsController: _approvingOfficerTA,
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
               (val) {
@@ -688,7 +697,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
                       return null;
                     }
                   ]),
-                  suggestionsBoxController: _vehicleTA,
+                  suggestionsController: _vehicleTA,
                   decoration:
                       InputDecoration(hintText: 'System Lookup', suffixIcon: const Icon(Icons.expand_more, size: 30)),
                   itemBuilder: (context, itemData) {
@@ -736,7 +745,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
           title: 'Vehicle / Motorcycle',
           child: TextFormField(
             enabled: false,
-            controller: new TextEditingController(
+            controller: TextEditingController(
               text: "$vehicleTypeENUM ($vehicleType)",
             ),
           ),
@@ -758,7 +767,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
         //                   child: Icon(Icons
         //                       .date_range), // myIcon is a 48px-wide widget.
         //                 )),
-        //             format: new DateFormat('dd MMMM yyyy')
+        //             format: DateFormat('dd MMMM yyyy')
         //             // readonly: true,
         //             ),
         //       ).paddingAll(10)
@@ -776,7 +785,7 @@ class _TripFormScreenState extends State<TripFormScreen> {
         //                   child: Icon(Icons
         //                       .date_range), // myIcon is a 48px-wide widget.
         //                 )),
-        //             format: new DateFormat('dd MMMM yyyy')),
+        //             format: DateFormat('dd MMMM yyyy')),
         //       ).paddingAll(10),
       ];
 
@@ -792,10 +801,12 @@ class _TripFormScreenState extends State<TripFormScreen> {
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              )),
-              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+              shape: const WidgetStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                ),
+              ),
+              side: WidgetStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
             ),
             onPressed: () {
               addNewDestination();
@@ -811,15 +822,17 @@ class _TripFormScreenState extends State<TripFormScreen> {
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              )),
-              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+              shape: const WidgetStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                ),
+              ),
+              side: WidgetStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
             ),
             onPressed: () {
               // Navigator.pushNamed(
               //     context, "/driver/quiz");
-              if (_tripFormKey.currentState!.saveAndValidate()) {
+              if (_tripFormKey.currentState?.saveAndValidate() ?? false) {
                 submissionFormAlert(_tripFormKey.currentState!.value);
               }
             },
