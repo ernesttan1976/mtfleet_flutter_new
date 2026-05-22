@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RiskAccessmentScreen extends StatefulWidget {
@@ -8,7 +7,7 @@ class RiskAccessmentScreen extends StatefulWidget {
   final bool? isVehicleCommander;
   final String? overAllRisk;
 
-  RiskAccessmentScreen({
+  const RiskAccessmentScreen({
     Key? key,
     this.index,
     this.onPrev,
@@ -17,11 +16,11 @@ class RiskAccessmentScreen extends StatefulWidget {
     this.overAllRisk,
   }) : super(key: key);
 
-  @override
-  _RiskAccessmentScreenState createState() => _RiskAccessmentScreenState();
+    @override
+    RiskAccessmentScreenState createState() => RiskAccessmentScreenState();
 }
 
-class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
+class RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
   bool isLoading = false;
 
   List<Widget> _buildChildren() {
@@ -38,13 +37,11 @@ class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
     var listofWidgets = [
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(
-              'Risk Assessment',
-              style: Theme.of(context).textTheme.headline4?.copyWith(color: Theme.of(context).primaryColor),
-            )),
-          ),
+          Flexible(
+              child: Text(
+            'Risk Assessment',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).primaryColor),
+          )),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
@@ -53,7 +50,7 @@ class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
           Container(
             child: Flexible(
                 child: Text('Overall Risk:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -65,7 +62,7 @@ class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
               child: Flexible(
                   child: Text(
             '${widget.overAllRisk}',
-            style: Theme.of(context).textTheme.headline4?.copyWith(color: myColor),
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: myColor),
           ))),
         ],
       ),
@@ -75,7 +72,7 @@ class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
           Container(
             child: Flexible(
                 child: Text('Risk Levels Explanation:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -86,10 +83,10 @@ class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
               child: Text.rich(
             TextSpan(
               text: 'LOW',
-              style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.green), // default text style
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.green), // default text style
               children: <TextSpan>[
                 TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.black),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.black),
                   text: '  Risk - Normal operational risk ',
                 )
               ],
@@ -104,10 +101,10 @@ class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
               child: Text.rich(
             TextSpan(
               text: 'MEDIUM',
-              style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.orange[500]), // default text style
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.orange[500]), // default text style
               children: <TextSpan>[
                 TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.black),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.black),
                   text:
                       ' Risk - Above normal operational risk level. Increase supervision, briefing and exercise caution. Mission may be suspended till conditions are better ',
                 )
@@ -123,10 +120,10 @@ class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
               child: Text.rich(
             TextSpan(
               text: 'HIGH',
-              style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.red[500]), // default text style
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.red[500]), // default text style
               children: <TextSpan>[
                 TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.black),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.black),
                   text:
                       ' Risk - Do not proceed with mission unless approved by higher authorities. All high risk factors must be mitigated ',
                 )
@@ -138,50 +135,40 @@ class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Front Passenger Standing Order:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
-          ),
+          Flexible(
+              child: Text('Front Passenger Standing Order:',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('1. Remind the driver to stay awake:', style: Theme.of(context).textTheme.bodyText1)),
-          ),
+          Flexible(
+              child: Text('1. Remind the driver to stay awake:', style: Theme.of(context).textTheme.bodyLarge)),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('2. Look out for sign of fatigue in the driver.',
-                    style: Theme.of(context).textTheme.bodyText1)),
-          ),
+          Flexible(
+              child: Text('2. Look out for sign of fatigue in the driver.',
+                  style: Theme.of(context).textTheme.bodyLarge)),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('3. Remind the driver not to speed or drive recklessly.',
-                    style: Theme.of(context).textTheme.bodyText1)),
-          ),
+          Flexible(
+              child: Text('3. Remind the driver not to speed or drive recklessly.',
+                  style: Theme.of(context).textTheme.bodyLarge)),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('4. Remind the driver not to use mobile device while the vehicle is in motion.',
-                    style: Theme.of(context).textTheme.bodyText1)),
-          ),
+          Flexible(
+              child: Text('4. Remind the driver not to use mobile device while the vehicle is in motion.',
+                  style: Theme.of(context).textTheme.bodyLarge)),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
@@ -189,76 +176,61 @@ class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
     if (widget.isVehicleCommander!) {
       listofWidgets.addAll([
         Row(
-          children: <Widget>[
-            Container(
-              child: Flexible(
-                  child: Text('Vehicle Commander Standing Order:',
-                      style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
-            ),
-          ],
+        children: <Widget>[
+          Flexible(
+              child: Text('Vehicle Commander Standing Order:',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+        ],
         ),
         Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
         Row(
-          children: <Widget>[
-            Container(
-              child: Flexible(
-                  child: Text(
-                      '1. To be responsible for the discipline and safety of all passengers/crew in the assigned transport detail.',
-                      style: Theme.of(context).textTheme.bodyText1)),
-            ),
-          ],
+        children: <Widget>[
+          Flexible(
+              child: Text(
+                  '1. To be responsible for the discipline and safety of all passengers/crew in the assigned transport detail.',
+                  style: Theme.of(context).textTheme.bodyLarge)),
+        ],
         ),
         Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
         Row(
-          children: <Widget>[
-            Container(
-              child: Flexible(
-                  child: Text(
-                      '2. To assist to look out fire obstruction, hazard or danger. if the driver is reversing, there is no requirement for the VC to dismount to guide the driver. However, VC should render assitance to the driver when requested.',
-                      style: Theme.of(context).textTheme.bodyText1)),
-            ),
-          ],
+        children: <Widget>[
+          Flexible(
+              child: Text(
+                  '2. To assist to look out fire obstruction, hazard or danger. if the driver is reversing, there is no requirement for the VC to dismount to guide the driver. However, VC should render assitance to the driver when requested.',
+                  style: Theme.of(context).textTheme.bodyLarge)),
+        ],
         ),
         Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
         Row(
-          children: <Widget>[
-            Container(
-              child: Flexible(
-                  child: Text('3. Go through intended route with the driver.',
-                      style: Theme.of(context).textTheme.bodyText1)),
-            ),
-          ],
+        children: <Widget>[
+          Flexible(
+              child: Text('3. Go through intended route with the driver.',
+                  style: Theme.of(context).textTheme.bodyLarge)),
+        ],
         ),
         Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
         Row(
-          children: <Widget>[
-            Container(
-              child: Flexible(
-                  child: Text(
-                      '4. If unsure of the route or lost, to instruct the driver to stop the vehicle at a safe place to re-orientate or seek further instruction.',
-                      style: Theme.of(context).textTheme.bodyText1)),
-            ),
-          ],
+        children: <Widget>[
+          Flexible(
+              child: Text(
+                  '4. If unsure of the route or lost, to instruct the driver to stop the vehicle at a safe place to re-orientate or seek further instruction.',
+                  style: Theme.of(context).textTheme.bodyLarge)),
+        ],
         ),
         Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
         Row(
-          children: <Widget>[
-            Container(
-              child: Flexible(
-                  child: Text(
-                      '5. If involved in an accident, to inform unit about the accident and assist the driver to manage the accident.',
-                      style: Theme.of(context).textTheme.bodyText1)),
-            ),
-          ],
+        children: <Widget>[
+          Flexible(
+              child: Text(
+                  '5. If involved in an accident, to inform unit about the accident and assist the driver to manage the accident.',
+                  style: Theme.of(context).textTheme.bodyLarge)),
+        ],
         ),
         Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
         Row(
-          children: <Widget>[
-            Container(
-              child: Flexible(
-                  child: Text('6. To check and endrose the MT-RAC.', style: Theme.of(context).textTheme.bodyText1)),
-            ),
-          ],
+        children: <Widget>[
+          Flexible(child: Text('6. To check and endrose the MT-RAC.', style: Theme.of(context).textTheme.bodyLarge)),
+        ],
         ),
         Row(
           children: <Widget>[
@@ -267,10 +239,10 @@ class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: OutlinedButton(
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   )),
-                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  side: WidgetStateProperty.all<BorderSide>(BorderSide(color: Theme.of(context).primaryColor)),
                 ),
                 onPressed: () {
                   widget.onNext!(widget.index! + 1);
@@ -292,10 +264,10 @@ class _RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
             padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: OutlinedButton(
               style: ButtonStyle(
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 )),
-                side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                side: WidgetStateProperty.all<BorderSide>(BorderSide(color: Theme.of(context).primaryColor)),
               ),
               onPressed: () {
                 widget.onNext!(widget.index! + 1);
