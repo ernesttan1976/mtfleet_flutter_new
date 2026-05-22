@@ -66,16 +66,7 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
   ///   );
   /// }
   /// ```
-  final ItemBuilder<T> itemBuilder;
-
-  /// The decoration of the material sheet that contains the suggestions.
-  ///
-  /// If null, default decoration with an elevation of 4.0 is used
-  final SuggestionsBoxDecoration suggestionsBoxDecoration;
-
-  /// Used to control the `_SuggestionsBox`. Allows manual control to
-  /// open, close, toggle, or resize the `_SuggestionsBox`.
-  final SuggestionsBoxController? suggestionsBoxController;
+  final SuggestionsItemBuilder<T> itemBuilder;
 
   /// The duration to wait after the user stops typing before calling
   /// [suggestionsCallback]
@@ -119,82 +110,20 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
   /// display when an exception is thrown
   /// For example:
   /// ```dart
-  /// (BuildContext context, error) {
+  /// (BuildContext context, Object? error) {
   ///   return Text('$error');
   /// }
   /// ```
   ///
   /// If not specified, the error is shown in [ThemeData.errorColor](https://docs.flutter.io/flutter/material/ThemeData/errorColor.html)
-  final ErrorBuilder? errorBuilder;
-
-  /// Called to display animations when [suggestionsCallback] returns suggestions
-  ///
-  /// It is provided with the suggestions box instance and the animation
-  /// controller, and expected to return some animation that uses the controller
-  /// to display the suggestion box.
-  ///
-  /// For example:
-  /// ```dart
-  /// transitionBuilder: (context, suggestionsBox, animationController) {
-  ///   return FadeTransition(
-  ///     child: suggestionsBox,
-  ///     opacity: CurvedAnimation(
-  ///       parent: animationController,
-  ///       curve: Curves.fastOutSlowIn
-  ///     ),
-  ///   );
-  /// }
-  /// ```
-  /// This argument is best used with [animationDuration] and [animationStart]
-  /// to fully control the animation.
-  ///
-  /// To fully remove the animation, just return `suggestionsBox`
-  ///
-  /// If not specified, a [SizeTransition](https://docs.flutter.io/flutter/widgets/SizeTransition-class.html) is shown.
-  final AnimationTransitionBuilder? transitionBuilder;
-
-  /// The duration that [transitionBuilder] animation takes.
-  ///
-  /// This argument is best used with [transitionBuilder] and [animationStart]
-  /// to fully control the animation.
-  ///
-  /// Defaults to 500 milliseconds.
-  final Duration animationDuration;
-
-  /// Determine the [SuggestionBox]'s direction.
-  ///
-  /// If [AxisDirection.down], the [SuggestionBox] will be below the [TextField]
-  /// and the [_SuggestionsList] will grow **down**.
-  ///
-  /// If [AxisDirection.up], the [SuggestionBox] will be above the [TextField]
-  /// and the [_SuggestionsList] will grow **up**.
-  ///
-  /// [AxisDirection.left] and [AxisDirection.right] are not allowed.
-  final AxisDirection direction;
-
-  /// The value at which the [transitionBuilder] animation starts.
-  ///
-  /// This argument is best used with [transitionBuilder] and [animationDuration]
-  /// to fully control the animation.
-  ///
-  /// Defaults to 0.25.
-  final double animationStart;
-
-  /// The configuration of the [TextField](https://docs.flutter.io/flutter/material/TextField-class.html)
-  /// that the TypeAhead widget displays
-  final TextFieldConfiguration textFieldConfiguration;
-
-  /// How far below the text field should the suggestions box be
-  ///
-  /// Defaults to 5.0
-  final double suggestionsBoxVerticalOffset;
+  final Widget Function(BuildContext, Object?)? errorBuilder;
 
   /// If set to true, suggestions will be fetched immediately when the field is
   /// added to the view.
   ///
   /// But the suggestions box will only be shown when the field receives focus.
   /// To make the field receive focus immediately, you can set the `autofocus`
-  /// property in the [textFieldConfiguration] to true
+  /// property in the text field to true
   ///
   /// Defaults to false
   final bool getImmediateSuggestions;
@@ -234,21 +163,13 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
   ///
   /// Note that if this is enabled, the only way
   /// to close the suggestions box is either manually via the
-  /// `SuggestionsBoxController` or when the user closes the software
+  /// `SuggestionsController` or when the user closes the software
   /// keyboard if `hideSuggestionsOnKeyboardHide` is set to true. Users
   /// with a physical keyboard will be unable to close the
-  /// box without a manual way via `SuggestionsBoxController`.
+  /// box without a manual way via `SuggestionsController`.
   ///
   /// Defaults to false.
   final bool keepSuggestionsOnSuggestionSelected;
-
-  /// If set to true, in the case where the suggestions box has less than
-  /// _SuggestionsBoxController.minOverlaySpace to grow in the desired [direction], the direction axis
-  /// will be temporarily flipped if there's more room available in the opposite
-  /// direction.
-  ///
-  /// Defaults to false
-  final bool autoFlipDirection;
 
   final SelectionToTextTransformer<T>? selectionToTextTransformer;
 
@@ -257,9 +178,15 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
   /// If null, this widget will create its own [TextEditingController].
   final TextEditingController? controller;
 
+  /// Controller to manage the state of the suggestions box.
+  final SuggestionsController? suggestionsController;
+
+  /// Vertical offset for the suggestions box.
+  final double suggestionsBoxVerticalOffset;
+
   /// Creates text field that auto-completes user input from a list of items
   FormBuilderTypeAhead({
-    Key? key,
+    super.key,
     //From Super
     required String name,
     required FormFieldValidator<T> validator,
@@ -280,26 +207,18 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
     this.noItemsFoundBuilder,
     this.loadingBuilder,
     this.debounceDuration = const Duration(milliseconds: 300),
-    this.suggestionsBoxDecoration = const SuggestionsBoxDecoration(),
     this.suggestionsBoxVerticalOffset = 5.0,
-    this.textFieldConfiguration = const TextFieldConfiguration(),
-    this.transitionBuilder,
-    this.animationDuration = const Duration(milliseconds: 500),
-    this.animationStart = 0.25,
-    this.direction = AxisDirection.down,
     this.hideOnLoading = false,
     this.hideOnEmpty = false,
     this.hideOnError = false,
     this.hideSuggestionsOnKeyboardHide = true,
     this.keepSuggestionsOnLoading = true,
-    this.autoFlipDirection = false,
-    this.suggestionsBoxController,
+    this.suggestionsController,
     this.keepSuggestionsOnSuggestionSelected = false,
     this.onSuggestionSelected,
     this.controller,
   })  : assert(T == String || selectionToTextTransformer != null),
         super(
-          key: key,
           initialValue: initialValue,
           name: name,
           validator: validator,
@@ -309,53 +228,47 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
           onSaved: onSaved,
           enabled: enabled,
           onReset: onReset,
-          decoration: decoration,
           focusNode: focusNode,
           builder: (FormFieldState<T> field) {
             final state = field as _FormBuilderTypeAheadState<T>;
             final theme = Theme.of(state.context);
 
             return TypeAheadField<T>(
-              textFieldConfiguration: textFieldConfiguration.copyWith(
+              suggestionsCallback: suggestionsCallback,
+              itemBuilder: itemBuilder,
+              builder: (context, controller, focusNode) {
+                final effectiveController = state._typeAheadController;
+                return TextField(
+                  controller: effectiveController,
+                  focusNode: focusNode,
                   enabled: state.enabled,
-                  controller: state._typeAheadController,
                   style: state.enabled
-                      ? textFieldConfiguration.style
+                      ? theme.textTheme.titleMedium
                       : theme.textTheme.titleMedium?.copyWith(
                           color: theme.disabledColor,
                         ),
-                  focusNode: state.effectiveFocusNode,
-                  decoration: state.decoration),
-              // HACK to satisfy strictness
-              suggestionsCallback: suggestionsCallback,
-              itemBuilder: itemBuilder,
-              transitionBuilder: (context, suggestionsBox, controller) => suggestionsBox,
-              onSuggestionSelected: (T suggestion) {
+                  decoration: const InputDecoration(),
+                );
+              },
+              onSelected: (T suggestion) {
                 if (selectionToTextTransformer != null) {
                   state._typeAheadController.text = selectionToTextTransformer(suggestion);
                 } else {
-                  state._typeAheadController.text = suggestion != null ? suggestion.toString() : '';
+                  state._typeAheadController.text = suggestion.toString();
                 }
                 onSuggestionSelected?.call(suggestion);
               },
-              getImmediateSuggestions: getImmediateSuggestions,
+              emptyBuilder: noItemsFoundBuilder,
               errorBuilder: errorBuilder,
-              noItemsFoundBuilder: noItemsFoundBuilder,
               loadingBuilder: loadingBuilder,
               debounceDuration: debounceDuration,
-              suggestionsBoxDecoration: suggestionsBoxDecoration,
-              suggestionsBoxVerticalOffset: suggestionsBoxVerticalOffset,
-              animationDuration: animationDuration,
-              animationStart: animationStart,
-              direction: direction,
-              hideOnLoading: hideOnLoading,
+              suggestionsController: suggestionsController as SuggestionsController<T>?,
+              offset: Offset(0, suggestionsBoxVerticalOffset),
+              // getImmediateSuggestions is no longer a parameter; rely on debounceDuration
+              hideOnSelect: !keepSuggestionsOnSuggestionSelected,
+              retainOnLoading: keepSuggestionsOnLoading,
               hideOnEmpty: hideOnEmpty,
               hideOnError: hideOnError,
-              hideSuggestionsOnKeyboardHide: hideSuggestionsOnKeyboardHide,
-              keepSuggestionsOnLoading: keepSuggestionsOnLoading,
-              autoFlipDirection: autoFlipDirection,
-              suggestionsBoxController: suggestionsBoxController,
-              keepSuggestionsOnSuggestionSelected: keepSuggestionsOnSuggestionSelected,
             );
           },
         );
@@ -399,7 +312,7 @@ class _FormBuilderTypeAheadState<T> extends FormBuilderFieldState<FormBuilderTyp
   @override
   void dispose() {
     // Dispose the _typeAheadController when initState created it
-    if (null == widget.controller) {
+    if (widget.controller == null) {
       _typeAheadController.dispose();
     }
     super.dispose();
