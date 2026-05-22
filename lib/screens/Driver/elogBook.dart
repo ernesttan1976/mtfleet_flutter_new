@@ -82,7 +82,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
           });
         }
       } else {
-        showAlertDialog(context, 'Error', res.reasonPhrase?.toString() ?? res.statusMessage ?? 'Unknown error');
+        showAlertDialog(context, 'Error', res.reasonPhrase?.toString() ?? 'Unknown error');
       }
     } on DioException catch (e) {
       showAlertDialog(context, 'Error', e.response?.data?['message']?.toString() ?? e.toString());
@@ -96,11 +96,11 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
     setState(() {
       _isLoading = true;
     });
-    final _startTime = DateTime.now().copyWith(hourN: time.hour, p: time.minute).toUtc().toIso8601String();
-    final _dio = await dioClient;
+    final startTime = DateTime.now().copyWith(hourN: time.hour, p: time.minute).toUtc().toIso8601String();
+    final dio = await dioClient;
     try {
-      final res = await _dio.post('/trips/start-destination',
-          data: {"destinationId": desId, "currentMeterReading": currentMeterReading, 'startTime': _startTime});
+      final res = await dio.post('/trips/start-destination',
+          data: {"destinationId": desId, "currentMeterReading": currentMeterReading, 'startTime': startTime});
       if (res.statusCode == 200 || res.statusCode == 201) {
         _fetchTripDetail();
         showAlertDialog(context, 'Success', res.statusMessage?.toString() ?? 'Success', isPop: false);
@@ -255,11 +255,9 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
-            child: Text(
-              "Vehicle is Already in Trip...",
-              textAlign: TextAlign.center,
-            ),
+          content: const Text(
+            "Vehicle is Already in Trip...",
+            textAlign: TextAlign.center,
           ),
           actions: [
             Container(
@@ -332,12 +330,12 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
         // }
 
         // Send Trip data to backend Start
-        DateFormat dateFormat = new DateFormat.Hm();
+        DateFormat dateFormat = DateFormat.Hm();
         String getTime = dateFormat.format(DateTime.now());
         var data = {
           "newDestination": {"id": desId, "isAdhoc": adHoc},
           "eLogData": {
-            "startTime": getTime + ":00.000",
+            "startTime": "$getTime:00.000",
             "vehicleNumber": _tripDetailModel!.vehicle?.vehicleNumber,
             "requisitionerPurpose": requisitionerPurpose
           },
@@ -391,12 +389,12 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
           }
         }
 
-        DateFormat dateFormat = new DateFormat.Hm();
+        DateFormat dateFormat = DateFormat.Hm();
         String getTime = dateFormat.format(DateTime.now());
         var data = {
           "newDestination": {"id": desId, "isAdhoc": adHoc},
           "eLogData": {
-            "startTime": getTime + ":00.000",
+            "startTime": "$getTime:00.000",
             "vehicleNumber": _tripDetailModel!.vehicle?.vehicleNumber,
             "requisitionerPurpose": requisitionerPurpose
           },
@@ -525,18 +523,17 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
       // barrierDismissible: false,
       builder: (BuildContext context) {
         return PopScope(
-          onWillPop: (route) {
+          onPopInvokedWithResult: (didPop, result) {
             Navigator.of(context).pop();
             _fetchTripDetail();
-            return Future.value(true);
           },
           child: AlertDialog(
-            title: new Text('Current Meter Reading Form'),
+            title: Text('Current Meter Reading Form'),
             elevation: 10,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
-            content: Container(
+            content: SizedBox(
                 height: 200,
                 child: FormBuilder(
                   key: _initialMeterReadingFormKey,
@@ -692,7 +689,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
           tripEnded = true;
         });
       } else {
-        showAlertDialog(context, 'Error', response.statusMessage, isPop: false);
+        showAlertDialog(context, 'Error', response.statusMessage?.toString() ?? 'Unknown error', isPop: false);
       }
     } catch (e) {
       setState(() {
@@ -706,96 +703,82 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
     var myList = [
       Row(
         children: <Widget>[
-          Container(
-            child:
-                Text('Trip Date', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold)),
-          ),
+          Text('Trip Date', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold)),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-              child:
-                  Text(myTripData.tripDate!.formatDateddMMMyyyyHHmmaa, style: Theme.of(context).textTheme.bodyText1)),
+          Text(myTripData.tripDate!.formatDateddMMMyyyyHHmmaa, style: Theme.of(context).textTheme.bodyText1),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Text('Vehicle Number',
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold)),
-          ),
+          Text('Vehicle Number',
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold)),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-              child: Text("${myTripData.vehicle?.vehicleNumber ?? ''}", style: Theme.of(context).textTheme.bodyText1)),
+          Text(myTripData.vehicle?.vehicleNumber ?? '', style: Theme.of(context).textTheme.bodyText1),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Safety Measure',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
-          ),
+          Flexible(
+              child: Text('Safety Measure',
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(
-                    myTripData.mtracForm == null
-                        ? "There is no safety measure for this trip."
-                        : myTripData.mtracForm?.safetyMeasures == null
-                            ? "There is no safety measure for this trip"
-                            : myTripData.mtracForm!.safetyMeasures!,
-                    style: Theme.of(context).textTheme.bodyText1)),
-          ),
+          Flexible(
+              child: Text(
+                  myTripData.mtracForm == null
+                      ? "There is no safety measure for this trip."
+                      : myTripData.mtracForm?.safetyMeasures == null
+                          ? "There is no safety measure for this trip"
+                          : myTripData.mtracForm!.safetyMeasures!,
+                  style: Theme.of(context).textTheme.bodyText1)),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Destination List',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
-          ),
+          Flexible(
+              child: Text('Destination List',
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
         ],
       ),
       ...myTripData.sortDestination().asMap().keys.map((index) {
-        bool _showStart = false;
-        final _item = myTripData.destinations[index];
+        bool showStart = false;
+        final item = myTripData.destinations[index];
         if (index == 0) {
-          _showStart = true;
+          showStart = true;
         } else {
-          final _preItem = myTripData.destinations[index - 1];
-          if (_preItem.status != "InProgress" && _preItem.status != "Inactive") {
-            _showStart = true;
+          final preItem = myTripData.destinations[index - 1];
+          if (preItem.status != "InProgress" && preItem.status != "Inactive") {
+            showStart = true;
           } else {
-            _showStart = false;
+            showStart = false;
           }
         }
         return DestinationListCard(
-          destinationData: _item,
-          showStart: _showStart,
+          destinationData: item,
+          showStart: showStart,
           startDestination: () {
             debugPrint("startDestination called");
             dialogTime((val) async {
-              final _currentMeterReading =
+              final currentMeterReading =
                   widget.currentMeterReading == 0 ? _tripDetailModel!.currentMeterReading : widget.currentMeterReading;
-              debugPrint(" $_currentMeterReading");
-              startDestination(_item.id, _currentMeterReading?.toInt(), val);
+              debugPrint(" $currentMeterReading");
+              startDestination(item.id, currentMeterReading?.toInt(), val);
             });
           },
-          endDestination: (int desId, bool adHoc) async {
+            endDestination: (int desId, bool adHoc) async {
             dialogTime((val) {
-              endDestination(_item, index == myTripData.destinations.length - 1, val);
+              endDestination(item, index == myTripData.destinations.length - 1, val);
             });
           },
         );
