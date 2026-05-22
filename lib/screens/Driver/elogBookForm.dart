@@ -16,7 +16,7 @@ class ELogBookFormScreen extends StatefulWidget {
   final bool? isEnd;
   final TimeOfDay? endTime;
 
-  ELogBookFormScreen({this.destinationId, this.destination, this.detailTrip, this.isEnd = false, this.endTime});
+  const ELogBookFormScreen({Key? key, this.destinationId, this.destination, this.detailTrip, this.isEnd = false, this.endTime}) : super(key: key);
 
   @override
   _ELogBookFormScreenState createState() => _ELogBookFormScreenState();
@@ -46,11 +46,11 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
       if (res.statusCode == 200 || res.statusCode == 201) {
         _currentMeterReading = res.data['meterReading'] ?? 0;
       } else {
-        showAlertDialog(context, 'Error', res.statusMessage);
+        showAlertDialog(context, 'Error', res.statusMessage ?? 'Unknown error');
         return;
       }
-    } on DioError catch (e) {
-      showAlertDialog(context, 'Error', e.response!.data["message"]);
+    } on DioException catch (e) {
+      showAlertDialog(context, 'Error', e.response?.data["message"]?.toString() ?? e.toString());
     }
   }
 
@@ -83,17 +83,17 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
         if (widget.isEnd!) {
           onCompletedTrip();
         } else {
-          showAlertDialog(context, 'Success', _res.statusMessage);
+          showAlertDialog(context, 'Success', _res.statusMessage ?? 'Success');
         }
       }
       setState(() {
         _isLoading = false;
       });
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       setState(() {
         _isLoading = false;
       });
-      showAlertDialog(context, ' Dio Error', "${e.response?.data["message"]}", isPop: false);
+      showAlertDialog(context, 'Dio Error', e.response?.data["message"]?.toString() ?? e.toString(), isPop: false);
     }
   }
 
@@ -110,15 +110,15 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
       });
 
       if (response.statusCode == 200) {
-        showAlertDialog(context, 'Success', response.statusMessage);
+        showAlertDialog(context, 'Success', response.statusMessage ?? 'Success');
       } else {
-        showAlertDialog(context, 'Error', response.statusMessage);
+        showAlertDialog(context, 'Error', response.statusMessage ?? 'Unknown error');
       }
     } catch (e) {
       setState(() {
         _isLoading = false;
       });
-      showAlertDialog(context, 'Error', e);
+      showAlertDialog(context, 'Error', e.toString());
     }
   }
 
@@ -132,11 +132,9 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
-            child: Text(
-              "You have completed the last trip\nDo you want end the trip session?",
-              textAlign: TextAlign.center,
-            ),
+          content: Text(
+            "You have completed the last trip\nDo you want end the trip session?",
+            textAlign: TextAlign.center,
           ),
           actions: [
             Container(
@@ -151,10 +149,10 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
+                          backgroundColor: WidgetStateProperty.all<Color>(
                             Theme.of(context).primaryColor,
                           ),
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -176,10 +174,10 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () => {
                           Navigator.of(context).pop(),
@@ -231,38 +229,38 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
                           30.verticalSpace,
                           Text(
                             'Trip Date',
-                            style: _themeData.textTheme.subtitle2?.semiBold,
+                            style: _themeData.textTheme.bodySmall?.semiBold,
                           ).paddingOnly(left: 10),
                           5.verticalSpace,
                           Text(
                                   widget.detailTrip?.tripDate == null
                                       ? '--'
                                       : widget.detailTrip!.tripDate!.formatDateddMMMyyyy,
-                                  style: _themeData.textTheme.subtitle1!.medium)
+                                  style: _themeData.textTheme.bodyMedium!.medium)
                               .paddingOnly(left: 10),
                           20.verticalSpace,
                           Text(
                             'Time Start',
-                            style: _themeData.textTheme.subtitle2?.semiBold,
+                            style: _themeData.textTheme.bodySmall?.semiBold,
                           ).paddingOnly(left: 10),
                           5.verticalSpace,
                           Text(
                                   widget.destination?.eLog?.startTime == null
                                       ? '--'
                                       : widget.destination!.eLog!.startTime!.formatDateTime('HH:mm'),
-                                  style: _themeData.textTheme.subtitle1!.medium)
+                                  style: _themeData.textTheme.bodyMedium!.medium)
                               .paddingOnly(left: 10),
                           20.verticalSpace,
                           Text(
                             'Time Arrived',
-                            style: _themeData.textTheme.subtitle2!.semiBold,
+                            style: _themeData.textTheme.bodySmall!.semiBold,
                           ).paddingOnly(left: 10),
                           5.verticalSpace,
                           Text(
                                   DateTime.now()
                                       .copyWith(hourN: widget.endTime!.hour, p: widget.endTime!.minute)
                                       .formatDateTime('HH:mm'),
-                                  style: _themeData.textTheme.subtitle1!.medium)
+                                  style: _themeData.textTheme.bodyMedium!.medium)
                               .paddingOnly(left: 10),
                           20.verticalSpace,
                           TitleAndWidgetShadow(
@@ -290,18 +288,15 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
                                 hintText: "Type here...",
                               ),
                               onChanged: (val) {
-                                print("Current meter " + _currentMeterReading.toString());
+                                print('Current meter $_currentMeterReading');
                                 if ((val as String).isEmpty) {
                                   _textTotalDistanceKm.clear();
                                 } else {
-                                  if (_currentMeterReading != null) {
-                                    if (int.parse(val) - _currentMeterReading > 0) {
-                                      _textTotalDistanceKm.text = '${int.parse(val) - _currentMeterReading}';
-                                    } else {
-                                      _textTotalDistanceKm.text = '0';
-                                    }
+                                  final parsed = int.tryParse(val) ?? 0;
+                                  if (parsed - _currentMeterReading > 0) {
+                                    _textTotalDistanceKm.text = '${parsed - _currentMeterReading}';
                                   } else {
-                                    _textTotalDistanceKm.text = val;
+                                    _textTotalDistanceKm.text = '0';
                                   }
                                 }
                               },
@@ -389,10 +384,10 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
                           30.verticalSpace,
                           OutlinedButton(
                             style: ButtonStyle(
-                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                              shape: WidgetStateProperty.all(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
                               )),
-                              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                             ),
                             onPressed: () {
                               if (_elogbookFormKey.currentState!.saveAndValidate()) {
@@ -404,22 +399,19 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
                               }
                             },
                             child: Text(
-                              "Submit",
-                              style: TextStyle(color: Colors.black),
+                              'Submit',
+                              style: _themeData.textTheme.bodyMedium!.medium,
                             ),
-                          ).fullWidth.paddingAll(10),
-                          20.verticalSpace,
+                          ).paddingAll(10),
+                          30.verticalSpace,
                         ],
                       ),
                     ),
-                  ).paddingHorizontal(15),
-                ),
+                  ),
+                )
               ],
             ),
-            if (_isLoading)
-              const Center(
-                child: CircularProgressIndicator(),
-              ),
+            if (_isLoading) Center(child: CircularProgressIndicator())
           ],
         ));
   }
