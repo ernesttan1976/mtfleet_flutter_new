@@ -434,7 +434,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
                     return null;
                   }
                 ]),
-                suggestionsBoxController: _vehicleTA,
+                suggestionsController: _vehicleTA,
                 decoration:
                     InputDecoration(hintText: 'System Lookup', suffixIcon: const Icon(Icons.expand_more, size: 30)),
                 itemBuilder: (context, itemData) {
@@ -538,10 +538,14 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            )),
-            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
+            side: WidgetStatePropertyAll(
+              BorderSide(color: Theme.of(context).primaryColor),
+            ),
           ),
           onPressed: () {
             addNewDestination();
@@ -557,10 +561,14 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            )),
-            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
+            side: WidgetStatePropertyAll(
+              BorderSide(color: Theme.of(context).primaryColor),
+            ),
           ),
           onPressed: () {
             if (_mtrcApprovalFormKey.currentState!.saveAndValidate()) {
@@ -657,7 +665,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
                     return null;
                   }
                 ]),
-                suggestionsBoxController: _vehicleTA,
+                suggestionsController: _vehicleTA,
                 decoration:
                     InputDecoration(hintText: 'System Lookup', suffixIcon: const Icon(Icons.expand_more, size: 30)),
                 itemBuilder: (context, itemData) {
@@ -723,10 +731,14 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
         padding: const EdgeInsets.only(top: 20),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            )),
-            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
+            side: WidgetStatePropertyAll(
+              BorderSide(color: Theme.of(context).primaryColor),
+            ),
           ),
           onPressed: () {
             addNewDestination();
@@ -742,10 +754,14 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            )),
-            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
+            side: WidgetStatePropertyAll(
+              BorderSide(color: Theme.of(context).primaryColor),
+            ),
           ),
           onPressed: () {
             if (_mtrcApprovalFormKey.currentState!.saveAndValidate()) {
