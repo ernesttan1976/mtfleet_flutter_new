@@ -1,17 +1,15 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
-import 'package:transport_flutter/components/extension/extension.dart';
 import 'package:transport_flutter/components/form_builder_typehead.dart';
 import 'package:transport_flutter/extensions/extensions.dart';
 import 'package:transport_flutter/util/currentUserData.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request_client;
 
 import '../../components/components.dart';
 
@@ -27,12 +25,12 @@ class MTRCFormScreen extends StatefulWidget {
 }
 
 class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDataMixin {
-  var data;
+  Map<String, dynamic>? data;
   bool _autoValidate = false;
   final GlobalKey<FormBuilderState> _mtrcApprovalFormKey = GlobalKey<FormBuilderState>();
 
-  final _approvingOfficerTA = SuggestionsBoxController();
-  final _vehicleTA = SuggestionsBoxController();
+  final SuggestionsController _approvingOfficerTA = SuggestionsController();
+  final SuggestionsController _vehicleTA = SuggestionsController();
 
   String? approvingOfficerID;
   String? vehicleID;
@@ -50,7 +48,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
   String? nextAVIDate;
   bool initStateFetching = false;
 
-  var request = new Request.Request();
+  var request = request_client.Request();
 
   late ThemeData _themeData;
   var logger = Logger();
@@ -540,10 +538,10 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             addNewDestination();
@@ -559,10 +557,10 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             if (_mtrcApprovalFormKey.currentState!.saveAndValidate()) {
@@ -607,7 +605,6 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
         title: 'Approval Officer',
         child: FormBuilderTypeAhead<dynamic>(
           name: "approvingOfficer",
-          suggestionsBoxController: _approvingOfficerTA,
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
             (val) {
@@ -726,10 +723,10 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
         padding: const EdgeInsets.only(top: 20),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             addNewDestination();
@@ -745,10 +742,10 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: MaterialStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             if (_mtrcApprovalFormKey.currentState!.saveAndValidate()) {
