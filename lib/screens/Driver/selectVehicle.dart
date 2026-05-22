@@ -2,7 +2,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -20,16 +19,16 @@ import '../../components/AlertDialog.dart';
 class SelectVehicleFormScreen extends StatefulWidget {
   final Function? onSubmitForm;
 
-  SelectVehicleFormScreen({this.onSubmitForm, Key? key}) : super(key: key);
+  const SelectVehicleFormScreen({this.onSubmitForm, Key? key}) : super(key: key);
 
   @override
-  _SelectVehicleFormScreenState createState() => _SelectVehicleFormScreenState();
+  SelectVehicleFormScreenState createState() => SelectVehicleFormScreenState();
 }
 
-class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
+class SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
   final GlobalKey<FormBuilderState> _selectVehicleFormKey = GlobalKey<FormBuilderState>();
 
-  final _vehicleTA = SuggestionsBoxController();
+  final SuggestionsController<dynamic> _vehicleSuggestionsController = SuggestionsController<dynamic>();
 
   final dioClient = AuthedDio.instance.dio;
 
@@ -64,7 +63,7 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
   @override
   void dispose() {
     _showFuelReceive.close();
-    _vehicleTA.close();
+    _vehicleSuggestionsController.close();
     super.dispose();
   }
 
@@ -87,7 +86,7 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
         baseID = user['base'] != null ? user["base"] : "-1";
         driverID = user['id'];
         currentRole = role;
-        canAccessAllVehicles = user['canAccessAllVehicles'] == null ? false : user['canAccessAllVehicles'];
+        canAccessAllVehicles = user['canAccessAllVehicles'] ?? false;
         initStateFetching = true;
       });
     } catch (e) {
@@ -104,10 +103,11 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
       for (var i = 0; i < licenseClasses.length; i++) {
         var cls = licenseClasses[i];
         var id = cls['id'];
-        if (i == 0)
-          query = query + "?id_in=$id";
-        else
-          query = query + "&id_in=$id";
+        if (i == 0) {
+          query = "?id_in=$id";
+        } else {
+          query = "$query&id_in=$id";
+        }
       }
     }
 
@@ -119,16 +119,17 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
       licenseClasses.forEach((c) {
         var vp = c['vehicles_platforms'];
         vp.forEach((v) {
-          pQuery = pQuery + "&platform.id_in=${v['id']}";
+          pQuery = "$pQuery&platform.id_in=${v['id']}";
         });
       });
 
       print("Got DATA: $pQuery");
 
-      if (pQuery != "")
+      if (pQuery != "") {
         setState(() {
           platformQuery = pQuery;
         });
+      }
       return "";
     }
   }
@@ -150,9 +151,10 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
       var dio = await dioClient;
       print("Can Access: $canAccessAllVehicles");
 
-      String query = canAccessAllVehicles == null || !canAccessAllVehicles
-          ? "/vehicles?_limit=5&sub_unit.id=$subUnitID&vehicleNumber=$pattern$platformQuery"
-          : "/vehicles?_limit=5&sub_unit.base=$baseID&vehicleNumber=$pattern$platformQuery";
+      String baseQuery = "/vehicles?_limit=5&vehicleNumber=$pattern$platformQuery";
+      String query = canAccessAllVehicles
+          ? "$baseQuery&sub_unit.base=$baseID"
+          : "$baseQuery&sub_unit.id=$subUnitID";
       var result = await dio.get(query);
       // print("query: $query");
       list = result.data;
@@ -183,8 +185,8 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
       setState(() {
         submitButtonLoading = true;
       });
-      final _eLogData = {};
-      _eLogData.addAll({
+      final eLogData = <String, dynamic>{};
+      eLogData.addAll({
         'startTime': _timeStarted?.toUtc().toIso8601String(),
         'endTime': _timeArrived?.toUtc().toIso8601String(),
         "requisitionerPurpose": formData['requisitionerPurpose'],
@@ -196,7 +198,7 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
         "POSONumber": 2,
       });
       if (_showFuelReceive.value) {
-        _eLogData.addAll({
+        eLogData.addAll({
           "fuelReceived": double.parse(formData['fuelReceived']),
           "fuelType": formData['fuelType'],
         });
@@ -207,7 +209,7 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
         "vehicleId": int.parse(vehicleID!),
         "requisitionerPurpose": formData['requisitionerPurpose'],
         "currentMeterReading": double.parse(formData['intialmeterReading']),
-        "eLog": _eLogData,
+        "eLog": eLogData,
       };
       var dataJSON = jsonEncode(data, toEncodable: myEncode);
       logger.e(dataJSON);
@@ -218,26 +220,27 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
         submitButtonLoading = false;
       });
       if (response.statusCode == 201) {
-        showAlertDialog(context, "Success", response.statusMessage);
-      } else if (response.statusCode! >= 400 || response.statusCode! < 500) {
-        logger.e("Response is 400");
+        showAlertDialog(context, "Success", response.statusMessage ?? "Success");
+      } else if (response.statusCode! >= 400 && response.statusCode! < 500) {
+        logger.e("Response is 4xx");
       } else if (response.statusCode! >= 500) {
-        logger.e("Response is 500");
+        logger.e("Response is 5xx");
       } else {
-        showAlertDialog(context, "Failure", response.statusMessage, isPop: false);
+        showAlertDialog(context, "Failure", response.statusMessage ?? "Failure", isPop: false);
       }
-    } on DioError catch (e) {
-      if (e.response!.statusCode! >= 400 || e.response!.statusCode! < 500) {
-        logger.e("Response is 400 ${e.response!.data!}");
+    } on DioException catch (e) {
+      if (e.response?.statusCode != null && e.response!.statusCode! >= 400 && e.response!.statusCode! < 500) {
+        logger.e("Response is 4xx ${e.response!.data}");
       }
       setState(() {
         submitButtonLoading = false;
       });
-      showAlertDialog(context, "Error", e.response!.data!["message"], isPop: false);
+      final message = e.response?.data is Map<String, dynamic> ? e.response!.data["message"] : e.message;
+      showAlertDialog(context, "Error", message.toString(), isPop: false);
     }
   }
 
-  ValueChanged _onChanged = (val) => print(val);
+  void handleOnChanged(val) => print(val);
 
   // Submission Form Alert
 
@@ -248,14 +251,14 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
         child: FormBuilderDateTimePicker(
             validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
             name: "tripDate",
-            onChanged: _onChanged,
+            onChanged: handleOnChanged,
             inputType: InputType.date,
-            decoration: InputDecoration(suffixIcon: const Icon(Icons.date_range, size: 25)),
+            decoration: const InputDecoration(suffixIcon: Icon(Icons.date_range, size: 25)),
             // initialDate: ,
             // validator: (val) => null,
             // initialTime: TimeOfDay(hour: 8, minute: 0),
             initialValue: DateTime.now(),
-            format: new DateFormat('dd MMMM yyyy')
+            format: DateFormat('dd MMMM yyyy')
             // readonly: true,
             ),
       ).paddingAll(10),
@@ -267,7 +270,7 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
             Expanded(
               child: FormBuilderTypeAhead<dynamic>(
                 name: "vehicle",
-                suggestionsBoxController: _vehicleTA,
+                suggestionsController: _vehicleSuggestionsController,
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(),
                   (val) {
@@ -280,7 +283,7 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
                   }
                 ]),
                 decoration:
-                    InputDecoration(hintText: 'System Lookup', suffixIcon: const Icon(Icons.expand_more, size: 30)),
+                    const InputDecoration(hintText: 'System Lookup', suffixIcon: Icon(Icons.expand_more, size: 30)),
                 itemBuilder: (context, itemData) {
                   return itemData != null || itemData.length != 0
                       ? ListTile(title: Text("${itemData['vehicleNumber']}"))
@@ -296,7 +299,7 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
                   return "";
                 },
                 onSuggestionSelected: (suggestion) => setVehicleNumber(suggestion),
-                noItemsFoundBuilder: (context) => Text(
+                noItemsFoundBuilder: (context) => const Text(
                   "No Vehicles Found!",
                   textAlign: TextAlign.center,
                 ).paddingAll(10),
@@ -309,8 +312,9 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
                 opacity: vehicleID != null ? 1 : 0.2,
                 child: InkWell(
                   onTap: () {
-                    if (vehicleID != null)
+                    if (vehicleID != null) {
                       Navigator.pushNamed(context, '/driver/past14DaysELog', arguments: int.parse(vehicleID!));
+                    }
                   },
                   child: Image.asset('ic_book'.assetPathIcon, width: 25),
                 ),
@@ -323,16 +327,17 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
         title: 'Requisitioner Purpose',
         child: FormBuilderDropdown(
           name: "requisitionerPurpose",
-          hint: Text('BOS/AOS/POL/DI/AHS'),
+          hint: const Text('BOS/AOS/POL/DI/AHS'),
           onChanged: (val) {
             if (val == 'POL') {
               _showFuelReceive.add(true);
-            } else
+            } else {
               _showFuelReceive.add(false);
+            }
           },
           validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
           items: ['BOS', 'AOS', 'POL', 'DI', 'AHS']
-              .map((option) => DropdownMenuItem(value: option, child: Text("$option")))
+              .map((option) => DropdownMenuItem(value: option, child: Text(option)))
               .toList(),
           icon: const Icon(Icons.expand_more, size: 25),
         ),
@@ -343,17 +348,17 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
             name: "timeStarted",
             onChanged: (val) {
               _timeStarted = DateTime.now().copyWith(hourN: val?.hour, p: val?.minute);
-              _onChanged(_timeStarted);
+              handleOnChanged(_timeStarted);
             },
             inputType: InputType.time,
             validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 hintText: "HH-MM",
                 suffixIcon: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 12.0),
-                  child: const Icon(Icons.access_time), // myIcon is a 48px-wide widget.
+                  padding: EdgeInsetsDirectional.only(end: 12.0),
+                  child: Icon(Icons.access_time), // myIcon is a 48px-wide widget.
                 )),
-            format: new DateFormat('HH:mm')
+            format: DateFormat('HH:mm')
             // readonly: true,
             ),
       ).paddingAll(10),
@@ -363,17 +368,17 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
             name: "timeArrived",
             onChanged: (val) {
               _timeArrived = DateTime.now().copyWith(hourN: val!.hour, p: val.minute);
-              _onChanged(_timeArrived);
+              handleOnChanged(_timeArrived);
             },
             inputType: InputType.time,
             validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 hintText: "HH-MM",
                 suffixIcon: Padding(
-                  padding: const EdgeInsetsDirectional.only(end: 12.0),
-                  child: const Icon(Icons.access_time), // myIcon is a 48px-wide widget.
+                  padding: EdgeInsetsDirectional.only(end: 12.0),
+                  child: Icon(Icons.access_time), // myIcon is a 48px-wide widget.
                 )),
-            format: new DateFormat('HH:mm')
+            format: DateFormat('HH:mm')
             // readonly: true,
             ),
       ).paddingAll(10),
@@ -386,8 +391,8 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
             FormBuilderValidators.numeric(errorText: "Must be numeric!"),
             FormBuilderValidators.min(0)
           ]),
-          keyboardType: TextInputType.numberWithOptions(decimal: true),
-          decoration: InputDecoration(
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          decoration: const InputDecoration(
             hintText: "Type here...",
           ),
         ),
@@ -403,10 +408,11 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
                         title: 'Fuel Type',
                         child: FormBuilderDropdown(
                           name: "fuelType",
-                          hint: Text('Fuel Type'),
-                          validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
+                          hint: const Text('Fuel Type'),
+                          validator:
+                              FormBuilderValidators.compose([FormBuilderValidators.required()]),
                           items: ['Diesel', 'Petrol']
-                              .map((option) => DropdownMenuItem(value: option, child: Text("$option")))
+                              .map((option) => DropdownMenuItem(value: option, child: Text(option)))
                               .toList(),
                           icon: const Icon(Icons.expand_more, size: 25),
                         ),
@@ -414,11 +420,11 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
                       TitleAndWidgetShadow(
                         title: 'Fuel Received',
                         child: FormBuilderTextField(
-                          key: Key("fuelReceived"),
+                          key: const Key("fuelReceived"),
                           validator: FormBuilderValidators.compose(
                               [FormBuilderValidators.required(), FormBuilderValidators.numeric()]),
                           name: 'fuelReceived',
-                          decoration: InputDecoration(hintText: 'Fuel Received'),
+                          decoration: const InputDecoration(hintText: 'Fuel Received'),
                           keyboardType: TextInputType.number,
                         ),
                       ).paddingAll(10),
@@ -429,12 +435,12 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
       TitleAndWidgetShadow(
         title: 'Remarks',
         child: FormBuilderTextField(
-          key: Key("remarks"),
+          key: const Key("remarks"),
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(),
           ]),
           name: 'remarks',
-          decoration: InputDecoration(hintText: 'Remarks'),
+          decoration: const InputDecoration(hintText: 'Remarks'),
         ),
       ).paddingAll(10),
     ];
@@ -442,14 +448,15 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
     var newList = [
       Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: !submitButtonLoading
             ? OutlinedButton(
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   )),
-                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  side: WidgetStateProperty.all(
+                      BorderSide(color: Theme.of(context).primaryColor)),
                 ),
                 onPressed: () {
                   if (_selectVehicleFormKey.currentState!.saveAndValidate()) {
@@ -459,7 +466,7 @@ class _SelectVehicleFormScreenState extends State<SelectVehicleFormScreen> {
                     _submit(data);
                   }
                 },
-                child: Text(
+                child: const Text(
                   "Submit",
                   style: TextStyle(color: Colors.black),
                 ),
