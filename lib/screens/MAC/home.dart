@@ -10,7 +10,7 @@ import 'package:transport_flutter/screens/MAC/PreventiveCheckInForm.dart';
 import 'package:transport_flutter/util/currentUserData.dart';
 
 class MACHome extends StatefulWidget {
-  MACHome({Key? key}) : super(key: key);
+  const MACHome({Key? key}) : super(key: key);
 
   @override
   _MACHomeState createState() => _MACHomeState();
@@ -27,7 +27,7 @@ class _MACHomeState extends State<MACHome> {
   @override
   void initState() {
     super.initState();
-    this.loadUser();
+    loadUser();
   }
 
   loadUser() async {
@@ -39,7 +39,7 @@ class _MACHomeState extends State<MACHome> {
       name = "$userName";
       uid = "${auth['user']['id']}";
     });
-    this.loadVSs();
+    loadVSs();
   }
 
   loadVSs() async {
@@ -47,8 +47,8 @@ class _MACHomeState extends State<MACHome> {
       final dio = await dioClient;
       final response = await dio.get("/vehicle-servicing/mac");
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final _list = (response.data as List).map((e) => VehicleServicingModel.fromJson(e)).toList();
-        _vehicleServicings.add(_list);
+        final list = (response.data as List).map((e) => VehicleServicingModel.fromJson(e)).toList();
+        _vehicleServicings.add(list);
       } else if (response.statusCode == 401) {
         await storage.deleteAll();
         Navigator.pushReplacementNamed(context, '/login');
@@ -57,10 +57,10 @@ class _MACHomeState extends State<MACHome> {
           await storage.deleteAll();
           Navigator.pushReplacementNamed(context, '/login');
         }
-        showAlertDialog(context, 'Error', response.statusMessage, isPop: false);
+        showAlertDialog(context, 'Error', response.statusMessage ?? 'Unknown error', isPop: false);
       }
     } catch (e) {
-      showAlertDialog(context, 'Error', e as String, isPop: false);
+      showAlertDialog(context, 'Error', e.toString(), isPop: false);
     }
   }
 
@@ -69,81 +69,100 @@ class _MACHomeState extends State<MACHome> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text("Please select"),
-          content: Container(
+          title: const Text("Please select"),
+          content: SizedBox(
             height: 260,
             child: Column(
               children: <Widget>[
-                Text("What type of maintenance is this vehicle checking in for?"),
-                Container(
+                const Text("What type of maintenance is this vehicle checking in for?"),
+                SizedBox(
                   width: double.infinity,
-                  margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: OutlinedButton(
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      )),
-                      side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
+                      side: MaterialStateProperty.all(
+                        BorderSide(color: Theme.of(context).primaryColor),
+                      ),
                     ),
                     onPressed: () async {
                       Navigator.of(context).pop();
 
-                      await Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => PreventiveCheckInFormScreen(
-                                maintenanceType: "Preventive",
-                              )));
+                      await Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const PreventiveCheckInFormScreen(
+                            maintenanceType: "Preventive",
+                          ),
+                        ),
+                      );
 
-                      this.loadVSs();
+                      loadVSs();
                     },
-                    child: Text(
+                    child: const Text(
                       "Preventive",
                       style: TextStyle(color: Colors.black),
                     ),
                   ),
                 ),
-                Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                    child: OutlinedButton(
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        )),
-                        side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
-                      ),
-                      onPressed: () async {
-                        Navigator.of(context).pop();
-
-                        await Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PreventiveCheckInFormScreen(
-                                  maintenanceType: "Corrective",
-                                )));
-                        this.loadVSs();
-                      },
-                      child: Text(
-                        "Corrective",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    )),
-                Container(
+                SizedBox(
                   width: double.infinity,
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: OutlinedButton(
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      )),
-                      side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
+                      side: MaterialStateProperty.all(
+                        BorderSide(color: Theme.of(context).primaryColor),
+                      ),
                     ),
                     onPressed: () async {
                       Navigator.of(context).pop();
-                      await Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => PreventiveCheckInFormScreen(
-                                maintenanceType: "AVI",
-                              )));
-                      this.loadVSs();
+
+                      await Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const PreventiveCheckInFormScreen(
+                            maintenanceType: "Corrective",
+                          ),
+                        ),
+                      );
+                      loadVSs();
                     },
-                    child: Text(
+                    child: const Text(
+                      "Corrective",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
+                      side: MaterialStateProperty.all(
+                        BorderSide(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                    onPressed: () async {
+                      Navigator.of(context).pop();
+                      await Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const PreventiveCheckInFormScreen(
+                            maintenanceType: "AVI",
+                          ),
+                        ),
+                      );
+                      loadVSs();
+                    },
+                    child: const Text(
                       "Annual Vehicle Inspection",
                       style: TextStyle(color: Colors.black),
                     ),
@@ -157,8 +176,8 @@ class _MACHomeState extends State<MACHome> {
             borderRadius: BorderRadius.circular(10.0),
           ),
           actions: <Widget>[
-            new TextButton(
-              child: new Text("Close"),
+            TextButton(
+              child: const Text("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -171,7 +190,10 @@ class _MACHomeState extends State<MACHome> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return RefreshIndicator(
+      onRefresh: () => loadVSs(),
       child: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(
@@ -179,79 +201,88 @@ class _MACHomeState extends State<MACHome> {
               child: uid != null
                   ? Container(
                       alignment: Alignment.topLeft,
-                      padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 10, 0),
                       child: Column(
                         children: <Widget>[
                           Row(
                             children: <Widget>[
-                              Container(
-                                child: Flexible(
-                                    child: name != null && name != "null"
-                                        ? Text(
-                                            'Hi, $name,',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline4
-                                                ?.copyWith(color: Theme.of(context).primaryColor),
-                                          )
-                                        : Text(
-                                            'Hi,',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline4
-                                                ?.copyWith(color: Theme.of(context).primaryColor),
-                                          )),
+                              Flexible(
+                                child: name != null && name != "null"
+                                    ? Text(
+                                        'Hi, $name,',
+                                        style: textTheme.headlineMedium?.copyWith(
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      )
+                                    : Text(
+                                        'Hi,',
+                                        style: textTheme.headlineMedium?.copyWith(
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      ),
                               ),
                             ],
                           ),
-                          Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+                          const SizedBox(height: 20),
                           Row(
                             children: <Widget>[
-                              Container(
-                                child: Flexible(
-                                    child: Text('Vehicle In Workshop', style: Theme.of(context).textTheme.headline6)),
+                              Flexible(
+                                child: Text(
+                                  'Vehicle In Workshop',
+                                  style: textTheme.titleLarge,
+                                ),
                               ),
                             ],
                           ),
                           StreamBuilder<List<VehicleServicingModel>>(
-                              stream: _vehicleServicings,
-                              builder: (context, snapshot) {
-                                if (snapshot.data == null) return CircularProgressIndicator();
-                                return MaintenanceCard(vehicleServicings: snapshot.data!, refetch: () => loadVSs());
-                              }),
-                          Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+                            stream: _vehicleServicings,
+                            builder: (context, snapshot) {
+                              if (snapshot.data == null) return const CircularProgressIndicator();
+                              return MaintenanceCard(
+                                vehicleServicings: snapshot.data!,
+                                refetch: () => loadVSs(),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 20),
                           Row(
                             children: <Widget>[
                               Container(
                                 color: Colors.transparent,
-                                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                                 width: MediaQuery.of(context).size.width * 0.9,
                                 height: 60,
                                 child: OutlinedButton(
                                   style: ButtonStyle(
-                                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    )),
-                                    side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                      ),
+                                    ),
+                                    side: MaterialStateProperty.all(
+                                      BorderSide(
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                    ),
                                   ),
                                   onPressed: _selectionOptionAlert,
-                                  child: Text(
+                                  child: const Text(
                                     "Check-in Vehicle",
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           )
                         ],
-                      ))
-                  : Center(
+                      ),
+                    )
+                  : const Center(
                       child: CircularProgressIndicator(),
                     ),
             ),
           ),
         ],
       ),
-      onRefresh: () => this.loadVSs(),
     );
   }
 }
