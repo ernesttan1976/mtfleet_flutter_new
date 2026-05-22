@@ -12,10 +12,10 @@ import 'package:transport_flutter/screens/Driver/tripPageView.dart';
 import 'package:transport_flutter/util/currentUserData.dart';
 
 class DriverHome extends StatefulWidget {
-  DriverHome({Key? key}) : super(key: key);
+  const DriverHome({Key? key}) : super(key: key);
 
   @override
-  _DriverHomeState createState() => _DriverHomeState();
+  State<DriverHome> createState() => _DriverHomeState();
 }
 
 class _DriverHomeState extends State<DriverHome> {
@@ -29,7 +29,7 @@ class _DriverHomeState extends State<DriverHome> {
   @override
   void initState() {
     super.initState();
-    this.loadCurrentUser();
+    loadCurrentUser();
   }
 
   void loadCurrentUser() async {
@@ -43,7 +43,7 @@ class _DriverHomeState extends State<DriverHome> {
       userJoined = auth['user']['createdAt'];
       currentRole = roleString;
     });
-    this.loadVSs();
+    loadVSs();
   }
 
   loadVSs() async {
@@ -51,13 +51,15 @@ class _DriverHomeState extends State<DriverHome> {
       final dio = await dioClient;
       final response = await dio.get("/vehicle-servicing/driver");
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final _list = (response.data as List).map((e) => VehicleServicingModel.fromJson(e)).toList();
-        _vehicleServicings.add(_list);
+        final vehicleServicingList = (response.data as List)
+            .map((e) => VehicleServicingModel.fromJson(e))
+            .toList();
+        _vehicleServicings.add(vehicleServicingList);
       } else if (response.statusCode == 401) {
         await storage.deleteAll();
         Navigator.pushReplacementNamed(context, '/login');
       } else {
-        showAlertDialog(context, 'Error', response.statusMessage, isPop: false);
+        showAlertDialog(context, 'Error', response.statusMessage ?? '', isPop: false);
       }
     } catch (e) {
       // showAlertDialog(context, 'Error', e.response.data['message'], isPop: false);
@@ -77,7 +79,7 @@ class _DriverHomeState extends State<DriverHome> {
             borderRadius: BorderRadius.circular(10.0),
           ),
           content: Container(
-            child: Text(
+            child: const Text(
               "Does this trip require MT RAC form approval?",
               textAlign: TextAlign.center,
             ),
@@ -85,42 +87,42 @@ class _DriverHomeState extends State<DriverHome> {
           actions: [
             Container(
                 color: Colors.transparent,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                 width: MediaQuery.of(context).size.width * 1.0,
                 height: 50,
                 child: Row(
                   children: <Widget>[
                     Container(
                       width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child:TextButton(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
+                          backgroundColor: WidgetStateProperty.all<Color>(
                             Theme.of(context).primaryColor,
                           ),
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                           ),
                         ),
                         onPressed: _vechicleCommaderAlert,
-                        child: Text(
+                        child: const Text(
                           "Yes",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -131,7 +133,7 @@ class _DriverHomeState extends State<DriverHome> {
                                 // mtrcApprovalRequired,isVehicleCommander
                               ));
                         },
-                        child: Text(
+                        child: const Text(
                           "No",
                           style: TextStyle(color: Colors.black),
                         ),
@@ -158,7 +160,7 @@ class _DriverHomeState extends State<DriverHome> {
             borderRadius: BorderRadius.circular(10.0),
           ),
           content: Container(
-            child: Text(
+            child: const Text(
               "Is there Vehicle Commander/Front Passenger Present for the trip?",
               textAlign: TextAlign.center,
             ),
@@ -166,20 +168,20 @@ class _DriverHomeState extends State<DriverHome> {
           actions: [
             Container(
                 color: Colors.transparent,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                 width: MediaQuery.of(context).size.width * 1.0,
                 height: 50,
                 child: Row(
                   children: <Widget>[
                     Container(
                       width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
+                          backgroundColor: WidgetStateProperty.all<Color>(
                             Theme.of(context).primaryColor,
                           ),
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -194,22 +196,22 @@ class _DriverHomeState extends State<DriverHome> {
                                   // mtrcApprovalRequired,isVehicleCommander
                                   ))
                         },
-                        child: Text(
+                        child: const Text(
                           "Yes",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () => {
                           Navigator.of(context).pop(),
@@ -221,7 +223,7 @@ class _DriverHomeState extends State<DriverHome> {
                                 // mtrcApprovalRequired,isVehicleCommander
                               ))
                         },
-                        child: Text(
+                        child: const Text(
                           "No",
                           style: TextStyle(color: Colors.black),
                         ),
@@ -245,7 +247,7 @@ class _DriverHomeState extends State<DriverHome> {
               child: uid != null
                   ? Container(
                       alignment: Alignment.topLeft,
-                      padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 10, 0),
                       child: Column(
                         children: <Widget>[
                           Row(
@@ -257,14 +259,14 @@ class _DriverHomeState extends State<DriverHome> {
                                             'Hi, $name,',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline4
+                                                .headlineMedium
                                                 ?.copyWith(color: Theme.of(context).primaryColor),
                                           )
                                         : Text(
                                             'Hi,',
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .headline4
+                                                .headlineMedium
                                                 ?.copyWith(color: Theme.of(context).primaryColor),
                                           )),
                               ),
@@ -285,23 +287,23 @@ class _DriverHomeState extends State<DriverHome> {
                           //       if (snapshot.data == null) return CircularProgressIndicator();
                           //       return MaintenanceCard(vehicleServicings: snapshot.data);
                           //     }),
-                          Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+                          const Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
                           PerformanceCardSection(uid: uid, userJoined: userJoined),
-                          Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+                          const Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
                           Row(
                             children: <Widget>[
                               Expanded(
                                 child: Container(
                                   color: Colors.transparent,
-                                  padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                                   height: 60,
                                   child: OutlinedButton(
                                     style: ButtonStyle(
-                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30.0),
                                       )),
                                       side:
-                                          MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                                          WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                                     ),
                                     onPressed: () async {
                                       var roleString = await getCurrentRole();
@@ -316,7 +318,7 @@ class _DriverHomeState extends State<DriverHome> {
                                         _mTRCFormAlert();
                                       }
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Initiate New Trip",
                                     ),
                                   ),
@@ -324,21 +326,21 @@ class _DriverHomeState extends State<DriverHome> {
                               )
                             ],
                           ),
-                          Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+                          const Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
                           Row(
                             children: <Widget>[
                               Expanded(
                                 child: Container(
                                   color: Colors.transparent,
-                                  padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                                   height: 60,
                                   child: OutlinedButton(
                                     style: ButtonStyle(
-                                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30.0),
                                       )),
                                       side:
-                                          MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                                          WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                                     ),
                                     onPressed: () => {
                                       Navigator.push(
@@ -347,7 +349,7 @@ class _DriverHomeState extends State<DriverHome> {
                                             builder: (context) => BOCTripPageView(),
                                           )),
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "BOS/AOS/POL/DI/AHS",
                                     ),
                                   ),
@@ -355,17 +357,17 @@ class _DriverHomeState extends State<DriverHome> {
                               )
                             ],
                           ),
-                          Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+                          const Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
                         ],
                       ))
-                  : Center(
+                  : const Center(
                       child: CircularProgressIndicator(),
                     ),
             ),
           ),
         ],
       ),
-      onRefresh: () => this.loadVSs(),
+      onRefresh: () => loadVSs(),
     );
   }
 }
