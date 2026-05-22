@@ -1,14 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/config/dio.dart';
 import 'package:transport_flutter/extensions/extensions.dart';
 import 'package:transport_flutter/models/models.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request_util;
 
 import 'MTRACApprovalTwo.dart';
 import 'TripApproval.dart';
@@ -16,7 +15,7 @@ import 'TripApproval.dart';
 class TripApprovalScreen extends StatefulWidget {
   final String? tripID;
 
-  TripApprovalScreen({Key? key, this.tripID}) : super(key: key);
+  const TripApprovalScreen({Key? key, this.tripID}) : super(key: key);
 
   @override
   _TripApprovalScreenState createState() => _TripApprovalScreenState();
@@ -25,11 +24,12 @@ class TripApprovalScreen extends StatefulWidget {
 class _TripApprovalScreenState extends State<TripApprovalScreen> {
   final dioClient = AuthedDio.instance.dio;
   bool _isLoading = false;
-  final GlobalKey<FormBuilderState> _safetyKey = GlobalKey<FormBuilderState>();
+  // TODO: Wire up _formKey when form is added or remove if unnecessary.
+  // final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
 
   String? myTripId;
-  var request = new Request.Request();
-  final _tripModel = BehaviorSubject<TripDetailModel>();
+  final request = request_util.Request();
+  final BehaviorSubject<TripDetailModel> _tripModel = BehaviorSubject<TripDetailModel>();
 
   @override
   void initState() {
@@ -45,13 +45,13 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
     try {
       final res = await request.get(Uri.parse('trips/$myTripId'));
       if (res.statusCode == 200 || res.statusCode == 201) {
-        final _a = json.decode(res.body);
+        final decodedBody = json.decode(res.body);
         Logger logger = Logger();
-        logger.e(_a);
-        final _model = TripDetailModel.fromJson(_a);
-        _tripModel.add(_model);
+        logger.e(decodedBody);
+        final TripDetailModel tripModel = TripDetailModel.fromJson(decodedBody);
+        _tripModel.add(tripModel);
       } else {
-        showAlertDialog(context, 'Error', res.reasonPhrase);
+        showAlertDialog(context, 'Error', res.reasonPhrase ?? 'Unknown error');
       }
     } catch (e) {
       showAlertDialog(context, 'Catch Error', e.toString());
@@ -65,11 +65,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
     var myList = [
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child:
-                    Text('Date:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
-          ),
+          Text('Date:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold)),
         ],
       ),
       Row(
@@ -146,7 +142,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
               children: <Widget>[
                 Container(
                   child: Flexible(
-                      child: Text("Requisitioner's Purpose",
+                      child: const Text("Requisitioner's Purpose",
                           style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
                 ),
               ],
@@ -168,13 +164,13 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
         padding: const EdgeInsets.only(top: 10),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
-            if (tripData.mtracForm != null)
+            if (tripData.mtracForm != null) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -183,7 +179,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
                   ),
                 ),
               );
-            else {
+            } else {
               Navigator.push(
                 context,
                 MaterialPageRoute(
