@@ -13,7 +13,7 @@ import 'package:transport_flutter/components/extension/extension.dart';
 import 'package:transport_flutter/config/dio.dart';
 import 'package:transport_flutter/extensions/extensions.dart';
 import 'package:transport_flutter/models/models.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request_util;
 
 import 'elogBookForm.dart';
 
@@ -21,23 +21,23 @@ class ElogBookScreen extends StatefulWidget {
   final int? tripdataId;
   final num? currentMeterReading;
 
-  ElogBookScreen({
+  const ElogBookScreen({
     Key? key,
     this.tripdataId,
     this.currentMeterReading,
   }) : super(key: key);
 
   @override
-  _ElogBookScreenState createState() => _ElogBookScreenState();
+  State<ElogBookScreen> createState() => _ElogBookScreenState();
 }
 
 class _ElogBookScreenState extends State<ElogBookScreen> {
-  var tripID;
+  int? tripID;
 
   bool isCancelling = false;
   final dioClient = AuthedDio.instance.dio;
 
-  var request = new Request.Request();
+  final request = request_util.Request();
   final _eLogBookScaffoldKey = GlobalKey<ScaffoldState>();
 
   final _tripModel = BehaviorSubject<TripDetailModel>();
@@ -72,20 +72,20 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
     try {
       final res = await request.get(Uri.parse('trips/$tripID'));
       if (res.statusCode == 200 || res.statusCode == 201) {
-        final _a = json.decode(res.body);
-        final _model = TripDetailModel.fromJson(_a);
-        _tripDetailModel = _model;
-        _tripModel.add(_model);
-        if ((_model.destinations).isNotEmpty) {
+        final bodyJson = json.decode(res.body);
+        final fetchedModel = TripDetailModel.fromJson(bodyJson);
+        _tripDetailModel = fetchedModel;
+        _tripModel.add(fetchedModel);
+        if ((fetchedModel.destinations).isNotEmpty) {
           setState(() {
-            desSelected = _model.destinations.first;
+            desSelected = fetchedModel.destinations.first;
           });
         }
       } else {
-        showAlertDialog(context, 'Error', res.reasonPhrase);
+        showAlertDialog(context, 'Error', res.reasonPhrase?.toString() ?? res.statusMessage ?? 'Unknown error');
       }
-    } on DioError catch (e) {
-      showAlertDialog(context, 'Error', e.response!.data["message"].toString());
+    } on DioException catch (e) {
+      showAlertDialog(context, 'Error', e.response?.data?['message']?.toString() ?? e.toString());
     }
     setState(() {
       _isLoading = false;
@@ -103,12 +103,12 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
           data: {"destinationId": desId, "currentMeterReading": currentMeterReading, 'startTime': _startTime});
       if (res.statusCode == 200 || res.statusCode == 201) {
         _fetchTripDetail();
-        showAlertDialog(context, 'Success', res.statusMessage, isPop: false);
+        showAlertDialog(context, 'Success', res.statusMessage?.toString() ?? 'Success', isPop: false);
       } else {
-        showAlertDialog(context, 'Error', res.statusMessage, isPop: false);
+        showAlertDialog(context, 'Error', res.statusMessage?.toString() ?? 'Unknown error', isPop: false);
       }
-    } on DioError catch (e) {
-      showAlertDialog(context, 'Error', e.response!.data, isPop: false);
+    } on DioException catch (e) {
+      showAlertDialog(context, 'Error', e.response?.data?.toString() ?? e.toString(), isPop: false);
     }
     setState(() {
       _isLoading = false;
@@ -274,10 +274,10 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -478,13 +478,13 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
       });
       if (response.statusCode == 200) {
         _fetchTripDetail();
-        showAlertDialog(context, 'Success', response.reasonPhrase, isPop: false);
+        showAlertDialog(context, 'Success', response.reasonPhrase?.toString() ?? 'Success', isPop: false);
       }
     } catch (e) {
       setState(() {
         _isLoading = false;
       });
-      showAlertDialog(context, 'Error', e, isPop: false);
+      showAlertDialog(context, 'Error', e.toString(), isPop: false);
     }
   }
 
@@ -524,8 +524,8 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
       context: context,
       // barrierDismissible: false,
       builder: (BuildContext context) {
-        return WillPopScope(
-          onWillPop: () {
+        return PopScope(
+          onWillPop: (route) {
             Navigator.of(context).pop();
             _fetchTripDetail();
             return Future.value(true);
@@ -565,10 +565,10 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
                           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                           child: OutlinedButton(
                             style: ButtonStyle(
-                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                              shape: WidgetStateProperty.all(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
                               )),
-                              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                             ),
                             onPressed: () async {
                               if (_initialMeterReadingFormKey.currentState!.validate()) {
@@ -687,7 +687,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
 
       if (response.statusCode == 200) {
         _fetchTripDetail();
-        showAlertDialog(context, 'Success', response.statusMessage, isPop: false);
+        showAlertDialog(context, 'Success', response.statusMessage?.toString() ?? 'Success', isPop: false);
         setState(() {
           tripEnded = true;
         });
@@ -698,7 +698,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
       setState(() {
         _isLoading = false;
       });
-      showAlertDialog(context, 'Error', e, isPop: false);
+      showAlertDialog(context, 'Error', e.toString(), isPop: false);
     }
   }
 
@@ -827,8 +827,8 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: TextButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xffff0033)),
-                  shape: MaterialStateProperty.all(
+                  backgroundColor: WidgetStateProperty.all<Color>(Color(0xffff0033)),
+                  shape: WidgetStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
