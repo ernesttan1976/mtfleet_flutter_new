@@ -9,13 +9,13 @@ import 'package:transport_flutter/extensions/extensions.dart';
 import 'package:transport_flutter/models/models.dart';
 import 'package:transport_flutter/screens/ApprovingOfficer/ApprovedTripDoc.dart';
 import 'package:transport_flutter/screens/ApprovingOfficer/MTRACApprovedDoc.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request_api;
 
 class DestinationApprovalScreen extends StatefulWidget {
   final int? tripID;
   final int? adHocDestinationID;
 
-  DestinationApprovalScreen({Key? key, this.tripID, this.adHocDestinationID}) : super(key: key);
+  const DestinationApprovalScreen({Key? key, this.tripID, this.adHocDestinationID}) : super(key: key);
 
   @override
   _DestinationApprovalScreenState createState() => _DestinationApprovalScreenState();
@@ -23,7 +23,7 @@ class DestinationApprovalScreen extends StatefulWidget {
 
 class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
   late int myTripId;
-  var request = new Request.Request();
+  final request = request_api.Request();
 
   bool _isLoading = false;
 
@@ -44,11 +44,11 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
     try {
       final res = await request.get(Uri.parse('trips/$myTripId'));
       if (res.statusCode == 200 || res.statusCode == 201) {
-        final _a = json.decode(res.body);
-        final _model = TripDetailModel.fromJson(_a[0]);
-        _tripModel.add(_model);
+        final decodedBody = json.decode(res.body);
+        final tripModel = TripDetailModel.fromJson(decodedBody[0]);
+        _tripModel.add(tripModel);
       } else {
-        showAlertDialog(context, 'Error', res.reasonPhrase);
+        showAlertDialog(context, 'Error', res.reasonPhrase ?? 'Unknown error');
       }
     } catch (e) {
       showAlertDialog(context, 'Error', e.toString());
@@ -201,7 +201,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
       ),
     ]);
 
-    var fourthList;
+    List<Widget>? fourthList;
 
     if (trip.mtracForm != null) {
       fourthList = [
@@ -287,8 +287,8 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: TextButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
-              shape: MaterialStateProperty.all(
+              backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
+              shape: WidgetStateProperty.all(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
@@ -306,7 +306,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: MaterialStateProperty.all(
+              shape: WidgetStateProperty.all(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                   side: BorderSide(color: Theme.of(context).primaryColor),
@@ -378,8 +378,8 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: TextButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
-              shape: MaterialStateProperty.all(
+              backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
+              shape: WidgetStateProperty.all(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
@@ -397,10 +397,10 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              shape: WidgetStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               )),
-              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
             ),
             onPressed: () {
               denyAlert();
@@ -414,7 +414,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
       ];
     }
 
-    return [...myList, ...fourthList];
+    return [...myList, ...?fourthList];
   }
 
   void onSubmitApprove() async {
@@ -428,15 +428,15 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
         _isLoading = false;
       });
       if (res.statusCode == 200 || res.statusCode == 201) {
-        showAlertDialog(context, 'Success', res.statusMessage);
+        showAlertDialog(context, 'Success', res.statusMessage ?? 'Success');
       } else {
-        showAlertDialog(context, 'Error', res.statusMessage, isPop: false);
+        showAlertDialog(context, 'Error', res.statusMessage ?? 'Unknown error', isPop: false);
       }
     } catch (e) {
       setState(() {
         _isLoading = false;
       });
-      showAlertDialog(context, 'Error', e, isPop: false);
+      showAlertDialog(context, 'Error', e.toString(), isPop: false);
     }
   }
 
@@ -451,15 +451,15 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
         _isLoading = false;
       });
       if (res.statusCode == 200 || res.statusCode == 201) {
-        showAlertDialog(context, 'Success', res.statusMessage);
+        showAlertDialog(context, 'Success', res.statusMessage ?? 'Success');
       } else {
-        showAlertDialog(context, 'Error', res.statusMessage, isPop: false);
+        showAlertDialog(context, 'Error', res.statusMessage ?? 'Unknown error', isPop: false);
       }
     } catch (e) {
       setState(() {
         _isLoading = false;
       });
-      showAlertDialog(context, 'Error', e as String, isPop: false);
+      showAlertDialog(context, 'Error', e.toString(), isPop: false);
     }
   }
 
@@ -494,8 +494,8 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
-                          shape: MaterialStateProperty.all(
+                          backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -517,10 +517,10 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
