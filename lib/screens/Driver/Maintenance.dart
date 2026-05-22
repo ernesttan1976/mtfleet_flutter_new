@@ -74,7 +74,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         children: <Widget>[
           Container(
             child: Flexible(
-                child: Text('${model.workCenter}',
+                child: Text(model.workCenter,
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -92,8 +92,8 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
       Row(
         children: <Widget>[
           Container(
-            child: Flexible(
-                child: Text('${model.telephoneNo}',
+                child: Flexible(
+                child: Text(model.telephoneNo,
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -111,8 +111,8 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
       Row(
         children: <Widget>[
           Container(
-            child: Flexible(
-                child: Text('${widget.service.vehicle?.vehicleNumber}',
+                child: Flexible(
+                child: Text(widget.service.vehicle?.vehicleNumber ?? '',
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -130,8 +130,8 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
       Row(
         children: <Widget>[
           Container(
-            child: Flexible(
-                child: Text('${widget.service.vehicle?.model}',
+                child: Flexible(
+                child: Text(widget.service.vehicle?.model ?? '',
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -153,8 +153,8 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         Row(
           children: <Widget>[
             Container(
-              child: Flexible(
-                  child: Text('${widget.service.maintenanceType}',
+                  child: Flexible(
+                  child: Text(widget.service.maintenanceType,
                       style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
             ),
           ],
@@ -176,8 +176,8 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
       Row(
         children: <Widget>[
           Container(
-            child: Flexible(
-                child: Text('${model.frontSensorTag}',
+                child: Flexible(
+                child: Text(model.frontSensorTag,
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -290,7 +290,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         children: <Widget>[
           Container(
             child: Flexible(
-                child: Text(model.dateIn == null ? '--' : '${model.dateIn!.formatDateddMMyyyy}',
+                child: Text(model.dateIn == null ? '--' : model.dateIn!.formatDateddMMyyyy,
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -310,7 +310,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           Container(
             child: Flexible(
                 child: Text(
-                    model.expectedCheckoutDate != null ? '${model.expectedCheckoutDate!.formatDateddMMyyyy}' : '--',
+                    model.expectedCheckoutDate != null ? model.expectedCheckoutDate!.formatDateddMMyyyy : '--',
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -329,7 +329,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         children: <Widget>[
           Container(
             child: Flexible(
-                child: Text('${model.speedoReading}',
+                child: Text(model.speedoReading.toString(),
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -348,7 +348,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         children: <Widget>[
           Container(
             child: Flexible(
-                child: Text('${model.swdReading}',
+                child: Text(model.swdReading.toString(),
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -367,7 +367,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         children: <Widget>[
           Container(
             child: Flexible(
-                child: Text('${model.handedBy}',
+                child: Text(model.handedBy,
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -389,7 +389,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                 child: Text(
                     model.expectedCheckoutTime == null
                         ? '--'
-                        : '${model.expectedCheckoutTime!.formatDateTime('hh:mm a')}',
+                        : model.expectedCheckoutTime!.formatDateTime('hh:mm a'),
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -408,7 +408,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         children: <Widget>[
           Container(
             child: Flexible(
-                child: Text('${model.attender}',
+                child: Text(model.attender,
                     style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],

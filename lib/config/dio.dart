@@ -28,7 +28,7 @@ class AuthedDio {
     String? token = await storage.read(key: Constants.storageBearer);
     Logger().e("Token $token");
     BaseOptions options = new BaseOptions(
-        baseUrl: "${Constants.SERVER_URI_API}", headers: {"Authorization": "Bearer $token", "Accept": "*/*"});
+        baseUrl: Constants.SERVER_URI_API, headers: {"Authorization": "Bearer $token", "Accept": "*/*"});
 
     return Dio(options);
   }
@@ -64,7 +64,7 @@ class AuthedDioAPI {
     String jwt = auth['jwt'];
 
     BaseOptions options = new BaseOptions(
-        baseUrl: "${Constants.SERVER_URI_API}", headers: {"Authorization": "Bearer $jwt", "Accept": "*/*"});
+        baseUrl: Constants.SERVER_URI_API, headers: {"Authorization": "Bearer $jwt", "Accept": "*/*"});
 
     return Dio(options);
   }

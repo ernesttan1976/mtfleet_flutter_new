@@ -123,7 +123,7 @@ class _ApprovingOfficerNavigationState
                                   items: roles
                                       ?.map((role) => DropdownMenuItem(
                                           child: Text(
-                                            "${role.toString().replaceAll('_', ' ')}",
+                                            role.toString().replaceAll('_', ' '),
                                           ),
                                           value: "$role"))
                                       .toList(),

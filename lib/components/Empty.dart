@@ -24,7 +24,7 @@ class EmptyPlaceholder extends StatelessWidget {
               width: width ?? MediaQuery.of(context).size.width,
             ),
             Text(
-              "$description",
+              description,
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey),
             )

@@ -136,7 +136,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
               children: <Widget>[
                 Container(
                   child: Flexible(
-                      child: Text("${item.to}",
+                      child: Text(item.to,
                           style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
                 ),
               ],
@@ -155,7 +155,7 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
               children: <Widget>[
                 Container(
                   child: Flexible(
-                      child: Text("${item.requisitionerPurpose}",
+                      child: Text(item.requisitionerPurpose,
                           style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
                 ),
               ],

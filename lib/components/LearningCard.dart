@@ -40,7 +40,7 @@ class LearningCard extends StatelessWidget {
             Row(
               children: <Widget>[
                 Image.network(
-                  "$cover",
+                  cover,
                   fit: BoxFit.cover,
                   width: 90,
                   height: 90,
@@ -49,10 +49,10 @@ class LearningCard extends StatelessWidget {
                     child: ListTile(
                   contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                   title: Text(
-                    '$title',
+                    title,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text("$description"),
+                  subtitle: Text(description),
                 )),
                 // Padding(
                 //     padding: EdgeInsets.fromLTRB(0, 0, 10, 0),

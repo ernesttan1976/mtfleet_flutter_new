@@ -114,7 +114,7 @@ class MTRACApprovalSecondScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text('$title:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold)),
-        Text('${content}', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal)),
+        Text(content, style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal)),
         const SizedBox(
           height: 15,
         ),
