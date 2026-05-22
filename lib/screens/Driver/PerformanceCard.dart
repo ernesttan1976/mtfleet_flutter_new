@@ -11,13 +11,13 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/config/dio.dart';
 import 'package:transport_flutter/util/currentUserData.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request_client;
 
 class PerformanceCardSection extends StatefulWidget {
   final dynamic uid;
   final dynamic userJoined;
 
-  PerformanceCardSection({Key? key, this.uid, this.userJoined}) : super(key: key);
+  const PerformanceCardSection({Key? key, this.uid, this.userJoined}) : super(key: key);
 
   @override
   _PerformanceCardSectionState createState() => _PerformanceCardSectionState();
@@ -39,21 +39,21 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
 
   void getPerformanceCard() async {
     try {
-      var request = new Request.Request();
-      final _response = await request.get(Uri.parse("performance-card"));
-      final result = json.decode(_response.body);
-      if (_response.statusCode == 200) {
+      var request = request_client.Request();
+      final response = await request.get(Uri.parse("performance-card"));
+      final result = json.decode(response.body);
+      if (response.statusCode == 200) {
         setState(() {
           performanceCard = result;
         });
-      } else if (_response.statusCode == 401) {
+      } else if (response.statusCode == 401) {
         await storage.deleteAll();
         Navigator.pushReplacementNamed(context, '/login');
       } else {
-        showAlertDialog(context, 'Error', _response.body, isPop: false);
+        showAlertDialog(context, 'Error', response.body, isPop: false);
       }
     } catch (e) {
-      showAlertDialog(context, 'Error', e as String, isPop: false);
+      showAlertDialog(context, 'Error', e.toString(), isPop: false);
     }
   }
 
@@ -63,62 +63,64 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text('Select Duration'),
+          title: const Text('Select Duration'),
           elevation: 10,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
+          content: SizedBox(
               height: 320,
               child: FormBuilder(
                 key: _durationFormKey,
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: FormBuilderDateRangePicker(
-                        firstDate: DateTime.parse(widget.userJoined).subtract(Duration(days: 1)),
+                        firstDate: DateTime.parse(widget.userJoined).subtract(const Duration(days: 1)),
                         lastDate: DateTime.now(),
                         initialValue: DateTimeRange(
                           start: DateTime.parse(widget.userJoined),
-                          end: DateTime.now().subtract(Duration(minutes: 10)),
+                          end: DateTime.now().subtract(const Duration(minutes: 10)),
                         ),
                         format: DateFormat("E dd MMM, yyyy"),
                         name: "duration",
                         validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
                         maxLines: 2,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             labelText: "Duration",
                             hintText: "Select Duration",
                             labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: FormBuilderTextField(
                           name: "verifiedBy",
                           validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               labelText: "Verified By",
                               hintText: "Enter Name",
-                              labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black))),
+                              labelStyle:
+                                  TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black))),
                     ),
                     if (!isEmpty)
                       Container(
                           width: MediaQuery.of(context).size.width * 0.9,
-                          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                           child: OutlinedButton(
                             style: ButtonStyle(
-                              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                              shape: WidgetStateProperty.all(RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
                               )),
-                              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                             ),
                             onPressed: () async {
                               if (_durationFormKey.currentState!.validate()) {
                                 _durationFormKey.currentState!.save();
 
-                                DateTimeRange duration = _durationFormKey.currentState!.value['duration'];
+                                DateTimeRange duration =
+                                    _durationFormKey.currentState!.value['duration'];
 
                                 var start = duration.start.toUtc().toIso8601String();
                                 var end = duration.end.toUtc().toIso8601String();
@@ -126,11 +128,11 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                                 var verifiedBy = _durationFormKey.currentState!.value['verifiedBy'];
                                 print("Verified By $verifiedBy");
 
-                                downloadPerformanceCard(start, end, verifiedBy);
+                                await downloadPerformanceCard(start, end, verifiedBy);
                                 Navigator.of(context).pop();
                               }
                             },
-                            child: Text(
+                            child: const Text(
                               "Download",
                               style: TextStyle(color: Colors.black),
                             ),
@@ -143,36 +145,46 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
     );
   }
 
-  void downloadPerformanceCard(start, end, verifiedBy) async {
+  Future<void> downloadPerformanceCard(start, end, verifiedBy) async {
     Directory tempDir = await getTemporaryDirectory();
     String tempPath = tempDir.path;
     try {
-      var request = new Request.Request();
-      final _response = await request.post(Uri.parse("performance-card/download"), body: {
+      var request = request_client.Request();
+      final response = await request.post(Uri.parse("performance-card/download"), body: {
         "verifiedBy": verifiedBy,
         "startDate": start,
         "endDate": end,
       });
 
-      if (_response.statusCode == 201) {
-        File f = File(tempPath + "/PerformanceCard.csv");
-        f.writeAsString(_response.body);
+      if (response.statusCode == 201) {
+        File f = File("$tempPath/PerformanceCard.csv");
+        f.writeAsString(response.body);
 
         try {
           final params = SaveFileDialogParams(sourceFilePath: f.path);
           await FlutterFileDialog.saveFile(params: params);
           print(params.sourceFilePath);
+          // ignore: use_build_context_synchronously
           showAlertDialog(context, 'Success', "Download success", isPop: false);
         } catch (e) {
-          showAlertDialog(context, 'Error',
+          // ignore: use_build_context_synchronously
+          showAlertDialog(
+              context,
+              'Error',
               "Unable to save your performance card. Make sure you have enabled permission to access storage!",
               isPop: false);
         }
       } else {
-        showAlertDialog(context, 'Error', _response.reasonPhrase, isPop: false);
+        // reasonPhrase is nullable; provide a fallback string
+        final reason = response.reasonPhrase ?? 'Unknown error while downloading performance card';
+        // ignore: use_build_context_synchronously
+        showAlertDialog(context, 'Error', reason, isPop: false);
       }
     } catch (e) {
-      showAlertDialog(context, 'Error',
+      // ignore: use_build_context_synchronously
+      showAlertDialog(
+          context,
+          'Error',
           "There was some internal server error while downloading your performance card. Please try again or contact support!",
           isPop: false);
     }
@@ -188,7 +200,8 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Expanded(
-                    child: Text('My Performance Card ', style: Theme.of(context).textTheme.headline6),
+                    child: Text('My Performance Card ',
+                        style: Theme.of(context).textTheme.titleLarge),
                   ),
                   // Spacer(),
                 ],
@@ -207,7 +220,7 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                       "Download",
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText1
+                          .bodyLarge
                           ?.copyWith(letterSpacing: 1.5, decoration: TextDecoration.underline),
                     ),
                   ),
@@ -218,7 +231,7 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                 Builder(builder: (_) {
                   final totalDistanceCovered = cls['totalDistanceCovered'] ?? 0;
                   return Container(
-                    padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
+                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                     child: Card(
                       color: Colors.white,
                       elevation: 5,
@@ -226,19 +239,19 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Container(
-                        padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
+                        padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
                         width: MediaQuery.of(context).size.width * 1.0,
                         child: Column(
                           children: <Widget>[
                             Text(
                               "Class ${cls['licenseClass']['class']}",
-                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                             ),
-                            Divider(),
+                            const Divider(),
                             Wrap(
                               alignment: WrapAlignment.spaceAround,
                               children: <Widget>[
-                                Container(
+                                SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.25,
                                   child: Column(
                                     children: <Widget>[
@@ -251,27 +264,27 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                                                 progressColor: Colors.blue,
                                                 center: Text(
                                                   "${(totalDistanceCovered / 3000 * 100).toStringAsFixed(2)}%",
-                                                  style: new TextStyle(fontSize: 12.0),
+                                                  style: const TextStyle(fontSize: 12.0),
                                                 ),
                                               )
                                             : CircularPercentIndicator(
                                                 radius: 45,
                                                 percent: 1,
                                                 progressColor: Colors.blue,
-                                                center: Text(
+                                                center: const Text(
                                                   "100%",
-                                                  style: new TextStyle(fontSize: 12.0),
+                                                  style: TextStyle(fontSize: 12.0),
                                                 ),
                                               ),
                                       ),
-                                      Text("3k Bonus"),
+                                      const Text("3k Bonus"),
                                       totalDistanceCovered >= 3000
-                                          ? Text("Done!")
-                                          : Text("${3000 - totalDistanceCovered}km Left!")
+                                          ? const Text("Done!")
+                                          : Text("${3000 - totalDistanceCovered}km Left!"),
                                     ],
                                   ),
                                 ),
-                                Container(
+                                SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.25,
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -285,27 +298,27 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                                                 progressColor: Colors.blue,
                                                 center: Text(
                                                   "${(totalDistanceCovered / 6000 * 100).toStringAsFixed(2)}%",
-                                                  style: new TextStyle(fontSize: 12.0),
+                                                  style: const TextStyle(fontSize: 12.0),
                                                 ),
                                               )
                                             : CircularPercentIndicator(
                                                 radius: 45,
                                                 percent: 1,
                                                 progressColor: Colors.blue,
-                                                center: Text(
+                                                center: const Text(
                                                   "100%",
-                                                  style: new TextStyle(fontSize: 12.0),
+                                                  style: TextStyle(fontSize: 12.0),
                                                 ),
                                               ),
                                       ),
-                                      Text("6k Bonus"),
+                                      const Text("6k Bonus"),
                                       totalDistanceCovered >= 6000
-                                          ? Text("Done!")
-                                          : Text("${6000 - totalDistanceCovered}km Left!")
+                                          ? const Text("Done!")
+                                          : Text("${6000 - totalDistanceCovered}km Left!"),
                                     ],
                                   ),
                                 ),
-                                Container(
+                                SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.25,
                                   child: Column(
                                     children: <Widget>[
@@ -318,23 +331,23 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                                                 progressColor: Colors.blue,
                                                 center: Text(
                                                   "${(totalDistanceCovered / 9000 * 100).toStringAsFixed(2)}%",
-                                                  style: new TextStyle(fontSize: 12.0),
+                                                  style: const TextStyle(fontSize: 12.0),
                                                 ),
                                               )
                                             : CircularPercentIndicator(
                                                 radius: 45,
                                                 percent: 1,
                                                 progressColor: Colors.blue,
-                                                center: Text(
+                                                center: const Text(
                                                   "100%",
-                                                  style: new TextStyle(fontSize: 12.0),
+                                                  style: TextStyle(fontSize: 12.0),
                                                 ),
                                               ),
                                       ),
-                                      Text("9k Bonus"),
+                                      const Text("9k Bonus"),
                                       totalDistanceCovered >= 9000
-                                          ? Text("Done!")
-                                          : Text("${9000 - totalDistanceCovered}km Left!")
+                                          ? const Text("Done!")
+                                          : Text("${9000 - totalDistanceCovered}km Left!"),
                                     ],
                                   ),
                                 )
@@ -355,7 +368,8 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Expanded(
-                    child: Text('My Performance Card ', style: Theme.of(context).textTheme.headline6),
+                    child: Text('My Performance Card ',
+                        style: Theme.of(context).textTheme.titleLarge),
                   ),
                   // Spacer(),
                 ],
@@ -370,7 +384,7 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                       "Download",
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText1
+                          .bodyLarge
                           ?.copyWith(letterSpacing: 1.5, decoration: TextDecoration.underline),
                     ),
                   ),
@@ -378,13 +392,13 @@ class _PerformanceCardSectionState extends State<PerformanceCardSection> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: isEmpty
-                    ? Text(
+                    ? const Text(
                         "No completed trips are found!",
                         textAlign: TextAlign.center,
                       )
-                    : CircularProgressIndicator(),
+                    : const CircularProgressIndicator(),
               )
             ],
           );
