@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/components/Driver/DestinationListCard.dart';
-import 'package:transport_flutter/components/Driver/custom_time_picker.dart';
 import 'package:transport_flutter/components/components.dart';
 import 'package:transport_flutter/components/extension/extension.dart';
 import 'package:transport_flutter/config/dio.dart';
@@ -887,7 +886,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
   }
 
   void dialogTime(Function(TimeOfDay) callBack) async {
-    final TimeOfDay? timeOfDay = await showTimePickerCustom(
+    final TimeOfDay? timeOfDay = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
       builder: (BuildContext context, Widget? child) {
@@ -904,7 +903,7 @@ class _ElogBookScreenState extends State<ElogBookScreen> {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              child!,
+              if (child != null) child,
             ],
           ),
         );
