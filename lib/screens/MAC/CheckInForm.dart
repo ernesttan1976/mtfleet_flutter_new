@@ -25,7 +25,7 @@ class CheckInFormScreen extends StatelessWidget {
             style: TextStyle(color: Theme.of(context).primaryColor),
           ),
           backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.black),
           // elevation: 5,
         ),
         body: CustomScrollView(
@@ -51,7 +51,7 @@ class CheckInForm extends StatefulWidget {
   const CheckInForm({Key? key, this.maintenanceType}) : super(key: key);
 
   @override
-  _CheckInFormState createState() => _CheckInFormState();
+  State<CheckInForm> createState() => _CheckInFormState();
 }
 
 class _CheckInFormState extends State<CheckInForm> {
@@ -86,14 +86,16 @@ class _CheckInFormState extends State<CheckInForm> {
   final TextEditingController _serviceTextController = TextEditingController();
 
   // Add Value into CheckBox
-  var typeOfServicesValues = ["AVI"];
-  var typeOfServicesOptions = [
+  var typeOfServicesValues = const ["AVI"];
+  var typeOfServicesOptions = const [
     FormBuilderFieldOption(value: "AVI"),
   ];
-  final ValueChanged _onChanged = (val) => print(val);
+  void _onChanged(dynamic val) {
+    debugPrint(val.toString());
+  }
 
   void setVehicleNumber(vehicle) {
-    print("$vehicle");
+    debugPrint('$vehicle');
     setState(() {
       vehicleID = "${vehicle['id']}";
       vehicleModel = "${vehicle['model']}";
@@ -101,7 +103,7 @@ class _CheckInFormState extends State<CheckInForm> {
   }
 
   void setHandoverDriver(driver) {
-    print("$driver");
+    debugPrint('$driver');
     setState(() {
       handOverDriverID = "${driver['id']}";
     });
@@ -113,29 +115,30 @@ class _CheckInFormState extends State<CheckInForm> {
     loadUser();
   }
 
-  loadUser() async {
+  Future<void> loadUser() async {
     final authString = await getUser();
-    final auth = jsonDecode(authString);
-    final userName = auth['user']['name'];
+    final auth = jsonDecode(authString as String);
+    final userName = auth['user']['name'] as String;
     final id = auth['user']['id'];
-    print("Username: $userName");
+    debugPrint('Username: $userName');
 
     setState(() {
       base = auth['user']['base'] != null ? "${auth['user']['base']['id']}" : "";
-      name = "$userName";
-      userID = "$id";
+      name = userName;
+      userID = '$id';
     });
   }
 
 // Get List of vehicle from server
   Future<List> getVehicles(pattern) async {
-    print("Pattern: $pattern");
-    print("State: $vehicleModel");
+    debugPrint('Pattern: $pattern');
+    debugPrint('State: $vehicleModel');
     List list;
     try {
       var dio = await dioClient;
-      var result = await dio.get("/vehicles?_limit=5&sub_unit.base=$base&vehicleNumber=$pattern");
-      list = result.data;
+      var result =
+          await dio.get("/vehicles?_limit=5&sub_unit.base=$base&vehicleNumber=$pattern");
+      list = result.data as List;
 
       setState(() {
         vehicleID = null;
@@ -149,14 +152,16 @@ class _CheckInFormState extends State<CheckInForm> {
 
 // Get List of driver from server
   Future<List> getDrivers(pattern) async {
-    print("Pattern: $pattern");
+    debugPrint('Pattern: $pattern');
     List list;
     try {
       var dio = await dioClient;
-      var result1 = await dio.get("/users?role.type=driver&_limit=5&name_contains=$pattern");
-      var result2 = await dio.get("/users?otherRoles.type=driver&_limit=5&name_contains=$pattern");
-      list = [...result1.data, ...result2.data];
-      print(list);
+      var result1 =
+          await dio.get("/users?role.type=driver&_limit=5&name_contains=$pattern");
+      var result2 = await dio
+          .get("/users?otherRoles.type=driver&_limit=5&name_contains=$pattern");
+      list = [...result1.data as List, ...result2.data as List];
+      debugPrint(list.toString());
       if (list.isEmpty) {
         setState(() {
           handOverDriverID = null;
@@ -168,13 +173,13 @@ class _CheckInFormState extends State<CheckInForm> {
     return list;
   }
 
-  void onToolRemove(index) {
+  void onToolRemove(int index) {
     setState(() {
       listOfItems[index] = null;
     });
   }
 
-  void onServiceRemove(index) {
+  void onServiceRemove(int index) {
     setState(() {
       typeOfServices[index] = null;
     });
@@ -182,52 +187,54 @@ class _CheckInFormState extends State<CheckInForm> {
 
   // Add New Item fields in list
   void addNewItem() {
-    print("The Length of List is ${listOfItems.length}");
-    int index = listOfItems.length;
+    debugPrint('The Length of List is ${listOfItems.length}');
+    final int index = listOfItems.length;
     setState(() {
       listOfItems.add(
         Container(
-          padding: EdgeInsets.fromLTRB(10, 0, 0, 10),
+          padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
           child: Row(
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
+                padding: const EdgeInsets.fromLTRB(0, 25, 20, 0),
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: FormBuilderTextField(
-                  key: Key("$index"),
-                  validator:
-                      FormBuilderValidators.compose([FormBuilderValidators.required(errorText: "Cannot be empty!")]),
-                  name: "name$index",
+                  key: Key('$index'),
+                  validator: FormBuilderValidators.compose(
+                      [FormBuilderValidators.required(errorText: 'Cannot be empty!')]),
+                  name: 'name$index',
                   controller: TextEditingController(),
-                  decoration: InputDecoration(
-                    hintText: "Type Here...",
+                  decoration: const InputDecoration(
+                    hintText: 'Type Here...',
                   ),
                 ),
               ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.35,
-                padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
+                padding: const EdgeInsets.fromLTRB(0, 25, 20, 0),
                 child: FormBuilderTextField(
-                  key: Key("$index"),
+                  key: Key('$index'),
                   validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(errorText: "Cannot be empty!"),
-                    FormBuilderValidators.numeric(errorText: "Must be numeric!"),
-                    FormBuilderValidators.min(1, errorText: "Must be > 0!")
+                    FormBuilderValidators.required(errorText: 'Cannot be empty!'),
+                    FormBuilderValidators.numeric(errorText: 'Must be numeric!'),
+                    FormBuilderValidators.min(1, errorText: 'Must be > 0!')
                   ]),
-                  name: "quantity$index",
+                  name: 'quantity$index',
                   controller: TextEditingController(),
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      hintText: "Type Here",
-                      counterStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 4.0, color: Colors.black)),
+                  decoration: const InputDecoration(
+                      hintText: 'Type Here',
+                      counterStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 4.0,
+                          color: Colors.black)),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 0.1,
                 child: IconButton(
-                  icon: Icon(Icons.close),
+                  icon: const Icon(Icons.close),
                   onPressed: () => onToolRemove(index),
                 ),
               ),
@@ -238,42 +245,45 @@ class _CheckInFormState extends State<CheckInForm> {
     });
   }
 
-  void setMyItem(var context) {
+  void setMyItem(BuildContext context) {
     if (!itemSet) {
       setState(() {
         listOfItems.add(
           Container(
-            padding: EdgeInsets.fromLTRB(10, 0, 0, 10),
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
             child: Row(
               children: [
                 Container(
-                  padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 25, 20, 0),
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: FormBuilderTextField(
-                    validator:
-                        FormBuilderValidators.compose([FormBuilderValidators.required(errorText: "Cannot be empty!")]),
-                    name: "name",
-                    decoration: InputDecoration(
-                      hintText: "Type Here...",
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(errorText: 'Cannot be empty!')
+                    ]),
+                    name: 'name',
+                    decoration: const InputDecoration(
+                      hintText: 'Type Here...',
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.35,
-                  padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
                   child: FormBuilderTextField(
                     validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(errorText: "Cannot be empty!"),
-                      FormBuilderValidators.numeric(errorText: "Must be numeric!"),
-                      FormBuilderValidators.min(1, errorText: "Must be > 0!")
+                      FormBuilderValidators.required(errorText: 'Cannot be empty!'),
+                      FormBuilderValidators.numeric(errorText: 'Must be numeric!'),
+                      FormBuilderValidators.min(1, errorText: 'Must be > 0!')
                     ]),
-                    name: "quantity",
+                    name: 'quantity',
                     controller: TextEditingController(),
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        hintText: "Type Here",
-                        counterStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 4.0, color: Colors.black)),
+                    decoration: const InputDecoration(
+                        hintText: 'Type Here',
+                        counterStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 4.0,
+                            color: Colors.black)),
                   ),
                 )
               ],
@@ -286,13 +296,14 @@ class _CheckInFormState extends State<CheckInForm> {
         width: MediaQuery.of(context).size.width * 0.9,
         child: FormBuilderCheckboxGroup(
           activeColor: Theme.of(context).primaryColor,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               border: InputBorder.none,
-              labelText: "Types of Services",
-              labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black)),
-          name: "service",
-          initialValue: ["AVI"],
-          options: [FormBuilderFieldOption(value: "AVI")],
+              labelText: 'Types of Services',
+              labelStyle: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black)),
+          name: 'service',
+          initialValue: const ['AVI'],
+          options: const [FormBuilderFieldOption(value: 'AVI')],
         ),
       ));
     }
@@ -303,113 +314,120 @@ class _CheckInFormState extends State<CheckInForm> {
 
   // Add New Service
   void addNewService(String service) {
-    print("The Length of List is ${typeOfServices.length}");
-    int index = typeOfServices.length;
+    debugPrint('The Length of List is ${typeOfServices.length}');
+    final int index = typeOfServices.length;
     setState(() {
       typeOfServices.add(Container(
-        padding: EdgeInsets.fromLTRB(10, 0, 0, 10),
+        padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.75,
               child: FormBuilderCheckboxGroup(
-                key: Key("$index"),
+                key: Key('$index'),
                 activeColor: Theme.of(context).primaryColor,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: InputBorder.none,
                     // labelText: "Types of Services",
-                    labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black)),
-                name: "service$index",
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18.0, color: Colors.black)),
+                name: 'service$index',
                 initialValue: [service],
                 options: [FormBuilderFieldOption(value: service)],
               ),
             ),
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 15, 20, 0),
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.1,
               child: IconButton(
-                icon: Icon(Icons.close),
+                icon: const Icon(Icons.close),
                 onPressed: () => onServiceRemove(index),
               ),
             ),
           ],
         ),
       ));
-      newTypeOfService = "";
+      newTypeOfService = '';
     });
   }
 
   // On Submit Checkout Form
-  void onSubmitForm(var data) async {
+  Future<void> onSubmitForm(Map<String, dynamic> data) async {
     setState(() {
       submitting = true;
     });
 
-    List names = [];
-    List quantities = [];
+    final List names = [];
+    final List quantities = [];
 
-    data.entries.forEach((e) {
-      if (e.key.contains("name")) {
-        names.add(e.value);
-      } else if (e.key.contains("quantity")) {
-        quantities.add(e.value);
+    data.forEach((key, value) {
+      if (key.contains('name')) {
+        names.add(value);
+      } else if (key.contains('quantity')) {
+        quantities.add(value);
       }
     });
 
     // List of Tools
-    List basicIssueTools = [];
+    final List basicIssueTools = [];
 
     for (var i = 0; i < names.length; i++) {
-      if (listOfItems[i] != null) basicIssueTools.add({"name": names[i], "quantity": quantities[i]});
+      if (listOfItems[i] != null) {
+        basicIssueTools.add({'name': names[i], 'quantity': quantities[i]});
+      }
     }
 
-    List allServices = [];
-    data.entries.forEach((e) {
-      if (e.key.contains("service")) {
-        if (e.value.isNotEmpty) {
-          String myService = e.value.first;
-          allServices.add(myService);
-        }
+    final List allServices = [];
+    data.forEach((key, value) {
+      if (key.contains('service') && value is List && value.isNotEmpty) {
+        allServices.add(value.first);
       }
     });
 
     data['services'] = allServices;
 
-    data["basicIssueTools"] = basicIssueTools.toList();
-    data["expectedCheckoutTime"] = data['expectedCheckoutTime'].toString().substring(11, 16) + ":00.000";
-    data["dateIn"] = data["dateIn"].toIso8601String();
-    data["expectedCheckoutDate"] = data["expectedCheckoutDate"].toIso8601String();
-    data["maintenanceType"] = widget.maintenanceType;
-    data["vehicle"] = vehicleID;
-    data["handedOverBy"] = handOverDriverID;
-    data["attendedBy"] = userID;
+    data['basicIssueTools'] = basicIssueTools.toList();
+    data['expectedCheckoutTime'] =
+        '${data['expectedCheckoutTime'].toString().substring(11, 16)}:00.000';
+    data['dateIn'] = (data['dateIn'] as DateTime).toIso8601String();
+    data['expectedCheckoutDate'] =
+        (data['expectedCheckoutDate'] as DateTime).toIso8601String();
+    data['maintenanceType'] = widget.maintenanceType;
+    data['vehicle'] = vehicleID;
+    data['handedOverBy'] = handOverDriverID;
+    data['attendedBy'] = userID;
 
-    var dio = await dioClient;
+    final dio = await dioClient;
 
-    List images = data['images'];
+    final List images = data['images'] as List? ?? [];
 
-    data.remove("images");
+    data.remove('images');
 
-    final response = await dio.post("/vehicle-servicings", data: json.encode(data));
+    final response = await dio.post('/vehicle-servicings', data: json.encode(data));
 
-    Future uploadImage(image) async {
-      File file = image as File;
-      FormData formData = FormData();
-      formData.fields.add(MapEntry("ref", response.data["ref"]));
-      formData.fields.add(MapEntry("refId", response.data["refId"].toString()));
-      formData.fields.add(MapEntry("field", response.data["field"]));
+    Future<void> uploadImage(dynamic image) async {
+      final file = image as File;
+      final formData = FormData();
+      formData.fields.add(MapEntry('ref', response.data['ref'] as String));
+      formData.fields
+          .add(MapEntry('refId', response.data['refId'].toString()));
+      formData.fields.add(MapEntry('field', response.data['field'] as String));
       // Add permission to upload images on Strapi
-      formData.files.add(MapEntry("files", await MultipartFile.fromFile(file.path)));
-      await dio.post("/upload", data: formData);
-      print("Image Added!");
+      formData.files
+          .add(MapEntry('files', await MultipartFile.fromFile(file.path)));
+      await dio.post('/upload', data: formData);
+      debugPrint('Image Added!');
     }
 
-    Future.forEach(images, uploadImage).then((value) {
-      setState(() {
-        submitting = false;
-      });
-      showAlertDialog(context, "Success", "Vehicle is Checked-In successfully!");
+    for (final image in images) {
+      await uploadImage(image);
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      submitting = false;
     });
+    showAlertDialog(context, 'Success', 'Vehicle is Checked-In successfully!');
   }
 
   @override
@@ -421,61 +439,74 @@ class _CheckInFormState extends State<CheckInForm> {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
-              validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-              name: "unitSquardon",
-              decoration: InputDecoration(
-                  labelText: "Unit Squardon",
-                  hintText: "Type Here... ",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(),
+              ]),
+              name: 'unitSquardon',
+              decoration: const InputDecoration(
+                  labelText: 'Unit Squardon',
+                  hintText: 'Type Here... ',
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.black)),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
-              validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-              name: "telephoneNo",
-              decoration: InputDecoration(
-                  labelText: "Telephone No.",
-                  hintText: "Type Here...",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(),
+              ]),
+              name: 'telephoneNo',
+              decoration: const InputDecoration(
+                  labelText: 'Telephone No.',
+                  hintText: 'Type Here...',
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.black)),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTypeAhead<dynamic>(
-              name: "vehicleNumber",
+              name: 'vehicleNumber',
               suggestionsController: _vehicleTA,
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(),
                 (val) {
-                  if (vehicleModel == null) return "Please enter a valid vehicle number";
+                  if (vehicleModel == null) return 'Please enter a valid vehicle number';
                   return null;
                 }
               ]),
-              decoration: InputDecoration(
-                  labelText: "Vehicle Number",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
+              decoration: const InputDecoration(
+                  labelText: 'Vehicle Number',
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.black)),
               itemBuilder: (context, itemData) {
                 return itemData != null && itemData.length != 0
-                    ? ListTile(title: Text("${itemData['vehicleNumber']}"))
-                    : Container();
+                    ? ListTile(title: Text('${itemData['vehicleNumber']}'))
+                    : const SizedBox.shrink();
               },
               suggestionsCallback: (pattern) async {
-                return await getVehicles(pattern);
+                return getVehicles(pattern);
               },
               selectionToTextTransformer: (suggestion) {
-                if (suggestion != "") {
-                  return "${suggestion['vehicleNumber']}";
+                if (suggestion != '') {
+                  return suggestion['vehicleNumber'] as String;
                 }
-                return "";
+                return '';
               },
               onSuggestionSelected: (suggestion) => setVehicleNumber(suggestion),
-              noItemsFoundBuilder: (context) => Padding(
+              noItemsFoundBuilder: (context) => const Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "No Vehicles Found!",
+                  'No Vehicles Found!',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -483,73 +514,95 @@ class _CheckInFormState extends State<CheckInForm> {
           ),
           Row(
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child:
-                    Text('Model', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black)),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: const Text('Model',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.0,
+                        color: Colors.black)),
               ),
             ],
           ),
           Row(
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
-                child: Text(vehicleModel != null ? "$vehicleModel" : "N/A",
-                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15.0, color: Colors.black)),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                child: Text(vehicleModel ?? 'N/A',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 15.0,
+                        color: Colors.black)),
               ),
             ],
           ),
 
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderDropdown(
-              name: "frontSensorTag",
-              decoration: InputDecoration(
-                  labelText: "Fuel Sensor Tag",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
-              hint: Text('Yes/No'),
-              validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-              items: ['Yes', 'No'].map((option) => DropdownMenuItem(value: option, child: Text("$option"))).toList(),
+              name: 'frontSensorTag',
+              decoration: const InputDecoration(
+                  labelText: 'Fuel Sensor Tag',
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.black)),
+              hint: const Text('Yes/No'),
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(),
+              ]),
+              items: const ['Yes', 'No']
+                  .map((option) => DropdownMenuItem(value: option, child: Text(option)))
+                  .toList(),
             ),
           ),
-          Container(
-            padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
             child: Row(
               children: <Widget>[
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.6,
-                  child: Text(
-                    "Basic Issue Tools",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
+                  child: const Text(
+                    'Basic Issue Tools',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.0,
+                        color: Colors.black),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.2,
-                  child: Text("In(QTY)",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black)),
+                  child: const Text('In(QTY)',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0,
+                          color: Colors.black)),
                 )
               ],
             ),
           ),
           // Column(children: listOfItems),
-          for (var item in listOfItems)
+          for (final item in listOfItems)
             if (item != null) item,
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
-            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-            child: OutlinedButton(
-              style: ButtonStyle(
-                shape: WidgetStatePropertyAll<RoundedRectangleBorder>(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                )),
-                side: WidgetStatePropertyAll<BorderSide>(BorderSide(color: Theme.of(context).primaryColor)),
-              ),
-              onPressed: () {
-                addNewItem();
-              },
-              child: Text(
-                "Add Another Item",
-                style: TextStyle(color: Colors.black),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: OutlinedButton(
+                style: ButtonStyle(
+                  shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  )),
+                  side: WidgetStatePropertyAll<BorderSide>(
+                    BorderSide(color: Theme.of(context).primaryColor),
+                  ),
+                ),
+                onPressed: addNewItem,
+                child: const Text(
+                  'Add Another Item',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ),
           ),
@@ -569,29 +622,39 @@ class _CheckInFormState extends State<CheckInForm> {
           //   ),
           // ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
-              validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-              name: "defect",
-              decoration: InputDecoration(
-                  labelText: "Defect",
-                  hintText: "Type Here...",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(),
+              ]),
+              name: 'defect',
+              decoration: const InputDecoration(
+                  labelText: 'Defect',
+                  hintText: 'Type Here...',
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.black)),
             ),
           ),
 
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderDateTimePicker(
-                validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-                name: "dateIn",
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                ]),
+                name: 'dateIn',
                 onChanged: _onChanged,
                 inputType: InputType.date,
-                decoration: InputDecoration(
-                    labelText: "Date In",
-                    labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black),
+                decoration: const InputDecoration(
+                    labelText: 'Date In',
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                        color: Colors.black),
                     suffixIcon: Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 12.0),
+                      padding: EdgeInsetsDirectional.only(end: 12.0),
                       child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
                     )),
                 // initialDate: ,
@@ -603,17 +666,22 @@ class _CheckInFormState extends State<CheckInForm> {
                 ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderDateTimePicker(
-                name: "expectedCheckoutDate",
-                validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
+                name: 'expectedCheckoutDate',
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                ]),
                 onChanged: _onChanged,
                 inputType: InputType.date,
-                decoration: InputDecoration(
-                    labelText: "Expected Check-out Date",
-                    labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black),
+                decoration: const InputDecoration(
+                    labelText: 'Expected Check-out Date',
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                        color: Colors.black),
                     suffixIcon: Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 12.0),
+                      padding: EdgeInsetsDirectional.only(end: 12.0),
                       child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
                     )),
                 // initialDate: ,
@@ -625,28 +693,38 @@ class _CheckInFormState extends State<CheckInForm> {
                 ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
-              validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-              name: "speedoReading",
-              decoration: InputDecoration(
-                  labelText: "Speedo Reading",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(),
+              ]),
+              name: 'speedoReading',
+              decoration: const InputDecoration(
+                  labelText: 'Speedo Reading',
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.black)),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
-              validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-              name: "swdReading",
-              decoration: InputDecoration(
-                  labelText: "SWD Reading",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(),
+              ]),
+              name: 'swdReading',
+              decoration: const InputDecoration(
+                  labelText: 'SWD Reading',
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.black)),
             ),
           ),
 
           // Second Logic
-          for (var item in typeOfServices)
+          for (final item in typeOfServices)
             if (item != null) item,
 
           // Container(
@@ -666,40 +744,38 @@ class _CheckInFormState extends State<CheckInForm> {
           //     options: typeOfServicesOptions,
           //   ),
           // ),
-          Container(
-            padding: EdgeInsets.fromLTRB(10, 0, 0, 10),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
             child: Row(
               children: [
-                Container(
-                  // padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.75,
                   child: FormBuilderTextField(
                     onChanged: (value) {
                       setState(() {
-                        newTypeOfService = value!;
+                        newTypeOfService = value ?? '';
                       });
                     },
-                    name: "newType",
+                    name: 'newType',
                     controller: _serviceTextController,
                     decoration: InputDecoration(
-                      hintText: "Type Here...",
-                      labelText: "Add New Service",
-                      errorText: _validate ? 'New Service Can\'t Be Empty' : null,
+                      hintText: 'Type Here...',
+                      labelText: 'Add New Service',
+                      errorText: _validate ? "New Service Can't Be Empty" : null,
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.1,
                   child: IconButton(
-                    icon: Icon(Icons.add),
+                    icon: const Icon(Icons.add),
                     onPressed: () {
-                      if (newTypeOfService.length != 0) {
+                      if (newTypeOfService.isNotEmpty) {
                         addNewService(newTypeOfService);
-                        _serviceTextController.text = "";
+                        _serviceTextController.text = '';
                       } else {
                         setState(() {
-                          _serviceTextController.text.isEmpty ? _validate = true : _validate = false;
+                          _validate = _serviceTextController.text.isEmpty;
                         });
                       }
 
@@ -721,67 +797,82 @@ class _CheckInFormState extends State<CheckInForm> {
           ),
 
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
-              validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-              name: "cw",
-              decoration: InputDecoration(
-                  labelText: "Corrective Maintenance",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(),
+              ]),
+              name: 'cw',
+              decoration: const InputDecoration(
+                  labelText: 'Corrective Maintenance',
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.black)),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTypeAhead<dynamic>(
-              name: "handedOverBy",
+              name: 'handedOverBy',
               suggestionsController: _handoverTA,
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(),
                 (val) {
-                  if (handOverDriverID == null) return "Please enter a valid name. ";
+                  if (handOverDriverID == null) {
+                    return 'Please enter a valid name. ';
+                  }
                   return null;
                 }
               ]),
-              decoration: InputDecoration(
-                  labelText: "Handed Over By",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
+              decoration: const InputDecoration(
+                  labelText: 'Handed Over By',
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.black)),
               itemBuilder: (context, itemData) {
                 return itemData != null && itemData.length != 0
-                    ? ListTile(title: Text("${itemData['name']}"))
-                    : Container();
+                    ? ListTile(title: Text('${itemData['name']}'))
+                    : const SizedBox.shrink();
               },
               suggestionsCallback: (pattern) async {
-                return await getDrivers(pattern);
+                return getDrivers(pattern);
               },
               selectionToTextTransformer: (suggestion) {
-                if (suggestion != "") {
-                  return "${suggestion['name']}";
+                if (suggestion != '') {
+                  return suggestion['name'] as String;
                 }
-                return "";
+                return '';
               },
               onSuggestionSelected: (suggestion) => setHandoverDriver(suggestion),
-              noItemsFoundBuilder: (context) => Padding(
+              noItemsFoundBuilder: (context) => const Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "No Drivers Found!",
+                  'No Drivers Found!',
                   textAlign: TextAlign.center,
                 ),
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderDateTimePicker(
-                name: "expectedCheckoutTime",
+                name: 'expectedCheckoutTime',
                 onChanged: _onChanged,
-                validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                ]),
                 inputType: InputType.time,
-                decoration: InputDecoration(
-                    labelText: "Time",
-                    hintText: "HH-MM",
-                    labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black),
+                decoration: const InputDecoration(
+                    labelText: 'Time',
+                    hintText: 'HH-MM',
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                        color: Colors.black),
                     suffixIcon: Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 12.0),
+                      padding: EdgeInsetsDirectional.only(end: 12.0),
                       child: Icon(Icons.access_time), // myIcon is a 48px-wide widget.
                     )),
                 format: DateFormat('h:mma')
@@ -790,62 +881,81 @@ class _CheckInFormState extends State<CheckInForm> {
           ),
           Row(
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Text('Attended By(IEPL)',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black)),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: const Text('Attended By(IEPL)',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.0,
+                        color: Colors.black)),
               ),
             ],
           ),
           Row(
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
                 child: Text(
-                  name ?? "",
-                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15.0, color: Colors.black),
+                  name ?? '',
+                  style: const TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15.0,
+                      color: Colors.black),
                 ),
               ),
             ],
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderDropdown(
-              name: "vehicle",
-              decoration: InputDecoration(
-                  labelText: "Vehicle / Motorcycle",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
+              name: 'vehicle',
+              decoration: const InputDecoration(
+                  labelText: 'Vehicle / Motorcycle',
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.black)),
               initialValue: 'Vehicle',
-              validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-              items: ['Vehicle', 'Motorcycle']
-                  .map((vehicle) => DropdownMenuItem(value: vehicle, child: Text("$vehicle")))
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.required(),
+              ]),
+              items: const ['Vehicle', 'Motorcycle']
+                  .map((vehicle) => DropdownMenuItem(value: vehicle, child: Text(vehicle)))
                   .toList(),
             ),
           ),
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
-            padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
-            child: submitting
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : OutlinedButton(
-                    style: ButtonStyle(
-                      shape: WidgetStatePropertyAll<RoundedRectangleBorder>(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                      )),
-                      side: WidgetStatePropertyAll<BorderSide>(BorderSide(color: Theme.of(context).primaryColor)),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+              child: submitting
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : OutlinedButton(
+                      style: ButtonStyle(
+                        shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        )),
+                        side: WidgetStatePropertyAll<BorderSide>(
+                          BorderSide(color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                      onPressed: () {
+                        if (_checkInFormKey.currentState!.saveAndValidate()) {
+                          onSubmitForm(
+                            _checkInFormKey.currentState!.value
+                                .map((key, value) => MapEntry(key, value)),
+                          );
+                        }
+                      },
+                      child: const Text(
+                        'Submit',
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
-                    onPressed: () {
-                      if (_checkInFormKey.currentState!.saveAndValidate()) {
-                        onSubmitForm(_checkInFormKey.currentState!.value);
-                      }
-                    },
-                    child: Text(
-                      "Submit",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
+            ),
           ),
         ],
       ),
