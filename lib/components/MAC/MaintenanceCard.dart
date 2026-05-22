@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:transport_flutter/models/models.dart';
 import 'package:transport_flutter/screens/MAC/Maintenance.dart';
 
 class MaintenanceCard extends StatefulWidget {
   final List<VehicleServicingModel> vehicleServicings;
-  final refetch;
+  final VoidCallback? refetch;
 
   const MaintenanceCard({Key? key, required this.vehicleServicings, this.refetch}) : super(key: key);
 
   @override
-  _MaintenanceCardState createState() => new _MaintenanceCardState();
+  State<MaintenanceCard> createState() => _MaintenanceCardState();
 }
 
 class _MaintenanceCardState extends State<MaintenanceCard> {
@@ -45,7 +44,7 @@ class _MaintenanceCardState extends State<MaintenanceCard> {
                               await Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => MaintenanceScreen(service: item),
                               ));
-                              widget.refetch();
+                              widget.refetch?.call();
                             },
                             child: Text(
                               "View",
