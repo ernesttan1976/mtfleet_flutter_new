@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -13,7 +12,7 @@ class CheckListScreen extends StatefulWidget {
   final String overAllRisk;
   final Function onSubmit;
 
-  CheckListScreen({
+  const CheckListScreen({
     Key? key,
     required this.index,
     required this.onPrev,
@@ -22,10 +21,10 @@ class CheckListScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CheckListScreenState createState() => _CheckListScreenState();
+  CheckListScreenState createState() => CheckListScreenState();
 }
 
-class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAliveClientMixin {
+class CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAliveClientMixin {
   String? checkListFor;
   final GlobalKey<FormBuilderState> _frontPassengerCheckListFormKey = GlobalKey<FormBuilderState>();
   final GlobalKey<FormBuilderState> _vehicleCommanderFormKey = GlobalKey<FormBuilderState>();
@@ -49,17 +48,16 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
-              child: Text(
+          content: const Text(
             "Are you sure to submit this trip form ?",
             textAlign: TextAlign.center,
-          )),
+          ),
           actions: [
-            Container(
-                color: Colors.transparent,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                width: MediaQuery.of(context).size.width * 1.0,
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+              child: SizedBox(
                 height: 50,
+                width: MediaQuery.of(context).size.width * 1.0,
                 child: Row(
                   children: <Widget>[
                     Container(
@@ -67,8 +65,8 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
-                          shape: MaterialStateProperty.all(
+                          backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -93,10 +91,10 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -139,7 +137,7 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
                 hint: Text('Filled by'),
                 validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
                 items: ['Front Passenger', 'Vehicle Commander']
-                    .map((filledBy) => DropdownMenuItem(value: filledBy, child: Text("$filledBy")))
+                    .map((filledBy) => DropdownMenuItem(value: filledBy, child: Text(filledBy)))
                     .toList(),
                 icon: const Icon(Icons.expand_more),
               ),
@@ -152,7 +150,7 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
             ),
             20.verticalSpace,
             Text(
-              '${widget.overAllRisk}',
+              widget.overAllRisk,
               style: _themeData.textTheme.headline4?.copyWith(color: myColor),
             ),
             20.verticalSpace,
@@ -169,14 +167,14 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
                 decoration: InputDecoration(border: InputBorder.none, filled: false, contentPadding: EdgeInsets.zero),
                 options: [
                   FormBuilderFieldOption(
-                    value: "${frontPassengerCheckList[0]['title']}",
+                    value: frontPassengerCheckList[0]['title'] as String,
                   ),
-                  FormBuilderFieldOption(value: "${frontPassengerCheckList[1]['title']}"),
-                  FormBuilderFieldOption(value: "${frontPassengerCheckList[2]['title']}"),
-                  FormBuilderFieldOption(value: "${frontPassengerCheckList[3]['title']}"),
-                  FormBuilderFieldOption(value: "${frontPassengerCheckList[4]['title']}"),
-                  FormBuilderFieldOption(value: "${frontPassengerCheckList[5]['title']}"),
-                  FormBuilderFieldOption(value: "${frontPassengerCheckList[6]['title']}"),
+                  FormBuilderFieldOption(value: frontPassengerCheckList[1]['title'] as String),
+                  FormBuilderFieldOption(value: frontPassengerCheckList[2]['title'] as String),
+                  FormBuilderFieldOption(value: frontPassengerCheckList[3]['title'] as String),
+                  FormBuilderFieldOption(value: frontPassengerCheckList[4]['title'] as String),
+                  FormBuilderFieldOption(value: frontPassengerCheckList[5]['title'] as String),
+                  FormBuilderFieldOption(value: frontPassengerCheckList[6]['title'] as String),
                 ],
               ),
             20.verticalSpace,
@@ -214,10 +212,10 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: OutlinedButton(
             style: ButtonStyle(
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              shape: WidgetStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               )),
-              side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+              side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
             ),
             onPressed: () {
               if (_frontPassengerCheckListFormKey.currentState!.saveAndValidate()) {
@@ -257,7 +255,7 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
                 hint: Text('Filled by'),
                 validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
                 items: ['Front Passenger', 'Vehicle Commander']
-                    .map((filledBy) => DropdownMenuItem(value: filledBy, child: Text("$filledBy")))
+                    .map((filledBy) => DropdownMenuItem(value: filledBy, child: Text(filledBy)))
                     .toList(),
                 icon: const Icon(Icons.expand_more),
               ),
@@ -273,7 +271,7 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  '${widget.overAllRisk}',
+                  widget.overAllRisk,
                   style: _themeData.textTheme.headline4?.copyWith(color: myColor),
                 ),
               ],
@@ -295,23 +293,23 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
                   contentPadding: EdgeInsets.zero,
                 ),
                 options: [
-                  FormBuilderFieldOption(
-                    value: "${commanderCheckList[0]['title']}",
-                  ),
-                  FormBuilderFieldOption(value: "${commanderCheckList[1]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[2]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[3]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[4]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[5]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[6]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[7]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[8]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[9]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[10]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[11]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[12]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[13]['title']}"),
-                  FormBuilderFieldOption(value: "${commanderCheckList[14]['title']}"),
+FormBuilderFieldOption(
+   value: commanderCheckList[0]['title'] as String,
+ ),
+                  FormBuilderFieldOption(value: commanderCheckList[1]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[2]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[3]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[4]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[5]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[6]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[7]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[8]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[9]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[10]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[11]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[12]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[13]['title'] as String),
+                  FormBuilderFieldOption(value: commanderCheckList[14]['title'] as String),
                   // FormBuilderFieldOption(
                   //     value: "${commanderCheckList[15]['title']}"),
                 ],
@@ -352,10 +350,10 @@ class _CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAli
         child: !isLoading
             ? OutlinedButton(
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   )),
-                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                 ),
                 onPressed: () {
                   if (_vehicleCommanderFormKey.currentState!.saveAndValidate()) {
