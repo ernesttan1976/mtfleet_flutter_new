@@ -15,7 +15,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
           Container(
             child: Flexible(
                 child:
-                    Text('Date:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                    Text('Date:', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -24,7 +24,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
           Container(
             child: Flexible(
                 child: Text('${approvedTripData.tripDate}',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -34,7 +34,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
           Container(
             child: Flexible(
                 child: Text('Approving Officer Name:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -46,7 +46,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
                     approvedTripData.approvingOfficer == null
                         ? "No Approving Officer"
                         : '${approvedTripData.approvingOfficer['name']}',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -56,7 +56,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
           Container(
             child: Flexible(
                 child: Text('Vehicle License Number:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -65,7 +65,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
           Container(
             child: Flexible(
                 child: Text("${approvedTripData.vehicle?.vehicleNumber}",
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -75,7 +75,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
           Container(
             child: Flexible(
                 child:
-                    Text('Type:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                    Text('Type:', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -84,7 +84,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
           Container(
             child: Flexible(
                 child: Text("${approvedTripData.vehicle?.vehicleType}",
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
       ),
@@ -97,7 +97,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
                 Container(
                   child: Flexible(
                       child: Text('To:',
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
                 ),
               ],
             ),
@@ -106,7 +106,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
                 Container(
                   child: Flexible(
                       child: Text(item.to,
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
                 ),
               ],
             ),
@@ -116,7 +116,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
                 Container(
                   child: Flexible(
                       child: Text("Requisitioner's Purpose",
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
                 ),
               ],
             ),
@@ -125,7 +125,7 @@ class ApprovedTripDocScreen extends StatelessWidget {
                 Container(
                   child: Flexible(
                       child: Text(item.requisitionerPurpose,
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
                 ),
               ],
             ),
