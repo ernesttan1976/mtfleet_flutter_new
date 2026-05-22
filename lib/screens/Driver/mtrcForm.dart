@@ -18,10 +18,10 @@ class MTRCFormScreen extends StatefulWidget {
   final bool isVehicleCommander;
   final Function onNext;
 
-  MTRCFormScreen(this.mtrcApprovalRequired, this.isVehicleCommander, this.onNext, {Key? key}) : super(key: key);
+  const MTRCFormScreen(this.mtrcApprovalRequired, this.isVehicleCommander, this.onNext, {Key? key}) : super(key: key);
 
   @override
-  _MTRCFormScreenState createState() => _MTRCFormScreenState();
+  State<MTRCFormScreen> createState() => _MTRCFormScreenState();
 }
 
 class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDataMixin {
@@ -72,12 +72,12 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
     await fetchLicenseClasses(auth['user']['license_classes']);
 
     setState(() {
-      subUnitID = user['subUnitId'] != null ? user["subUnitId"] : "-1";
-      baseID = user['baseAdminId'] != null ? user["baseAdminId"] : "-1";
+      subUnitID = user['subUnitId'] ?? "-1";
+      baseID = user['baseAdminId'] ?? "-1";
       driverID = user['id'];
       currentRole = role;
       logger.e("Current role $role}");
-      canAccessAllVehicles = user['canAccessAllVehicles'] == null ? false : user['canAccessAllVehicles'];
+      canAccessAllVehicles = user['canAccessAllVehicles'] ?? false;
       logger.e("canAccessAllVehicles ${user['canAccessAllVehicles']}}");
       initStateFetching = true;
     });
@@ -89,12 +89,9 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
     var query = "";
     if (licenseClasses != null) {
       for (var i = 0; i < licenseClasses.length; i++) {
-        var cls = licenseClasses[i];
-        var id = cls['id'];
-        if (i == 0)
-          query = query + "?id_in=$id";
-        else
-          query = query + "&id_in=$id";
+        final cls = licenseClasses[i];
+        final id = cls['id'];
+        query = query + (i == 0 ? "?id_in=$id" : "&id_in=$id");
       }
     }
 
@@ -102,17 +99,18 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
       var result = json.decode((await request.get(Uri.parse('license-classes$query'))).body);
       var licenseClasses = result;
       var pQuery = "";
-      licenseClasses.forEach((c) {
-        var vp = c['vehicles_platforms'];
-        vp.forEach((v) {
-          pQuery = pQuery + "&platform.id_in=${v['id']}";
-        });
-      });
+      for (final c in licenseClasses) {
+        final vp = c['vehicles_platforms'];
+        for (final v in vp) {
+          pQuery = "${pQuery}&platform.id_in=${v['id']}";
+        }
+      }
 
-      if (pQuery != "")
+      if (pQuery != "") {
         setState(() {
           platformQuery = pQuery;
         });
+      }
       return "";
     }
   }
@@ -190,7 +188,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
       var result1 = json.decode((await request.get(Uri.parse("users/approving-officers?name=$pattern"))).body);
       print("Pattern: $result1");
       list = [...result1];
-      if (list.length == 0) {
+      if (list.isEmpty) {
         setState(() {
           approvingOfficerID = null;
         });
@@ -228,20 +226,21 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
     List tos = [];
     List requisitionerPurposes = [];
 
-    data.entries.forEach((e) {
+    for (final e in data.entries) {
       if (e.key.contains("to")) {
         tos.add(e.value);
       } else if (e.key.contains("requisitionerPurpose")) {
         requisitionerPurposes.add(e.value);
       }
-    });
+    }
 
     // List of Tools
     List destinations = [];
 
     for (var i = 0; i < tos.length; i++) {
-      if (listOfDestinations[i] != null)
+      if (listOfDestinations[i] != null) {
         destinations.add({"to": tos[i], "requisitionerPurpose": requisitionerPurposes[i]});
+      }
     }
 
     final newData = Map.of(data);
@@ -303,8 +302,9 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
   List<Widget> _buildFormChildren() {
     if (currentRole == "PRE_APPROVED_DRIVER") {
       return _widgetPreApprovedDriver();
-    } else
+    } else {
       return _widgetsNotPreApprovedDriver();
+    }
   }
 
   void setMyItem() {
@@ -353,6 +353,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
 
   @override
   Widget build(BuildContext context) {
+    // NOTE: wantKeepAlive is not part of this mixin; keptAlive below controls it.
     _themeData = Theme.of(context);
     setMyItem();
     return Scaffold(
