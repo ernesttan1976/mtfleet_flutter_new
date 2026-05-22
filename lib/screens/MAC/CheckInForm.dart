@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -49,7 +48,7 @@ class CheckInFormScreen extends StatelessWidget {
 class CheckInForm extends StatefulWidget {
   final String? maintenanceType;
 
-  CheckInForm({Key? key, this.maintenanceType}) : super(key: key);
+  const CheckInForm({Key? key, this.maintenanceType}) : super(key: key);
 
   @override
   _CheckInFormState createState() => _CheckInFormState();
@@ -58,12 +57,12 @@ class CheckInForm extends StatefulWidget {
 class _CheckInFormState extends State<CheckInForm> {
   final dioClient = AuthedDio.instance.dio;
 
-  final _vehicleTA = SuggestionsBoxController();
-  final _handoverTA = SuggestionsBoxController();
+  final SuggestionsController<dynamic> _vehicleTA = SuggestionsController<dynamic>();
+  final SuggestionsController<dynamic> _handoverTA = SuggestionsController<dynamic>();
 
   final GlobalKey<FormBuilderState> _checkInFormKey = GlobalKey<FormBuilderState>();
 
-  var data;
+  dynamic data;
   String base = "";
   bool autoValidate = true;
   bool readOnly = false;
@@ -84,14 +83,14 @@ class _CheckInFormState extends State<CheckInForm> {
   String newTypeOfService = "";
   bool _validate = false;
 
-  TextEditingController _serviceTextController = new TextEditingController();
+  final TextEditingController _serviceTextController = TextEditingController();
 
   // Add Value into CheckBox
   var typeOfServicesValues = ["AVI"];
   var typeOfServicesOptions = [
     FormBuilderFieldOption(value: "AVI"),
   ];
-  ValueChanged _onChanged = (val) => print(val);
+  final ValueChanged _onChanged = (val) => print(val);
 
   void setVehicleNumber(vehicle) {
     print("$vehicle");
@@ -111,7 +110,7 @@ class _CheckInFormState extends State<CheckInForm> {
   @override
   void initState() {
     super.initState();
-    this.loadUser();
+    loadUser();
   }
 
   loadUser() async {
@@ -158,7 +157,7 @@ class _CheckInFormState extends State<CheckInForm> {
       var result2 = await dio.get("/users?otherRoles.type=driver&_limit=5&name_contains=$pattern");
       list = [...result1.data, ...result2.data];
       print(list);
-      if (list.length == 0) {
+      if (list.isEmpty) {
         setState(() {
           handOverDriverID = null;
         });
@@ -199,7 +198,7 @@ class _CheckInFormState extends State<CheckInForm> {
                   validator:
                       FormBuilderValidators.compose([FormBuilderValidators.required(errorText: "Cannot be empty!")]),
                   name: "name$index",
-                  controller: new TextEditingController(),
+                  controller: TextEditingController(),
                   decoration: InputDecoration(
                     hintText: "Type Here...",
                   ),
@@ -216,7 +215,7 @@ class _CheckInFormState extends State<CheckInForm> {
                     FormBuilderValidators.min(1, errorText: "Must be > 0!")
                   ]),
                   name: "quantity$index",
-                  controller: new TextEditingController(),
+                  controller: TextEditingController(),
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -269,7 +268,7 @@ class _CheckInFormState extends State<CheckInForm> {
                       FormBuilderValidators.min(1, errorText: "Must be > 0!")
                     ]),
                     name: "quantity",
-                    controller: new TextEditingController(),
+                    controller: TextEditingController(),
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -283,7 +282,7 @@ class _CheckInFormState extends State<CheckInForm> {
         );
       });
 
-      typeOfServices.add(Container(
+      typeOfServices.add(SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         child: FormBuilderCheckboxGroup(
           activeColor: Theme.of(context).primaryColor,
@@ -367,7 +366,7 @@ class _CheckInFormState extends State<CheckInForm> {
     List allServices = [];
     data.entries.forEach((e) {
       if (e.key.contains("service")) {
-        if (e.value.length > 0) {
+        if (e.value.isNotEmpty) {
           String myService = e.value.first;
           allServices.add(myService);
         }
@@ -397,7 +396,7 @@ class _CheckInFormState extends State<CheckInForm> {
       File file = image as File;
       FormData formData = FormData();
       formData.fields.add(MapEntry("ref", response.data["ref"]));
-      formData.fields.add(MapEntry("refId", "${response.data["refId"]}"));
+      formData.fields.add(MapEntry("refId", response.data["refId"].toString()));
       formData.fields.add(MapEntry("field", response.data["field"]));
       // Add permission to upload images on Strapi
       formData.files.add(MapEntry("files", await MultipartFile.fromFile(file.path)));
@@ -447,7 +446,7 @@ class _CheckInFormState extends State<CheckInForm> {
             padding: EdgeInsets.all(10),
             child: FormBuilderTypeAhead<dynamic>(
               name: "vehicleNumber",
-              suggestionsBoxController: _vehicleTA,
+              suggestionsController: _vehicleTA,
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(),
                 (val) {
@@ -459,7 +458,7 @@ class _CheckInFormState extends State<CheckInForm> {
                   labelText: "Vehicle Number",
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
               itemBuilder: (context, itemData) {
-                return itemData != null || itemData?.length != 0
+                return itemData != null && itemData.length != 0
                     ? ListTile(title: Text("${itemData['vehicleNumber']}"))
                     : Container();
               },
@@ -540,10 +539,10 @@ class _CheckInFormState extends State<CheckInForm> {
             padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: OutlinedButton(
               style: ButtonStyle(
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                shape: WidgetStatePropertyAll<RoundedRectangleBorder>(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 )),
-                side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                side: WidgetStatePropertyAll<BorderSide>(BorderSide(color: Theme.of(context).primaryColor)),
               ),
               onPressed: () {
                 addNewItem();
@@ -599,7 +598,7 @@ class _CheckInFormState extends State<CheckInForm> {
                 // validator: (val) => null,
                 // initialTime: TimeOfDay(hour: 8, minute: 0),
                 initialValue: DateTime.now(),
-                format: new DateFormat('dd MMMM yyyy')
+                format: DateFormat('dd MMMM yyyy')
                 // readonly: true,
                 ),
           ),
@@ -621,7 +620,7 @@ class _CheckInFormState extends State<CheckInForm> {
                 // validator: (val) => null,
                 // initialTime: TimeOfDay(hour: 8, minute: 0),
                 initialValue: DateTime.now(),
-                format: new DateFormat('dd MMMM yyyy')
+                format: DateFormat('dd MMMM yyyy')
                 // readonly: true,
                 ),
           ),
@@ -735,18 +734,19 @@ class _CheckInFormState extends State<CheckInForm> {
             padding: EdgeInsets.all(10),
             child: FormBuilderTypeAhead<dynamic>(
               name: "handedOverBy",
-              suggestionsBoxController: _handoverTA,
+              suggestionsController: _handoverTA,
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(),
                 (val) {
                   if (handOverDriverID == null) return "Please enter a valid name. ";
+                  return null;
                 }
               ]),
               decoration: InputDecoration(
                   labelText: "Handed Over By",
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
               itemBuilder: (context, itemData) {
-                return itemData != null || itemData.length != 0
+                return itemData != null && itemData.length != 0
                     ? ListTile(title: Text("${itemData['name']}"))
                     : Container();
               },
@@ -784,7 +784,7 @@ class _CheckInFormState extends State<CheckInForm> {
                       padding: const EdgeInsetsDirectional.only(end: 12.0),
                       child: Icon(Icons.access_time), // myIcon is a 48px-wide widget.
                     )),
-                format: new DateFormat('h:mma')
+                format: DateFormat('h:mma')
                 // readonly: true,
                 ),
           ),
@@ -801,8 +801,10 @@ class _CheckInFormState extends State<CheckInForm> {
             children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
-                child:
-                    Text("$name", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15.0, color: Colors.black)),
+                child: Text(
+                  name ?? "",
+                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15.0, color: Colors.black),
+                ),
               ),
             ],
           ),
@@ -829,10 +831,10 @@ class _CheckInFormState extends State<CheckInForm> {
                   )
                 : OutlinedButton(
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      shape: WidgetStatePropertyAll<RoundedRectangleBorder>(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       )),
-                      side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                      side: WidgetStatePropertyAll<BorderSide>(BorderSide(color: Theme.of(context).primaryColor)),
                     ),
                     onPressed: () {
                       if (_checkInFormKey.currentState!.saveAndValidate()) {
