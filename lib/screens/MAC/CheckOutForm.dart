@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -9,35 +8,33 @@ import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/config/dio.dart';
 
 class CheckOutFormScreen extends StatefulWidget {
-  final servicingId;
+  final String servicingId;
   final String? checkInType;
   final String? workCentreData;
 
-  const CheckOutFormScreen({Key? key, @required this.servicingId, this.checkInType, this.workCentreData})
+  const CheckOutFormScreen({Key? key, required this.servicingId, this.checkInType, this.workCentreData})
       : super(key: key);
 
   @override
-  _CheckOutFormScreenState createState() => _CheckOutFormScreenState();
+  State<CheckOutFormScreen> createState() => _CheckOutFormScreenState();
 }
 
 class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
   final GlobalKey<FormBuilderState> _checkOutFormKey = GlobalKey<FormBuilderState>();
-  List listOfItems = [];
+  List<Widget?> listOfItems = [];
   int toolsCount = 1;
-  var submitting = false;
+  bool submitting = false;
   bool itemSet = false;
   final dioClient = AuthedDio.instance.dio;
 
-  void onToolRemove(index) {
+  void onToolRemove(int index) {
     setState(() {
       listOfItems[index] = null;
     });
   }
 
   dynamic myEncode(dynamic item) {
-    if (item is DateTime) {
-      return item.toIso8601String();
-    }
+    if (item is DateTime) return item.toIso8601String();
     return item;
   }
 
@@ -59,7 +56,7 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
                   validator:
                       FormBuilderValidators.compose([FormBuilderValidators.required(errorText: "Cannot be empty!")]),
                   name: "name$index",
-                  controller: new TextEditingController(),
+                  controller: TextEditingController(),
                   decoration: InputDecoration(
                     hintText: "Type Here...",
                   ),
@@ -76,7 +73,7 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
                     FormBuilderValidators.min(1, errorText: "Must be > 0!")
                   ]),
                   name: "quantity$index",
-                  controller: new TextEditingController(),
+                  controller: TextEditingController(),
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -126,10 +123,10 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
 
       var dio = await dioClient;
 
-      final _typeData = {};
+      final Map<String, dynamic> typeData = {};
 
       if (widget.checkInType == 'Preventive') {
-        _typeData.addAll({
+        typeData.addAll({
           "preventiveMaintenance": {
             "nextServicingDate": data['nextServicingDate'].toUtc().toIso8601String(),
             "nextServicingMileage": int.parse(data['nextServicingMileage'])
@@ -137,12 +134,12 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
         });
       }
       if (widget.checkInType == 'Corrective') {
-        _typeData.addAll({
+        typeData.addAll({
           "correctiveMaintenance": {"correctiveMaintenance": data['correctiveMaintenance']}
         });
       }
       if (widget.checkInType == 'AVI') {
-        _typeData.addAll({
+        typeData.addAll({
           "annualVehicleInspection": {"nextAVIDate": data['nextAVIDate'].toUtc().toIso8601String()},
         });
       }
@@ -161,7 +158,7 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
       //   ..._typeData,
       //   "vehicleServicing": widget.servicingId
       // };
-      final _data = {
+      final Map<String, dynamic> dataPayload = {
         "dateOut": data['dateOut'].toUtc().toIso8601String(),
         "speedoReading": data['speedoReading'],
         "swdReading": data['swdReading'],
@@ -172,25 +169,25 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
         "vehicleTakenOver": data['vehicleTakenOver'],
         "checkOutType": widget.checkInType,
         "basicIssueTools": basicIssueTools.toList(),
-        ..._typeData,
+        ...typeData,
         "vehicleServicing": widget.servicingId
       };
-      print(_data);
-      print(json.encode(_data));
-      final response = await dio.post("/check-out", data: json.encode(_data));
+      print(dataPayload);
+      print(json.encode(dataPayload));
+      final response = await dio.post("/check-out", data: json.encode(dataPayload));
       setState(() {
         submitting = false;
       });
       if (response.statusCode == 201) {
-        showAlertDialog(context, "Success", response.statusMessage);
+        showAlertDialog(context, "Success", response.statusMessage ?? 'Success');
       } else {
-        showAlertDialog(context, "Failure", response.statusMessage, isPop: false);
+        showAlertDialog(context, "Failure", response.statusMessage ?? 'Failure', isPop: false);
       }
     } catch (e) {
       setState(() {
         submitting = false;
       });
-      showAlertDialog(context, "Failure", e, isPop: false);
+      showAlertDialog(context, "Failure", e.toString(), isPop: false);
     }
   }
 
@@ -224,7 +221,7 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
                       FormBuilderValidators.min(1, errorText: "Must be > 0!")
                     ]),
                     name: "quantity",
-                    controller: new TextEditingController(),
+                    controller: TextEditingController(),
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -244,7 +241,7 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
   }
 
   List<Widget> _buildChildren() {
-    var listOfWidget = [];
+    var listOfWidget = <Widget>[];
     if (widget.checkInType == "Preventive") {
       listOfWidget.addAll([
         Padding(
@@ -261,7 +258,7 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
                     child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
                   )),
               initialValue: DateTime.now(),
-              format: new DateFormat('dd MMMM yyyy')),
+              format: DateFormat('dd MMMM yyyy')),
         ),
         Padding(
           padding: EdgeInsets.all(10),
@@ -294,27 +291,26 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
                     child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
                   )),
               // initialValue: DateTime.now(),
-              format: new DateFormat('dd MMMM yyyy')),
+              format: DateFormat('dd MMMM yyyy')),
         ),
       );
     }
 
-    listOfWidget.addAll([
-      Container(
+    listOfWidget.addAll(const [
+      Padding(
         padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
         child: Row(
           children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width * 0.6,
+            Expanded(
+              flex: 3,
               child: Text(
                 "Basic Issue Tools",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
               ),
             ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.2,
-              child:
-                  Text("OUT (Qty)", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black)),
+            Expanded(
+              flex: 1,
+              child: Text("OUT (Qty)", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black)),
             )
           ],
         ),
@@ -335,10 +331,10 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             addNewItem();
@@ -364,7 +360,7 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
                 child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
               )),
           initialValue: DateTime.now(),
-          format: new DateFormat('dd MMMM yyyy'),
+          format: DateFormat('dd MMMM yyyy'),
         ),
       ),
       Padding(
@@ -445,7 +441,7 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
                 padding: const EdgeInsetsDirectional.only(end: 12.0),
                 child: Icon(Icons.access_time),
               )),
-          format: new DateFormat('hh:mm'),
+          format: DateFormat('hh:mm'),
           initialValue: DateTime.now(),
         ),
       ),
@@ -480,10 +476,10 @@ class _CheckOutFormScreenState extends State<CheckOutFormScreen> {
               )
             : OutlinedButton(
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   )),
-                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                 ),
                 onPressed: () {
                   if (_checkOutFormKey.currentState!.saveAndValidate()) {
