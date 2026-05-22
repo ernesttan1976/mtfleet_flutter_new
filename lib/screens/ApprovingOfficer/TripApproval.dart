@@ -7,28 +7,27 @@ import 'package:rxdart/rxdart.dart';
 import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/components/components.dart';
 import 'package:transport_flutter/config/dio.dart';
-import 'package:transport_flutter/extensions/date_time_extension.dart';
 import 'package:transport_flutter/extensions/extensions.dart';
 import 'package:transport_flutter/models/models.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request_client;
 
 class TripApprovalFinalScreen extends StatefulWidget {
   final int? tripID;
 
-  TripApprovalFinalScreen({Key? key, required this.tripID}) : super(key: key);
+  const TripApprovalFinalScreen({Key? key, required this.tripID}) : super(key: key);
 
   @override
-  _TripApprovalFinalScreenState createState() => _TripApprovalFinalScreenState();
+  TripApprovalFinalScreenState createState() => TripApprovalFinalScreenState();
 }
 
-class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
+class TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
   final dioClient = AuthedDio.instance.dio;
   bool _isLoading = false;
   final GlobalKey<FormBuilderState> _safetyKey = GlobalKey<FormBuilderState>();
 
   late int? myTripId;
-  var request = new Request.Request();
-  final _tripModel = BehaviorSubject<TripDetailModel>();
+  final request = request_client.Request();
+  final tripModel = BehaviorSubject<TripDetailModel>();
 
   @override
   void initState() {
@@ -44,11 +43,11 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
     try {
       final res = await request.get(Uri.parse('trips/$myTripId'));
       if (res.statusCode == 200 || res.statusCode == 201) {
-        final _a = json.decode(res.body);
-        final _model = TripDetailModel.fromJson(_a);
-        _tripModel.add(_model);
+        final a = json.decode(res.body);
+        final model = TripDetailModel.fromJson(a);
+        tripModel.add(model);
       } else {
-        showAlertDialog(context, 'Error', res.reasonPhrase);
+        showAlertDialog(context, 'Error', res.reasonPhrase ?? 'Unknown error');
       }
     } catch (e) {
       showAlertDialog(context, 'Error', e.toString());
@@ -59,7 +58,7 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
   }
 
   void onSubmitApprove() async {
-    final _safety = _safetyKey.currentState?.value['safety'];
+    final safety = _safetyKey.currentState?.value['safety'];
     try {
       setState(() {
         _isLoading = true;
@@ -67,16 +66,16 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
       var dio = await dioClient;
       var res = await dio.post('/trips/approve', data: {
         "tripId": myTripId,
-        "safetyMeasures": _safety,
+        "safetyMeasures": safety,
       });
       setState(() {
         _isLoading = false;
       });
       if (res.statusCode == 200 || res.statusCode == 201) {
         Navigator.of(context).popAndPushNamed('/approvingOfficer');
-        showAlertDialog(context, 'Success', res.statusMessage, isPop: false);
+        showAlertDialog(context, 'Success', res.statusMessage ?? 'Success', isPop: false);
       } else {
-        showAlertDialog(context, 'Error', res.statusMessage, isPop: false);
+        showAlertDialog(context, 'Error', res.statusMessage ?? 'Unknown error', isPop: false);
       }
     } catch (e) {
       setState(() {
@@ -98,9 +97,9 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
       });
       if (res.statusCode == 200 || res.statusCode == 201) {
         Navigator.of(context).popAndPushNamed('/approvingOfficer');
-        showAlertDialog(context, 'Success', res.statusMessage, isPop: false);
+        showAlertDialog(context, 'Success', res.statusMessage ?? 'Success', isPop: false);
       } else {
-        showAlertDialog(context, 'Error', res.statusMessage, isPop: false);
+        showAlertDialog(context, 'Error', res.statusMessage ?? 'Unknown error', isPop: false);
       }
     } catch (e) {
       setState(() {
@@ -122,11 +121,9 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
-            child: Text(
-              "Are you sure to reject this trip?",
-              textAlign: TextAlign.center,
-            ),
+          content: const Text(
+            "Are you sure to reject this trip?",
+            textAlign: TextAlign.center,
           ),
           actions: [
             Container(
@@ -140,12 +137,10 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
                       width: MediaQuery.of(context).size.width * 0.35,
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child:TextButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
+                        style: TextButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
                           ),
                         ),
                         onPressed: () {
@@ -163,11 +158,11 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
                       width: MediaQuery.of(context).size.width * 0.35,
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
-                          )),
-                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          ),
+                          side: BorderSide(color: Theme.of(context).primaryColor),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -190,57 +185,63 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
     var myList = [
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child:
-                    Text('Date:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              'Date:',
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(tripData.tripDate!.formatDateTime('dd MMM yyyy'),
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
-          ),
-        ],
-      ),
-      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Vehicle License Number:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
-          ),
-        ],
-      ),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("${tripData.vehicle != null ? tripData.vehicle?.vehicleNumber : 'N/A'}",
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              tripData.tripDate!.formatDateTime('dd MMM yyyy'),
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child:
-                    Text('Type:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              'Vehicle License Number:',
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("${tripData.vehicle?.model}",
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              "${tripData.vehicle != null ? tripData.vehicle?.vehicleNumber : 'N/A'}",
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.normal),
+            ),
+          ),
+        ],
+      ),
+      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              'Type:',
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              "${tripData.vehicle?.model}",
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
@@ -250,38 +251,42 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
             Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
             Row(
               children: <Widget>[
-                Container(
-                  child: Flexible(
-                      child: Text('To:',
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                Flexible(
+                  child: Text(
+                    'To:',
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
             Row(
               children: <Widget>[
-                Container(
-                  child: Flexible(
-                      child: Text(item.to,
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+                Flexible(
+                  child: Text(
+                    item.to,
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal),
+                  ),
                 ),
               ],
             ),
             Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
             Row(
               children: <Widget>[
-                Container(
-                  child: Flexible(
-                      child: Text("Requisitioner's Purpose",
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                Flexible(
+                  child: Text(
+                    "Requisitioner's Purpose",
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
             Row(
               children: <Widget>[
-                Container(
-                  child: Flexible(
-                      child: Text(item.requisitionerPurpose,
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+                Flexible(
+                  child: Text(
+                    item.requisitionerPurpose,
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal),
+                  ),
                 ),
               ],
             ),
@@ -309,12 +314,10 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
         width: MediaQuery.of(context).size.width * 0.9,
         padding: const EdgeInsets.only(top: 20),
         child:TextButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
+          style: TextButton.styleFrom(
+            backgroundColor: Theme.of(context).primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
             ),
           ),
           onPressed: () {
@@ -332,11 +335,11 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
         width: MediaQuery.of(context).size.width * 0.9,
         padding: const EdgeInsets.only(top: 10),
         child: OutlinedButton(
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          style: OutlinedButton.styleFrom(
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
-            )),
-            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            ),
+            side: BorderSide(color: Theme.of(context).primaryColor),
           ),
           onPressed: () {
             denyAlert();
@@ -373,7 +376,7 @@ class _TripApprovalFinalScreenState extends State<TripApprovalFinalScreen> {
             child: Stack(
               children: <Widget>[
                 StreamBuilder<TripDetailModel>(
-                    stream: _tripModel,
+                    stream: tripModel,
                     builder: (context, snapshot) {
                       if (snapshot.data == null) {
                         return const SizedBox();
