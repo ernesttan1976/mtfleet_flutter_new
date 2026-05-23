@@ -5,10 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/models/models.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request;
 
 class Past14DaysELogBloc {
-  final request = new Request.Request();
+  final request = request.Request();
 
   final currentIndexTable = BehaviorSubject<int>();
 
@@ -39,8 +39,8 @@ class Past14DaysELogBloc {
       final response = await request.get(Uri.parse("eLogs/vehicle?vehicleId=$vehicleID"));
       debugPrint(response.body);
       if (response.statusCode == 200) {
-        final _list = (json.decode(response.body) as List).map((e) => ELogVehicleModel.fromJson(e)).toList();
-        listELogVehicle.add(_list);
+        final list = (json.decode(response.body) as List).map((e) => ELogVehicleModel.fromJson(e)).toList();
+        listELogVehicle.add(list);
       }
     } on HttpException catch (e) {
       showAlertDialog(context, "Error HttpException", e.message, isPop: false);
@@ -55,13 +55,13 @@ class Past14DaysELogBloc {
     try {
       final response = await request.get(Uri.parse("eLogs/bos-aos-pol/vehicle?vehicleId=$vehicleID"));
       if (response.statusCode == 200) {
-        final _list = (json.decode(response.body) as List).map((e) => ELogBapVehicleModel.fromJson(e)).toList();
-        listELogBAPVehicle.add(_list);
+        final list = (json.decode(response.body) as List).map((e) => ELogBapVehicleModel.fromJson(e)).toList();
+        listELogBAPVehicle.add(list);
       }
     } on HttpException catch (e) {
-      showAlertDialog(context, 'Error HttpException', "${e.message}", isPop: false);
+      showAlertDialog(context, 'Error HttpException', e.message, isPop: false);
     } on Exception catch (e) {
-      showAlertDialog(context, 'Error Catch', '${e.toString()}', isPop: false);
+      showAlertDialog(context, 'Error Catch', e.toString(), isPop: false);
     }
     isLoading.add(false);
   }
