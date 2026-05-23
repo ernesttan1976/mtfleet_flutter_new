@@ -6,8 +6,10 @@ import 'package:transport_flutter/models/mt_broadcast.dart';
 import 'bloc.dart';
 
 class MTBroadCast extends StatefulWidget {
+  const MTBroadCast({Key? key}) : super(key: key);
+
   @override
-  _MTBroadCastState createState() => _MTBroadCastState();
+  State<MTBroadCast> createState() => _MTBroadCastState();
 }
 
 class _MTBroadCastState extends State<MTBroadCast> {
@@ -49,7 +51,7 @@ class _MTBroadCastState extends State<MTBroadCast> {
             children: <Widget>[
               Text(
                 'MT BroadCast',
-                style: _themeData.textTheme.headline5?.text244F4E.semiBold,
+                style: _themeData.textTheme.headlineMedium?.text244F4E.semiBold,
               ).paddingOnly(left: 24),
               10.verticalSpace,
               Card(
@@ -57,9 +59,9 @@ class _MTBroadCastState extends State<MTBroadCast> {
                 elevation: 5,
                 child: StreamBuilder<List<MtBroadcastModel>>(
                     stream: _bloc.listBroadCast,
-                    initialData: [],
+                    initialData: const [],
                     builder: (context, snapshot) {
-                      return _buildTable(snapshot.data!).paddingAll(20);
+                      return _buildTable(snapshot.data ?? []).paddingAll(20);
                     }),
               )
             ],
@@ -91,7 +93,7 @@ class _MTBroadCastState extends State<MTBroadCast> {
                                   ? const SizedBox()
                                   : Text(
                                       '${snapshot2.data} %',
-                                      style: _themeData.textTheme.headline6?.semiBold.text244F4E,
+                                      style: _themeData.textTheme.titleLarge?.semiBold.text244F4E,
                                     ).paddingOnly(top: 20);
                             })
                       ],
@@ -104,11 +106,11 @@ class _MTBroadCastState extends State<MTBroadCast> {
 
   Widget _buildTable(List<MtBroadcastModel> list) {
     return Table(
-      columnWidths: {
+      columnWidths: const {
         0: IntrinsicColumnWidth(flex: 4),
         1: IntrinsicColumnWidth(flex: 1),
       },
-      border: TableBorder.all(color: Colors.grey),
+      border: TableBorder.all(color: Colors.grey.withValues(alpha: 0.3)),
       children: [
         _buildHeaderTable(),
         ...list
@@ -126,7 +128,7 @@ class _MTBroadCastState extends State<MTBroadCast> {
   TableRow _buildHeaderTable() {
     return TableRow(
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.3),
+          color: Colors.grey.withValues(alpha: 0.3),
         ),
         children: [
           'Title',
@@ -151,7 +153,7 @@ class _MTBroadCastState extends State<MTBroadCast> {
       alignment: Alignment.center,
       child: Text(
         value,
-        style: _themeData.textTheme.subtitle1?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
+        style: _themeData.textTheme.titleMedium?.weight(isHeader ? FontWeight.w600 : FontWeight.normal),
       ),
     );
   }
