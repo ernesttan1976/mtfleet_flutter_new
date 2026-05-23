@@ -37,9 +37,9 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
     try {
       final res = await request.get(Uri.parse('check-in/${widget.service?.vehicleId}'));
       if (res.statusCode == 200 || res.statusCode == 201) {
-        final _a = json.decode(res.body);
-        final _model = VehicleServicingDetailModel.fromJson(_a);
-        _vehicleServicingModel.add(_model);
+        final responseJson = json.decode(res.body);
+        final vehicleServicingDetailModel = VehicleServicingDetailModel.fromJson(responseJson);
+        _vehicleServicingModel.add(vehicleServicingDetailModel);
       } else {
         if (res.statusCode == 400) {
           showAlertDialog(context, 'Notification', 'checked out');
@@ -237,10 +237,11 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("Condition of Vehicle:",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              "Condition of Vehicle:",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -253,19 +254,21 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                 children: <Widget>[
                   for (var pic in model.images)
                     Container(
+                      margin: EdgeInsets.only(right: 10),
                       child: CachedNetworkImage(
-                        imageUrl: "${constants.SERVER_URI_API}${pic.path}",
+                        imageUrl: constants.SERVER_URI_API + pic.path,
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
-                      margin: EdgeInsets.only(right: 10),
                     ),
                 ],
               )
             : Row(
                 children: <Widget>[
                   Flexible(
-                    child: Text('No Images Found!',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal)),
+                    child: Text(
+                      'No Images Found!',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+                    ),
                   ),
                 ],
               ),
@@ -447,6 +450,19 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         width: MediaQuery.of(context).size.width * 0.9,
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: TextButton(
+          onPressed: () async {
+            final servicingId = widget.service?.id;
+            await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CheckOutFormScreen(
+                    servicingId: servicingId?.toString() ?? '',
+                    checkInType: widget.service!.maintenanceType,
+                    workCentreData: model.workCenter,
+                  ),
+                ));
+            _fetchVehicleServicing();
+          },
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.all<Color>(
               Theme.of(context).primaryColor,
@@ -457,7 +473,6 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
               ),
             ),
           ),
-          onPressed: () async {
             final servicingId = widget.service?.id;
             await Navigator.push(
                 context,
