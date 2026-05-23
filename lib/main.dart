@@ -88,13 +88,15 @@ Future<void> main() async {
       options.useNativeBreadcrumbTracking();
     },
     // Init your App.
-    appRunner: () => runApp(MyApp()),
+    appRunner: () => runApp(const MyApp()),
   );
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class MyHttpOverrides extends HttpOverrides {
@@ -151,16 +153,17 @@ class _MyAppState extends State<MyApp> {
           '/mac': (context) => MACNavigation(),
           '/mac/checkinform': (context) => CheckInFormScreen(),
           '/mac/maintenance': (context) => MaintenanceScreen(),
-          '/mac/viewlog': (context) => ViewLogScreen(),
-          '/mac/vehicleupdateform': (context) => VehicleUpdateScreen(),
+          '/mac/viewlog': (context) => const ViewLogScreen(servicingId: 0),
+          '/mac/vehicleupdateform': (context) => const VehicleUpdateScreen(
+                servicingID: 0,
+                currentUpdates: null,
+              ),
         },
         theme: AppTheme.themeData);
   }
 
   void _setupNotificationListeners() async {
-    if (flutterLocalNotificationsPlugin == null) {
-      flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    }
+    flutterLocalNotificationsPlugin ??= FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin
         ?.resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
@@ -184,12 +187,7 @@ class _MyAppState extends State<MyApp> {
       badge: true,
       sound: true,
     );
-    final StreamController<ReceivedNotification>
-        didReceiveLocalNotificationStream =
-        StreamController<ReceivedNotification>.broadcast();
 
-    final StreamController<String> selectNotificationStream =
-        StreamController<String>.broadcast();
     final List<DarwinNotificationCategory> darwinNotificationCategories =
         <DarwinNotificationCategory>[
       DarwinNotificationCategory(
@@ -242,6 +240,12 @@ class _MyAppState extends State<MyApp> {
       requestSoundPermission: false,
       notificationCategories: darwinNotificationCategories,
     );
+
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
+      iOS: initializationSettingsDarwin,
+    );
+
     String? token = await messaging.getToken();
 
     logger.e("Firebase Token $token");
@@ -255,10 +259,6 @@ class _MyAppState extends State<MyApp> {
         logger.e("onMessage Listen Done");
       },
     );
-    final InitializationSettings initializationSettings =
-        InitializationSettings(
-      iOS: initializationSettingsDarwin,
-    );
 
     FirebaseMessaging.onMessageOpenedApp.listen(_handleNotifiesClicked);
 
@@ -269,7 +269,7 @@ class _MyAppState extends State<MyApp> {
           "Firebase Message Called ${message?.data} ${message?.notification?.body}");
       if (message != null && message.notification != null) {
         logger.e(message.notification);
-        Future.delayed(Duration(seconds: 2), () {
+        Future.delayed(const Duration(seconds: 2), () {
           final tripId = message.data['tripId'];
           navigatorKey.currentState?.push(MaterialPageRoute(
             builder: (_) => TripApprovalScreen(
@@ -314,7 +314,7 @@ class _MyAppState extends State<MyApp> {
               channelDescription: channel.description,
               icon: '@mipmap/ic_launcher',
             ),
-            iOS: DarwinNotificationDetails()),
+            iOS: const DarwinNotificationDetails()),
       );
     }
   }
