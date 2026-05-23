@@ -6,10 +6,10 @@ class BOCTripPageView extends StatefulWidget {
   const BOCTripPageView({Key? key}) : super(key: key);
 
   @override
-  _BOCTripPageViewState createState() => _BOCTripPageViewState();
+  State<BOCTripPageView> createState() => _BOCTripPageViewState();
 }
 
-class BOCTripPageViewState extends State<BOCTripPageView> {
+class _BOCTripPageViewState extends State<BOCTripPageView> {
   final dioClient = AuthedDio.instance.dio;
 
   // TripForm Variable

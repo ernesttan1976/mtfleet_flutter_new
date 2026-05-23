@@ -8,7 +8,7 @@ import 'package:transport_flutter/models/models.dart';
 import 'package:transport_flutter/util/request.dart' as request;
 
 class Past14DaysELogBloc {
-  final request = request.Request();
+  late final requestClient = request.Request();
 
   final currentIndexTable = BehaviorSubject<int>();
 
@@ -36,7 +36,7 @@ class Past14DaysELogBloc {
   Future fetchDataNormalAdHoc(BuildContext context) async {
     isLoading.add(true);
     try {
-      final response = await request.get(Uri.parse("eLogs/vehicle?vehicleId=$vehicleID"));
+      final response = await requestClient.get(Uri.parse("eLogs/vehicle?vehicleId=$vehicleID"));
       debugPrint(response.body);
       if (response.statusCode == 200) {
         final list = (json.decode(response.body) as List).map((e) => ELogVehicleModel.fromJson(e)).toList();
@@ -53,7 +53,7 @@ class Past14DaysELogBloc {
   Future fetchDataBAPH(BuildContext context) async {
     isLoading.add(true);
     try {
-      final response = await request.get(Uri.parse("eLogs/bos-aos-pol/vehicle?vehicleId=$vehicleID"));
+      final response = await requestClient.get(Uri.parse("eLogs/bos-aos-pol/vehicle?vehicleId=$vehicleID"));
       if (response.statusCode == 200) {
         final list = (json.decode(response.body) as List).map((e) => ELogBapVehicleModel.fromJson(e)).toList();
         listELogBAPVehicle.add(list);

@@ -64,7 +64,7 @@ class MTBroadCastBloc {
       await _dio.download(url, savePath, onReceiveProgress: (rec, total) {
         final percent = ((rec / total) * 100).round();
         percentDownLoad.add(percent);
-        if (_percent == 100 && downloadInProgress) {
+        if (percent == 100 && downloadInProgress) {
           downloadInProgress = false;
           showAlertDialog(context, 'Download', 'File downloaded successfully', isPop: false);
         }
