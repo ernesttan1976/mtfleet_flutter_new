@@ -102,7 +102,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
       for (final c in licenseClasses) {
         final vp = c['vehicles_platforms'];
         for (final v in vp) {
-          pQuery = "${pQuery}&platform.id_in=${v['id']}";
+          pQuery = "$pQuery&platform.id_in=${v['id']}";
         }
       }
 
@@ -467,8 +467,9 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
                 opacity: vehicleID != null ? 1 : 0.2,
                 child: InkWell(
                   onTap: () {
-                    if (vehicleID != null)
+                    if (vehicleID != null) {
                       Navigator.pushNamed(context, '/driver/past14DaysELog', arguments: int.parse(vehicleID!));
+                    }
                   },
                   child: Image.asset('ic_book'.assetPathIcon, width: 25),
                 ),
@@ -698,8 +699,9 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
                 opacity: vehicleID != null ? 1 : 0.2,
                 child: InkWell(
                   onTap: () {
-                    if (vehicleID != null)
+                    if (vehicleID != null) {
                       Navigator.pushNamed(context, '/driver/past14DaysELog', arguments: int.parse(vehicleID!));
+                    }
                   },
                   child: Image.asset('ic_book'.assetPathIcon, width: 25),
                 ),

@@ -26,6 +26,7 @@ class _LearningVideoScreenState extends State<LearningVideoScreen> {
   }
   """;
 
+  // ignore: unused_element
   List _buildList(learningVideos) {
     List<Widget> listItems = [];
 

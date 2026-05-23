@@ -200,9 +200,9 @@ class TripScreenState extends State<TripScreen> {
                 );
               }
 
-              return ListView(
-                children: _buildList(trips),
-              );
+      return ListView(
+        children: _buildList(trips),
+      );
             }),
         if (_isLoading)
           const Center(
