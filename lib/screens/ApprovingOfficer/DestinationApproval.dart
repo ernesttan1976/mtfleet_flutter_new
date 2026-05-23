@@ -18,10 +18,10 @@ class DestinationApprovalScreen extends StatefulWidget {
   const DestinationApprovalScreen({Key? key, this.tripID, this.adHocDestinationID}) : super(key: key);
 
   @override
-  _DestinationApprovalScreenState createState() => _DestinationApprovalScreenState();
+  DestinationApprovalScreenState createState() => DestinationApprovalScreenState();
 }
 
-class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
+class DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
   late int myTripId;
   final request = request_api.Request();
 
@@ -73,10 +73,11 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
       myList.addAll([
         Row(
           children: <Widget>[
-            Container(
-              child: Flexible(
-                  child: Text('Overall Risk:',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+            Flexible(
+              child: Text(
+                'Overall Risk:',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),
@@ -84,14 +85,14 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-                child: Flexible(
-                    child: Text(
-              "${trip.mtracForm?.overAllRisk}",
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: myColor,
-                  ),
-            ))),
+            Flexible(
+              child: Text(
+                "${trip.mtracForm?.overAllRisk}",
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: myColor,
+                ),
+              ),
+            ),
           ],
         ),
         Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
@@ -101,19 +102,21 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
     myList.addAll([
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child:
-                    Text('Date:', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              'Date:',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(trip.tripDate!.formatDateddMMMMHHmma,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              trip.tripDate!.formatDateddMMMMHHmma,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
@@ -145,10 +148,11 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child:
-                    Text('To:', style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              'To:',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -180,10 +184,11 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("Requisitioner's Purpose",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              "Requisitioner's Purpose",
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -192,10 +197,11 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("Approved Documents:",
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              "Approved Documents:",
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -414,7 +420,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
       ];
     }
 
-    return [...myList, ...?fourthList];
+    return [...myList, ...fourthList];
   }
 
   void onSubmitApprove() async {
@@ -475,11 +481,9 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
-            child: Text(
-              "Are you sure to reject this Ad-Hoc Destination?",
-              textAlign: TextAlign.center,
-            ),
+          content: const Text(
+            "Are you sure to reject this Ad-Hoc Destination?",
+            textAlign: TextAlign.center,
           ),
           actions: [
             Container(
@@ -489,9 +493,8 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                 height: 50,
                 child: Row(
                   children: <Widget>[
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
                           backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
@@ -505,7 +508,7 @@ class _DestinationApprovalScreenState extends State<DestinationApprovalScreen> {
                           Navigator.of(context).pop();
                           onSubmitDeny();
                         },
-                        child: Text(
+                        child: const Text(
                           "Yes",
                           style: TextStyle(color: Colors.white),
                         ),
