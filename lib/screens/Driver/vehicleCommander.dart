@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -9,13 +8,13 @@ class VehicleCommanderScreen extends StatefulWidget {
   final String? overAllRisk;
   final Function? onSubmit;
 
-  VehicleCommanderScreen({Key? key, this.index, this.onPrev, this.onSubmit, this.overAllRisk}) : super(key: key);
+  const VehicleCommanderScreen({Key? key, this.index, this.onPrev, this.onSubmit, this.overAllRisk}) : super(key: key);
 
   @override
-  _VehicleCommanderScreenState createState() => _VehicleCommanderScreenState();
+  VehicleCommanderScreenState createState() => VehicleCommanderScreenState();
 }
 
-class _VehicleCommanderScreenState extends State<VehicleCommanderScreen> with AutomaticKeepAliveClientMixin {
+class VehicleCommanderScreenState extends State<VehicleCommanderScreen> with AutomaticKeepAliveClientMixin {
   final GlobalKey<FormBuilderState> _vehicleCommanderFormKey = GlobalKey<FormBuilderState>();
 
   List<Widget> _buildChildren() {
@@ -30,33 +29,28 @@ class _VehicleCommanderScreenState extends State<VehicleCommanderScreen> with Au
     var listofWidgets = [
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Overall Risk:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
-          ),
+          Flexible(
+              child: Text('Overall Risk:',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
         ],
       ),
-      Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+      const Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
-              child: Flexible(
-                  child: Text(
+          Flexible(
+              child: Text(
             '${widget.overAllRisk}',
-            style: Theme.of(context).textTheme.headline4?.copyWith(color: myColor),
-          ))),
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: myColor),
+          )),
         ],
       ),
-      Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+      const Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Checklist:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
-          ),
+          Flexible(
+              child: Text('Checklist:',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
         ],
       ),
       FormBuilder(
@@ -64,14 +58,14 @@ class _VehicleCommanderScreenState extends State<VehicleCommanderScreen> with Au
         child: Column(
           children: <Widget>[
             Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: FormBuilderCheckboxGroup(
                   name: "vehicleCommanderChecklist",
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                   ),
                   activeColor: Theme.of(context).primaryColor,
-                  options: [
+                  options: const [
                     FormBuilderFieldOption(
                         value:
                             "Driver is Licensed to operate the vehicle and has displayed Miltray Driving permit on dashboard"),
@@ -90,14 +84,14 @@ class _VehicleCommanderScreenState extends State<VehicleCommanderScreen> with Au
                   ],
                 )),
             Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: FormBuilderTextField(
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(),
-                  FormBuilderValidators.email(errorText: "Please Enter Your Correct Email.")
+                  FormBuilderValidators.email(errorText: "Please Enter Your Correct Email."),
                 ]),
                 name: "vehicleCommanderEmail",
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     labelText: "Vehicle Commander Email",
                     hintText: "TypeHere",
                     labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
@@ -108,20 +102,20 @@ class _VehicleCommanderScreenState extends State<VehicleCommanderScreen> with Au
       ),
       Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+        padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             if (_vehicleCommanderFormKey.currentState!.saveAndValidate()) {
               widget.onSubmit!(_vehicleCommanderFormKey.currentState!.value);
             }
           },
-          child: Text(
+          child: const Text(
             "Submit",
             style: TextStyle(color: Colors.black),
           ),
@@ -142,10 +136,10 @@ class _VehicleCommanderScreenState extends State<VehicleCommanderScreen> with Au
               style: TextStyle(color: Theme.of(context).primaryColor),
             ),
             backgroundColor: Colors.white,
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             leading: IconButton(
                 // alignment: Alignment.topLeft,
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   widget.onPrev!(widget.index! - 1);
                 })
@@ -157,7 +151,7 @@ class _VehicleCommanderScreenState extends State<VehicleCommanderScreen> with Au
               child: SizedBox(
                 child: Container(
                   alignment: Alignment.topLeft,
-                  padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                   child: Column(children: _buildChildren()),
                 ),
               ),
