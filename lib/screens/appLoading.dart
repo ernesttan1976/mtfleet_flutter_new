@@ -10,10 +10,10 @@ class AppLoadingScreen extends StatefulWidget {
   const AppLoadingScreen({Key? key}) : super(key: key);
 
   @override
-  _AppLoadingScreenState createState() => _AppLoadingScreenState();
+  AppLoadingScreenState createState() => AppLoadingScreenState();
 }
 
-class _AppLoadingScreenState extends State<AppLoadingScreen> {
+class AppLoadingScreenState extends State<AppLoadingScreen> {
   final storage = FlutterSecureStorage();
   final dio = dio_client.Dio();
   final request = Request();

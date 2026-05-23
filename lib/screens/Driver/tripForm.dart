@@ -21,10 +21,10 @@ class TripFormScreen extends StatefulWidget {
   const TripFormScreen(this.mtrcApprovalRequired, this.isVehicleCommander, {Key? key}) : super(key: key);
 
   @override
-  _TripFormScreenState createState() => _TripFormScreenState();
+  TripFormScreenState createState() => TripFormScreenState();
 }
 
-class _TripFormScreenState extends State<TripFormScreen> {
+class TripFormScreenState extends State<TripFormScreen> {
   final GlobalKey<FormBuilderState> _tripFormKey = GlobalKey<FormBuilderState>();
 
   final SuggestionsController _approvingOfficerTA = SuggestionsController();

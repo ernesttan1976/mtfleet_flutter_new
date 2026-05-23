@@ -245,7 +245,9 @@ class _MyAppState extends State<MyApp> {
       iOS: initializationSettingsDarwin,
     );
 
-    await flutterLocalNotificationsPlugin?.initialize(initializationSettings);
+    await flutterLocalNotificationsPlugin?.initialize(
+      settings: initializationSettings,
+    );
 
     String? token = await messaging.getToken();
 

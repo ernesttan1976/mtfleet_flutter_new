@@ -17,10 +17,10 @@ class AdHocDestinationFormScreen extends StatefulWidget {
   const AdHocDestinationFormScreen({Key? key, this.tripId, this.tripDate}) : super(key: key);
 
   @override
-  _AdHocDestinationFormScreenState createState() => _AdHocDestinationFormScreenState();
+  AdHocDestinationFormScreenState createState() => AdHocDestinationFormScreenState();
 }
 
-class _AdHocDestinationFormScreenState extends State<AdHocDestinationFormScreen> {
+class AdHocDestinationFormScreenState extends State<AdHocDestinationFormScreen> {
   final GlobalKey<FormBuilderState> _adHocDestinationFormKey = GlobalKey<FormBuilderState>();
 
   final dioClient = AuthedDio.instance.dio;

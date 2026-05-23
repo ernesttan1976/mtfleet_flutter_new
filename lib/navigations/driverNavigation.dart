@@ -12,10 +12,10 @@ class DriverNavigation extends StatefulWidget {
   const DriverNavigation({Key? key}) : super(key: key);
 
   @override
-  _DriverNavigationState createState() => _DriverNavigationState();
+  DriverNavigationState createState() => DriverNavigationState();
 }
 
-class _DriverNavigationState extends State<DriverNavigation> {
+class DriverNavigationState extends State<DriverNavigation> {
   final storage = FlutterSecureStorage();
   List? roles;
 

@@ -22,10 +22,11 @@ class MTRACApprovalThirdScreen extends StatelessWidget {
     var myList = [
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Overall Risk:',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              'Overall Risk:',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -33,14 +34,14 @@ class MTRACApprovalThirdScreen extends StatelessWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
-              child: Flexible(
-                  child: Text(
-            "${tripModel?.mtracForm?.overAllRisk}",
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: myColor,
-                ),
-          ))),
+          Flexible(
+            child: Text(
+              tripModel?.mtracForm?.overAllRisk ?? '',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: myColor,
+              ),
+            ),
+          ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),

@@ -6,10 +6,10 @@ class LearningVideoScreen extends StatefulWidget {
   const LearningVideoScreen({Key? key}) : super(key: key);
 
   @override
-  _LearningVideoScreenState createState() => _LearningVideoScreenState();
+  LearningVideoScreenState createState() => LearningVideoScreenState();
 }
 
-class _LearningVideoScreenState extends State<LearningVideoScreen> {
+class LearningVideoScreenState extends State<LearningVideoScreen> {
   String query = """
   query {
     learningVideos{

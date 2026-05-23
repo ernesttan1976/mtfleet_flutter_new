@@ -18,10 +18,10 @@ class TripApprovalScreen extends StatefulWidget {
   const TripApprovalScreen({Key? key, this.tripID}) : super(key: key);
 
   @override
-  _TripApprovalScreenState createState() => _TripApprovalScreenState();
+  TripApprovalScreenState createState() => TripApprovalScreenState();
 }
 
-class _TripApprovalScreenState extends State<TripApprovalScreen> {
+class TripApprovalScreenState extends State<TripApprovalScreen> {
   final dioClient = AuthedDio.instance.dio;
   bool _isLoading = false;
   // TODO: Wire up _formKey when form is added or remove if unnecessary.

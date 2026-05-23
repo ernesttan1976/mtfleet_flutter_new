@@ -14,10 +14,10 @@ class VehicleUpdateScreen extends StatefulWidget {
   const VehicleUpdateScreen({Key? key, this.servicingID, this.currentUpdates}) : super(key: key);
 
   @override
-  _VehicleUpdateScreenState createState() => _VehicleUpdateScreenState();
+  VehicleUpdateScreenState createState() => VehicleUpdateScreenState();
 }
 
-class _VehicleUpdateScreenState extends State<VehicleUpdateScreen> {
+class VehicleUpdateScreenState extends State<VehicleUpdateScreen> {
   final dioClient = AuthedDio.instance.dio;
   final GlobalKey<FormBuilderState> _vehicleUpdateFormKey = GlobalKey<FormBuilderState>();
 

@@ -116,6 +116,7 @@ class FormBuilderTypeAhead<T> extends FormBuilderField<T> {
   /// ```
   ///
   /// If not specified, the error is shown in [ThemeData.errorColor](https://docs.flutter.io/flutter/material/ThemeData/errorColor.html)
+  @override
   final Widget Function(BuildContext, Object?)? errorBuilder;
 
   /// If set to true, suggestions will be fetched immediately when the field is

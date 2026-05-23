@@ -201,7 +201,7 @@ class TripScreenState extends State<TripScreen> {
               }
 
       return ListView(
-        children: _buildList(trips),
+        children: const [],
       );
             }),
         if (_isLoading)

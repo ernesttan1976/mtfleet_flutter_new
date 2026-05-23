@@ -37,7 +37,7 @@ class MTBroadCastBloc {
         final broadcastList = (json.decode(res.body) as List).map((e) => MtBroadcastModel.fromJson(e)).toList();
         listBroadCast.add(broadcastList);
       } else {
-        showAlertDialog(context, 'Error', res.reasonPhrase);
+        showAlertDialog(context, 'Error', res.reasonPhrase ?? 'Unknown error');
       }
     } catch (e) {
       showAlertDialog(context, 'Error', e.toString());
