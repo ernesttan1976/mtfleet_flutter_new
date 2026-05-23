@@ -16,10 +16,10 @@ import 'package:transport_flutter/util/request.dart' as request_util;
 class MaintenanceScreen extends StatefulWidget {
   final VehicleServicingModel? service;
 
-  MaintenanceScreen({Key? key, this.service}) : super(key: key);
+  const MaintenanceScreen({Key? key, this.service}) : super(key: key);
 
   @override
-  _MaintenanceScreenState createState() => _MaintenanceScreenState();
+  State<MaintenanceScreen> createState() => _MaintenanceScreenState();
 }
 
 class _MaintenanceScreenState extends State<MaintenanceScreen> {
@@ -80,7 +80,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         children: <Widget>[
           Container(
             child: Flexible(
-                child: Text('${model.workCenter}',
+                child: Text(model.workCenter,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -99,7 +99,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         children: <Widget>[
           Container(
             child: Flexible(
-                child: Text('${model.telephoneNo}',
+                child: Text(model.telephoneNo,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -118,7 +118,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         children: <Widget>[
           Container(
             child: Flexible(
-                child: Text('${widget.service!.vehicle!.vehicleNumber}',
+                child: Text(widget.service!.vehicle!.vehicleNumber,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -137,7 +137,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         children: <Widget>[
           Container(
             child: Flexible(
-                child: Text('${widget.service!.vehicle!.model}',
+                child: Text(widget.service!.vehicle!.model,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -160,7 +160,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           children: <Widget>[
             Container(
               child: Flexible(
-                  child: Text('${widget.service!.maintenanceType}',
+                  child: Text(widget.service!.maintenanceType,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
             ),
           ],
@@ -183,7 +183,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         children: <Widget>[
           Container(
             child: Flexible(
-                child: Text('${model.frontSensorTag}',
+                child: Text(model.frontSensorTag,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
           ),
         ],
@@ -440,7 +440,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => CheckOutFormScreen(
-                    servicingId: servicingId,
+                    servicingId: servicingId?.toString() ?? '',
                     checkInType: widget.service!.maintenanceType,
                     workCentreData: model.workCenter,
                   ),
