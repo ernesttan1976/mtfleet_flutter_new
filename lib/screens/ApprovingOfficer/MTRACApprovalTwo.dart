@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:transport_flutter/extensions/extensions.dart';
 import 'package:transport_flutter/models/models.dart';
@@ -22,27 +21,29 @@ class MTRACApprovalSecondScreen extends StatelessWidget {
     }
 
     var myList = [
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Overall Risk:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+Row(
+      children: <Widget>[
+        Flexible(
+          child: Text(
+            'Overall Risk:',
+            style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
           ),
-        ],
-      ),
+        ),
+      ],
+    ),
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
-              child: Flexible(
-                  child: Text(
-            "${tripModel?.mtracForm?.overAllRisk}",
-            style: Theme.of(context).textTheme.headline4?.copyWith(
-                  color: myColor,
-                ),
-          ))),
+          Flexible(
+            child: Text(
+              "${tripModel?.mtracForm?.overAllRisk}",
+              style: Theme.of(context).textTheme.headline4?.copyWith(
+                color: myColor,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
@@ -53,11 +54,11 @@ class MTRACApprovalSecondScreen extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.9,
         padding: EdgeInsets.fromLTRB(0, 20, 0, 50),
         child: OutlinedButton(
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          style: OutlinedButton.styleFrom(
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
-            )),
-            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            ),
+            side: BorderSide(color: Theme.of(context).primaryColor),
           ),
           onPressed: () {
             Navigator.push(
