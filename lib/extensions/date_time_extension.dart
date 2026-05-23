@@ -62,7 +62,7 @@ extension DateTimeExt on DateTime {
   }
 
   int containsDate({required List<DateTime> listDate}) {
-    return listDate.indexWhere((element) => this.differenceDateTime(element));
+    return listDate.indexWhere((element) => differenceDateTime(element));
   }
 
   String timeAgoSinceDate() {
@@ -70,7 +70,7 @@ extension DateTimeExt on DateTime {
     final difference = date2.difference(this);
 
     if ((difference.inDays / 7).floor() >= 1) {
-      return this.formatDateMMMddYYY;
+      return formatDateMMMddYYY;
     } else if (difference.inDays >= 1) {
       return '${difference.inDays} days ago';
     } else if (difference.inHours >= 1) {

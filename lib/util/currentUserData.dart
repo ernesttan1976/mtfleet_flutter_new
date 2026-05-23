@@ -1,6 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-const SUPPORTED_ROLES = [
+const supportedRoles = [
   "MAC",
   "APPROVING_OFFICER",
   "PRE_APPROVED_DRIVER",
