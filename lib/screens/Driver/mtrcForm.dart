@@ -394,8 +394,6 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
               ));
   }
 
-  @override
-  bool get wantKeepAlive => true;
 
   List<Widget> _widgetPreApprovedDriver() {
     var myFormList = [
@@ -412,7 +410,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
               ),
             ),
             initialValue: DateTime.now().toUtc(),
-            format: new DateFormat('dd MMMM yyyy')
+            format: DateFormat('dd MMMM yyyy')
             // readonly: true,
             ),
       ).paddingAll(10),
@@ -483,7 +481,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
         title: 'Vehicle / Motorcycle',
         child: TextFormField(
           enabled: false,
-          controller: new TextEditingController(
+          controller: TextEditingController(
             text: "$vehicleTypeENUM ($vehicleType)",
           ),
         ),
@@ -504,7 +502,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
       //                   child: const Icon(
       //                       Icons.date_range), // myIcon is a 48px-wide widget.
       //                 )),
-      //             format: new DateFormat('dd MMMM yyyy')
+      //             format: DateFormat('dd MMMM yyyy')
       //             // readonly: true,
       //             ),
       //       ).paddingAll(10)
@@ -521,7 +519,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
       //                   child: Icon(
       //                       Icons.date_range), // myIcon is a 48px-wide widget.
       //                 )),
-      //             format: new DateFormat('dd MMMM yyyy')
+      //             format: DateFormat('dd MMMM yyyy')
       //             // readonly: true,
       //             ),
       //       ).paddingAll(10)
@@ -606,7 +604,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
             // validator: (val) => null,
             // initialTime: TimeOfDay(hour: 8, minute: 0),
             initialValue: DateTime.now().toUtc(),
-            format: new DateFormat('dd MMMM yyyy')
+            format: DateFormat('dd MMMM yyyy')
             // readonly: true,
             ),
       ).paddingAll(10),
@@ -714,7 +712,7 @@ class _MTRCFormScreenState extends State<MTRCFormScreen> with KeepAliveParentDat
         title: 'Vehicle / Motorcycle',
         child: TextFormField(
           enabled: false,
-          controller: new TextEditingController(
+          controller: TextEditingController(
             text: "$vehicleTypeENUM ($vehicleType)",
           ),
         ),
