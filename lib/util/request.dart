@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
-import 'package:transport_flutter/constants.dart' as Constants;
+import 'package:transport_flutter/constants.dart' as constants;
 
 class Request extends http.BaseClient {
   final Client _client = Client();
@@ -13,7 +13,7 @@ class Request extends http.BaseClient {
   Request();
 
   String endpoint(String url) {
-    return '${Constants.SERVER_URI_API}/$url';
+    return '${constants.SERVER_URI_API}/$url';
   }
 
   void _logEndpoint(String method, Uri url) {
@@ -26,39 +26,39 @@ class Request extends http.BaseClient {
     request.headers['Accept'] = 'application/json';
     request.headers['Cache-Control'] = 'no-cache';
 
-    return this._client.send(request);
+    return _client.send(request);
   }
 
   @override
   Future<http.Response> head(url, {Map<String, String>? headers}) {
-    this._logEndpoint('head', url);
-    return this._client.head(Uri.parse(endpoint(url.path)), headers: headers);
+    _logEndpoint('head', url);
+    return _client.head(Uri.parse(endpoint(url.path)), headers: headers);
   }
 
   @override
   Future<http.Response> get(url, {Map<String, String>? headers}) async {
-    this._logEndpoint('get', url);
-    final _storage = FlutterSecureStorage();
-    var _token = await _storage.read(key: Constants.storageBearer);
+    _logEndpoint('get', url);
+    final storage = FlutterSecureStorage();
+    final token = await storage.read(key: constants.storageBearer);
 
-    return this._client.get(
+    return _client.get(
       Uri.parse(endpoint(url.toString())),
       headers: {
         HttpHeaders.acceptHeader: "application/json",
-        HttpHeaders.authorizationHeader: 'Bearer $_token',
+        HttpHeaders.authorizationHeader: 'Bearer $token',
       },
     );
   }
 
   @override
   Future<http.Response> post(url, {Map<String, String>? headers, body, Encoding? encoding}) async {
-    this._logEndpoint('post', url);
-    final _storage = FlutterSecureStorage();
-    var _token = await _storage.read(key: Constants.storageBearer);
-    return this._client.post(Uri.parse(endpoint(url.path)),
+    _logEndpoint('post', url);
+    final storage = FlutterSecureStorage();
+    final token = await storage.read(key: constants.storageBearer);
+    return _client.post(Uri.parse(endpoint(url.path)),
         headers: {
           HttpHeaders.acceptHeader: "application/json",
-          HttpHeaders.authorizationHeader: 'Bearer $_token',
+          HttpHeaders.authorizationHeader: 'Bearer $token',
         },
         body: body,
         encoding: encoding);
@@ -66,19 +66,19 @@ class Request extends http.BaseClient {
 
   @override
   Future<http.Response> put(url, {Map<String, String>? headers, body, Encoding? encoding}) {
-    this._logEndpoint('put', url);
-    return this._client.put(Uri.parse(endpoint(url.path)), headers: headers, body: body, encoding: encoding);
+    _logEndpoint('put', url);
+    return _client.put(Uri.parse(endpoint(url.path)), headers: headers, body: body, encoding: encoding);
   }
 
   @override
   Future<http.Response> patch(url, {Map<String, String>? headers, body, Encoding? encoding}) async {
-    this._logEndpoint('patch', url);
-    final _storage = FlutterSecureStorage();
-    var _token = await _storage.read(key: Constants.storageBearer);
-    return this._client.patch(Uri.parse(endpoint(url.path)),
+    _logEndpoint('patch', url);
+    final storage = FlutterSecureStorage();
+    final token = await storage.read(key: constants.storageBearer);
+    return _client.patch(Uri.parse(endpoint(url.path)),
         headers: {
           HttpHeaders.acceptHeader: "application/json",
-          HttpHeaders.authorizationHeader: 'Bearer $_token',
+          HttpHeaders.authorizationHeader: 'Bearer $token',
         },
         body: body,
         encoding: encoding);
