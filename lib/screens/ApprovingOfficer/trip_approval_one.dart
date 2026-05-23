@@ -70,103 +70,113 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(tripData.tripDate!.formatDateTime('dd MMM yyyy'),
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              tripData.tripDate!.formatDateTime('dd MMM yyyy'),
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
-      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+      const Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Vehicle License Number:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
-          ),
-        ],
-      ),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("${tripData.vehicle != null ? tripData.vehicle?.vehicleNumber : 'N/A'}",
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
-          ),
-        ],
-      ),
-      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child:
-                    Text('Type:', style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              'Vehicle License Number:',
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("${tripData.vehicle?.model}",
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              "${tripData.vehicle != null ? tripData.vehicle?.vehicleNumber : 'N/A'}",
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal),
+            ),
+          ),
+        ],
+      ),
+      const Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              'Type:',
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              "${tripData.vehicle?.model}",
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
       for (var item in tripData.destinations)
-        (Column(
+        Column(
           children: <Widget>[
-            Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+            const Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
             Row(
               children: <Widget>[
-                Container(
-                  child: Flexible(
-                      child: Text('To:',
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                Flexible(
+                  child: Text(
+                    'To:',
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
             Row(
               children: <Widget>[
-                Container(
-                  child: Flexible(
-                      child: Text(item.to,
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+                Flexible(
+                  child: Text(
+                    item.to,
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal),
+                  ),
                 ),
               ],
             ),
-            Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+            const Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
             Row(
               children: <Widget>[
-                Container(
-                  child: Flexible(
-                      child: const Text("Requisitioner's Purpose",
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                Flexible(
+                  child: Text(
+                    "Requisitioner's Purpose",
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
             Row(
               children: <Widget>[
-                Container(
-                  child: Flexible(
-                      child: Text(item.requisitionerPurpose,
-                          style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal))),
+                Flexible(
+                  child: Text(
+                    item.requisitionerPurpose,
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.normal),
+                  ),
                 ),
               ],
             ),
           ],
-        )),
+        ),
       15.verticalSpace,
-      Container(
+      SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
-        padding: const EdgeInsets.only(top: 10),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: WidgetStateProperty.all(RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            )),
+            shape: WidgetStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
             side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
@@ -190,12 +200,12 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
               );
             }
           },
-          child: Text(
+          child: const Text(
             "Next",
             style: TextStyle(color: Colors.black),
           ),
         ),
-      )
+      ),
     ];
     return myList;
   }
@@ -222,21 +232,22 @@ class _TripApprovalScreenState extends State<TripApprovalScreen> {
             child: Stack(
               children: <Widget>[
                 StreamBuilder<TripDetailModel>(
-                    stream: _tripModel,
-                    builder: (context, snapshot) {
-                      if (snapshot.data == null) {
-                        return const SizedBox();
-                      }
-                      return SingleChildScrollView(
-                        child: Column(
-                          children: _buildChildren(snapshot.data!),
-                        ).paddingHorizontal(20),
-                      );
-                    }),
+                  stream: _tripModel,
+                  builder: (context, snapshot) {
+                    if (snapshot.data == null) {
+                      return const SizedBox();
+                    }
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: _buildChildren(snapshot.data!),
+                      ).paddingHorizontal(20),
+                    );
+                  },
+                ),
                 if (_isLoading)
                   const Center(
                     child: CircularProgressIndicator(),
-                  )
+                  ),
               ],
             ),
           ),
