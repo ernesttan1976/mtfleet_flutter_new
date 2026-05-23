@@ -3,17 +3,17 @@ import 'package:transport_flutter/config/dio.dart';
 import 'package:transport_flutter/screens/Driver/selectVehicle.dart';
 
 class BOCTripPageView extends StatefulWidget {
-  BOCTripPageView({Key? key}) : super(key: key);
+  const BOCTripPageView({Key? key}) : super(key: key);
 
   @override
   _BOCTripPageViewState createState() => _BOCTripPageViewState();
 }
 
-class _BOCTripPageViewState extends State<BOCTripPageView> {
+class BOCTripPageViewState extends State<BOCTripPageView> {
   final dioClient = AuthedDio.instance.dio;
 
   // TripForm Variable
-  var tripFormData;
+  Map<String, dynamic>? tripFormData;
   dynamic userID;
 
   // @override
