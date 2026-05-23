@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:transport_flutter/components/LearningCard.dart';
-import "package:transport_flutter/constants.dart" as Constants;
+import 'package:transport_flutter/constants.dart' as constants;
 
 class LearningVideoScreen extends StatefulWidget {
-  LearningVideoScreen({Key? key}) : super(key: key);
+  const LearningVideoScreen({Key? key}) : super(key: key);
 
   @override
   _LearningVideoScreenState createState() => _LearningVideoScreenState();
@@ -30,15 +30,16 @@ class _LearningVideoScreenState extends State<LearningVideoScreen> {
     List<Widget> listItems = [];
 
     for (var item in learningVideos) {
-      if (item['video'] != null && item['video']['mime'].contains("video"))
+      if (item['video'] != null && item['video']['mime'].contains("video")) {
         listItems.add(Padding(
-            padding: new EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: LearningCard(
               title: item['title'],
               description: item['description'],
-              cover: Constants.SERVER_URI_API + item['cover']['url'],
-              videoUrl: Constants.SERVER_URI_API + item['video']['url'],
+              cover: constants.SERVER_URI_API + item['cover']['url'],
+              videoUrl: constants.SERVER_URI_API + item['video']['url'],
             )));
+      }
     }
 
     return listItems;
