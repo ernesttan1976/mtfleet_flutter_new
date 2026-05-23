@@ -307,17 +307,19 @@ class _MyAppState extends State<MyApp> {
     logger.e("HandleNotifies ${message?.data} ${message?.notification} ");
     if (notification != null && android != null) {
       flutterLocalNotificationsPlugin?.show(
-        notification.hashCode,
-        notification.title,
-        notification.body,
-        NotificationDetails(
-            android: AndroidNotificationDetails(
-              channel.id,
-              channel.name,
-              channelDescription: channel.description,
-              icon: '@mipmap/ic_launcher',
-            ),
-            iOS: const DarwinNotificationDetails()),
+        id: notification.hashCode,
+        title: notification.title,
+        body: notification.body,
+        notificationDetails: NotificationDetails(
+          android: AndroidNotificationDetails(
+            channel.id,
+            channel.name,
+            channelDescription: channel.description,
+            icon: '@mipmap/ic_launcher',
+          ),
+          iOS: const DarwinNotificationDetails(),
+        ),
+        payload: null,
       );
     }
   }
