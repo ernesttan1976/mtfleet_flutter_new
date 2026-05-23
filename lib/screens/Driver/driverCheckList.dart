@@ -3,14 +3,14 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:transport_flutter/util/checkListArray.dart';
 
 class DriverCheckList extends StatefulWidget {
-  final Function onPrev;
-  final Function onNext;
+  final void Function(int index) onPrev;
+  final void Function(int index, Map<String, dynamic> value) onNext;
   final int index;
   final String overAllRisk;
   final bool isVehicleCommander;
-  final Function onSubmit;
+  final void Function(Map<String, dynamic> value) onSubmit;
 
-  DriverCheckList({
+  const DriverCheckList({
     Key? key,
     required this.index,
     required this.onPrev,
@@ -58,8 +58,8 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
-                          shape: MaterialStateProperty.all(
+                          backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
+                          shape: WidgetStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             ),
@@ -84,10 +84,10 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
                       padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
@@ -122,33 +122,28 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
           children: <Widget>[
             Row(
               children: <Widget>[
-                Container(
-                  child: Flexible(
-                      child: Text('Overall Risk:',
-                          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold))),
-                ),
+                Flexible(
+                    child: Text('Overall Risk:',
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold))),
               ],
             ),
-            Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                    child: Flexible(
-                        child: Text(
-                  '${widget.overAllRisk}',
-                  style: Theme.of(context).textTheme.headline4!.copyWith(color: myColor),
-                ))),
+                Flexible(
+                    child: Text(
+                  widget.overAllRisk,
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: myColor),
+                )),
               ],
             ),
-            Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+            const SizedBox(height: 20),
             Row(
               children: <Widget>[
-                Container(
-                  child: Flexible(
-                      child: Text('Checklist:',
-                          style: Theme.of(context).textTheme.bodyText1!.copyWith(fontWeight: FontWeight.bold))),
-                ),
+                Flexible(
+                    child: Text('Checklist:',
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold))),
               ],
             ),
             FormBuilderCheckboxGroup(
@@ -175,56 +170,60 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
     ];
 
     if (widget.isVehicleCommander) {
-      listofWidgets.add(Container(
-        width: MediaQuery.of(context).size.width * 0.9,
-        padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-        child: !isLoading
-            ? OutlinedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  )),
-                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
-                ),
-                onPressed: () {
-                  if (_driverFormKey.currentState!.saveAndValidate()) {
-                    widget.onNext(widget.index + 1, _driverFormKey.currentState!.value);
-                  }
-                },
-                child: Text(
-                  "Next",
-                  style: TextStyle(color: Colors.black),
-                ),
-              )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
+      listofWidgets.add(Padding(
+        padding: const EdgeInsets.only(top: 20.0),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: !isLoading
+              ? OutlinedButton(
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    )),
+                    side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  ),
+                  onPressed: () {
+                    if (_driverFormKey.currentState!.saveAndValidate()) {
+                      widget.onNext(widget.index + 1, _driverFormKey.currentState!.value);
+                    }
+                  },
+                  child: const Text(
+                    "Next",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                )
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+        ),
       ));
     } else {
-      listofWidgets.add(Container(
-        width: MediaQuery.of(context).size.width * 0.9,
-        padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-        child: !isLoading
-            ? OutlinedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  )),
-                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
-                ),
-                onPressed: () {
-                  if (_driverFormKey.currentState!.saveAndValidate()) {
-                    submissionFormAlert(_driverFormKey.currentState!.value);
-                  }
-                },
-                child: Text(
-                  "Submit",
-                  style: TextStyle(color: Colors.black),
-                ),
-              )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
+      listofWidgets.add(Padding(
+        padding: const EdgeInsets.only(top: 20.0),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: !isLoading
+              ? OutlinedButton(
+                  style: ButtonStyle(
+                    shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    )),
+                    side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  ),
+                  onPressed: () {
+                    if (_driverFormKey.currentState!.saveAndValidate()) {
+                      submissionFormAlert(_driverFormKey.currentState!.value);
+                    }
+                  },
+                  child: const Text(
+                    "Submit",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                )
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+        ),
       ));
     }
 
