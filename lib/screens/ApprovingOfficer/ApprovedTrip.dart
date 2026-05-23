@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
@@ -9,26 +8,26 @@ import 'package:transport_flutter/components/ApprovingOfficer/PendingTripCard.da
 import 'package:transport_flutter/components/Empty.dart';
 import 'package:transport_flutter/models/models.dart';
 import 'package:transport_flutter/util/currentUserData.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request_client;
 
 class ApprovedTripsScreen extends StatefulWidget {
-  ApprovedTripsScreen({Key? key}) : super(key: key);
+  const ApprovedTripsScreen({Key? key}) : super(key: key);
 
   @override
-  _ApprovedTripsScreenState createState() => _ApprovedTripsScreenState();
+  ApprovedTripsScreenState createState() => ApprovedTripsScreenState();
 }
 
-class _ApprovedTripsScreenState extends State<ApprovedTripsScreen> {
+class ApprovedTripsScreenState extends State<ApprovedTripsScreen> {
   String? userID;
   bool _isLoading = false;
-  var request = new Request.Request();
+  final request = request_client.Request();
   final _myTrips = BehaviorSubject<List<TripDriverModel>>();
   var logger = Logger();
 
   @override
   void initState() {
     super.initState();
-    this.loadCurrentUser();
+    loadCurrentUser();
     _fetchListMyTrip();
   }
 
@@ -42,10 +41,11 @@ class _ApprovedTripsScreenState extends State<ApprovedTripsScreen> {
     final authString = await getUser();
     final auth = jsonDecode(authString);
     final user = auth['user']['id'];
-    if (this.mounted)
+    if (mounted) {
       setState(() {
         userID = "$user";
       });
+    }
   }
 
   void _fetchListMyTrip() async {
@@ -56,24 +56,24 @@ class _ApprovedTripsScreenState extends State<ApprovedTripsScreen> {
       final res = await request.get(Uri.parse('trips/approving-officer?approvalStatus=Approved'));
       logger.e(res.body);
       if (res.statusCode == 200 || res.statusCode == 201) {
-        final _list = (json.decode(res.body) as List).map((e) {
+        final tripList = (json.decode(res.body) as List).map((e) {
           logger.e(res.body);
           return TripDriverModel.fromJson(e);
         }).toList();
-        _list.sort((a, b) => b.id.compareTo(a.id));
-        _myTrips.add(_list);
+        tripList.sort((a, b) => b.id.compareTo(a.id));
+        _myTrips.add(tripList);
       } else if (res.statusCode == 401) {
         await storage.deleteAll();
         Navigator.pushReplacementNamed(context, '/login');
       } else {
-        showAlertDialog(context, 'Error', res.reasonPhrase, isPop: false);
+        showAlertDialog(context, 'Error', res.reasonPhrase ?? 'Unknown error', isPop: false);
       }
     } catch (e) {
       /* if (e.response.data['statusCode'] == 401) {
         await storage.deleteAll();
         Navigator.pushReplacementNamed(context, '/login');
       }*/
-      showAlertDialog(context, 'Error', e, isPop: false);
+      showAlertDialog(context, 'Error', e.toString(), isPop: false);
     }
     setState(() {
       _isLoading = false;
@@ -85,7 +85,7 @@ class _ApprovedTripsScreenState extends State<ApprovedTripsScreen> {
 
     for (var item in trips) {
       listItems.add(Padding(
-          padding: new EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           child: Card(
             clipBehavior: Clip.antiAlias,
             elevation: 5,
@@ -109,14 +109,14 @@ class _ApprovedTripsScreenState extends State<ApprovedTripsScreen> {
             children: <Widget>[
               StreamBuilder<List<TripDriverModel>>(
                   stream: _myTrips,
-                  initialData: [],
+                  initialData: const [],
                   builder: (context, snapshot) {
                     if (snapshot.data != null && snapshot.data!.isNotEmpty) {
                       return ListView(
                         children: _buildList(snapshot.data!),
                       );
                     }
-                    return Center(
+                    return const Center(
                       child: EmptyPlaceholder(
                           description: "Approved Trip not found.", imagePath: "assets/images/no_data.png"),
                     );
