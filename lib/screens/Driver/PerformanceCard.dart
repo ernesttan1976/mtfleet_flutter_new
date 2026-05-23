@@ -20,14 +20,15 @@ class PerformanceCardSection extends StatefulWidget {
   const PerformanceCardSection({Key? key, this.uid, this.userJoined}) : super(key: key);
 
   @override
-  _PerformanceCardSectionState createState() => _PerformanceCardSectionState();
+  PerformanceCardSectionState createState() => PerformanceCardSectionState();
 }
 
-class _PerformanceCardSectionState extends State<PerformanceCardSection> {
+class PerformanceCardSectionState extends State<PerformanceCardSection> {
   final dioClient = AuthedDio.instance.dio;
   List<dynamic>? performanceCard;
   bool isEmpty = false;
-  final _performanceCardScaffoldKey = GlobalKey<ScaffoldState>();
+  // TODO: remove this key if unused or wire it into the Scaffold. Keeping for now.
+  final performanceCardScaffoldKey = GlobalKey<ScaffoldState>();
 
   final GlobalKey<FormBuilderState> _durationFormKey = GlobalKey<FormBuilderState>();
 
