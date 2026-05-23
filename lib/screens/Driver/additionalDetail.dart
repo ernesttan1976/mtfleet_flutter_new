@@ -49,7 +49,6 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
 
   @override
   Widget build(BuildContext context) {
-    String? nextAVIDate;
     super.build(context);
     return Scaffold(
         appBar: AppBar(
@@ -178,35 +177,20 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
                               ),
                               TitleAndWidgetShadow(
                                 title: 'Vehicle Next AVI Date Due',
-                                child: nextAVIDate != null && nextAVIDate!.isNotEmpty
-                                    ? FormBuilderDateTimePicker(
-                                        key: Key("nextAviDateKey"),
-                                        name: "aviDate",
-                                        validator: FormBuilderValidators.required(),
-                                        inputType: InputType.date,
-                                        initialValue: DateTime.tryParse(nextAVIDate),
-                                        decoration: InputDecoration(
-                                            hintText: "DD-MMM-YYYY",
-                                            suffixIcon: Padding(
-                                              padding: const EdgeInsetsDirectional.only(end: 12.0),
-                                              child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
-                                            )),
-                                        format: DateFormat('dd MMMM yyyy')
-                                        // readonly: true,
-                                        )
-                                    : FormBuilderDateTimePicker(
-                                        name: "aviDate",
-                                        validator: FormBuilderValidators.required(),
-                                        inputType: InputType.date,
-                                        decoration: InputDecoration(
-                                            hintText: "DD-MMM-YYYY",
-                                            suffixIcon: Padding(
-                                              padding: const EdgeInsetsDirectional.only(end: 12.0),
-                                              child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
-                                            )),
-                                        format: DateFormat('dd MMMM yyyy')
-                                        // readonly: true,
-                                        ),
+                                child: FormBuilderDateTimePicker(
+                                  name: "aviDate",
+                                  validator: FormBuilderValidators.required(),
+                                  inputType: InputType.date,
+                                  decoration: const InputDecoration(
+                                    hintText: "DD-MMM-YYYY",
+                                    suffixIcon: Padding(
+                                      padding: EdgeInsetsDirectional.only(end: 12.0),
+                                      child: Icon(Icons.date_range),
+                                    ),
+                                  ),
+                                  format: DateFormat('dd MMMM yyyy'),
+                                  // readonly: true,
+                                ),
                               ).paddingAll(10),
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.9,
