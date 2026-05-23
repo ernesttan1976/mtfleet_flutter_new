@@ -31,11 +31,13 @@ class _AdHocDestinationFormScreenState extends State<AdHocDestinationFormScreen>
   bool submitButtonLoading = false;
   dynamic currentRole;
 
-  var request = request.Request();
+  late final request.Request _request;
+
 
   @override
   void initState() {
     super.initState();
+    _request = request.Request();
     loadUser();
   }
 
@@ -67,7 +69,7 @@ class _AdHocDestinationFormScreenState extends State<AdHocDestinationFormScreen>
     print("Pattern: $pattern");
     List list;
     try {
-      var result1 = json.decode((await request.get(Uri.parse("users/approving-officers?name=$pattern"))).body);
+      var result1 = json.decode((await _request.get(Uri.parse("users/approving-officers?name=$pattern"))).body);
       list = [...result1];
       if (list.isEmpty) {
         setState(() {
