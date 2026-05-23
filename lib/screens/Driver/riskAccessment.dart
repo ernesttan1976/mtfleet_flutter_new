@@ -47,10 +47,9 @@ class RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Overall Risk:',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text('Overall Risk:',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -58,22 +57,20 @@ class RiskAccessmentScreenState extends State<RiskAccessmentScreen> {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
-              child: Flexible(
-                  child: Text(
-            '${widget.overAllRisk}',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: myColor),
-          ))),
+          Flexible(
+            child: Text(
+              '${widget.overAllRisk}',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: myColor),
+            ),
+          ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Risk Levels Explanation:',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
-          ),
+          Flexible(
+              child: Text('Risk Levels Explanation:',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold))),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
