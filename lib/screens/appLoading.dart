@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart' as DioClient;
+import 'package:dio/dio.dart' as dio_client;
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:transport_flutter/util/currentUserData.dart';
 import 'package:transport_flutter/util/request.dart';
 
 class AppLoadingScreen extends StatefulWidget {
-  AppLoadingScreen({Key? key}) : super(key: key);
+  const AppLoadingScreen({Key? key}) : super(key: key);
 
   @override
   _AppLoadingScreenState createState() => _AppLoadingScreenState();
@@ -15,8 +15,8 @@ class AppLoadingScreen extends StatefulWidget {
 
 class _AppLoadingScreenState extends State<AppLoadingScreen> {
   final storage = FlutterSecureStorage();
-  final dio = DioClient.Dio();
-  final request = new Request();
+  final dio = dio_client.Dio();
+  final request = Request();
 
   void onError() {
     storage.deleteAll();
@@ -61,7 +61,7 @@ class _AppLoadingScreenState extends State<AppLoadingScreen> {
           Navigator.pushReplacementNamed(context, '/login');
           return;
         }
-      } on DioClient.DioError catch (error) {
+      } on dio_client.DioException catch (error) {
         print('DIO Error: $error');
         onError();
         Navigator.pushReplacementNamed(context, '/login');
@@ -83,10 +83,8 @@ class _AppLoadingScreenState extends State<AppLoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      ),
+    return Scaffold(
+      body: const Center(child: CircularProgressIndicator()),
     );
   }
 }
