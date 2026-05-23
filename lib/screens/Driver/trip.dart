@@ -10,26 +10,27 @@ import 'package:transport_flutter/components/components.dart';
 import 'package:transport_flutter/models/models.dart';
 import 'package:transport_flutter/screens/Driver/elogBook.dart';
 import 'package:transport_flutter/util/currentUserData.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request;
 
 class TripScreen extends StatefulWidget {
   const TripScreen({Key? key}) : super(key: key);
 
   @override
-  _TripScreenState createState() => _TripScreenState();
+  TripScreenState createState() => TripScreenState();
 }
 
-class _TripScreenState extends State<TripScreen> {
+class TripScreenState extends State<TripScreen> {
   String? userID = '';
 
-  var request = new Request.Request();
+  final requestClient = request.Request();
   final _myTrips = BehaviorSubject<List<TripDriverModel>>();
   bool _isLoading = false;
+  String _lastEnterReading = '0';
 
   @override
   void initState() {
     super.initState();
-    this.loadCurrentUser();
+    loadCurrentUser();
     _fetchListMyTrip();
   }
 
@@ -53,13 +54,13 @@ class _TripScreenState extends State<TripScreen> {
       _isLoading = true;
     });
     try {
-      final res = await request.get(Uri.parse('trips/driver'));
+      final res = await requestClient.get(Uri.parse('trips/driver'));
       if (res.statusCode == 200 || res.statusCode == 201) {
-        final _list = (json.decode(res.body) as List).map((e) => TripDriverModel.fromJson(e)).toList();
-        final _finalList = List<TripDriverModel>.from(_list.reversed);
-        _myTrips.add(_finalList);
+        final list = (json.decode(res.body) as List).map((e) => TripDriverModel.fromJson(e)).toList();
+        final finalList = List<TripDriverModel>.from(list.reversed);
+        _myTrips.add(finalList);
       } else {
-        showAlertDialog(context, 'Error', res.reasonPhrase);
+        showAlertDialog(context, 'Error', res.reasonPhrase ?? 'Unknown error occurred');
       }
     } catch (e) {
       showAlertDialog(context, 'Error Catch', e.toString());
@@ -79,8 +80,7 @@ class _TripScreenState extends State<TripScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
-              child: Text("There is no safety measure for this trip \n\nNote: Click proceed to start the trip")),
+          content: const Text("There is no safety measure for this trip \n\nNote: Click proceed to start the trip"),
           actions: [
             Row(
               children: <Widget>[
@@ -89,10 +89,10 @@ class _TripScreenState extends State<TripScreen> {
                   padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
                   child: OutlinedButton(
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       )),
-                      side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                      side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -124,7 +124,7 @@ class _TripScreenState extends State<TripScreen> {
     for (var trip in trips) {
       listItems.add(
         Padding(
-          padding: new EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(10.0),
           child: Card(
             clipBehavior: Clip.antiAlias,
             elevation: trip.approvalStatus == "Rejected" ? 1 : 5,
@@ -194,7 +194,7 @@ class _TripScreenState extends State<TripScreen> {
             builder: (context, snapshot) {
               final trips = snapshot.data!;
               // Empty
-              if (trips.length == 0) {
+              if (trips.isEmpty) {
                 return Center(
                   child: EmptyPlaceholder(description: "No trips found.", imagePath: "assets/images/no_data.png"),
                 );
@@ -214,15 +214,14 @@ class _TripScreenState extends State<TripScreen> {
 
   void showDialogAddCurrentMeter(TripDriverModel model) async {
     String currentMeterReading = '0';
-    String _lastEnterReading = '0';
-    final res = await request.get(Uri.parse('vehicles/last-meter-reading/${model.vehiclesId}'));
+    final res = await requestClient.get(Uri.parse('vehicles/last-meter-reading/${model.vehiclesId}'));
     if (res.statusCode == 200 || res.statusCode == 201) {
       currentMeterReading = json.decode(res.body)['meterReading'].toString();
       if ((currentMeterReading).isNotEmpty && currentMeterReading.toLowerCase() != 'null') {
         _lastEnterReading = currentMeterReading;
       }
     } else {
-      showAlertDialog(context, 'Error', res.reasonPhrase, isPop: false);
+      showAlertDialog(context, 'Error', res.reasonPhrase ?? 'Unknown error occurred', isPop: false);
       return;
     }
     showDialog(
@@ -234,7 +233,7 @@ class _TripScreenState extends State<TripScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          title: new Text('Current Meter Reading'),
+          title: Text('Current Meter Reading'),
           content: TitleAndWidgetShadow(
             title: 'Current Meter Reading',
             child: FormBuilder(
@@ -257,10 +256,10 @@ class _TripScreenState extends State<TripScreen> {
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: OutlinedButton(
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   )),
-                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                  side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                 ),
                 onPressed: () async {
                   if (currentMeterReading.isNotEmpty) {
