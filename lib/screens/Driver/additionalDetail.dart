@@ -1,5 +1,4 @@
 // Create a Form widget.
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -21,7 +20,7 @@ class AdditionalDetailScreen extends StatefulWidget with KeepAliveParentDataMixi
   }) : super(key: key);
 
   @override
-  _AdditionalDetailScreenState createState() => _AdditionalDetailScreenState();
+  State<AdditionalDetailScreen> createState() => _AdditionalDetailScreenState();
 
   @override
   void detach() {
@@ -36,9 +35,11 @@ class AdditionalDetailScreen extends StatefulWidget with KeepAliveParentDataMixi
 class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with AutomaticKeepAliveClientMixin {
   bool additionalCheckBox = false;
 
-  GlobalKey<FormBuilderState> _additionalDetailFormKey = GlobalKey<FormBuilderState>(debugLabel: 'ssas');
+  final GlobalKey<FormBuilderState> _additionalDetailFormKey = GlobalKey<FormBuilderState>(debugLabel: 'ssas');
 
-  ValueChanged _onChanged = (val) => print(val);
+  void _onChanged(dynamic val) {
+    print(val);
+  }
 
   void _onChangedCheckBox(value) {
     setState(() {
@@ -96,7 +97,7 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
                                           padding: const EdgeInsetsDirectional.only(end: 12.0),
                                           child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
                                         )),
-                                    format: new DateFormat('dd MMMM yyyy')
+                                    format: DateFormat('dd MMMM yyyy')
                                     // readonly: true,
                                     ),
                               ).paddingAll(10),
@@ -116,7 +117,7 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
                                           padding: const EdgeInsetsDirectional.only(end: 12.0),
                                           child: Icon(Icons.access_time), // myIcon is a 48px-wide widget.
                                         )),
-                                    format: new DateFormat('HH:mm')
+                                    format: DateFormat('HH:mm')
                                     // readonly: true,
                                     ),
                               ).paddingAll(10),
@@ -136,7 +137,7 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
                                           padding: const EdgeInsetsDirectional.only(end: 12.0),
                                           child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
                                         )),
-                                    format: new DateFormat('dd MMMM yyyy')
+                                    format: DateFormat('dd MMMM yyyy')
                                     // readonly: true,
                                     ),
                               ).paddingAll(10),
@@ -156,7 +157,7 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
                                           padding: const EdgeInsetsDirectional.only(end: 12.0),
                                           child: Icon(Icons.access_time), // myIcon is a 48px-wide widget.
                                         )),
-                                    format: new DateFormat('HH:mm')
+                                    format: DateFormat('HH:mm')
                                     // readonly: true,
                                     ),
                               ).paddingAll(10),
@@ -177,7 +178,7 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
                               ),
                               TitleAndWidgetShadow(
                                 title: 'Vehicle Next AVI Date Due',
-                                child: nextAVIDate != null
+                                child: nextAVIDate != null && nextAVIDate!.isNotEmpty
                                     ? FormBuilderDateTimePicker(
                                         key: Key("nextAviDateKey"),
                                         name: "aviDate",
@@ -190,7 +191,7 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
                                               padding: const EdgeInsetsDirectional.only(end: 12.0),
                                               child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
                                             )),
-                                        format: new DateFormat('dd MMMM yyyy')
+                                        format: DateFormat('dd MMMM yyyy')
                                         // readonly: true,
                                         )
                                     : FormBuilderDateTimePicker(
@@ -203,7 +204,7 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
                                               padding: const EdgeInsetsDirectional.only(end: 12.0),
                                               child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
                                             )),
-                                        format: new DateFormat('dd MMMM yyyy')
+                                        format: DateFormat('dd MMMM yyyy')
                                         // readonly: true,
                                         ),
                               ).paddingAll(10),
@@ -212,10 +213,10 @@ class _AdditionalDetailScreenState extends State<AdditionalDetailScreen> with Au
                                 padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                                 child: OutlinedButton(
                                   style: ButtonStyle(
-                                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                    shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),
                                     )),
-                                    side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                                    side: WidgetStatePropertyAll(BorderSide(color: Theme.of(context).primaryColor)),
                                   ),
                                   onPressed: () {
                                     if (_additionalDetailFormKey.currentState!.saveAndValidate()) {
