@@ -13,10 +13,10 @@ class MACHome extends StatefulWidget {
   const MACHome({Key? key}) : super(key: key);
 
   @override
-  _MACHomeState createState() => _MACHomeState();
+  MACHomeState createState() => MACHomeState();
 }
 
-class _MACHomeState extends State<MACHome> {
+class MACHomeState extends State<MACHome> {
   final dioClient = AuthedDio.instance.dio;
 
   String? name;
@@ -254,12 +254,12 @@ class _MACHomeState extends State<MACHome> {
                                 height: 60,
                                 child: OutlinedButton(
                                   style: ButtonStyle(
-                                    shape: MaterialStateProperty.all(
+                                    shape: WidgetStateProperty.all(
                                       RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30.0),
                                       ),
                                     ),
-                                    side: MaterialStateProperty.all(
+                                    side: WidgetStateProperty.all(
                                       BorderSide(
                                         color: Theme.of(context).primaryColor,
                                       ),
