@@ -11,7 +11,6 @@ class TitleAndWidgetShadow extends StatelessWidget {
 
   const TitleAndWidgetShadow({Key? key, this.title, required this.child, this.isShadow = true, this.isTitle = true}) : super(key: key);
 
-  late final ThemeData _themeData;
   static final InputBorder _inputBorder = OutlineInputBorder(
     borderSide: BorderSide(color: Colors.transparent),
     borderRadius: BorderRadius.circular(12),
@@ -19,9 +18,9 @@ class TitleAndWidgetShadow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _themeData = Theme.of(context);
+    final themeData = Theme.of(context);
     return Theme(
-      data: _themeData.copyWith(
+      data: themeData.copyWith(
         inputDecorationTheme: InputDecorationTheme(
           errorMaxLines: 2,
           helperMaxLines: 2,
@@ -53,7 +52,7 @@ class TitleAndWidgetShadow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          if (isTitle) Text(title ?? '', style: _themeData.textTheme.titleSmall?.semiBold).paddingFromLTRB(0, 0, 0, 10),
+          if (isTitle) Text(title ?? '', style: themeData.textTheme.titleSmall?.semiBold).paddingFromLTRB(0, 0, 0, 10),
           if (isShadow) child.shadow() else child
         ],
       ),
