@@ -106,7 +106,9 @@ class CheckListScreenState extends State<CheckListScreen> with AutomaticKeepAliv
                       ),
                     ),
                   ],
-                ))
+                ),
+              ),
+            ),
           ],
         );
       },

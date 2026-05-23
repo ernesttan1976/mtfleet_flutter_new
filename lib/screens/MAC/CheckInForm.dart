@@ -514,14 +514,14 @@ class _CheckInFormState extends State<CheckInForm> {
           ),
           Row(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: const Text('Model',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15.0,
-                        color: Colors.black)),
-              ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: Text('Model',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15.0,
+                    color: Colors.black)),
+          ),
             ],
           ),
           Row(
@@ -879,11 +879,11 @@ class _CheckInFormState extends State<CheckInForm> {
                 // readonly: true,
                 ),
           ),
-          Row(
+          const Row(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: const Text('Attended By(IEPL)',
+                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Text('Attended By(IEPL)',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15.0,
