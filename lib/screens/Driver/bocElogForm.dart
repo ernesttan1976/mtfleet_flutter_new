@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -15,10 +14,10 @@ class BOCELogBookFormScreen extends StatefulWidget {
   final dynamic tripData;
   final Function? onPrev;
 
-  BOCELogBookFormScreen({Key? key, this.tripData, this.onPrev}) : super(key: key);
+  const BOCELogBookFormScreen({Key? key, this.tripData, this.onPrev}) : super(key: key);
 
   @override
-  _BOCELogBookFormScreenState createState() => _BOCELogBookFormScreenState();
+  State<BOCELogBookFormScreen> createState() => _BOCELogBookFormScreenState();
 }
 
 class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
@@ -38,8 +37,8 @@ class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
 
     String formattedTime1 = DateFormat.Hm().format(widget.tripData['timeStarted']);
     String formattedTime2 = DateFormat.Hm().format(widget.tripData['timeArrived']);
-    formData['startTime'] = formattedTime1 + ":00.000";
-    formData['endTime'] = formattedTime2 + ":00.000";
+    formData['startTime'] = "$formattedTime1:00.000";
+    formData['endTime'] = "$formattedTime2:00.000";
 
     formData['totalDistance'] = "$newTotalDistance";
     formData['vehicleNumber'] = widget.tripData['vehicle'];
@@ -88,7 +87,7 @@ class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
           children: <Widget>[
             Text(
               'ELogbook',
-              style: _themeData.textTheme.headline5!.text244F4E.semiBold,
+              style: _themeData.textTheme.headlineSmall!.text244F4E.semiBold,
             ).paddingHorizontal(24),
             10.verticalSpace,
             Expanded(
@@ -103,14 +102,14 @@ class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Trip Date', style: _themeData.textTheme.subtitle2!.semiBold),
-          Text("${DateTime.now().toString().substring(0, 10)}", style: _themeData.textTheme.bodyText1),
+          Text('Trip Date', style: _themeData.textTheme.titleSmall!.semiBold),
+          Text(DateTime.now().toString().substring(0, 10), style: _themeData.textTheme.bodyLarge),
           20.verticalSpace,
-          Text('Time Started', style: _themeData.textTheme.subtitle2!.semiBold),
-          Text("${DateTime.now().toString().substring(11, 16)}", style: _themeData.textTheme.bodyText1),
+          Text('Time Started', style: _themeData.textTheme.titleSmall!.semiBold),
+          Text(DateTime.now().toString().substring(11, 16), style: _themeData.textTheme.bodyLarge),
           20.verticalSpace,
-          Text('Time Arrived', style: _themeData.textTheme.subtitle2!.semiBold),
-          Text("${DateTime.now().toString().substring(11, 16)}", style: _themeData.textTheme.bodyText1),
+          Text('Time Arrived', style: _themeData.textTheme.titleSmall!.semiBold),
+          Text(DateTime.now().toString().substring(11, 16), style: _themeData.textTheme.bodyLarge),
           20.verticalSpace,
           FormBuilder(
             key: _bOCElogbookFormKey,
@@ -125,7 +124,7 @@ class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
                       FormBuilderValidators.required(),
                       FormBuilderValidators.numeric(),
                     ]),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Type here...",
                     ),
                     keyboardType: TextInputType.number,
@@ -137,12 +136,11 @@ class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
                   child: FormBuilderTextField(
                     name: "meterReading",
                     onChanged: (value) {
-                      if (value?.length == 0) {
+                      if (value?.isEmpty ?? true) {
                         setState(() {
                           newTotalDistance = 0;
                         });
-                      }
-                      if (value!.length > 0) {
+                      } else {
                         setState(() {
                           newTotalDistance = 1;
                         });
@@ -154,7 +152,7 @@ class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
                       FormBuilderValidators.min(100, errorText: "Must be > 100!")
                     ]),
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(hintText: "Type here..."),
+                    decoration: const InputDecoration(hintText: "Type here..."),
                   ),
                 ),
                 20.verticalSpace,
@@ -162,92 +160,29 @@ class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
                   title: 'Total Distance in KM',
                   child: TextFormField(
                     enabled: false,
-                    controller: new TextEditingController(text: '$newTotalDistance'),
-                    decoration: InputDecoration(hintText: 'System calculated'),
+                    controller: TextEditingController(text: '$newTotalDistance'),
+                    decoration: const InputDecoration(hintText: 'System calculated'),
                   ),
                 ),
-                // Padding(
-                //   padding: EdgeInsets.all(10),
-                //   child: FormBuilderTextField(
-                //     minLines: 3,
-                //     name: "fuelReceived",
-                //     validator: FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
-                //     decoration: InputDecoration(
-                //         hintText: "Type Here",
-                //         labelText: "Fuel Received",
-                //         labelStyle: TextStyle(
-                //             fontWeight: FontWeight.bold,
-                //             fontSize: 20.0,
-                //             color: Colors.black)),
-                //   ),
-                // ),
-                // Padding(
-                //   padding: EdgeInsets.all(10),
-                //   child: FormBuilderDropdown(
-                //     name: "fuelType",
-                //     decoration: InputDecoration(
-                //         labelText: "Fuel Sensor Tag",
-                //         labelStyle: TextStyle(
-                //             fontWeight: FontWeight.bold,
-                //             fontSize: 20.0,
-                //             color: Colors.black)),
-                //     hint: Text('Diesel/Petrol'),
-                //     validator: FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
-                //     items: ['Diesel', 'Petrol']
-                //         .map((option) => DropdownMenuItem(
-                //             value: option, child: Text("$option")))
-                //         .toList(),
-                //   ),
-                // ),
-                // Padding(
-                //   padding: EdgeInsets.all(10),
-                //   child: FormBuilderTextField(
-                //     minLines: 3,
-                //     name: "POSONumber",
-                //     validators: [
-                //       FormBuilderValidators.required(context,),
-                //     ],
-                //     decoration: InputDecoration(
-                //         hintText: "Type Here",
-                //         labelText: "PO/SO No",
-                //         labelStyle: TextStyle(
-                //             fontWeight: FontWeight.bold,
-                //             fontSize: 20.0,
-                //             color: Colors.black)),
-                //   ),
-                // ),
-                // Padding(
-                //   padding: EdgeInsets.all(10),
-                //   child: FormBuilderTextField(
-                //     name: "driverNo",
-                //     decoration: InputDecoration(
-                //         hintText: "Type Here...",
-                //         labelText: "Driver's No.(if Any)",
-                //         labelStyle: TextStyle(
-                //             fontWeight: FontWeight.bold,
-                //             fontSize: 20.0,
-                //             color: Colors.black)),
-                //   ),
-                // ),
                 20.verticalSpace,
                 TitleAndWidgetShadow(
                   title: 'Remarks',
                   child: FormBuilderTextField(
                     name: "remarks",
                     minLines: 4,
-                    decoration: InputDecoration(hintText: "Type here..."),
+                    decoration: const InputDecoration(hintText: "Type here..."),
                   ),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                   child: !submitButtonLoading
                       ? OutlinedButton(
                           style: ButtonStyle(
-                            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                            shape: WidgetStateProperty.all(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
                             )),
-                            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                           ),
                           onPressed: () {
                             if (_bOCElogbookFormKey.currentState!.validate()) {
@@ -260,7 +195,7 @@ class _BOCELogBookFormScreenState extends State<BOCELogBookFormScreen> {
                               setState(() => _autovalidate = true);
                             }
                           },
-                          child: Text(
+                          child: const Text(
                             "Submit",
                             style: TextStyle(color: Colors.black),
                           ),
