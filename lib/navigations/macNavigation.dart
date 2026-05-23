@@ -4,7 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:transport_flutter/components/AlertDialog.dart';
-import "package:transport_flutter/constants.dart" as Constants;
+import 'package:transport_flutter/constants.dart' as constants;
 import 'package:transport_flutter/screens/MAC/home.dart';
 import 'package:transport_flutter/util/currentUserData.dart';
 
@@ -12,10 +12,10 @@ class MACNavigation extends StatefulWidget {
   const MACNavigation({Key? key}) : super(key: key);
 
   @override
-  _MACNavigationState createState() => _MACNavigationState();
+  MACNavigationState createState() => MACNavigationState();
 }
 
-class _MACNavigationState extends State<MACNavigation> {
+class MACNavigationState extends State<MACNavigation> {
   final storage = FlutterSecureStorage();
 
   List? roles;
@@ -25,7 +25,7 @@ class _MACNavigationState extends State<MACNavigation> {
   @override
   void initState() {
     super.initState();
-    this.loadRoles();
+    loadRoles();
   }
 
   @override
@@ -119,13 +119,13 @@ class _MACNavigationState extends State<MACNavigation> {
                                 value: selectedRoleValue,
                                 items: roles
                                     ?.map((role) => DropdownMenuItem(
+                                        value: "$role",
                                         child: Text(
                                           role.toString().replaceAll('_', ' '),
-                                        ),
-                                        value: "$role"))
+                                        )))
                                     .toList(),
                                 onChanged: (value) {
-                                  this.changeRole(value, context);
+                                  changeRole(value, context);
                                 },
                               )),
                             )
@@ -176,12 +176,12 @@ class _MACNavigationState extends State<MACNavigation> {
                 ),
               ],
             ),
-            new Positioned(
+            Positioned(
               child: Padding(
                 padding: EdgeInsets.all(10),
-                child: new Align(
+                child: Align(
                     alignment: FractionalOffset.bottomCenter,
-                    child: Text("Version ${Constants.CURRENT_VERSION}",
+                    child: Text("Version ${constants.CURRENT_VERSION}",
                         style: TextStyle(color: Colors.white, fontSize: 12))),
               ),
             )
