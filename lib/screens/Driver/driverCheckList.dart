@@ -11,17 +11,17 @@ class DriverCheckList extends StatefulWidget {
   final void Function(Map<String, dynamic> value) onSubmit;
 
   const DriverCheckList({
-    Key? key,
+    super.key,
     required this.index,
     required this.onPrev,
     required this.onNext,
     required this.overAllRisk,
     required this.isVehicleCommander,
     required this.onSubmit,
-  }) : super(key: key);
+  });
 
   @override
-  _DriverCheckListState createState() => _DriverCheckListState();
+  State<DriverCheckList> createState() => _DriverCheckListState();
 }
 
 class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAliveClientMixin {
@@ -31,31 +31,26 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
   void submissionFormAlert(Map<String, dynamic> value) {
     showDialog(
       context: context,
-      // barrierDismissible: false, // user must tap button!
-
       builder: (BuildContext context) {
         return AlertDialog(
-          // title: new Text('You clicked on'),
           elevation: 10,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
-              child: Text(
+          content: const Text(
             "Are you sure to submit this trip form ?",
             textAlign: TextAlign.center,
-          )),
+          ),
           actions: [
-            Container(
-                color: Colors.transparent,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                width: MediaQuery.of(context).size.width * 1.0,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
                 height: 50,
                 child: Row(
                   children: <Widget>[
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: TextButton(
                         style: ButtonStyle(
                           backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
@@ -72,16 +67,15 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
                           widget.onSubmit(value);
                           Navigator.of(context).pop();
                         },
-                        child: Text(
+                        child: const Text(
                           "Yes",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
-                    Spacer(),
-                    Container(
+                    const Spacer(),
+                    SizedBox(
                       width: MediaQuery.of(context).size.width * 0.35,
-                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
                           shape: WidgetStateProperty.all(RoundedRectangleBorder(
@@ -92,14 +86,16 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text(
+                        child: const Text(
                           "No",
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ),
                   ],
-                ))
+                ),
+              ),
+            ),
           ],
         );
       },
@@ -149,7 +145,7 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
             FormBuilderCheckboxGroup(
               name: "driver_checklist",
               activeColor: Theme.of(context).primaryColor,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: InputBorder.none,
               ),
               options: [
@@ -192,9 +188,9 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
                     style: TextStyle(color: Colors.black),
                   ),
                 )
-                : const Center(
-                    child: CircularProgressIndicator(),
-                  ),
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
         ),
       ));
     } else {
@@ -220,9 +216,9 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
                     style: TextStyle(color: Colors.black),
                   ),
                 )
-                : const Center(
-                    child: CircularProgressIndicator(),
-                  ),
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
         ),
       ));
     }
@@ -241,25 +237,19 @@ class _DriverCheckListState extends State<DriverCheckList> with AutomaticKeepAli
               style: TextStyle(color: Theme.of(context).primaryColor),
             ),
             backgroundColor: Colors.white,
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: const IconThemeData(color: Colors.black),
             leading: IconButton(
-                // alignment: Alignment.topLeft,
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   widget.onPrev(widget.index - 1);
-                })
-            // elevation: 5,
-            ),
+                })),
         body: CustomScrollView(
           slivers: <Widget>[
             SliverToBoxAdapter(
-              child: SizedBox(
-                child: Container(
-                  alignment: Alignment.topLeft,
-                  padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                  child: Column(
-                    children: _buildChildrenVehicle(),
-                  ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: _buildChildrenVehicle(),
                 ),
               ),
             )
