@@ -4,11 +4,11 @@ import 'package:async/async.dart';
 import "package:dio/dio.dart";
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logger/logger.dart';
-import 'package:transport_flutter/constants.dart' as Constants;
+import 'package:transport_flutter/constants.dart' as constants;
 
 class AuthedDio {
   // Singleton pattern
-  static final AuthedDio _dbManager = new AuthedDio._internal();
+  static final AuthedDio _dbManager = AuthedDio._internal();
 
   AuthedDio._internal();
 
@@ -19,16 +19,21 @@ class AuthedDio {
   final _initDioMemoizer = AsyncMemoizer<Dio>();
 
   Future<Dio> get dio async {
-    _dio = await _initDio();
+    if (_dio != null) return _dio!;
+
+    _dio = await _initDioMemoizer.runOnce(() async {
+      return await _initDio();
+    });
+
     return _dio!;
   }
 
   Future<Dio> _initDio() async {
     var storage = FlutterSecureStorage();
-    String? token = await storage.read(key: Constants.storageBearer);
+    String? token = await storage.read(key: constants.storageBearer);
     Logger().e("Token $token");
-    BaseOptions options = new BaseOptions(
-        baseUrl: Constants.SERVER_URI_API, headers: {"Authorization": "Bearer $token", "Accept": "*/*"});
+    BaseOptions options = BaseOptions(
+        baseUrl: constants.SERVER_URI_API, headers: {"Authorization": "Bearer $token", "Accept": "*/*"});
 
     return Dio(options);
   }
@@ -36,7 +41,7 @@ class AuthedDio {
 
 class AuthedDioAPI {
   // Singleton pattern
-  static final AuthedDioAPI _dbManager = new AuthedDioAPI._internal();
+  static final AuthedDioAPI _dbManager = AuthedDioAPI._internal();
 
   AuthedDioAPI._internal();
 
@@ -63,8 +68,8 @@ class AuthedDioAPI {
     var auth = await json.decode(authString!);
     String jwt = auth['jwt'];
 
-    BaseOptions options = new BaseOptions(
-        baseUrl: Constants.SERVER_URI_API, headers: {"Authorization": "Bearer $jwt", "Accept": "*/*"});
+    BaseOptions options = BaseOptions(
+        baseUrl: constants.SERVER_URI_API, headers: {"Authorization": "Bearer $jwt", "Accept": "*/*"});
 
     return Dio(options);
   }
