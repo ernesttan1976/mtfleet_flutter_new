@@ -1,5 +1,4 @@
 import 'package:chewie/chewie.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
@@ -8,7 +7,7 @@ class VideoScreen extends StatefulWidget {
   final String title;
   final String? url;
 
-  VideoScreen({this.title = 'Video', this.url});
+  const VideoScreen({Key? key, this.title = 'Video', this.url}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -28,7 +27,7 @@ class _VideoScreenState extends State<VideoScreen> {
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
-    _videoPlayerController1 = VideoPlayerController.network('${widget.url}');
+    _videoPlayerController1 = VideoPlayerController.networkUrl(Uri.parse(widget.url ?? ''));
 
     _chewieController = ChewieController(
         videoPlayerController: _videoPlayerController1,
@@ -61,7 +60,7 @@ class _VideoScreenState extends State<VideoScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "${widget.title}",
+          widget.title,
           style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
