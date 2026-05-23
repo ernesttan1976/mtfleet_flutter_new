@@ -10,7 +10,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/models/models.dart';
 import 'package:transport_flutter/models/mt_broadcast.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request;
 
 class MTBroadCastBloc {
   final _dio = Dio();
@@ -21,7 +21,7 @@ class MTBroadCastBloc {
 
   final listBroadCast = BehaviorSubject<List<MtBroadcastModel>>();
 
-  var request = new Request.Request();
+  final requestClient = Request.Request();
 
   void dispose() {
     percentDownLoad.close();
@@ -47,7 +47,7 @@ class MTBroadCastBloc {
 
   void downLoadBroadCats(BuildContext context, String url) async {
     isLoading.add(true);
-    bool _download = true;
+    bool downloadInProgress = true;
     print(url);
     try {
       await Permission.storage.request();
@@ -65,8 +65,8 @@ class MTBroadCastBloc {
       await _dio.download(url, savePath, onReceiveProgress: (rec, total) {
         final _percent = ((rec / total) * 100).round();
         percentDownLoad.add(_percent);
-        if (_percent == 100 && _download) {
-          _download = false;
+        if (_percent == 100 && downloadInProgress) {
+          downloadInProgress = false;
           showAlertDialog(context, 'Download', 'File downloaded successfully', isPop: false);
         }
       });
@@ -74,7 +74,7 @@ class MTBroadCastBloc {
       showAlertDialog(context, 'Download Error', e.toString(), isPop: false);
     }
     percentDownLoad.add(0);
-    _download = false;
+    downloadInProgress = false;
     isLoading.add(false);
   }
 }
