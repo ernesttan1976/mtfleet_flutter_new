@@ -10,7 +10,6 @@ import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/components/form_builder_typehead.dart';
 import 'package:transport_flutter/config/dio.dart';
 import 'package:transport_flutter/util/currentUserData.dart';
-import 'package:transport_flutter/components/typeahead.dart';
 
 class AVICheckInFormScreen extends StatelessWidget {
   final String? maintenanceType;
@@ -49,10 +48,10 @@ class AVICheckInForm extends StatefulWidget {
   const AVICheckInForm({Key? key, this.maintenanceType}) : super(key: key);
 
   @override
-  _AVICheckInFormState createState() => _AVICheckInFormState();
+  AVICheckInFormState createState() => AVICheckInFormState();
 }
 
-class _AVICheckInFormState extends State<AVICheckInForm> {
+class AVICheckInFormState extends State<AVICheckInForm> {
   final dioClient = AuthedDio.instance.dio;
 
   final SuggestionsController _vehicleSuggestionsController = SuggestionsController();
@@ -76,20 +75,20 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
   String? vehicleID;
   String? handOverDriverID;
 
-  final ValueChanged _onChanged = (val) => print(val);
+  void _onChanged(val) { print(val); }
 
   void setVehicleNumber(vehicle) {
     print("$vehicle");
     setState(() {
-      vehicleID = "${vehicle['id']}";
-      vehicleModel = "${vehicle['model']}";
+      vehicleID = vehicle['id'].toString();
+      vehicleModel = vehicle['model'].toString();
     });
   }
 
   void setHandoverDriver(driver) {
     print("$driver");
     setState(() {
-      handOverDriverID = "${driver['id']}";
+      handOverDriverID = driver['id'].toString();
     });
   }
 
@@ -107,7 +106,7 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
     print("Username: $userName");
 
     setState(() {
-      base = auth['user']['base'] != null ? "${auth['user']['base']['id']}" : "";
+      base = auth['user']['base'] != null ? auth['user']['base']['id'].toString() : "";
       name = "$userName";
       userID = "$id";
     });
@@ -177,7 +176,7 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
                 padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: FormBuilderTextField(
-                  key: Key("$index"),
+                  key: Key(index.toString()),
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(errorText: "Cannot be empty!"),
                   ]),
@@ -192,7 +191,7 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
                 width: MediaQuery.of(context).size.width * 0.35,
                 padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
                 child: FormBuilderTextField(
-                  key: Key("$index"),
+                  key: Key(index.toString()),
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(errorText: "Cannot be empty!"),
                     FormBuilderValidators.numeric(errorText: "Must be numeric!"),
@@ -342,7 +341,7 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
       FormData formData = FormData();
       formData.fields.add(MapEntry("ref", response.data["ref"]));
       formData.fields
-          .add(MapEntry("refId", "${response.data["refId"]}"));
+          .add(MapEntry("refId", response.data["refId"].toString()));
       formData.fields.add(MapEntry("field", response.data["field"]));
       formData.files
           .add(MapEntry("files", await MultipartFile.fromFile(file.path)));
@@ -420,7 +419,7 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
                       color: Colors.black)),
               itemBuilder: (context, itemData) {
                 return itemData != null || itemData.length != 0
-                    ? ListTile(title: Text("${itemData['vehicleNumber']}"))
+                    ? ListTile(title: Text(itemData['vehicleNumber'].toString()))
                     : Container();
               },
               suggestionsCallback: (pattern) async {
@@ -428,7 +427,7 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
               },
               selectionToTextTransformer: (suggestion) {
                 if (suggestion != "") {
-                  return "${suggestion['vehicleNumber']}";
+                  return suggestion['vehicleNumber'].toString();
                 }
                 return "";
               },
@@ -458,7 +457,7 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
             children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
-                child: Text(vehicleModel != null ? "$vehicleModel" : "N/A",
+                child: Text(vehicleModel ?? "N/A",
                     style: TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 15.0,
@@ -482,15 +481,15 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
               ]),
               items: ['Yes', 'No']
                   .map((option) =>
-                      DropdownMenuItem(value: option, child: Text("$option")))
+                      DropdownMenuItem(value: option, child: Text(option)))
                   .toList(),
             ),
           ),
-          Container(
+          Padding(
             padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
             child: Row(
               children: <Widget>[
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: Text(
                     "Basic Issue Tools",
@@ -500,7 +499,7 @@ class _AVICheckInFormState extends State<AVICheckInForm> {
                         color: Colors.black),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.2,
                   child: Text("In(QTY)",
                       style: TextStyle(
