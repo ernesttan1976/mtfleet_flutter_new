@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -9,13 +8,13 @@ import 'package:transport_flutter/components/extension/extension.dart';
 import 'package:transport_flutter/components/title_and_widget_shadow.dart';
 import 'package:transport_flutter/config/dio.dart';
 import 'package:transport_flutter/util/currentUserData.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request;
 
 class AdHocDestinationFormScreen extends StatefulWidget {
   final int? tripId;
   final DateTime? tripDate;
 
-  AdHocDestinationFormScreen({Key? key, this.tripId, this.tripDate}) : super(key: key);
+  const AdHocDestinationFormScreen({Key? key, this.tripId, this.tripDate}) : super(key: key);
 
   @override
   _AdHocDestinationFormScreenState createState() => _AdHocDestinationFormScreenState();
@@ -32,7 +31,7 @@ class _AdHocDestinationFormScreenState extends State<AdHocDestinationFormScreen>
   bool submitButtonLoading = false;
   dynamic currentRole;
 
-  var request = new Request.Request();
+  var request = request.Request();
 
   @override
   void initState() {
@@ -70,7 +69,7 @@ class _AdHocDestinationFormScreenState extends State<AdHocDestinationFormScreen>
     try {
       var result1 = json.decode((await request.get(Uri.parse("users/approving-officers?name=$pattern"))).body);
       list = [...result1];
-      if (list.length == 0) {
+      if (list.isEmpty) {
         setState(() {
           approvingOfficerID = null;
         });
@@ -95,10 +94,10 @@ class _AdHocDestinationFormScreenState extends State<AdHocDestinationFormScreen>
       });
       data['tripId'] = widget.tripId;
 
-      final _dio = await dioClient;
-      final _res = await _dio.post('/trips/adHoc-destination', data: data);
-      if (_res.statusCode == 201) {
-        showAlertDialog(context, 'Success', _res.statusMessage);
+      final dio = await dioClient;
+      final res = await dio.post('/trips/adHoc-destination', data: data);
+      if (res.statusCode == 201) {
+        showAlertDialog(context, 'Success', res.statusMessage ?? '');
       }
       setState(() {
         submitButtonLoading = false;
@@ -107,240 +106,9 @@ class _AdHocDestinationFormScreenState extends State<AdHocDestinationFormScreen>
       setState(() {
         submitButtonLoading = false;
       });
-      showAlertDialog(context, 'Error', e as String, isPop: false);
+      showAlertDialog(context, 'Error', e.toString(), isPop: false);
     }
   }
-
-  // List<Widget> _buildChildren() {
-  //   if (currentRole == "Pre-Approved Driver") {
-  //     var formList = [
-  //       Row(
-  //         children: <Widget>[
-  //           Container(
-  //             padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //             child: Text('Trip Date',
-  //                 style: Theme.of(context)
-  //                     .textTheme
-  //                     .bodyText1
-  //                     .copyWith(fontWeight: FontWeight.bold)),
-  //           ),
-  //         ],
-  //       ),
-  //       Row(
-  //         children: <Widget>[
-  //           Container(
-  //             padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //             child: Text("${widget.tripDate}",
-  //                 style: Theme.of(context).textTheme.bodyText1),
-  //           ),
-  //         ],
-  //       ),
-  //       FormBuilder(
-  //         key: _adHocDestinationFormKey,
-  //         autovalidate: _autovalidate,
-  //         child: Column(
-  //           children: <Widget>[
-  //             Padding(
-  //               padding: EdgeInsets.all(10),
-  //               child: FormBuilderTextField(
-  //                 validator: FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
-  //                 name: "to",
-  //                 decoration: InputDecoration(
-  //                     labelText: "Ad-Hoc Destination",
-  //                     hintText: "Type Here",
-  //                     labelStyle: TextStyle(
-  //                         fontWeight: FontWeight.bold,
-  //                         fontSize: 20.0,
-  //                         color: Colors.black)),
-  //               ),
-  //             ),
-  //             Padding(
-  //               padding: EdgeInsets.all(10),
-  //               child: FormBuilderTextField(
-  //                 minLines: 3,
-  //                 validator: FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
-  //                 name: "requisitionerPurpose",
-  //                 decoration: InputDecoration(
-  //                     hintText: "Type Here",
-  //                     labelText: "Requisitioner's Purpose",
-  //                     labelStyle: TextStyle(
-  //                         fontWeight: FontWeight.bold,
-  //                         fontSize: 20.0,
-  //                         color: Colors.black)),
-  //               ),
-  //             ),
-  //             Container(
-  //               width: MediaQuery.of(context).size.width * 0.9,
-  //               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-  //               child: !submitButtonLoading
-  //                   ? OutlineButton(
-  //                       shape: RoundedRectangleBorder(
-  //                         borderRadius: BorderRadius.circular(30.0),
-  //                       ),
-  //                       onPressed: () {
-  //                         if (_adHocDestinationFormKey.currentState
-  //                             .validate()) {
-  //                           _adHocDestinationFormKey.currentState.save();
-  //                           onSubmit(
-  //                               _adHocDestinationFormKey.currentState.value,
-  //                               context);
-  //                         } else {
-  //                           setState(() => _autovalidate = true);
-  //                         }
-  //                       },
-  //                       borderSide:
-  //                           BorderSide(color: Theme.of(context).primaryColor),
-  //                       child: Text(
-  //                         "Submit",
-  //                         style: TextStyle(color: Colors.black),
-  //                       ),
-  //                     )
-  //                   : Center(
-  //                       child: CircularProgressIndicator(),
-  //                     ),
-  //             ),
-  //           ],
-  //         ),
-  //       )
-  //     ];
-  //     return formList;
-  //   } else if (currentRole != null) {
-  //     var formList = [
-  //       Row(
-  //         children: <Widget>[
-  //           Container(
-  //             padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //             child: Text('Trip Date',
-  //                 style: Theme.of(context)
-  //                     .textTheme
-  //                     .bodyText1
-  //                     .copyWith(fontWeight: FontWeight.bold)),
-  //           ),
-  //         ],
-  //       ),
-  //       Row(
-  //         children: <Widget>[
-  //           Container(
-  //             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-  //             child: Text("${widget.tripDate}",
-  //                 style: Theme.of(context).textTheme.bodyText1),
-  //           ),
-  //         ],
-  //       ),
-  //       FormBuilder(
-  //         key: _adHocDestinationFormKey,
-  //         autovalidate: _autovalidate,
-  //         child: Column(
-  //           children: <Widget>[
-  //             Padding(
-  //               padding: EdgeInsets.all(10),
-  //               child: FormBuilderTypeAhead(
-  //                 name: "approvingOfficer",
-  //                 suggestionsBoxController: _approvingOfficerTA,
-  //                 validator: FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
-  //                 decoration: InputDecoration(
-  //                     labelText: "Approving Officer",
-  //                     labelStyle: TextStyle(
-  //                         fontWeight: FontWeight.bold,
-  //                         fontSize: 20.0,
-  //                         color: Colors.black)),
-  //                 itemBuilder: (context, itemData) {
-  //                   return itemData != null || itemData.length != 0
-  //                       ? ListTile(title: Text("${itemData['name']}"))
-  //                       : [];
-  //                 },
-  //                 suggestionsCallback: (pattern) async {
-  //                   return await getApprovingOfficers(pattern);
-  //                 },
-  //                 selectionToTextTransformer: (suggestion) {
-  //                   if (suggestion != "") {
-  //                     return "${suggestion['name']}";
-  //                   }
-  //                   return "";
-  //                 },
-  //                 onSuggestionSelected: (suggestion) =>
-  //                     setApprovingOfficer(suggestion),
-  //                 noItemsFoundBuilder: (context) => Padding(
-  //                   padding: EdgeInsets.all(10),
-  //                   child: Text(
-  //                     "No Approving Officers Found!",
-  //                     textAlign: TextAlign.center,
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //             Padding(
-  //               padding: EdgeInsets.all(10),
-  //               child: FormBuilderTextField(
-  //                 validator: FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
-  //                 name: "to",
-  //                 decoration: InputDecoration(
-  //                     labelText: "Ad-Hoc Destination",
-  //                     hintText: "Type Here",
-  //                     labelStyle: TextStyle(
-  //                         fontWeight: FontWeight.bold,
-  //                         fontSize: 20.0,
-  //                         color: Colors.black)),
-  //               ),
-  //             ),
-  //             Padding(
-  //               padding: EdgeInsets.all(10),
-  //               child: FormBuilderTextField(
-  //                 minLines: 3,
-  //                 validator: FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
-  //                 name: "requisitionerPurpose",
-  //                 decoration: InputDecoration(
-  //                     hintText: "Type Here",
-  //                     labelText: "Requisitioner's Purpose",
-  //                     labelStyle: TextStyle(
-  //                         fontWeight: FontWeight.bold,
-  //                         fontSize: 20.0,
-  //                         color: Colors.black)),
-  //               ),
-  //             ),
-  //             Container(
-  //               width: MediaQuery.of(context).size.width * 0.9,
-  //               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-  //               child: !submitButtonLoading
-  //                   ? OutlineButton(
-  //                       shape: RoundedRectangleBorder(
-  //                         borderRadius: BorderRadius.circular(30.0),
-  //                       ),
-  //                       onPressed: () {
-  //                         if (_adHocDestinationFormKey.currentState
-  //                             .validate()) {
-  //                           _adHocDestinationFormKey.currentState.save();
-  //                           onSubmit(
-  //                               _adHocDestinationFormKey.currentState.value,
-  //                               context);
-  //                         } else {
-  //                           setState(() => _autovalidate = true);
-  //                         }
-  //                       },
-  //                       borderSide:
-  //                           BorderSide(color: Theme.of(context).primaryColor),
-  //                       child: Text(
-  //                         "Submit",
-  //                         style: TextStyle(color: Colors.black),
-  //                       ),
-  //                     )
-  //                   : Center(
-  //                       child: CircularProgressIndicator(),
-  //                     ),
-  //             ),
-  //           ],
-  //         ),
-  //       )
-  //     ];
-  //     return formList;
-  //   } else {
-  //     return [
-  //       Center(
-  //         child: CircularProgressIndicator(),
-  //       )
-  //     ];
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -399,10 +167,10 @@ class _AdHocDestinationFormScreenState extends State<AdHocDestinationFormScreen>
                       padding: const EdgeInsets.only(top: 30),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () {
                           if (_adHocDestinationFormKey.currentState!.validate()) {
