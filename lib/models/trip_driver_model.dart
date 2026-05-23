@@ -47,9 +47,9 @@ class TripDriverModel {
         aviDate: json["aviDate"] == null ? null : DateTime.parse(json["aviDate"]).toLocal(),
         driverId: json["driverId"],
         vehiclesId: json["vehiclesId"],
-        driverName: json["driverName"] == null ? null : json["driverName"],
-        vehicleNumber: json["vehicleNumber"] == null ? null : json["vehicleNumber"],
-        approvingOfficerId: json["approvingOfficerId"] == null ? null : json["approvingOfficerId"],
+        driverName: json["driverName"],
+        vehicleNumber: json["vehicleNumber"],
+        approvingOfficerId: json["approvingOfficerId"],
         destinations: json["destinations"] == null
             ? []
             : List<Destination>.from(json["destinations"].map((x) => Destination.fromJson(x))),
