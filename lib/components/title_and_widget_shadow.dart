@@ -9,7 +9,7 @@ class TitleAndWidgetShadow extends StatelessWidget {
   final bool isShadow;
   final bool isTitle;
 
-  TitleAndWidgetShadow({this.title, required this.child, this.isShadow = true, this.isTitle = true});
+  const TitleAndWidgetShadow({Key? key, this.title, required this.child, this.isShadow = true, this.isTitle = true}) : super(key: key);
 
   late final ThemeData _themeData;
   static final InputBorder _inputBorder = OutlineInputBorder(
@@ -58,9 +58,5 @@ class TitleAndWidgetShadow extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget? _buildInputTitle({required String title, required Widget child, bool isShadow = true}) {
-    return null;
   }
 }
