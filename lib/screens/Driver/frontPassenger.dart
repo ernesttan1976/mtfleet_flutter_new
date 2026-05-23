@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -8,14 +7,14 @@ class FrontPassengerScreen extends StatefulWidget {
   final String? overAllRisk;
   final Function? onSubmit;
 
-  FrontPassengerScreen({Key? key, this.index, this.onPrev, this.overAllRisk, this.onSubmit}) : super(key: key);
+  const FrontPassengerScreen({Key? key, this.index, this.onPrev, this.overAllRisk, this.onSubmit}) : super(key: key);
 
   @override
-  _FrontPassengerScreenState createState() => _FrontPassengerScreenState();
+  FrontPassengerScreenState createState() => FrontPassengerScreenState();
 }
 
-class _FrontPassengerScreenState extends State<FrontPassengerScreen> with AutomaticKeepAliveClientMixin {
-  var data;
+class FrontPassengerScreenState extends State<FrontPassengerScreen> with AutomaticKeepAliveClientMixin {
+  dynamic data;
   bool autoValidate = true;
   bool readOnly = false;
   bool showSegmentedControl = true;
@@ -33,32 +32,30 @@ class _FrontPassengerScreenState extends State<FrontPassengerScreen> with Automa
     var listofWidgets = [
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Overall Risk:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text('Overall Risk:',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
-      Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+      const Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
-              child: Flexible(
-                  child: Text(
-            '${widget.overAllRisk}',
-            style: Theme.of(context).textTheme.headline4?.copyWith(color: myColor),
-          ))),
+          Flexible(
+            child: Text(
+              '${widget.overAllRisk}',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: myColor),
+            ),
+          ),
         ],
       ),
-      Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+      const Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Checklist:',
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text('Checklist:',
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -67,14 +64,14 @@ class _FrontPassengerScreenState extends State<FrontPassengerScreen> with Automa
         child: Column(
           children: <Widget>[
             Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: FormBuilderCheckboxGroup(
                   name: "passenger_checklist",
                   activeColor: Theme.of(context).primaryColor,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                   ),
-                  options: [
+                  options: const [
                     FormBuilderFieldOption(
                         value:
                             "Driver is licensed to eperate the vehicle and has displayed Miltary driving permit on dashboard"),
@@ -92,10 +89,10 @@ class _FrontPassengerScreenState extends State<FrontPassengerScreen> with Automa
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             if (_frontPassengerFormKey.currentState!.saveAndValidate()) {
