@@ -505,8 +505,9 @@ class _TripFormScreenState extends State<TripFormScreen> {
                   opacity: vehicleID != null ? 1 : 0.2,
                   child: InkWell(
                     onTap: () {
-                      if (vehicleID != null)
+                      if (vehicleID != null) {
                         Navigator.pushNamed(context, '/driver/past14DaysELog', arguments: int.parse(vehicleID!));
+                      }
                     },
                     child: Image.asset('ic_book'.assetPathIcon, width: 25),
                   ),
@@ -731,8 +732,9 @@ class _TripFormScreenState extends State<TripFormScreen> {
                   opacity: vehicleID != null ? 1 : 0.2,
                   child: InkWell(
                     onTap: () {
-                      if (vehicleID != null)
+                      if (vehicleID != null) {
                         Navigator.pushNamed(context, '/driver/past14DaysELog', arguments: int.parse(vehicleID!));
+                      }
                     },
                     child: Image.asset('ic_book'.assetPathIcon, width: 25),
                   ),
