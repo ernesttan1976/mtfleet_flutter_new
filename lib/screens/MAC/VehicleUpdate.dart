@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -9,10 +8,10 @@ import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/config/dio.dart';
 
 class VehicleUpdateScreen extends StatefulWidget {
-  final servicingID;
-  final currentUpdates;
+  final dynamic servicingID;
+  final dynamic currentUpdates;
 
-  VehicleUpdateScreen({Key? key, this.servicingID, this.currentUpdates}) : super(key: key);
+  const VehicleUpdateScreen({Key? key, this.servicingID, this.currentUpdates}) : super(key: key);
 
   @override
   _VehicleUpdateScreenState createState() => _VehicleUpdateScreenState();
@@ -31,19 +30,19 @@ class _VehicleUpdateScreenState extends State<VehicleUpdateScreen> {
     return item;
   }
 
-  void onSubmitForm(var data) async {
+  void onSubmitForm(Map<String, dynamic> data) async {
     setState(() {
       submitButtonLoading = true;
     });
     try {
       print(data);
-      final _data = {
-        "dateOfCompletion": data['dateOfCompletion'].toUtc().toIso8601String(),
+      final dataMap = <String, dynamic>{
+        "dateOfCompletion": (data['dateOfCompletion'] as DateTime).toUtc().toIso8601String(),
         "vehicleServicingId": widget.servicingID,
         "notes": data['notes'],
       };
 
-      var dataJSON = jsonEncode(_data, toEncodable: myEncode);
+      var dataJSON = jsonEncode(dataMap, toEncodable: myEncode);
 
       print(dataJSON);
       var dio = await dioClient;
@@ -57,7 +56,7 @@ class _VehicleUpdateScreenState extends State<VehicleUpdateScreen> {
       setState(() {
         submitButtonLoading = false;
       });
-      showAlertDialog(context, "Error", e as String, isPop: false);
+      showAlertDialog(context, "Error", e.toString(), isPop: false);
     }
   }
 
@@ -113,7 +112,7 @@ class _VehicleUpdateScreenState extends State<VehicleUpdateScreen> {
                                         child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
                                       )),
                                   initialValue: DateTime.now(),
-                                  format: new DateFormat('dd MMMM yyyy')),
+                                  format: DateFormat('dd MMMM yyyy')),
                             ),
                           ],
                         ),
