@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class LoginScreen extends StatefulWidget {
   final String? error;
 
-  LoginScreen({Key? key, this.error}) : super(key: key);
+  const LoginScreen({Key? key, this.error}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -14,7 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -50,9 +50,9 @@ class _LoginScreenState extends State<LoginScreen> {
           content: Row(
             // mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              CircularProgressIndicator(),
+              const CircularProgressIndicator(),
               Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Text(text),
               ),
             ],
@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
         key: _scaffoldKey,
         body: GestureDetector(
             onTap: () {
-              FocusScope.of(context).requestFocus(new FocusNode());
+              FocusScope.of(context).requestFocus(FocusNode());
             },
             child: SingleChildScrollView(
               child: SafeArea(
@@ -81,66 +81,57 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: <Widget>[
                           Container(
                             alignment: Alignment.center,
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
                             child: Text('Welcome',
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline3
+                                    .headlineMedium
                                     ?.copyWith(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold)),
                           ),
                           Container(
                               alignment: Alignment.topLeft,
-                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                               child: Text('Please click the button below to login to the app',
-                                  textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodyText1)),
-                          Container(
-                              child: Form(
-                                  key: _formKey,
-                                  autovalidateMode: AutovalidateMode.disabled,
-                                  child: Column(children: <Widget>[
-                                    Container(
-                                        color: Colors.transparent,
-                                        width: MediaQuery.of(context).size.width,
-                                        // height: 60,
-                                        child: ElevatedButton(
-                                          style: ButtonStyle(
-                                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                borderRadius: new BorderRadius.circular(30.0),
-                                              ),
-                                            ),
-                                            padding: MaterialStateProperty.all(EdgeInsets.all(8.0)),
-                                            backgroundColor:
-                                                MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
-                                            textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(
-                                              color: Colors.white,
-                                            )),
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.bodyLarge)),
+                          Form(
+                              key: _formKey,
+                              autovalidateMode: AutovalidateMode.disabled,
+                              child: Column(children: <Widget>[
+                                SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(30.0),
                                           ),
-                                          /*shape: new RoundedRectangleBorder(
-                                            borderRadius: new BorderRadius.circular(30.0),
-                                          ),
-                                          padding: const EdgeInsets.all(8.0),
-                                          textColor: Colors.white,
-                                          color: Theme.of(context).primaryColor,*/
-                                          onPressed: this.onFormSubmit,
-                                          child: Text('Login'),
+                                        ),
+                                        padding: WidgetStateProperty.all(const EdgeInsets.all(8.0)),
+                                        backgroundColor: WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
+                                        textStyle: WidgetStateProperty.all<TextStyle>(const TextStyle(
+                                          color: Colors.white,
                                         )),
-                                    Container(
-                                        alignment: Alignment.topLeft,
-                                        padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                        child: Text(
-                                            'Not registered? Please contact your company for your login details.',
-                                            style: Theme.of(context).textTheme.bodyText2,
-                                            textAlign: TextAlign.center)),
-                                    Container(
-                                        alignment: Alignment.topLeft,
-                                        padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
-                                        child: Text(
-                                            'To reset your password, please contact your company for more details. Thank you.',
-                                            style: Theme.of(context).textTheme.bodyText2,
-                                            textAlign: TextAlign.center)),
-                                  ])))
+                                      ),
+                                      onPressed: onFormSubmit,
+                                      child: const Text('Login'),
+                                    )),
+                                Container(
+                                    alignment: Alignment.topLeft,
+                                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                    child: Text(
+                                        'Not registered? Please contact your company for your login details.',
+                                        style: Theme.of(context).textTheme.bodyMedium,
+                                        textAlign: TextAlign.center)),
+                                Container(
+                                    alignment: Alignment.topLeft,
+                                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+                                    child: Text(
+                                        'To reset your password, please contact your company for more details. Thank you.',
+                                        style: Theme.of(context).textTheme.bodyMedium,
+                                        textAlign: TextAlign.center)),
+                              ]))
                         ],
                       ))),
             )));
