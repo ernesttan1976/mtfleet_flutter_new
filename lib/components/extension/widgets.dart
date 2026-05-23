@@ -13,7 +13,7 @@ extension WidgetExtension on Widget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withAlpha(26),
               blurRadius: 6,
               offset: const Offset(2, 3),
             ),
