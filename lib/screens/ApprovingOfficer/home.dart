@@ -11,7 +11,7 @@ class ApprovingOfficerHome extends StatefulWidget {
   const ApprovingOfficerHome({Key? key}) : super(key: key);
 
   @override
-  _ApprovingOfficerHomeState createState() => _ApprovingOfficerHomeState();
+  State<ApprovingOfficerHome> createState() => _ApprovingOfficerHomeState();
 }
 
 class _ApprovingOfficerHomeState extends State<ApprovingOfficerHome> {
@@ -89,7 +89,7 @@ class _ApprovingOfficerHomeState extends State<ApprovingOfficerHome> {
                   ),
                 ]),
               ),
-              body: TabBarView(children: [
+              body: TabBarView(children: const [
                 PendingTripsScreen(),
                 // PendingDestinationScreen(),
                 ApprovedTripsScreen()
