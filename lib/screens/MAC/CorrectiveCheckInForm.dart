@@ -48,7 +48,7 @@ class CorrectiveCheckInForm extends StatefulWidget {
   const CorrectiveCheckInForm({Key? key, required this.maintenanceType}) : super(key: key);
 
   @override
-  _CorrectiveCheckInFormState createState() => _CorrectiveCheckInFormState();
+  State<CorrectiveCheckInForm> createState() => _CorrectiveCheckInFormState();
 }
 
 class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
@@ -74,7 +74,9 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
   String? vehicleID;
   String? handOverDriverID;
 
-  final ValueChanged _onChanged = (val) => print(val);
+  void _onChanged(dynamic val) {
+    print(val);
+  }
 
   void setVehicleNumber(vehicle) {
     print("$vehicle");
@@ -454,18 +456,20 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
             child: Row(
               children: <Widget>[
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  child: const Text(
-                    "Basic Issue Tools",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
-                  ),
+                SizedBox(
+                width: MediaQuery.of(context).size.width * 0.6,
+                child: const Text(
+                  "Basic Issue Tools",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  child: const Text("In(QTY)",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black)),
-                )
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.2,
+                child: const Text(
+                  "In(QTY)",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
+                ),
+              )
               ],
             ),
           ),
