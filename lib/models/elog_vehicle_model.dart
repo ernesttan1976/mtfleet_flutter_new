@@ -41,11 +41,11 @@ class ELogVehicleModel {
         tripStatus: json["tripStatus"],
         startTime: json["startTime"] == null ? null : DateTime.parse(json["startTime"]).toLocal(),
         endTime: json["endTime"] == null ? null : DateTime.parse(json["endTime"]).toLocal(),
-        stationaryRunningTime: json["stationaryRunningTime"] == null ? null : json["stationaryRunningTime"],
+        stationaryRunningTime: json["stationaryRunningTime"],
         meterReading: json["meterReading"],
         totalDistance: json["totalDistance"],
         driverName: json["driverName"],
-        approvingOfficer: json["approvingOfficer"] == null ? null : json["approvingOfficer"],
+        approvingOfficer: json["approvingOfficer"],
       );
 
   Map<String, dynamic> toJson() => {
