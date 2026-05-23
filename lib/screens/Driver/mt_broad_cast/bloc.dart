@@ -10,7 +10,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/models/models.dart';
 import 'package:transport_flutter/models/mt_broadcast.dart';
-import 'package:transport_flutter/util/request.dart' as request;
+import 'package:transport_flutter/util/request.dart';
 
 class MTBroadCastBloc {
   final _dio = Dio();
@@ -21,7 +21,7 @@ class MTBroadCastBloc {
 
   final listBroadCast = BehaviorSubject<List<MtBroadcastModel>>();
 
-  final requestClient = Request.Request();
+  final requestClient = Request();
 
   void dispose() {
     percentDownLoad.close();
@@ -32,10 +32,10 @@ class MTBroadCastBloc {
   void loadAllBoardCast(BuildContext context) async {
     isLoading.add(true);
     try {
-      final res = await request.get(Uri.parse('mt-broadcast'));
+      final res = await requestClient.get(Uri.parse('mt-broadcast'));
       if (res.statusCode == 200 || res.statusCode == 201) {
-        final _list = (json.decode(res.body) as List).map((e) => MtBroadcastModel.fromJson(e)).toList();
-        listBroadCast.add(_list);
+        final broadcastList = (json.decode(res.body) as List).map((e) => MtBroadcastModel.fromJson(e)).toList();
+        listBroadCast.add(broadcastList);
       } else {
         showAlertDialog(context, 'Error', res.reasonPhrase);
       }
@@ -57,14 +57,13 @@ class MTBroadCastBloc {
         localPath = downloadDirectory.path;
       } else {
         final downloadsDirectory = await getApplicationDocumentsDirectory();
-        localPath = downloadsDirectory.path + Platform.pathSeparator + 'Download';
+        localPath = '${downloadsDirectory.path}${Platform.pathSeparator}Download';
       }
-      final savePath =
-          localPath + '/${DateTime.now().millisecondsSinceEpoch}${url.substring(url.lastIndexOf("/") + 1)}';
+      final savePath = '$localPath/${DateTime.now().millisecondsSinceEpoch}${url.substring(url.lastIndexOf("/") + 1)}';
       print(savePath);
       await _dio.download(url, savePath, onReceiveProgress: (rec, total) {
-        final _percent = ((rec / total) * 100).round();
-        percentDownLoad.add(_percent);
+        final percent = ((rec / total) * 100).round();
+        percentDownLoad.add(percent);
         if (_percent == 100 && downloadInProgress) {
           downloadInProgress = false;
           showAlertDialog(context, 'Download', 'File downloaded successfully', isPop: false);
