@@ -52,7 +52,7 @@ class _MACNavigationState extends State<MACNavigation> {
     List<String> mp = [];
     for (var item in allRoles[0]) {
       print(item);
-      if (SUPPORTED_ROLES.contains(item)) mp.add(item);
+      if (supportedRoles.contains(item)) mp.add(item);
     }
 
     setState(() {

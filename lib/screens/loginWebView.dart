@@ -69,7 +69,7 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                       logger.e("loginData-> $data");
                       final roles = <String>[];
                       for (final role in (data['roles'] as List)) {
-                        if (SUPPORTED_ROLES.contains(role)) {
+                        if (supportedRoles.contains(role)) {
                           roles.add(role);
                         }
                       }

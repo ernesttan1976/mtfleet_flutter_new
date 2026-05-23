@@ -34,7 +34,7 @@ class _AppLoadingScreenState extends State<AppLoadingScreen> {
         print("NEW JSON: $data");
         var currentRole = await getCurrentRole();
         print("Current Role: $currentRole");
-        if (SUPPORTED_ROLES.contains(currentRole)) {
+        if (supportedRoles.contains(currentRole)) {
           switch (currentRole) {
             case "DRIVER":
             case "PRE_APPROVED_DRIVER":
