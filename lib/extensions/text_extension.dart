@@ -22,21 +22,21 @@ extension TextStyleExtension on TextStyle {
 
   TextStyle get normal => fontStyleT(FontStyle.normal);
 
-  TextStyle size(double size) => this.copyWith(fontSize: size);
+  TextStyle size(double size) => copyWith(fontSize: size);
 
-  TextStyle textColor(Color v) => this.copyWith(color: v);
+  TextStyle textColor(Color v) => copyWith(color: v);
 
-  TextStyle weight(FontWeight v) => this.copyWith(fontWeight: v);
+  TextStyle weight(FontWeight v) => copyWith(fontWeight: v);
 
-  TextStyle fontStyleT(FontStyle v) => this.copyWith(fontStyle: v);
+  TextStyle fontStyleT(FontStyle v) => copyWith(fontStyle: v);
 
-  TextStyle setDecoration(TextDecoration v) => this.copyWith(decoration: v);
+  TextStyle setDecoration(TextDecoration v) => copyWith(decoration: v);
 
   // TextStyle fontFamilies(String v) => this.copyWith(fontFamily:'cvcv');
 
-  TextStyle letterSpaC(double v) => this.copyWith(letterSpacing: v);
+  TextStyle letterSpaC(double v) => copyWith(letterSpacing: v);
 
-  TextStyle heightLine(double v) => this.copyWith(height: v / fontSize!);
+  TextStyle heightLine(double v) => copyWith(height: v / fontSize!);
 
   TextStyle get text244F4E => textColor(AppColors.green244F4E);
 
