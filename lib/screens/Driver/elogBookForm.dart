@@ -19,7 +19,7 @@ class ELogBookFormScreen extends StatefulWidget {
   const ELogBookFormScreen({Key? key, this.destinationId, this.destination, this.detailTrip, this.isEnd = false, this.endTime}) : super(key: key);
 
   @override
-  _ELogBookFormScreenState createState() => _ELogBookFormScreenState();
+  State<ELogBookFormScreen> createState() => _ELogBookFormScreenState();
 }
 
 class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
@@ -40,9 +40,9 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
   final _textTotalDistanceKm = TextEditingController();
 
   void _getLastMeterReading() async {
-    final _dio = await dioClient;
+    final dio = await dioClient;
     try {
-      final res = await _dio.get('/vehicles/last-meter-reading/${widget.detailTrip?.vehiclesId}');
+      final res = await dio.get('/vehicles/last-meter-reading/${widget.detailTrip?.vehiclesId}');
       if (res.statusCode == 200 || res.statusCode == 201) {
         _currentMeterReading = res.data['meterReading'] ?? 0;
       } else {
@@ -59,31 +59,31 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
       setState(() {
         _isLoading = true;
       });
-      final _value = _elogbookFormKey.currentState!.value;
-      final _data = {
+      final formValue = _elogbookFormKey.currentState!.value;
+      final requestData = {
         "destinationId": widget.destinationId,
-        "currentMeterReading": int.parse(_value['currentMeterReading']),
+        "currentMeterReading": int.parse(formValue['currentMeterReading']),
         // "details": _value['details'],
         "ELog": {
           "endTime":
               DateTime.now().copyWith(hourN: widget.endTime?.hour, p: widget.endTime?.minute).toUtc().toIso8601String(),
-          "stationaryRunningTime": int.parse(_value['stationaryRunningTime']),
-          "totalDistance": int.parse(_value['totalDistance']),
+          "stationaryRunningTime": int.parse(formValue['stationaryRunningTime']),
+          "totalDistance": int.parse(formValue['totalDistance']),
           // "fuelReceived": int.parse(_value['fuelReceived']),
           // "POSONumber": int.parse(_value['POSONumber']),
           // "fuelType": _value['FuelType'],
           // "requisitionerPurpose": _value['requisitionerPurpose'],
-          "remarks": _value['remarks']
+          "remarks": formValue['remarks']
         }
       };
-      logger.e(_data);
-      final _dio = await dioClient;
-      final _res = await _dio.post('/trips/end-destination', data: _data);
-      if (_res.statusCode == 201) {
+      logger.e(requestData);
+      final dio = await dioClient;
+      final response = await dio.post('/trips/end-destination', data: requestData);
+      if (response.statusCode == 201) {
         if (widget.isEnd!) {
           onCompletedTrip();
         } else {
-          showAlertDialog(context, 'Success', _res.statusMessage ?? 'Success');
+          showAlertDialog(context, 'Success', response.statusMessage ?? 'Success');
         }
       }
       setState(() {
@@ -398,20 +398,34 @@ class _ELogBookFormScreenState extends State<ELogBookFormScreen> {
                                 }
                               }
                             },
-                            child: Text(
-                              'Submit',
-                              style: _themeData.textTheme.bodyMedium!.medium,
+                            child: Center(
+                              child: Text(
+                                widget.isEnd! ? 'End Trip' : 'Submit',
+                                style: TextStyle(color: Theme.of(context).primaryColor),
+                              ),
                             ),
-                          ).paddingAll(10),
+                          ).paddingAll(40),
                           30.verticalSpace,
                         ],
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
-            if (_isLoading) Center(child: CircularProgressIndicator())
+            Visibility(
+              visible: _isLoading,
+              child: Container(
+                color: Colors.black38,
+                child: Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              ),
+            ),
           ],
         ));
   }
