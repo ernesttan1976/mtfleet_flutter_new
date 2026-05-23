@@ -6,19 +6,19 @@ import 'package:transport_flutter/components/AlertDialog.dart';
 import 'package:transport_flutter/extensions/date_time_extension.dart';
 import 'package:transport_flutter/models/models.dart';
 import 'package:transport_flutter/screens/MAC/VehicleUpdate.dart';
-import 'package:transport_flutter/util/request.dart' as Request;
+import 'package:transport_flutter/util/request.dart' as request_api;
 
 class ViewLogScreen extends StatefulWidget {
-  final servicingId;
+  final int servicingId;
 
-  ViewLogScreen({Key? key, this.servicingId}) : super(key: key);
+  const ViewLogScreen({Key? key, required this.servicingId}) : super(key: key);
 
   @override
-  _ViewLogScreenState createState() => _ViewLogScreenState();
+  State<ViewLogScreen> createState() => _ViewLogScreenState();
 }
 
 class _ViewLogScreenState extends State<ViewLogScreen> {
-  var request = new Request.Request();
+  final request = request_api.Request();
   final _elogs = BehaviorSubject<List<UpdateCheckInModel>>();
 
   @override
@@ -31,11 +31,11 @@ class _ViewLogScreenState extends State<ViewLogScreen> {
     try {
       final res = await request.get(Uri.parse('check-in/updates/${widget.servicingId}'));
       if (res.statusCode == 200 || res.statusCode == 201) {
-        final _list = (json.decode(res.body) as List).map((e) => UpdateCheckInModel.fromJson(e)).toList();
-        final _finalList = List<UpdateCheckInModel>.from(_list.reversed);
-        _elogs.add(_finalList);
+        final list = (json.decode(res.body) as List).map((e) => UpdateCheckInModel.fromJson(e)).toList();
+        final finalList = List<UpdateCheckInModel>.from(list.reversed);
+        _elogs.add(finalList);
       } else {
-        showAlertDialog(context, 'Error', res.reasonPhrase);
+        showAlertDialog(context, 'Error', res.reasonPhrase ?? 'Unknown error');
       }
     } catch (e) {
       showAlertDialog(context, 'Error', e.toString());
@@ -69,10 +69,11 @@ class _ViewLogScreenState extends State<ViewLogScreen> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Container(
-                          child: Flexible(
-                              child: Text('Update Logs: ',
-                                  style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold))),
+                        Flexible(
+                          child: Text(
+                            'Update Logs: ',
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ],
                     ),
@@ -82,7 +83,7 @@ class _ViewLogScreenState extends State<ViewLogScreen> {
                         padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                         child: Row(
                           children: <Widget>[
-                            Container(
+                            SizedBox(
                               width: MediaQuery.of(context).size.width * 0.3,
                               child: Text(
                                 update.updatedAt != null ? update.updatedAt!.formatDateddMMyyyy : '--',
@@ -94,7 +95,7 @@ class _ViewLogScreenState extends State<ViewLogScreen> {
                               width: MediaQuery.of(context).size.width * 0.55,
                               child: Column(
                                 children: <Widget>[
-                                  Text("${update.notes}",
+                                  Text(update.notes,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black)),
                                   Text(
@@ -108,16 +109,16 @@ class _ViewLogScreenState extends State<ViewLogScreen> {
                           ],
                         ),
                       ),
-                    Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+                    const SizedBox(height: 20),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.9,
                       padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: OutlinedButton(
                         style: ButtonStyle(
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           )),
-                          side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                          side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                         ),
                         onPressed: () async {
                           await Navigator.push(
