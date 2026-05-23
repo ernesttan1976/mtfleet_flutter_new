@@ -25,7 +25,7 @@ class CorrectiveCheckInFormScreen extends StatelessWidget {
             style: TextStyle(color: Theme.of(context).primaryColor),
           ),
           backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.black),
           // elevation: 5,
         ),
         body: CustomScrollView(
@@ -45,7 +45,7 @@ class CorrectiveCheckInFormScreen extends StatelessWidget {
 class CorrectiveCheckInForm extends StatefulWidget {
   final String maintenanceType;
 
-  CorrectiveCheckInForm({Key? key, required this.maintenanceType}) : super(key: key);
+  const CorrectiveCheckInForm({Key? key, required this.maintenanceType}) : super(key: key);
 
   @override
   _CorrectiveCheckInFormState createState() => _CorrectiveCheckInFormState();
@@ -54,10 +54,10 @@ class CorrectiveCheckInForm extends StatefulWidget {
 class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
   final dioClient = AuthedDio.instance.dio;
 
-  final _vehicleTA = SuggestionsBoxController();
+  final SuggestionsController<dynamic> _vehicleSuggestionsController = SuggestionsController<dynamic>();
   final GlobalKey<FormBuilderState> _preventiveCheckInFormKey = GlobalKey<FormBuilderState>();
 
-  var data;
+  dynamic data;
   String base = "";
   bool autoValidate = true;
   bool readOnly = false;
@@ -74,7 +74,7 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
   String? vehicleID;
   String? handOverDriverID;
 
-  ValueChanged _onChanged = (val) => print(val);
+  final ValueChanged _onChanged = (val) => print(val);
 
   void setVehicleNumber(vehicle) {
     print("$vehicle");
@@ -94,10 +94,10 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
   @override
   void initState() {
     super.initState();
-    this.loadUser();
+    loadUser();
   }
 
-  loadUser() async {
+  Future<void> loadUser() async {
     final authString = await getUser();
     final auth = jsonDecode(authString);
     final userName = auth['user']['name'];
@@ -141,7 +141,7 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
       var result2 = await dio.get("/users?otherRoles.type=driver&_limit=5&name_contains=$pattern");
       list = [...result1.data, ...result2.data];
       print(list);
-      if (list.length == 0) {
+      if (list.isEmpty) {
         setState(() {
           handOverDriverID = null;
         });
@@ -165,26 +165,26 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
     setState(() {
       listOfItems.add(
         Container(
-          padding: EdgeInsets.fromLTRB(10, 0, 0, 10),
+          padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
           child: Row(
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
+                padding: const EdgeInsets.fromLTRB(0, 25, 20, 0),
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: FormBuilderTextField(
                   key: Key("$index"),
                   validator:
                       FormBuilderValidators.compose([FormBuilderValidators.required(errorText: "Cannot be empty!")]),
                   name: "name$index",
-                  controller: new TextEditingController(),
-                  decoration: InputDecoration(
+                  controller: TextEditingController(),
+                  decoration: const InputDecoration(
                     hintText: "Type Here...",
                   ),
                 ),
               ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.35,
-                padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
+                padding: const EdgeInsets.fromLTRB(0, 25, 20, 0),
                 child: FormBuilderTextField(
                   key: Key("$index"),
                   validator: FormBuilderValidators.compose([
@@ -193,19 +193,19 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
                     FormBuilderValidators.min(1, errorText: "Must be > 0!")
                   ]),
                   name: "quantity$index",
-                  controller: new TextEditingController(),
+                  controller: TextEditingController(),
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: "Type Here",
                       counterStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 4.0, color: Colors.black)),
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
+                padding: const EdgeInsets.fromLTRB(0, 25, 20, 0),
                 width: MediaQuery.of(context).size.width * 0.1,
                 child: IconButton(
-                  icon: Icon(Icons.close),
+                  icon: const Icon(Icons.close),
                   onPressed: () => onToolRemove(index),
                 ),
               ),
@@ -221,24 +221,24 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
       setState(() {
         listOfItems.add(
           Container(
-            padding: EdgeInsets.fromLTRB(10, 0, 0, 10),
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
             child: Row(
               children: [
                 Container(
-                  padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 25, 20, 0),
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: FormBuilderTextField(
                     validator:
                         FormBuilderValidators.compose([FormBuilderValidators.required(errorText: "Cannot be empty!")]),
                     name: "name",
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Type Here...",
                     ),
                   ),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.35,
-                  padding: EdgeInsets.fromLTRB(0, 25, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 25, 20, 0),
                   child: FormBuilderTextField(
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(errorText: "Cannot be empty!"),
@@ -246,12 +246,13 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
                       FormBuilderValidators.min(1, errorText: "Must be > 0!")
                     ]),
                     name: "quantity",
-                    controller: new TextEditingController(),
+                    controller: TextEditingController(),
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: "Type Here",
-                        counterStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 4.0, color: Colors.black)),
+                        counterStyle:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 4.0, color: Colors.black)),
                   ),
                 )
               ],
@@ -292,7 +293,7 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
     List allServices = [];
     data.entries.forEach((e) {
       if (e.key.contains("service")) {
-        if (e.value.length > 0) {
+        if (e.value.isNotEmpty) {
           String myService = e.value.first;
           allServices.add(myService);
         }
@@ -302,7 +303,7 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
     // data['services'] = allServices;
 
     data["basicIssueTools"] = basicIssueTools.toList();
-    data["expectedCheckoutTime"] = data['expectedCheckoutTime'].toString().substring(11, 16) + ":00.000";
+    data["expectedCheckoutTime"] = "${data['expectedCheckoutTime'].toString().substring(11, 16)}:00.000";
     data["dateIn"] = data["dateIn"].toIso8601String();
     data["expectedCheckoutDate"] = data["expectedCheckoutDate"].toIso8601String();
     data["maintenanceType"] = widget.maintenanceType;
@@ -350,32 +351,32 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
               validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
               name: "workCentre",
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: "Work Centre",
                   hintText: "Type Here... ",
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
               validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
               name: "telephoneNo",
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: "Telephone No.",
                   hintText: "Type Here...",
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTypeAhead<dynamic>(
               name: "vehicleNumber",
-              suggestionsBoxController: _vehicleTA,
+              suggestionsController: _vehicleSuggestionsController,
               validator: FormBuilderValidators.compose([
                 FormBuilderValidators.required(),
                 (val) {
@@ -383,7 +384,7 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
                   return null;
                 }
               ]),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Vehicle Number",
                 labelStyle: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -401,12 +402,12 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
               },
               selectionToTextTransformer: (suggestion) {
                 if (suggestion != "") {
-                  return "${suggestion!["vehicleNumber"]}";
+                  return "${suggestion["vehicleNumber"]}";
                 }
                 return "";
               },
               onSuggestionSelected: (suggestion) => setVehicleNumber(suggestion),
-              noItemsFoundBuilder: (context) => Padding(
+              noItemsFoundBuilder: (context) => const Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
                   "No Vehicles Found!",
@@ -418,48 +419,51 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
           Row(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child:
-                    Text('Model', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black)),
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: const Text('Model',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black)),
               ),
             ],
           ),
           Row(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
-                child: Text(vehicleModel != null ? "$vehicleModel" : "N/A",
-                    style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15.0, color: Colors.black)),
+                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                child: Text(vehicleModel != null ? vehicleModel! : "N/A",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.normal, fontSize: 15.0, color: Colors.black)),
               ),
             ],
           ),
 
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderDropdown(
               name: "frontSensorTag",
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: "Fuel Sensor Tag",
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
-              hint: Text('Yes/No'),
+              hint: const Text('Yes/No'),
               validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
-              items: ['Yes', 'No'].map((option) => DropdownMenuItem(value: option, child: Text("$option"))).toList(),
+              items: ['Yes', 'No']
+                  .map((option) => DropdownMenuItem(value: option, child: Text(option)))
+                  .toList(),
             ),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
+            padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
             child: Row(
               children: <Widget>[
                 Container(
                   width: MediaQuery.of(context).size.width * 0.6,
-                  child: Text(
+                  child: const Text(
                     "Basic Issue Tools",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black),
                   ),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.2,
-                  child: Text("In(QTY)",
+                  child: const Text("In(QTY)",
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0, color: Colors.black)),
                 )
               ],
@@ -470,18 +474,18 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
             if (item != null) item,
           Container(
             width: MediaQuery.of(context).size.width * 0.9,
-            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: OutlinedButton(
               style: ButtonStyle(
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                shape: WidgetStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 )),
-                side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
               ),
               onPressed: () {
                 addNewItem();
               },
-              child: Text(
+              child: const Text(
                 "Add Another Item",
                 style: TextStyle(color: Colors.black),
               ),
@@ -501,11 +505,11 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
           //   ),
           // ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
               validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
               name: "defect",
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: "Corrective Maintenance",
                   hintText: "Type Here...",
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
@@ -513,75 +517,75 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
           ),
 
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderDateTimePicker(
                 validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
                 name: "dateIn",
                 onChanged: _onChanged,
                 inputType: InputType.date,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     labelText: "Date In",
                     labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black),
                     suffixIcon: Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 12.0),
+                      padding: EdgeInsetsDirectional.only(end: 12.0),
                       child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
                     )),
                 // initialDate: ,
                 // validator: (val) => null,
                 // initialTime: TimeOfDay(hour: 8, minute: 0),
                 initialValue: DateTime.now(),
-                format: new DateFormat('dd MMMM yyyy')
+                format: DateFormat('dd MMMM yyyy')
                 // readonly: true,
                 ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderDateTimePicker(
                 name: "expectedCheckoutDate",
                 validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
                 onChanged: _onChanged,
                 inputType: InputType.date,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     labelText: "Expected Check-out Date",
                     labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black),
                     suffixIcon: Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 12.0),
+                      padding: EdgeInsetsDirectional.only(end: 12.0),
                       child: Icon(Icons.date_range), // myIcon is a 48px-wide widget.
                     )),
                 // initialDate: ,
                 // validator: (val) => null,
                 // initialTime: TimeOfDay(hour: 8, minute: 0),
                 // initialValue: DateTime.now(),
-                format: new DateFormat('dd MMMM yyyy')
+                format: DateFormat('dd MMMM yyyy')
                 // readonly: true,
                 ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
               validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
               name: "speedoReading",
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: "Speedo Reading",
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
               validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
               name: "swdReading",
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: "SWD Reading",
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
               validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
               name: "handedBy",
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: "Handed Over By (Rank & Name)",
                   hintText: "Type Here...",
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
@@ -589,21 +593,21 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
           ),
 
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderDateTimePicker(
               name: "expectedCheckoutTime",
               onChanged: _onChanged,
               validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
               inputType: InputType.time,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: "Time",
                   hintText: "HH-MM",
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black),
                   suffixIcon: Padding(
-                    padding: const EdgeInsetsDirectional.only(end: 12.0),
+                    padding: EdgeInsetsDirectional.only(end: 12.0),
                     child: Icon(Icons.access_time), // myIcon is a 48px-wide widget.
                   )),
-              format: new DateFormat('h:mma'),
+              format: DateFormat('h:mma'),
               initialTime: TimeOfDay.now(),
               initialValue: DateTime.now(),
               // readonly: true,
@@ -634,35 +638,35 @@ class _CorrectiveCheckInFormState extends State<CorrectiveCheckInForm> {
           //   ],
           // ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: FormBuilderTextField(
               validator: FormBuilderValidators.compose([FormBuilderValidators.required()]),
               name: "attender",
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   labelText: "Attended By",
                   labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
             ),
           ),
           Container(
             width: MediaQuery.of(context).size.width * 0.9,
-            padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
             child: submitting
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : OutlinedButton(
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      shape: WidgetStateProperty.all(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       )),
-                      side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                      side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                     ),
                     onPressed: () {
                       if (_preventiveCheckInFormKey.currentState!.saveAndValidate()) {
                         onSubmitForm(_preventiveCheckInFormKey.currentState!.value);
                       }
                     },
-                    child: Text(
+                    child: const Text(
                       "Submit",
                       style: TextStyle(color: Colors.black),
                     ),
