@@ -8,6 +8,7 @@ import 'package:transport_flutter/extensions/extensions.dart';
 import 'package:transport_flutter/screens/Driver/past_14_days_elog/bloc.dart';
 
 class Past14DaysELog extends StatefulWidget {
+  const Past14DaysELog({Key? key}) : super(key: key);
   @override
   _Past14DaysELogState createState() => _Past14DaysELogState();
 }
@@ -71,10 +72,11 @@ class _Past14DaysELogState extends State<Past14DaysELog> with SingleTickerProvid
               initialData: false,
               stream: _bloc.isLoading,
               builder: (context, snapshot1) {
-                if (snapshot1.data!)
+                if (snapshot1.data!) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
+                }
                 return const Center();
               }),
         ],
@@ -110,12 +112,12 @@ class _Past14DaysELogState extends State<Past14DaysELog> with SingleTickerProvid
     return Container(
       height: 40,
       padding: const EdgeInsets.all(2),
-      decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2), borderRadius: BorderRadius.circular(12)),
+      decoration: BoxDecoration(color: Colors.grey.withAlpha((0.2 * 255).round()), borderRadius: BorderRadius.circular(12)),
       child: TabBar(
         controller: _tabController,
-        unselectedLabelStyle: _themeData.textTheme.subtitle1!.medium,
+        unselectedLabelStyle: _themeData.textTheme.titleMedium!.medium,
         unselectedLabelColor: _themeData.hintColor,
-        labelStyle: _themeData.textTheme.subtitle1!.semiBold,
+        labelStyle: _themeData.textTheme.titleMedium!.semiBold,
         labelColor: Colors.black,
         indicatorWeight: 0,
         labelPadding: const EdgeInsets.symmetric(horizontal: 10),
@@ -134,7 +136,7 @@ class _Past14DaysELogState extends State<Past14DaysELog> with SingleTickerProvid
   }
 
   Widget _getTable() {
-    final _tables = [
+    final tables = [
       TableELogOne(
         stream: _bloc.listELogVehicle,
         onTapItem: _bloc.onTapItem,
@@ -150,14 +152,14 @@ class _Past14DaysELogState extends State<Past14DaysELog> with SingleTickerProvid
         builder: (context, snapshot) {
           return IndexedStack(
             index: snapshot.data,
-            children: _tables
+            children: tables
                 .asMap()
                 .keys
                 .map(
                   (index) => Visibility(
                     maintainState: true,
                     visible: snapshot.data == index,
-                    child: _tables[index],
+                    child: tables[index],
                   ),
                 )
                 .toList(),
@@ -181,7 +183,7 @@ class _Past14DaysELogState extends State<Past14DaysELog> with SingleTickerProvid
           ), // myIcon is a 48px-wide widget.
         )),
         initialValue: _bloc.dateSelect,
-        format: new DateFormat('dd/MM/yyyy'),
+        format: DateFormat('dd/MM/yyyy'),
         name: '',
         // readonly: true,
       ).wrapWidth(200),
