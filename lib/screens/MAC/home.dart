@@ -79,12 +79,12 @@ class _MACHomeState extends State<MACHome> {
                   width: double.infinity,
                   child: OutlinedButton(
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
+                      shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
-                      side: MaterialStateProperty.all(
+                      side: WidgetStateProperty.all(
                         BorderSide(color: Theme.of(context).primaryColor),
                       ),
                     ),
@@ -111,12 +111,12 @@ class _MACHomeState extends State<MACHome> {
                   width: double.infinity,
                   child: OutlinedButton(
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
+                      shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
-                      side: MaterialStateProperty.all(
+                      side: WidgetStateProperty.all(
                         BorderSide(color: Theme.of(context).primaryColor),
                       ),
                     ),
@@ -142,12 +142,12 @@ class _MACHomeState extends State<MACHome> {
                   width: double.infinity,
                   child: OutlinedButton(
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
+                      shape: WidgetStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
-                      side: MaterialStateProperty.all(
+                      side: WidgetStateProperty.all(
                         BorderSide(color: Theme.of(context).primaryColor),
                       ),
                     ),

@@ -69,10 +69,10 @@ class MTRACApprovalThirdScreen extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
         child: OutlinedButton(
           style: ButtonStyle(
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
             )),
-            side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+            side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
           ),
           onPressed: () {
             Navigator.push(

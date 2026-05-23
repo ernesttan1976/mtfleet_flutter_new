@@ -128,10 +128,10 @@ class _VehicleUpdateScreenState extends State<VehicleUpdateScreen> {
                               )
                             : OutlinedButton(
                                 style: ButtonStyle(
-                                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30.0),
                                   )),
-                                  side: MaterialStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
+                                  side: WidgetStateProperty.all(BorderSide(color: Theme.of(context).primaryColor)),
                                 ),
                                 onPressed: () {
                                   if (_vehicleUpdateFormKey.currentState!.saveAndValidate()) {
