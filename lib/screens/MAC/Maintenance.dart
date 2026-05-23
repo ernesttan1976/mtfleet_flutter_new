@@ -418,7 +418,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
             child: Text(
               model.expectedCheckoutTime == null
                   ? '--'
-                  : model.expectedCheckoutTime?.formatDateTime('hh:mm a'),
+                  : model.expectedCheckoutTime!.formatDateTime('hh:mm a'),
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
             ),
           ),
@@ -453,14 +453,15 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
           onPressed: () async {
             final servicingId = widget.service?.id;
             await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CheckOutFormScreen(
-                    servicingId: servicingId?.toString() ?? '',
-                    checkInType: widget.service!.maintenanceType,
-                    workCentreData: model.workCenter,
-                  ),
-                ));
+              context,
+              MaterialPageRoute(
+                builder: (context) => CheckOutFormScreen(
+                  servicingId: servicingId?.toString() ?? '',
+                  checkInType: widget.service!.maintenanceType,
+                  workCentreData: model.workCenter,
+                ),
+              ),
+            );
             _fetchVehicleServicing();
           },
           style: ButtonStyle(
@@ -473,18 +474,6 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
               ),
             ),
           ),
-            final servicingId = widget.service?.id;
-            await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CheckOutFormScreen(
-                    servicingId: servicingId?.toString() ?? '',
-                    checkInType: widget.service!.maintenanceType,
-                    workCentreData: model.workCenter,
-                  ),
-                ));
-            _fetchVehicleServicing();
-          },
           child: Text(
             "Check Out",
             style: TextStyle(color: Colors.white),
