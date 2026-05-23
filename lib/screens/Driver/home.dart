@@ -78,11 +78,9 @@ class _DriverHomeState extends State<DriverHome> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
-            child: const Text(
-              "Does this trip require MT RAC form approval?",
-              textAlign: TextAlign.center,
-            ),
+          content: const Text(
+            "Does this trip require MT RAC form approval?",
+            textAlign: TextAlign.center,
           ),
           actions: [
             Container(
@@ -159,11 +157,9 @@ class _DriverHomeState extends State<DriverHome> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          content: Container(
-            child: const Text(
-              "Is there Vehicle Commander/Front Passenger Present for the trip?",
-              textAlign: TextAlign.center,
-            ),
+          content: const Text(
+            "Is there Vehicle Commander/Front Passenger Present for the trip?",
+            textAlign: TextAlign.center,
           ),
           actions: [
             Container(
