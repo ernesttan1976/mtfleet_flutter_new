@@ -56,89 +56,97 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
     var myChildren = [
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(
-                    widget.service!.maintenanceType == "AVI"
-                        ? 'Type of Maintenance : Annual Vehicle Inspection '
-                        : 'Type of Maintenance : ${widget.service!.maintenanceType}',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              widget.service!.maintenanceType == "AVI"
+                  ? 'Type of Maintenance : Annual Vehicle Inspection '
+                  : 'Type of Maintenance : ${widget.service!.maintenanceType}',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("Work Center",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              "Work Center",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(model.workCenter,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
-          ),
-        ],
-      ),
-      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("Telephone No",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
-          ),
-        ],
-      ),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(model.telephoneNo,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              model.workCenter,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Vehicle Number:',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              "Telephone No",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(widget.service!.vehicle!.vehicleNumber,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              model.telephoneNo,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child:
-                    Text('Model', style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              'Vehicle Number:',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(widget.service!.vehicle!.model,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              widget.service!.vehicle!.vehicleNumber,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
+          ),
+        ],
+      ),
+      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              'Model',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              widget.service!.vehicle!.model,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
@@ -149,19 +157,21 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
         Row(
           children: <Widget>[
-            Container(
-              child: Flexible(
-                  child: Text('Type of Preventive Maintenance',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+            Flexible(
+              child: Text(
+                'Type of Preventive Maintenance',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),
         Row(
           children: <Widget>[
-            Container(
-              child: Flexible(
-                  child: Text(widget.service!.maintenanceType,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+            Flexible(
+              child: Text(
+                widget.service!.maintenanceType,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+              ),
             ),
           ],
         )
@@ -172,29 +182,32 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("Fuel Sensor Tag",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              "Fuel Sensor Tag",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(model.frontSensorTag,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              model.frontSensorTag,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("Basic Issue Tools:",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              "Basic Issue Tools:",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -202,20 +215,22 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
         for (var tool in model.basicIssueTools)
           Row(
             children: <Widget>[
-              Container(
-                child: Flexible(
-                    child: Text('${tool.name}: ${tool.quantity}',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+              Flexible(
+                child: Text(
+                  '${tool.name}: ${tool.quantity}',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+                ),
               ),
             ],
           ),
       if (model.basicIssueTools.isEmpty)
         Row(
           children: <Widget>[
-            Container(
-              child: Flexible(
-                  child: Text('None',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+            Flexible(
+              child: Text(
+                'None',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+              ),
             ),
           ],
         ),
@@ -238,12 +253,8 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                 children: <Widget>[
                   for (var pic in model.images)
                     Container(
-                      // child: Image.network(
-                      //     "${Constants.SERVER_URI}${pic['url']}"),
                       child: CachedNetworkImage(
                         imageUrl: "${constants.SERVER_URI_API}${pic.path}",
-                        // placeholder: (context, url) =>
-                        //     CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                       margin: EdgeInsets.only(right: 10),
@@ -252,10 +263,9 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
               )
             : Row(
                 children: <Widget>[
-                  Container(
-                    child: Flexible(
-                        child: Text('No Images Found!',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+                  Flexible(
+                    child: Text('No Images Found!',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal)),
                   ),
                 ],
               ),
@@ -263,159 +273,172 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(widget.service!.maintenanceType == "Corrective" ? "Corrective Maintenance:" : "Defect:",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              widget.service!.maintenanceType == "Corrective" ? "Corrective Maintenance:" : "Defect:",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(
-                    widget.service!.maintenanceType == "Corrective"
-                        ? model.correctiveMaintenance?.correctiveMaintenance ?? '--'
-                        : "s",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
-          ),
-        ],
-      ),
-      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("Date In:",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
-          ),
-        ],
-      ),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(model.dateIn == null ? '--' : '${model.dateIn!.formatDateddMMyyyy}',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              widget.service!.maintenanceType == "Corrective"
+                  ? model.correctiveMaintenance?.correctiveMaintenance ?? '--'
+                  : "s",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("Expected Check-out Date:",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              "Date In:",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(
-                    model.expectedCheckoutDate != null ? '${model.expectedCheckoutDate!.formatDateddMMyyyy}' : '--',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
-          ),
-        ],
-      ),
-      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("Speedo Reading:",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
-          ),
-        ],
-      ),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('${model.speedoReading}',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              model.dateIn == null ? '--' : model.dateIn!.formatDateddMMyyyy,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("SWD Reading:",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              "Expected Check-out Date:",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('${model.swdReading}',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
-          ),
-        ],
-      ),
-      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text("Handed Over By:",
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
-          ),
-        ],
-      ),
-      Row(
-        children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('${model.handedBy}',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              model.expectedCheckoutDate != null ? model.expectedCheckoutDate!.formatDateddMMyyyy : '--',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child:
-                    Text('Time:', style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              "Speedo Reading:",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text(
-                    model.expectedCheckoutTime == null
-                        ? '--'
-                        : '${model.expectedCheckoutTime?.formatDateTime('hh:mm a')}',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              model.speedoReading.toString(),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
       Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('Attended By:',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold))),
+          Flexible(
+            child: Text(
+              "SWD Reading:",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
       Row(
         children: <Widget>[
-          Container(
-            child: Flexible(
-                child: Text('${model.attender}',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal))),
+          Flexible(
+            child: Text(
+              model.swdReading.toString(),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
+          ),
+        ],
+      ),
+      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              "Handed Over By:",
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              model.handedBy,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
+          ),
+        ],
+      ),
+      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              'Time:',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              model.expectedCheckoutTime == null
+                  ? '--'
+                  : model.expectedCheckoutTime?.formatDateTime('hh:mm a'),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
+          ),
+        ],
+      ),
+      Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0)),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              'Attended By:',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+      Row(
+        children: <Widget>[
+          Flexible(
+            child: Text(
+              model.attender,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal),
+            ),
           ),
         ],
       ),
