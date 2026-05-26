@@ -1,0 +1,1254 @@
+level,message,filepath,tag
+info,Unnecessary 'this.' qualifier,lib/components/extension/space.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/components/extension/space.dart,unnecessary_this
+info,'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss,lib/components/extension/widgets.dart,deprecated_member_use
+error,Undefined class 'ItemBuilder',lib/components/form_builder_typehead.dart,undefined_class
+error,Undefined class 'SuggestionsBoxDecoration',lib/components/form_builder_typehead.dart,undefined_class
+error,Undefined class 'SuggestionsBoxController',lib/components/form_builder_typehead.dart,undefined_class
+error,Undefined class 'ErrorBuilder',lib/components/form_builder_typehead.dart,undefined_class
+info,Field overrides a field inherited from 'FormField',lib/components/form_builder_typehead.dart,overridden_fields
+info,The member 'errorBuilder' overrides an inherited member but isn't annotated with '@override',lib/components/form_builder_typehead.dart,annotate_overrides
+error,Undefined class 'AnimationTransitionBuilder',lib/components/form_builder_typehead.dart,undefined_class
+error,Undefined class 'TextFieldConfiguration',lib/components/form_builder_typehead.dart,undefined_class
+error,The name 'SuggestionsBoxDecoration' isn't a class,lib/components/form_builder_typehead.dart,creation_with_non_type
+error,The name 'TextFieldConfiguration' isn't a class,lib/components/form_builder_typehead.dart,creation_with_non_type
+error,The named parameter 'decoration' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+error,"The named parameter 'onSelected' is required, but there's no corresponding argument",lib/components/form_builder_typehead.dart,missing_required_argument
+error,The named parameter 'textFieldConfiguration' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+error,The getter 'decoration' isn't defined for the type '_FormBuilderTypeAheadState<T>',lib/components/form_builder_typehead.dart,undefined_getter
+error,"The returned type 'Animation<double>' isn't returnable from a 'Widget' function, as required by the closure's context",lib/components/form_builder_typehead.dart,return_of_invalid_type_from_closure
+error,The named parameter 'onSuggestionSelected' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+error,The named parameter 'getImmediateSuggestions' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+error,The named parameter 'noItemsFoundBuilder' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+error,The named parameter 'suggestionsBoxDecoration' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+error,The named parameter 'suggestionsBoxVerticalOffset' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+error,The named parameter 'animationStart' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+error,The argument type 'AxisDirection' can't be assigned to the parameter type 'VerticalDirection?'.,lib/components/form_builder_typehead.dart,argument_type_not_assignable
+error,The named parameter 'hideSuggestionsOnKeyboardHide' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+error,The named parameter 'keepSuggestionsOnLoading' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+error,The named parameter 'suggestionsBoxController' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+error,The named parameter 'keepSuggestionsOnSuggestionSelected' isn't defined,lib/components/form_builder_typehead.dart,undefined_named_parameter
+info,Invalid use of a private type in a public API,lib/components/form_builder_typehead.dart,library_private_types_in_public_api
+info,Constructors for public widgets should have a named 'key' parameter,lib/components/title_and_widget_shadow.dart,use_key_in_widget_constructors
+info,Constructors in '@immutable' classes should be declared as 'const',lib/components/title_and_widget_shadow.dart,prefer_const_constructors_in_immutables
+warning,The declaration '_buildInputTitle' isn't referenced,lib/components/title_and_widget_shadow.dart,unused_element
+info,The prefix 'Constants' isn't a lower_case_with_underscores identifier,lib/config/dio.dart,library_prefixes
+info,Unnecessary 'new' keyword,lib/config/dio.dart,unnecessary_new
+warning,The value of the field '_initDioMemoizer' isn't used,lib/config/dio.dart,unused_field
+info,Unnecessary 'new' keyword,lib/config/dio.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/config/dio.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/config/dio.dart,unnecessary_new
+info,The constant name 'SERVER_URI' isn't a lowerCamelCase identifier,lib/constants.dart,constant_identifier_names
+info,The constant name 'SERVER_URI_API' isn't a lowerCamelCase identifier,lib/constants.dart,constant_identifier_names
+info,The constant name 'AUTH_CALLBACK' isn't a lowerCamelCase identifier,lib/constants.dart,constant_identifier_names
+info,The constant name 'CURRENT_VERSION' isn't a lowerCamelCase identifier,lib/constants.dart,constant_identifier_names
+info,Unnecessary 'this.' qualifier,lib/extensions/date_time_extension.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/extensions/date_time_extension.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/extensions/text_extension.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/extensions/text_extension.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/extensions/text_extension.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/extensions/text_extension.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/extensions/text_extension.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/extensions/text_extension.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/extensions/text_extension.dart,unnecessary_this
+info,Constructors for public widgets should have a named 'key' parameter,lib/main.dart,use_key_in_widget_constructors
+info,Invalid use of a private type in a public API,lib/main.dart,library_private_types_in_public_api
+info,The 'if' statement could be replaced by a null-aware assignment,lib/main.dart,prefer_conditional_assignment
+warning,The value of the local variable 'didReceiveLocalNotificationStream' isn't used,lib/main.dart,unused_local_variable
+warning,The value of the local variable 'selectNotificationStream' isn't used,lib/main.dart,unused_local_variable
+warning,The value of the local variable 'initializationSettings' isn't used,lib/main.dart,unused_local_variable
+error,"The named parameter 'id' is required, but there's no corresponding argument",lib/main.dart,missing_required_argument
+error,"Too many positional arguments: 0 expected, but 4 found",lib/main.dart,extra_positional_arguments_could_be_named
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/elog_vehicle_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/elog_vehicle_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_detail_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_driver_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_driver_model.dart,prefer_if_null_operators
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/models/trip_driver_model.dart,prefer_if_null_operators
+info,The prefix 'Constants' isn't a lower_case_with_underscores identifier,lib/navigations/approvingOfficerNavigation.dart,library_prefixes
+info,Invalid use of a private type in a public API,lib/navigations/approvingOfficerNavigation.dart,library_private_types_in_public_api
+info,Unnecessary 'this.' qualifier,lib/navigations/approvingOfficerNavigation.dart,unnecessary_this
+info,The 'child' argument should be last in widget constructor invocations,lib/navigations/approvingOfficerNavigation.dart,sort_child_properties_last
+info,Unnecessary 'this.' qualifier,lib/navigations/approvingOfficerNavigation.dart,unnecessary_this
+info,Unnecessary 'new' keyword,lib/navigations/approvingOfficerNavigation.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/navigations/approvingOfficerNavigation.dart,unnecessary_new
+info,The prefix 'Constants' isn't a lower_case_with_underscores identifier,lib/navigations/driverNavigation.dart,library_prefixes
+info,Invalid use of a private type in a public API,lib/navigations/driverNavigation.dart,library_private_types_in_public_api
+info,Unnecessary 'this.' qualifier,lib/navigations/driverNavigation.dart,unnecessary_this
+info,The 'child' argument should be last in widget constructor invocations,lib/navigations/driverNavigation.dart,sort_child_properties_last
+info,Unnecessary 'this.' qualifier,lib/navigations/driverNavigation.dart,unnecessary_this
+info,Unnecessary 'new' keyword,lib/navigations/driverNavigation.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/navigations/driverNavigation.dart,unnecessary_new
+info,The prefix 'Constants' isn't a lower_case_with_underscores identifier,lib/navigations/macNavigation.dart,library_prefixes
+info,Invalid use of a private type in a public API,lib/navigations/macNavigation.dart,library_private_types_in_public_api
+info,Unnecessary 'this.' qualifier,lib/navigations/macNavigation.dart,unnecessary_this
+info,The 'child' argument should be last in widget constructor invocations,lib/navigations/macNavigation.dart,sort_child_properties_last
+info,Unnecessary 'this.' qualifier,lib/navigations/macNavigation.dart,unnecessary_this
+info,Unnecessary 'new' keyword,lib/navigations/macNavigation.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/navigations/macNavigation.dart,unnecessary_new
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/ApprovingOfficer/ApprovedTrip.dart,unnecessary_import
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/ApprovingOfficer/ApprovedTrip.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/ApprovingOfficer/ApprovedTrip.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/ApprovingOfficer/ApprovedTrip.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/ApprovingOfficer/ApprovedTrip.dart,unnecessary_new
+info,Unnecessary 'this.' qualifier,lib/screens/ApprovingOfficer/ApprovedTrip.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/screens/ApprovingOfficer/ApprovedTrip.dart,unnecessary_this
+info,Statements in an if should be enclosed in a block,lib/screens/ApprovingOfficer/ApprovedTrip.dart,curly_braces_in_flow_control_structures
+info,The local variable '_list' starts with an underscore,lib/screens/ApprovingOfficer/ApprovedTrip.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/ApprovedTrip.dart,argument_type_not_assignable
+error,The argument type 'Object' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/ApprovedTrip.dart,argument_type_not_assignable
+info,Unnecessary 'new' keyword,lib/screens/ApprovingOfficer/ApprovedTrip.dart,unnecessary_new
+info,Use 'const' literals as arguments to constructors of '@immutable' classes,lib/screens/ApprovingOfficer/ApprovedTrip.dart,prefer_const_literals_to_create_immutables
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,unnecessary_import
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/ApprovedTripDoc.dart,avoid_unnecessary_containers
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/ApprovingOfficer/DestinationApproval.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/ApprovingOfficer/DestinationApproval.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/ApprovingOfficer/DestinationApproval.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/ApprovingOfficer/DestinationApproval.dart,unnecessary_new
+info,The local variable '_a' starts with an underscore,lib/screens/ApprovingOfficer/DestinationApproval.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_model' starts with an underscore,lib/screens/ApprovingOfficer/DestinationApproval.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/DestinationApproval.dart,argument_type_not_assignable
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/DestinationApproval.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/DestinationApproval.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/DestinationApproval.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/DestinationApproval.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/DestinationApproval.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/DestinationApproval.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/DestinationApproval.dart,avoid_unnecessary_containers
+info,An uninitialized variable should have an explicit type annotation,lib/screens/ApprovingOfficer/DestinationApproval.dart,prefer_typing_uninitialized_variables
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/DestinationApproval.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/DestinationApproval.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/DestinationApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/DestinationApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/DestinationApproval.dart,deprecated_member_use
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/DestinationApproval.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/DestinationApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/DestinationApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/DestinationApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/DestinationApproval.dart,deprecated_member_use
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/DestinationApproval.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/DestinationApproval.dart,argument_type_not_assignable
+error,The argument type 'Object' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/DestinationApproval.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/DestinationApproval.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/DestinationApproval.dart,argument_type_not_assignable
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/DestinationApproval.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/DestinationApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/DestinationApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/DestinationApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/DestinationApproval.dart,deprecated_member_use
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovalThree.dart,avoid_unnecessary_containers
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovalThree.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/MTRACApprovalThree.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/MTRACApprovalThree.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/ApprovingOfficer/MTRACApprovalTwo.dart,unnecessary_import
+warning,Unused import: 'package:transport_flutter/extensions/extensions.dart',lib/screens/ApprovingOfficer/MTRACApprovalTwo.dart,unused_import
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovalTwo.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovalTwo.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovalTwo.dart,avoid_unnecessary_containers
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovalTwo.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/MTRACApprovalTwo.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/MTRACApprovalTwo.dart,deprecated_member_use
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovalTwo.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovalTwo.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovalTwo.dart,undefined_getter
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,unnecessary_import
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/MTRACApprovedDoc.dart,undefined_getter
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/ApprovingOfficer/PendingDestination.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/ApprovingOfficer/PendingDestination.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/ApprovingOfficer/PendingDestination.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/ApprovingOfficer/PendingDestination.dart,unnecessary_new
+info,Unnecessary 'this.' qualifier,lib/screens/ApprovingOfficer/PendingDestination.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/screens/ApprovingOfficer/PendingDestination.dart,unnecessary_this
+info,Statements in an if should be enclosed in a block,lib/screens/ApprovingOfficer/PendingDestination.dart,curly_braces_in_flow_control_structures
+info,The local variable '_list' starts with an underscore,lib/screens/ApprovingOfficer/PendingDestination.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/PendingDestination.dart,argument_type_not_assignable
+info,Unnecessary 'new' keyword,lib/screens/ApprovingOfficer/PendingDestination.dart,unnecessary_new
+info,Use 'const' literals as arguments to constructors of '@immutable' classes,lib/screens/ApprovingOfficer/PendingDestination.dart,prefer_const_literals_to_create_immutables
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/ApprovingOfficer/PendingTrip.dart,unnecessary_import
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/ApprovingOfficer/PendingTrip.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/ApprovingOfficer/PendingTrip.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/ApprovingOfficer/PendingTrip.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/ApprovingOfficer/PendingTrip.dart,unnecessary_new
+info,Unnecessary 'this.' qualifier,lib/screens/ApprovingOfficer/PendingTrip.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/screens/ApprovingOfficer/PendingTrip.dart,unnecessary_this
+info,Statements in an if should be enclosed in a block,lib/screens/ApprovingOfficer/PendingTrip.dart,curly_braces_in_flow_control_structures
+info,The local variable '_list' starts with an underscore,lib/screens/ApprovingOfficer/PendingTrip.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/PendingTrip.dart,argument_type_not_assignable
+info,Unnecessary 'new' keyword,lib/screens/ApprovingOfficer/PendingTrip.dart,unnecessary_new
+info,Use 'const' literals as arguments to constructors of '@immutable' classes,lib/screens/ApprovingOfficer/PendingTrip.dart,prefer_const_literals_to_create_immutables
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/ApprovingOfficer/TripApproval.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/ApprovingOfficer/TripApproval.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/ApprovingOfficer/TripApproval.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/ApprovingOfficer/TripApproval.dart,unnecessary_new
+info,The local variable '_a' starts with an underscore,lib/screens/ApprovingOfficer/TripApproval.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_model' starts with an underscore,lib/screens/ApprovingOfficer/TripApproval.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/TripApproval.dart,argument_type_not_assignable
+info,The local variable '_safety' starts with an underscore,lib/screens/ApprovingOfficer/TripApproval.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/TripApproval.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/TripApproval.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/TripApproval.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/TripApproval.dart,argument_type_not_assignable
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/TripApproval.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/TripApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/TripApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/TripApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/TripApproval.dart,deprecated_member_use
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/TripApproval.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/TripApproval.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/TripApproval.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/TripApproval.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/TripApproval.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/TripApproval.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/TripApproval.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/TripApproval.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/TripApproval.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/TripApproval.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/TripApproval.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/TripApproval.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/TripApproval.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/TripApproval.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/TripApproval.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/TripApproval.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/TripApproval.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/TripApproval.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/TripApproval.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/TripApproval.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/TripApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/TripApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/TripApproval.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/TripApproval.dart,deprecated_member_use
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/TripApproval.dart,undefined_getter
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/ApprovingOfficer/home.dart,unnecessary_import
+info,Invalid use of a private type in a public API,lib/screens/ApprovingOfficer/home.dart,library_private_types_in_public_api
+info,Unnecessary 'this.' qualifier,lib/screens/ApprovingOfficer/home.dart,unnecessary_this
+info,Unnecessary 'new' keyword,lib/screens/ApprovingOfficer/home.dart,unnecessary_new
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/home.dart,undefined_getter
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/home.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/home.dart,avoid_unnecessary_containers
+error,The getter 'bodyText2' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/home.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/home.dart,avoid_unnecessary_containers
+error,The getter 'bodyText2' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/home.dart,undefined_getter
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/ApprovingOfficer/trip_approval_one.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/ApprovingOfficer/trip_approval_one.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/ApprovingOfficer/trip_approval_one.dart,library_private_types_in_public_api
+warning,The value of the field '_safetyKey' isn't used,lib/screens/ApprovingOfficer/trip_approval_one.dart,unused_field
+info,Unnecessary 'new' keyword,lib/screens/ApprovingOfficer/trip_approval_one.dart,unnecessary_new
+info,The local variable '_a' starts with an underscore,lib/screens/ApprovingOfficer/trip_approval_one.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_model' starts with an underscore,lib/screens/ApprovingOfficer/trip_approval_one.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/ApprovingOfficer/trip_approval_one.dart,argument_type_not_assignable
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/trip_approval_one.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/trip_approval_one.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/trip_approval_one.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/trip_approval_one.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/trip_approval_one.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/trip_approval_one.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/trip_approval_one.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/trip_approval_one.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/trip_approval_one.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/trip_approval_one.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/trip_approval_one.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/trip_approval_one.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/trip_approval_one.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/trip_approval_one.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/trip_approval_one.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/trip_approval_one.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/trip_approval_one.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/trip_approval_one.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/ApprovingOfficer/trip_approval_one.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/trip_approval_one.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/trip_approval_one.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/ApprovingOfficer/trip_approval_one.dart,deprecated_member_use
+info,Statements in an if should be enclosed in a block,lib/screens/ApprovingOfficer/trip_approval_one.dart,curly_braces_in_flow_control_structures
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/ApprovingOfficer/trip_approval_one.dart,undefined_getter
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/Driver/Maintenance.dart,unnecessary_import
+info,The prefix 'Constants' isn't a lower_case_with_underscores identifier,lib/screens/Driver/Maintenance.dart,library_prefixes
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/Driver/Maintenance.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/Maintenance.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/Maintenance.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/Driver/Maintenance.dart,unnecessary_new
+info,The local variable '_a' starts with an underscore,lib/screens/Driver/Maintenance.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_model' starts with an underscore,lib/screens/Driver/Maintenance.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/Maintenance.dart,argument_type_not_assignable
+error,The argument type 'Object' can't be assigned to the parameter type 'String'.,lib/screens/Driver/Maintenance.dart,argument_type_not_assignable
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,The 'child' argument should be last in widget constructor invocations,lib/screens/Driver/Maintenance.dart,sort_child_properties_last
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/Maintenance.dart,undefined_getter
+info,The imported package 'path_provider' isn't a dependency of the importing package,lib/screens/Driver/PerformanceCard.dart,depend_on_referenced_packages
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/Driver/PerformanceCard.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/PerformanceCard.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/PerformanceCard.dart,library_private_types_in_public_api
+warning,The value of the field '_performanceCardScaffoldKey' isn't used,lib/screens/Driver/PerformanceCard.dart,unused_field
+info,Unnecessary 'new' keyword,lib/screens/Driver/PerformanceCard.dart,unnecessary_new
+info,The local variable '_response' starts with an underscore,lib/screens/Driver/PerformanceCard.dart,no_leading_underscores_for_local_identifiers
+info,Unnecessary 'new' keyword,lib/screens/Driver/PerformanceCard.dart,unnecessary_new
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/Driver/PerformanceCard.dart,sized_box_for_whitespace
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/PerformanceCard.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/PerformanceCard.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/Driver/PerformanceCard.dart,unnecessary_new
+info,The local variable '_response' starts with an underscore,lib/screens/Driver/PerformanceCard.dart,no_leading_underscores_for_local_identifiers
+info,Use interpolation to compose strings and values,lib/screens/Driver/PerformanceCard.dart,prefer_interpolation_to_compose_strings
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/PerformanceCard.dart,argument_type_not_assignable
+error,The getter 'headline6' isn't defined for the type 'TextTheme',lib/screens/Driver/PerformanceCard.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/PerformanceCard.dart,undefined_getter
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/Driver/PerformanceCard.dart,sized_box_for_whitespace
+info,Unnecessary 'new' keyword,lib/screens/Driver/PerformanceCard.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/PerformanceCard.dart,unnecessary_new
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/Driver/PerformanceCard.dart,sized_box_for_whitespace
+info,Unnecessary 'new' keyword,lib/screens/Driver/PerformanceCard.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/PerformanceCard.dart,unnecessary_new
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/Driver/PerformanceCard.dart,sized_box_for_whitespace
+info,Unnecessary 'new' keyword,lib/screens/Driver/PerformanceCard.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/PerformanceCard.dart,unnecessary_new
+error,The getter 'headline6' isn't defined for the type 'TextTheme',lib/screens/Driver/PerformanceCard.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/PerformanceCard.dart,undefined_getter
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/Driver/adHocDestinationForm.dart,unnecessary_import
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/Driver/adHocDestinationForm.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/adHocDestinationForm.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/adHocDestinationForm.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/Driver/adHocDestinationForm.dart,unnecessary_new
+info,Use 'isEmpty' instead of 'length' to test whether the collection is empty,lib/screens/Driver/adHocDestinationForm.dart,prefer_is_empty
+info,The local variable '_dio' starts with an underscore,lib/screens/Driver/adHocDestinationForm.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_res' starts with an underscore,lib/screens/Driver/adHocDestinationForm.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/adHocDestinationForm.dart,argument_type_not_assignable
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/adHocDestinationForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/adHocDestinationForm.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/Driver/additionalDetail.dart,unnecessary_import
+info,Invalid use of a private type in a public API,lib/screens/Driver/additionalDetail.dart,library_private_types_in_public_api
+info,The private field _additionalDetailFormKey could be 'final',lib/screens/Driver/additionalDetail.dart,prefer_final_fields
+info,The private field _onChanged could be 'final',lib/screens/Driver/additionalDetail.dart,prefer_final_fields
+info,Unnecessary 'new' keyword,lib/screens/Driver/additionalDetail.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/additionalDetail.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/additionalDetail.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/additionalDetail.dart,unnecessary_new
+warning,"The operand must be 'null', so the condition is always 'false'",lib/screens/Driver/additionalDetail.dart,unnecessary_null_comparison
+info,Unnecessary 'new' keyword,lib/screens/Driver/additionalDetail.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/additionalDetail.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/additionalDetail.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/additionalDetail.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/Driver/bocElogForm.dart,unnecessary_import
+warning,Unused import: 'package:transport_flutter/extensions/extensions.dart',lib/screens/Driver/bocElogForm.dart,unused_import
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/bocElogForm.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/bocElogForm.dart,library_private_types_in_public_api
+info,Use interpolation to compose strings and values,lib/screens/Driver/bocElogForm.dart,prefer_interpolation_to_compose_strings
+info,Use interpolation to compose strings and values,lib/screens/Driver/bocElogForm.dart,prefer_interpolation_to_compose_strings
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/Driver/bocElogForm.dart,undefined_getter
+error,The getter 'subtitle2' isn't defined for the type 'TextTheme',lib/screens/Driver/bocElogForm.dart,undefined_getter
+info,Unnecessary use of string interpolation,lib/screens/Driver/bocElogForm.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/bocElogForm.dart,undefined_getter
+error,The getter 'subtitle2' isn't defined for the type 'TextTheme',lib/screens/Driver/bocElogForm.dart,undefined_getter
+info,Unnecessary use of string interpolation,lib/screens/Driver/bocElogForm.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/bocElogForm.dart,undefined_getter
+error,The getter 'subtitle2' isn't defined for the type 'TextTheme',lib/screens/Driver/bocElogForm.dart,undefined_getter
+info,Unnecessary use of string interpolation,lib/screens/Driver/bocElogForm.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/bocElogForm.dart,undefined_getter
+info,Use 'isEmpty' instead of 'length' to test whether the collection is empty,lib/screens/Driver/bocElogForm.dart,prefer_is_empty
+info,Use 'isNotEmpty' instead of 'length' to test whether the collection is empty,lib/screens/Driver/bocElogForm.dart,prefer_is_empty
+info,Unnecessary 'new' keyword,lib/screens/Driver/bocElogForm.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/bocElogForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/bocElogForm.dart,deprecated_member_use
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/bocTripView.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/bocTripView.dart,library_private_types_in_public_api
+info,An uninitialized field should have an explicit type annotation,lib/screens/Driver/bocTripView.dart,prefer_typing_uninitialized_variables
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/Driver/checkList.dart,unnecessary_import
+warning,Unused import: 'package:transport_flutter/extensions/extensions.dart',lib/screens/Driver/checkList.dart,unused_import
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/checkList.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/checkList.dart,library_private_types_in_public_api
+info,Unnecessary instance of 'Container',lib/screens/Driver/checkList.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/checkList.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/checkList.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/checkList.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/checkList.dart,deprecated_member_use
+info,Unnecessary use of string interpolation,lib/screens/Driver/checkList.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/checkList.dart,undefined_getter
+info,Unnecessary use of string interpolation,lib/screens/Driver/checkList.dart,unnecessary_string_interpolations
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/Driver/checkList.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/checkList.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/checkList.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/checkList.dart,deprecated_member_use
+info,Unnecessary use of string interpolation,lib/screens/Driver/checkList.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/checkList.dart,undefined_getter
+info,Unnecessary use of string interpolation,lib/screens/Driver/checkList.dart,unnecessary_string_interpolations
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/Driver/checkList.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/checkList.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/checkList.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/checkList.dart,deprecated_member_use
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/Driver/checkList.dart,undefined_getter
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/driverCheckList.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/driverCheckList.dart,library_private_types_in_public_api
+info,Unnecessary instance of 'Container',lib/screens/Driver/driverCheckList.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/driverCheckList.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/driverCheckList.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/driverCheckList.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/driverCheckList.dart,deprecated_member_use
+info,Unnecessary instance of 'Container',lib/screens/Driver/driverCheckList.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/driverCheckList.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/driverCheckList.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/Driver/driverCheckList.dart,unnecessary_string_interpolations
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/Driver/driverCheckList.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/driverCheckList.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/driverCheckList.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/driverCheckList.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/driverCheckList.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/driverCheckList.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/driverCheckList.dart,deprecated_member_use
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/Driver/elogBook.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/elogBook.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/elogBook.dart,library_private_types_in_public_api
+info,An uninitialized field should have an explicit type annotation,lib/screens/Driver/elogBook.dart,prefer_typing_uninitialized_variables
+info,Unnecessary 'new' keyword,lib/screens/Driver/elogBook.dart,unnecessary_new
+info,The local variable '_a' starts with an underscore,lib/screens/Driver/elogBook.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_model' starts with an underscore,lib/screens/Driver/elogBook.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBook.dart,argument_type_not_assignable
+info,'DioError' is deprecated and shouldn't be used. Use DioException instead. This will be removed in 6.0.0,lib/screens/Driver/elogBook.dart,deprecated_member_use
+info,The local variable '_startTime' starts with an underscore,lib/screens/Driver/elogBook.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_dio' starts with an underscore,lib/screens/Driver/elogBook.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBook.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBook.dart,argument_type_not_assignable
+info,'DioError' is deprecated and shouldn't be used. Use DioException instead. This will be removed in 6.0.0,lib/screens/Driver/elogBook.dart,deprecated_member_use
+info,Unnecessary instance of 'Container',lib/screens/Driver/elogBook.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBook.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBook.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/Driver/elogBook.dart,unnecessary_new
+info,Use interpolation to compose strings and values,lib/screens/Driver/elogBook.dart,prefer_interpolation_to_compose_strings
+info,Unnecessary 'new' keyword,lib/screens/Driver/elogBook.dart,unnecessary_new
+info,Use interpolation to compose strings and values,lib/screens/Driver/elogBook.dart,prefer_interpolation_to_compose_strings
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBook.dart,argument_type_not_assignable
+error,The argument type 'Object' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBook.dart,argument_type_not_assignable
+info,'WillPopScope' is deprecated and shouldn't be used. Use PopScope instead. The Android predictive back feature will not work with WillPopScope. This feature was deprecated after v3.12.0-1.0.pre,lib/screens/Driver/elogBook.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/Driver/elogBook.dart,unnecessary_new
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/Driver/elogBook.dart,sized_box_for_whitespace
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBook.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBook.dart,deprecated_member_use
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBook.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBook.dart,argument_type_not_assignable
+error,The argument type 'Object' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBook.dart,argument_type_not_assignable
+info,Unnecessary instance of 'Container',lib/screens/Driver/elogBook.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBook.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/elogBook.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBook.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/elogBook.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBook.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/elogBook.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/Driver/elogBook.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBook.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/elogBook.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBook.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/elogBook.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBook.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/elogBook.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBook.dart,undefined_getter
+info,The local variable '_showStart' starts with an underscore,lib/screens/Driver/elogBook.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_item' starts with an underscore,lib/screens/Driver/elogBook.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_preItem' starts with an underscore,lib/screens/Driver/elogBook.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_currentMeterReading' starts with an underscore,lib/screens/Driver/elogBook.dart,no_leading_underscores_for_local_identifiers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBook.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBook.dart,deprecated_member_use
+info,Constructors for public widgets should have a named 'key' parameter,lib/screens/Driver/elogBookForm.dart,use_key_in_widget_constructors
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/elogBookForm.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/elogBookForm.dart,library_private_types_in_public_api
+info,The local variable '_dio' starts with an underscore,lib/screens/Driver/elogBookForm.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBookForm.dart,argument_type_not_assignable
+info,'DioError' is deprecated and shouldn't be used. Use DioException instead. This will be removed in 6.0.0,lib/screens/Driver/elogBookForm.dart,deprecated_member_use
+info,The local variable '_value' starts with an underscore,lib/screens/Driver/elogBookForm.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_data' starts with an underscore,lib/screens/Driver/elogBookForm.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_dio' starts with an underscore,lib/screens/Driver/elogBookForm.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_res' starts with an underscore,lib/screens/Driver/elogBookForm.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBookForm.dart,argument_type_not_assignable
+info,'DioError' is deprecated and shouldn't be used. Use DioException instead. This will be removed in 6.0.0,lib/screens/Driver/elogBookForm.dart,deprecated_member_use
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBookForm.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBookForm.dart,argument_type_not_assignable
+error,The argument type 'Object' can't be assigned to the parameter type 'String'.,lib/screens/Driver/elogBookForm.dart,argument_type_not_assignable
+info,Unnecessary instance of 'Container',lib/screens/Driver/elogBookForm.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBookForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBookForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBookForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBookForm.dart,deprecated_member_use
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBookForm.dart,undefined_getter
+error,The getter 'subtitle2' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBookForm.dart,undefined_getter
+error,The getter 'subtitle1' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBookForm.dart,undefined_getter
+error,The getter 'subtitle2' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBookForm.dart,undefined_getter
+error,The getter 'subtitle1' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBookForm.dart,undefined_getter
+error,The getter 'subtitle2' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBookForm.dart,undefined_getter
+error,The getter 'subtitle1' isn't defined for the type 'TextTheme',lib/screens/Driver/elogBookForm.dart,undefined_getter
+info,Use interpolation to compose strings and values,lib/screens/Driver/elogBookForm.dart,prefer_interpolation_to_compose_strings
+warning,"The operand can't be 'null', so the condition is always 'true'",lib/screens/Driver/elogBookForm.dart,unnecessary_null_comparison
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBookForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/elogBookForm.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/Driver/frontPassenger.dart,unnecessary_import
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/frontPassenger.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/frontPassenger.dart,library_private_types_in_public_api
+info,An uninitialized field should have an explicit type annotation,lib/screens/Driver/frontPassenger.dart,prefer_typing_uninitialized_variables
+info,Unnecessary instance of 'Container',lib/screens/Driver/frontPassenger.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/frontPassenger.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/frontPassenger.dart,avoid_unnecessary_containers
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/Driver/frontPassenger.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/frontPassenger.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/frontPassenger.dart,undefined_getter
+info,Use 'const' literals as arguments to constructors of '@immutable' classes,lib/screens/Driver/frontPassenger.dart,prefer_const_literals_to_create_immutables
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/frontPassenger.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/frontPassenger.dart,deprecated_member_use
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/home.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/home.dart,library_private_types_in_public_api
+info,Unnecessary 'this.' qualifier,lib/screens/Driver/home.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/screens/Driver/home.dart,unnecessary_this
+info,The local variable '_list' starts with an underscore,lib/screens/Driver/home.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/home.dart,argument_type_not_assignable
+info,Unnecessary instance of 'Container',lib/screens/Driver/home.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,Unnecessary instance of 'Container',lib/screens/Driver/home.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,Unnecessary instance of 'Container',lib/screens/Driver/home.dart,avoid_unnecessary_containers
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/Driver/home.dart,undefined_getter
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/Driver/home.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/home.dart,deprecated_member_use
+info,Unnecessary 'this.' qualifier,lib/screens/Driver/home.dart,unnecessary_this
+info,The imported package 'path_provider' isn't a dependency of the importing package,lib/screens/Driver/mt_broad_cast/bloc.dart,depend_on_referenced_packages
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/Driver/mt_broad_cast/bloc.dart,library_prefixes
+info,Unnecessary 'new' keyword,lib/screens/Driver/mt_broad_cast/bloc.dart,unnecessary_new
+info,The local variable '_list' starts with an underscore,lib/screens/Driver/mt_broad_cast/bloc.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/mt_broad_cast/bloc.dart,argument_type_not_assignable
+info,The local variable '_download' starts with an underscore,lib/screens/Driver/mt_broad_cast/bloc.dart,no_leading_underscores_for_local_identifiers
+info,Use interpolation to compose strings and values,lib/screens/Driver/mt_broad_cast/bloc.dart,prefer_interpolation_to_compose_strings
+info,Use interpolation to compose strings and values,lib/screens/Driver/mt_broad_cast/bloc.dart,prefer_interpolation_to_compose_strings
+info,The local variable '_percent' starts with an underscore,lib/screens/Driver/mt_broad_cast/bloc.dart,no_leading_underscores_for_local_identifiers
+warning,Unused import: 'package:transport_flutter/extensions/extensions.dart',lib/screens/Driver/mt_broad_cast/page.dart,unused_import
+info,Constructors for public widgets should have a named 'key' parameter,lib/screens/Driver/mt_broad_cast/page.dart,use_key_in_widget_constructors
+info,Invalid use of a private type in a public API,lib/screens/Driver/mt_broad_cast/page.dart,library_private_types_in_public_api
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/Driver/mt_broad_cast/page.dart,undefined_getter
+info,Use 'const' literals as arguments to constructors of '@immutable' classes,lib/screens/Driver/mt_broad_cast/page.dart,prefer_const_literals_to_create_immutables
+error,The getter 'headline6' isn't defined for the type 'TextTheme',lib/screens/Driver/mt_broad_cast/page.dart,undefined_getter
+info,Use 'const' literals as arguments to constructors of '@immutable' classes,lib/screens/Driver/mt_broad_cast/page.dart,prefer_const_literals_to_create_immutables
+info,'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss,lib/screens/Driver/mt_broad_cast/page.dart,deprecated_member_use
+error,The getter 'subtitle1' isn't defined for the type 'TextTheme',lib/screens/Driver/mt_broad_cast/page.dart,undefined_getter
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/Driver/mtrcForm.dart,unnecessary_import
+info,The import of 'package:transport_flutter/components/extension/extension.dart' is unnecessary because all of the used elements are also provided by the import of '../../components/components.dart',lib/screens/Driver/mtrcForm.dart,unnecessary_import
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/Driver/mtrcForm.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/mtrcForm.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/mtrcForm.dart,library_private_types_in_public_api
+info,An uninitialized field should have an explicit type annotation,lib/screens/Driver/mtrcForm.dart,prefer_typing_uninitialized_variables
+error,The method 'SuggestionsBoxController' isn't defined for the type '_MTRCFormScreenState',lib/screens/Driver/mtrcForm.dart,undefined_method
+error,The method 'SuggestionsBoxController' isn't defined for the type '_MTRCFormScreenState',lib/screens/Driver/mtrcForm.dart,undefined_method
+info,Unnecessary 'new' keyword,lib/screens/Driver/mtrcForm.dart,unnecessary_new
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/screens/Driver/mtrcForm.dart,prefer_if_null_operators
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/mtrcForm.dart,curly_braces_in_flow_control_structures
+info,Use interpolation to compose strings and values,lib/screens/Driver/mtrcForm.dart,prefer_interpolation_to_compose_strings
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/mtrcForm.dart,curly_braces_in_flow_control_structures
+info,Use interpolation to compose strings and values,lib/screens/Driver/mtrcForm.dart,prefer_interpolation_to_compose_strings
+info,Use interpolation to compose strings and values,lib/screens/Driver/mtrcForm.dart,prefer_interpolation_to_compose_strings
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/mtrcForm.dart,curly_braces_in_flow_control_structures
+info,Use 'isEmpty' instead of 'length' to test whether the collection is empty,lib/screens/Driver/mtrcForm.dart,prefer_is_empty
+info,Function literals shouldn't be passed to 'forEach',lib/screens/Driver/mtrcForm.dart,avoid_function_literals_in_foreach_calls
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/mtrcForm.dart,curly_braces_in_flow_control_structures
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/mtrcForm.dart,curly_braces_in_flow_control_structures
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/Driver/mtrcForm.dart,undefined_getter
+warning,The getter doesn't override an inherited getter,lib/screens/Driver/mtrcForm.dart,override_on_non_overriding_member
+info,Unnecessary 'new' keyword,lib/screens/Driver/mtrcForm.dart,unnecessary_new
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/mtrcForm.dart,curly_braces_in_flow_control_structures
+info,Unnecessary 'new' keyword,lib/screens/Driver/mtrcForm.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/mtrcForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/mtrcForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/mtrcForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/mtrcForm.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/Driver/mtrcForm.dart,unnecessary_new
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/mtrcForm.dart,curly_braces_in_flow_control_structures
+info,Unnecessary 'new' keyword,lib/screens/Driver/mtrcForm.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/mtrcForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/mtrcForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/mtrcForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/mtrcForm.dart,deprecated_member_use
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/Driver/past_14_days_elog/bloc.dart,library_prefixes
+info,Unnecessary 'new' keyword,lib/screens/Driver/past_14_days_elog/bloc.dart,unnecessary_new
+info,The local variable '_list' starts with an underscore,lib/screens/Driver/past_14_days_elog/bloc.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_list' starts with an underscore,lib/screens/Driver/past_14_days_elog/bloc.dart,no_leading_underscores_for_local_identifiers
+info,Unnecessary use of string interpolation,lib/screens/Driver/past_14_days_elog/bloc.dart,unnecessary_string_interpolations
+info,Unnecessary use of string interpolation,lib/screens/Driver/past_14_days_elog/bloc.dart,unnecessary_string_interpolations
+warning,Unused import: 'package:transport_flutter/extensions/extensions.dart',lib/screens/Driver/past_14_days_elog/page.dart,unused_import
+info,Constructors for public widgets should have a named 'key' parameter,lib/screens/Driver/past_14_days_elog/page.dart,use_key_in_widget_constructors
+info,Invalid use of a private type in a public API,lib/screens/Driver/past_14_days_elog/page.dart,library_private_types_in_public_api
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/Driver/past_14_days_elog/page.dart,undefined_getter
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/past_14_days_elog/page.dart,curly_braces_in_flow_control_structures
+info,'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss,lib/screens/Driver/past_14_days_elog/page.dart,deprecated_member_use
+error,The getter 'subtitle1' isn't defined for the type 'TextTheme',lib/screens/Driver/past_14_days_elog/page.dart,undefined_getter
+error,The getter 'subtitle1' isn't defined for the type 'TextTheme',lib/screens/Driver/past_14_days_elog/page.dart,undefined_getter
+info,The local variable '_tables' starts with an underscore,lib/screens/Driver/past_14_days_elog/page.dart,no_leading_underscores_for_local_identifiers
+info,Unnecessary 'new' keyword,lib/screens/Driver/past_14_days_elog/page.dart,unnecessary_new
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/Driver/quiz.dart,unnecessary_import
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/quiz.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/quiz.dart,library_private_types_in_public_api
+info,Unnecessary instance of 'Container',lib/screens/Driver/quiz.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/quiz.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/quiz.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/quiz.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/quiz.dart,deprecated_member_use
+info,Unnecessary instance of 'Container',lib/screens/Driver/quiz.dart,avoid_unnecessary_containers
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/Driver/quiz.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/quiz.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/quiz.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/quiz.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/quiz.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/quiz.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/quiz.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/Driver/riskAccessment.dart,unnecessary_import
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/riskAccessment.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/riskAccessment.dart,library_private_types_in_public_api
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/riskAccessment.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/riskAccessment.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/riskAccessment.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/riskAccessment.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/riskAccessment.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/riskAccessment.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/Driver/selectVehicle.dart,unnecessary_import
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/selectVehicle.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/selectVehicle.dart,library_private_types_in_public_api
+error,The method 'SuggestionsBoxController' isn't defined for the type '_SelectVehicleFormScreenState',lib/screens/Driver/selectVehicle.dart,undefined_method
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/screens/Driver/selectVehicle.dart,prefer_if_null_operators
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/selectVehicle.dart,curly_braces_in_flow_control_structures
+info,Use interpolation to compose strings and values,lib/screens/Driver/selectVehicle.dart,prefer_interpolation_to_compose_strings
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/selectVehicle.dart,curly_braces_in_flow_control_structures
+info,Use interpolation to compose strings and values,lib/screens/Driver/selectVehicle.dart,prefer_interpolation_to_compose_strings
+info,Use interpolation to compose strings and values,lib/screens/Driver/selectVehicle.dart,prefer_interpolation_to_compose_strings
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/selectVehicle.dart,curly_braces_in_flow_control_structures
+warning,"The operand can't be 'null', so the condition is always 'false'",lib/screens/Driver/selectVehicle.dart,unnecessary_null_comparison
+info,The local variable '_eLogData' starts with an underscore,lib/screens/Driver/selectVehicle.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/selectVehicle.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/selectVehicle.dart,argument_type_not_assignable
+info,'DioError' is deprecated and shouldn't be used. Use DioException instead. This will be removed in 6.0.0,lib/screens/Driver/selectVehicle.dart,deprecated_member_use
+info,The private field _onChanged could be 'final',lib/screens/Driver/selectVehicle.dart,prefer_final_fields
+info,Unnecessary 'new' keyword,lib/screens/Driver/selectVehicle.dart,unnecessary_new
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/selectVehicle.dart,curly_braces_in_flow_control_structures
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/selectVehicle.dart,curly_braces_in_flow_control_structures
+info,Unnecessary use of string interpolation,lib/screens/Driver/selectVehicle.dart,unnecessary_string_interpolations
+info,Unnecessary 'new' keyword,lib/screens/Driver/selectVehicle.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/selectVehicle.dart,unnecessary_new
+info,Unnecessary use of string interpolation,lib/screens/Driver/selectVehicle.dart,unnecessary_string_interpolations
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/selectVehicle.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/selectVehicle.dart,deprecated_member_use
+error,The getter 'headline5' isn't defined for the type 'TextTheme',lib/screens/Driver/selectVehicle.dart,undefined_getter
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/Driver/trip.dart,library_prefixes
+info,Invalid use of a private type in a public API,lib/screens/Driver/trip.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/Driver/trip.dart,unnecessary_new
+info,Unnecessary 'this.' qualifier,lib/screens/Driver/trip.dart,unnecessary_this
+info,The local variable '_list' starts with an underscore,lib/screens/Driver/trip.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_finalList' starts with an underscore,lib/screens/Driver/trip.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/trip.dart,argument_type_not_assignable
+info,Unnecessary instance of 'Container',lib/screens/Driver/trip.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/trip.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/trip.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/Driver/trip.dart,unnecessary_new
+info,Use 'const' literals as arguments to constructors of '@immutable' classes,lib/screens/Driver/trip.dart,prefer_const_literals_to_create_immutables
+info,Use 'isEmpty' instead of 'length' to test whether the collection is empty,lib/screens/Driver/trip.dart,prefer_is_empty
+info,The local variable '_lastEnterReading' starts with an underscore,lib/screens/Driver/trip.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/Driver/trip.dart,argument_type_not_assignable
+info,Unnecessary 'new' keyword,lib/screens/Driver/trip.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/trip.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/trip.dart,deprecated_member_use
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/Driver/tripForm.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/tripForm.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/tripForm.dart,library_private_types_in_public_api
+error,The method 'SuggestionsBoxController' isn't defined for the type '_TripFormScreenState',lib/screens/Driver/tripForm.dart,undefined_method
+error,The method 'SuggestionsBoxController' isn't defined for the type '_TripFormScreenState',lib/screens/Driver/tripForm.dart,undefined_method
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripForm.dart,unnecessary_new
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/tripForm.dart,curly_braces_in_flow_control_structures
+info,Use interpolation to compose strings and values,lib/screens/Driver/tripForm.dart,prefer_interpolation_to_compose_strings
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/tripForm.dart,curly_braces_in_flow_control_structures
+info,Use interpolation to compose strings and values,lib/screens/Driver/tripForm.dart,prefer_interpolation_to_compose_strings
+info,Use interpolation to compose strings and values,lib/screens/Driver/tripForm.dart,prefer_interpolation_to_compose_strings
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/tripForm.dart,curly_braces_in_flow_control_structures
+info,Use 'isEmpty' instead of 'length' to test whether the collection is empty,lib/screens/Driver/tripForm.dart,prefer_is_empty
+info,Function literals shouldn't be passed to 'forEach',lib/screens/Driver/tripForm.dart,avoid_function_literals_in_foreach_calls
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/tripForm.dart,curly_braces_in_flow_control_structures
+info,The local variable '_map' starts with an underscore,lib/screens/Driver/tripForm.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_dio' starts with an underscore,lib/screens/Driver/tripForm.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'Object' can't be assigned to the parameter type 'String'.,lib/screens/Driver/tripForm.dart,argument_type_not_assignable
+info,The private field _onChanged could be 'final',lib/screens/Driver/tripForm.dart,prefer_final_fields
+info,Unnecessary instance of 'Container',lib/screens/Driver/tripForm.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripForm.dart,unnecessary_new
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/tripForm.dart,curly_braces_in_flow_control_structures
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripForm.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripForm.dart,unnecessary_new
+info,Statements in an if should be enclosed in a block,lib/screens/Driver/tripForm.dart,curly_braces_in_flow_control_structures
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripForm.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/tripForm.dart,deprecated_member_use
+info,The prefix 'Constants' isn't a lower_case_with_underscores identifier,lib/screens/Driver/tripPageView.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/tripPageView.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/tripPageView.dart,library_private_types_in_public_api
+info,An uninitialized field should have an explicit type annotation,lib/screens/Driver/tripPageView.dart,prefer_typing_uninitialized_variables
+info,An uninitialized field should have an explicit type annotation,lib/screens/Driver/tripPageView.dart,prefer_typing_uninitialized_variables
+info,An uninitialized field should have an explicit type annotation,lib/screens/Driver/tripPageView.dart,prefer_typing_uninitialized_variables
+info,An uninitialized field should have an explicit type annotation,lib/screens/Driver/tripPageView.dart,prefer_typing_uninitialized_variables
+info,An uninitialized field should have an explicit type annotation,lib/screens/Driver/tripPageView.dart,prefer_typing_uninitialized_variables
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/screens/Driver/tripPageView.dart,prefer_if_null_operators
+info,The local variable '_map' starts with an underscore,lib/screens/Driver/tripPageView.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_mtracForm' starts with an underscore,lib/screens/Driver/tripPageView.dart,no_leading_underscores_for_local_identifiers
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,The local variable '_dio' starts with an underscore,lib/screens/Driver/tripPageView.dart,no_leading_underscores_for_local_identifiers
+info,'DioError' is deprecated and shouldn't be used. Use DioException instead. This will be removed in 6.0.0,lib/screens/Driver/tripPageView.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Use the '??' operator rather than '?:' when testing for 'null',lib/screens/Driver/tripPageView.dart,prefer_if_null_operators
+info,The local variable '_map' starts with an underscore,lib/screens/Driver/tripPageView.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_mtracForm' starts with an underscore,lib/screens/Driver/tripPageView.dart,no_leading_underscores_for_local_identifiers
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,The local variable '_dio' starts with an underscore,lib/screens/Driver/tripPageView.dart,no_leading_underscores_for_local_identifiers
+info,'DioError' is deprecated and shouldn't be used. Use DioException instead. This will be removed in 6.0.0,lib/screens/Driver/tripPageView.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/Driver/tripPageView.dart,unnecessary_new
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/Driver/vehicleCommander.dart,unnecessary_import
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/Driver/vehicleCommander.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/Driver/vehicleCommander.dart,library_private_types_in_public_api
+info,Unnecessary instance of 'Container',lib/screens/Driver/vehicleCommander.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/vehicleCommander.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/vehicleCommander.dart,avoid_unnecessary_containers
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/Driver/vehicleCommander.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/Driver/vehicleCommander.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/Driver/vehicleCommander.dart,undefined_getter
+info,Use 'const' literals as arguments to constructors of '@immutable' classes,lib/screens/Driver/vehicleCommander.dart,prefer_const_literals_to_create_immutables
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/vehicleCommander.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/Driver/vehicleCommander.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/MAC/AVICheckInForm.dart,unnecessary_import
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/MAC/AVICheckInForm.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/MAC/AVICheckInForm.dart,library_private_types_in_public_api
+error,The method 'SuggestionsBoxController' isn't defined for the type '_AVICheckInFormState',lib/screens/MAC/AVICheckInForm.dart,undefined_method
+info,An uninitialized field should have an explicit type annotation,lib/screens/MAC/AVICheckInForm.dart,prefer_typing_uninitialized_variables
+info,The private field _onChanged could be 'final',lib/screens/MAC/AVICheckInForm.dart,prefer_final_fields
+info,Unnecessary 'this.' qualifier,lib/screens/MAC/AVICheckInForm.dart,unnecessary_this
+info,Use 'isEmpty' instead of 'length' to test whether the collection is empty,lib/screens/MAC/AVICheckInForm.dart,prefer_is_empty
+info,Unnecessary 'new' keyword,lib/screens/MAC/AVICheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/AVICheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/AVICheckInForm.dart,unnecessary_new
+info,Use interpolation to compose strings and values,lib/screens/MAC/AVICheckInForm.dart,prefer_interpolation_to_compose_strings
+info,Unnecessary use of string interpolation,lib/screens/MAC/AVICheckInForm.dart,unnecessary_string_interpolations
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/AVICheckInForm.dart,sized_box_for_whitespace
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/AVICheckInForm.dart,sized_box_for_whitespace
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/AVICheckInForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/AVICheckInForm.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/MAC/AVICheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/AVICheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/AVICheckInForm.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/AVICheckInForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/AVICheckInForm.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/MAC/CheckInForm.dart,unnecessary_import
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/MAC/CheckInForm.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/MAC/CheckInForm.dart,library_private_types_in_public_api
+error,The method 'SuggestionsBoxController' isn't defined for the type '_CheckInFormState',lib/screens/MAC/CheckInForm.dart,undefined_method
+error,The method 'SuggestionsBoxController' isn't defined for the type '_CheckInFormState',lib/screens/MAC/CheckInForm.dart,undefined_method
+info,An uninitialized field should have an explicit type annotation,lib/screens/MAC/CheckInForm.dart,prefer_typing_uninitialized_variables
+info,The private field _serviceTextController could be 'final',lib/screens/MAC/CheckInForm.dart,prefer_final_fields
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckInForm.dart,unnecessary_new
+info,The private field _onChanged could be 'final',lib/screens/MAC/CheckInForm.dart,prefer_final_fields
+info,Unnecessary 'this.' qualifier,lib/screens/MAC/CheckInForm.dart,unnecessary_this
+info,Use 'isEmpty' instead of 'length' to test whether the collection is empty,lib/screens/MAC/CheckInForm.dart,prefer_is_empty
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckInForm.dart,unnecessary_new
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/CheckInForm.dart,sized_box_for_whitespace
+info,Use 'const' literals as arguments to constructors of '@immutable' classes,lib/screens/MAC/CheckInForm.dart,prefer_const_literals_to_create_immutables
+info,Use 'const' literals as arguments to constructors of '@immutable' classes,lib/screens/MAC/CheckInForm.dart,prefer_const_literals_to_create_immutables
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/CheckInForm.dart,sized_box_for_whitespace
+info,Use interpolation to compose strings and values,lib/screens/MAC/CheckInForm.dart,prefer_interpolation_to_compose_strings
+info,Unnecessary use of string interpolation,lib/screens/MAC/CheckInForm.dart,unnecessary_string_interpolations
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/CheckInForm.dart,sized_box_for_whitespace
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/CheckInForm.dart,sized_box_for_whitespace
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CheckInForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CheckInForm.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckInForm.dart,unnecessary_new
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/CheckInForm.dart,sized_box_for_whitespace
+info,Use 'isNotEmpty' instead of 'length' to test whether the collection is empty,lib/screens/MAC/CheckInForm.dart,prefer_is_empty
+warning,"This function has a nullable return type of 'String?', but ends without returning a value",lib/screens/MAC/CheckInForm.dart,body_might_complete_normally_nullable
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckInForm.dart,unnecessary_new
+info,Unnecessary use of string interpolation,lib/screens/MAC/CheckInForm.dart,unnecessary_string_interpolations
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CheckInForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CheckInForm.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/MAC/CheckOutForm.dart,unnecessary_import
+info,An uninitialized field should have an explicit type annotation,lib/screens/MAC/CheckOutForm.dart,prefer_typing_uninitialized_variables
+info,"'required' is deprecated and shouldn't be used. In Dart 2.12 and later, use the built-in `required` keyword to mark a named parameter as required",lib/screens/MAC/CheckOutForm.dart,deprecated_member_use
+info,Invalid use of a private type in a public API,lib/screens/MAC/CheckOutForm.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckOutForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckOutForm.dart,unnecessary_new
+info,The local variable '_typeData' starts with an underscore,lib/screens/MAC/CheckOutForm.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_data' starts with an underscore,lib/screens/MAC/CheckOutForm.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/MAC/CheckOutForm.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/MAC/CheckOutForm.dart,argument_type_not_assignable
+error,The argument type 'Object' can't be assigned to the parameter type 'String'.,lib/screens/MAC/CheckOutForm.dart,argument_type_not_assignable
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckOutForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckOutForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckOutForm.dart,unnecessary_new
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/CheckOutForm.dart,sized_box_for_whitespace
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/CheckOutForm.dart,sized_box_for_whitespace
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CheckOutForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CheckOutForm.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckOutForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/CheckOutForm.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CheckOutForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CheckOutForm.dart,deprecated_member_use
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/MAC/CorrectiveCheckInForm.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/MAC/CorrectiveCheckInForm.dart,library_private_types_in_public_api
+error,The method 'SuggestionsBoxController' isn't defined for the type '_CorrectiveCheckInFormState',lib/screens/MAC/CorrectiveCheckInForm.dart,undefined_method
+info,An uninitialized field should have an explicit type annotation,lib/screens/MAC/CorrectiveCheckInForm.dart,prefer_typing_uninitialized_variables
+info,The private field _onChanged could be 'final',lib/screens/MAC/CorrectiveCheckInForm.dart,prefer_final_fields
+info,Unnecessary 'this.' qualifier,lib/screens/MAC/CorrectiveCheckInForm.dart,unnecessary_this
+info,Use 'isEmpty' instead of 'length' to test whether the collection is empty,lib/screens/MAC/CorrectiveCheckInForm.dart,prefer_is_empty
+info,Unnecessary 'new' keyword,lib/screens/MAC/CorrectiveCheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/CorrectiveCheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/CorrectiveCheckInForm.dart,unnecessary_new
+info,Use interpolation to compose strings and values,lib/screens/MAC/CorrectiveCheckInForm.dart,prefer_interpolation_to_compose_strings
+info,Unnecessary use of string interpolation,lib/screens/MAC/CorrectiveCheckInForm.dart,unnecessary_string_interpolations
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/CorrectiveCheckInForm.dart,sized_box_for_whitespace
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/CorrectiveCheckInForm.dart,sized_box_for_whitespace
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CorrectiveCheckInForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CorrectiveCheckInForm.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/MAC/CorrectiveCheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/CorrectiveCheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/CorrectiveCheckInForm.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CorrectiveCheckInForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/CorrectiveCheckInForm.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/MAC/Maintenance.dart,unnecessary_import
+info,The prefix 'Constants' isn't a lower_case_with_underscores identifier,lib/screens/MAC/Maintenance.dart,library_prefixes
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/MAC/Maintenance.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/MAC/Maintenance.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/MAC/Maintenance.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/MAC/Maintenance.dart,unnecessary_new
+info,The local variable '_a' starts with an underscore,lib/screens/MAC/Maintenance.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_model' starts with an underscore,lib/screens/MAC/Maintenance.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/MAC/Maintenance.dart,argument_type_not_assignable
+error,The argument type 'Object' can't be assigned to the parameter type 'String'.,lib/screens/MAC/Maintenance.dart,argument_type_not_assignable
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,The 'child' argument should be last in widget constructor invocations,lib/screens/MAC/Maintenance.dart,sort_child_properties_last
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/Maintenance.dart,avoid_unnecessary_containers
+info,Unnecessary use of string interpolation,lib/screens/MAC/Maintenance.dart,unnecessary_string_interpolations
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/Maintenance.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/Maintenance.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/Maintenance.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/Maintenance.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/Maintenance.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/Maintenance.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/Maintenance.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/MAC/PreventiveCheckInForm.dart,unnecessary_import
+info,The prefix 'Constants' isn't a lower_case_with_underscores identifier,lib/screens/MAC/PreventiveCheckInForm.dart,library_prefixes
+info,The local variable '_title' starts with an underscore,lib/screens/MAC/PreventiveCheckInForm.dart,no_leading_underscores_for_local_identifiers
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/MAC/PreventiveCheckInForm.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/MAC/PreventiveCheckInForm.dart,library_private_types_in_public_api
+error,The method 'SuggestionsBoxController' isn't defined for the type '_PreventiveCheckInFormState',lib/screens/MAC/PreventiveCheckInForm.dart,undefined_method
+info,An uninitialized field should have an explicit type annotation,lib/screens/MAC/PreventiveCheckInForm.dart,prefer_typing_uninitialized_variables
+info,The private field _onChanged could be 'final',lib/screens/MAC/PreventiveCheckInForm.dart,prefer_final_fields
+info,Unnecessary 'this.' qualifier,lib/screens/MAC/PreventiveCheckInForm.dart,unnecessary_this
+info,Use 'isEmpty' instead of 'length' to test whether the collection is empty,lib/screens/MAC/PreventiveCheckInForm.dart,prefer_is_empty
+info,Unnecessary 'new' keyword,lib/screens/MAC/PreventiveCheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/PreventiveCheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/PreventiveCheckInForm.dart,unnecessary_new
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/PreventiveCheckInForm.dart,sized_box_for_whitespace
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/PreventiveCheckInForm.dart,sized_box_for_whitespace
+info,The local variable '_typeData' starts with an underscore,lib/screens/MAC/PreventiveCheckInForm.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_images' starts with an underscore,lib/screens/MAC/PreventiveCheckInForm.dart,no_leading_underscores_for_local_identifiers
+info,Statements in an if should be enclosed in a block,lib/screens/MAC/PreventiveCheckInForm.dart,curly_braces_in_flow_control_structures
+info,The local variable '_a' starts with an underscore,lib/screens/MAC/PreventiveCheckInForm.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_img' starts with an underscore,lib/screens/MAC/PreventiveCheckInForm.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_checkoutDate' starts with an underscore,lib/screens/MAC/PreventiveCheckInForm.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_data' starts with an underscore,lib/screens/MAC/PreventiveCheckInForm.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_dio' starts with an underscore,lib/screens/MAC/PreventiveCheckInForm.dart,no_leading_underscores_for_local_identifiers
+info,Unnecessary use of string interpolation,lib/screens/MAC/PreventiveCheckInForm.dart,unnecessary_string_interpolations
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/MAC/PreventiveCheckInForm.dart,argument_type_not_assignable
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/MAC/PreventiveCheckInForm.dart,argument_type_not_assignable
+info,'DioError' is deprecated and shouldn't be used. Use DioException instead. This will be removed in 6.0.0,lib/screens/MAC/PreventiveCheckInForm.dart,deprecated_member_use
+info,Unnecessary use of string interpolation,lib/screens/MAC/PreventiveCheckInForm.dart,unnecessary_string_interpolations
+info,Unnecessary use of string interpolation,lib/screens/MAC/PreventiveCheckInForm.dart,unnecessary_string_interpolations
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/PreventiveCheckInForm.dart,sized_box_for_whitespace
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/PreventiveCheckInForm.dart,sized_box_for_whitespace
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/PreventiveCheckInForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/PreventiveCheckInForm.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/MAC/PreventiveCheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/PreventiveCheckInForm.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/PreventiveCheckInForm.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/PreventiveCheckInForm.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/PreventiveCheckInForm.dart,deprecated_member_use
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/MAC/VehicleUpdate.dart,unnecessary_import
+info,An uninitialized field should have an explicit type annotation,lib/screens/MAC/VehicleUpdate.dart,prefer_typing_uninitialized_variables
+info,An uninitialized field should have an explicit type annotation,lib/screens/MAC/VehicleUpdate.dart,prefer_typing_uninitialized_variables
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/MAC/VehicleUpdate.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/MAC/VehicleUpdate.dart,library_private_types_in_public_api
+info,The local variable '_data' starts with an underscore,lib/screens/MAC/VehicleUpdate.dart,no_leading_underscores_for_local_identifiers
+info,Unnecessary 'new' keyword,lib/screens/MAC/VehicleUpdate.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/VehicleUpdate.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/VehicleUpdate.dart,deprecated_member_use
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/MAC/ViewLog.dart,library_prefixes
+info,An uninitialized field should have an explicit type annotation,lib/screens/MAC/ViewLog.dart,prefer_typing_uninitialized_variables
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/MAC/ViewLog.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/MAC/ViewLog.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/MAC/ViewLog.dart,unnecessary_new
+info,The local variable '_list' starts with an underscore,lib/screens/MAC/ViewLog.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_finalList' starts with an underscore,lib/screens/MAC/ViewLog.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/MAC/ViewLog.dart,argument_type_not_assignable
+info,Unnecessary instance of 'Container',lib/screens/MAC/ViewLog.dart,avoid_unnecessary_containers
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/MAC/ViewLog.dart,undefined_getter
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/ViewLog.dart,sized_box_for_whitespace
+info,Unnecessary use of string interpolation,lib/screens/MAC/ViewLog.dart,unnecessary_string_interpolations
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/ViewLog.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/ViewLog.dart,deprecated_member_use
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/MAC/home.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/MAC/home.dart,library_private_types_in_public_api
+info,Unnecessary 'this.' qualifier,lib/screens/MAC/home.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/screens/MAC/home.dart,unnecessary_this
+info,The local variable '_list' starts with an underscore,lib/screens/MAC/home.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'String?' can't be assigned to the parameter type 'String'.,lib/screens/MAC/home.dart,argument_type_not_assignable
+info,Unnecessary 'new' keyword,lib/screens/MAC/home.dart,unnecessary_new
+info,Use a 'SizedBox' to add whitespace to a layout,lib/screens/MAC/home.dart,sized_box_for_whitespace
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/home.dart,deprecated_member_use
+info,Unnecessary 'this.' qualifier,lib/screens/MAC/home.dart,unnecessary_this
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/home.dart,deprecated_member_use
+info,Unnecessary 'this.' qualifier,lib/screens/MAC/home.dart,unnecessary_this
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/home.dart,deprecated_member_use
+info,Unnecessary 'this.' qualifier,lib/screens/MAC/home.dart,unnecessary_this
+info,Unnecessary 'new' keyword,lib/screens/MAC/home.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/MAC/home.dart,unnecessary_new
+info,Unnecessary instance of 'Container',lib/screens/MAC/home.dart,avoid_unnecessary_containers
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/MAC/home.dart,undefined_getter
+error,The getter 'headline4' isn't defined for the type 'TextTheme',lib/screens/MAC/home.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/MAC/home.dart,avoid_unnecessary_containers
+error,The getter 'headline6' isn't defined for the type 'TextTheme',lib/screens/MAC/home.dart,undefined_getter
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/home.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/MAC/home.dart,deprecated_member_use
+info,Unnecessary 'this.' qualifier,lib/screens/MAC/home.dart,unnecessary_this
+info,The prefix 'DioClient' isn't a lower_case_with_underscores identifier,lib/screens/appLoading.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/appLoading.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/appLoading.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/appLoading.dart,unnecessary_new
+info,'DioError' is deprecated and shouldn't be used. Use DioException instead. This will be removed in 6.0.0,lib/screens/appLoading.dart,deprecated_member_use
+info,Unnecessary instance of 'Container',lib/screens/appLoading.dart,avoid_unnecessary_containers
+info,The prefix 'Constants' isn't a lower_case_with_underscores identifier,lib/screens/learningVideo.dart,library_prefixes
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/learningVideo.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/learningVideo.dart,library_private_types_in_public_api
+warning,The declaration '_buildList' isn't referenced,lib/screens/learningVideo.dart,unused_element
+info,Statements in an if should be enclosed in a block,lib/screens/learningVideo.dart,curly_braces_in_flow_control_structures
+info,Unnecessary 'new' keyword,lib/screens/learningVideo.dart,unnecessary_new
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/login.dart,prefer_const_constructors_in_immutables
+info,Invalid use of a private type in a public API,lib/screens/login.dart,library_private_types_in_public_api
+info,Unnecessary 'new' keyword,lib/screens/login.dart,unnecessary_new
+info,Unnecessary 'new' keyword,lib/screens/login.dart,unnecessary_new
+error,The getter 'headline3' isn't defined for the type 'TextTheme',lib/screens/login.dart,undefined_getter
+error,The getter 'bodyText1' isn't defined for the type 'TextTheme',lib/screens/login.dart,undefined_getter
+info,Unnecessary instance of 'Container',lib/screens/login.dart,avoid_unnecessary_containers
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/login.dart,deprecated_member_use
+info,Unnecessary 'new' keyword,lib/screens/login.dart,unnecessary_new
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/login.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/login.dart,deprecated_member_use
+info,'MaterialStateProperty' is deprecated and shouldn't be used. Use WidgetStateProperty instead. Moved to the Widgets layer to make code available outside of Material. This feature was deprecated after v3.19.0-0.3.pre,lib/screens/login.dart,deprecated_member_use
+info,Unnecessary 'this.' qualifier,lib/screens/login.dart,unnecessary_this
+error,The getter 'bodyText2' isn't defined for the type 'TextTheme',lib/screens/login.dart,undefined_getter
+error,The getter 'bodyText2' isn't defined for the type 'TextTheme',lib/screens/login.dart,undefined_getter
+info,The prefix 'DioClient' isn't a lower_case_with_underscores identifier,lib/screens/loginWebView.dart,library_prefixes
+info,The prefix 'Constants' isn't a lower_case_with_underscores identifier,lib/screens/loginWebView.dart,library_prefixes
+info,The prefix 'Request' isn't a lower_case_with_underscores identifier,lib/screens/loginWebView.dart,library_prefixes
+info,Constructors for public widgets should have a named 'key' parameter,lib/screens/loginWebView.dart,use_key_in_widget_constructors
+info,Invalid use of a private type in a public API,lib/screens/loginWebView.dart,library_private_types_in_public_api
+error,Undefined name 'WebView',lib/screens/loginWebView.dart,undefined_identifier
+error,The method 'AndroidWebView' isn't defined for the type '_LoginAuthScreenState',lib/screens/loginWebView.dart,undefined_method
+error,The method 'WebView' isn't defined for the type '_LoginAuthScreenState',lib/screens/loginWebView.dart,undefined_method
+error,Undefined name 'JavascriptMode',lib/screens/loginWebView.dart,undefined_identifier
+info,The local variable '_roles' starts with an underscore,lib/screens/loginWebView.dart,no_leading_underscores_for_local_identifiers
+info,Function literals shouldn't be passed to 'forEach',lib/screens/loginWebView.dart,avoid_function_literals_in_foreach_calls
+info,The local variable '_client' starts with an underscore,lib/screens/loginWebView.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_dio' starts with an underscore,lib/screens/loginWebView.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'Object' can't be assigned to the parameter type 'String'.,lib/screens/loginWebView.dart,argument_type_not_assignable
+info,The local variable '_client' starts with an underscore,lib/screens/loginWebView.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_dio' starts with an underscore,lib/screens/loginWebView.dart,no_leading_underscores_for_local_identifiers
+error,The argument type 'Object' can't be assigned to the parameter type 'String'.,lib/screens/loginWebView.dart,argument_type_not_assignable
+info,The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart',lib/screens/video.dart,unnecessary_import
+info,The imported package 'video_player' isn't a dependency of the importing package,lib/screens/video.dart,depend_on_referenced_packages
+info,Constructors for public widgets should have a named 'key' parameter,lib/screens/video.dart,use_key_in_widget_constructors
+info,Constructors in '@immutable' classes should be declared as 'const',lib/screens/video.dart,prefer_const_constructors_in_immutables
+info,'VideoPlayerController.network' is deprecated and shouldn't be used. Use VideoPlayerController.networkUrl instead,lib/screens/video.dart,deprecated_member_use
+info,Unnecessary use of string interpolation,lib/screens/video.dart,unnecessary_string_interpolations
+error,The argument type 'CardTheme' can't be assigned to the parameter type 'CardThemeData?'.,lib/theme/app_theme.dart,argument_type_not_assignable
+error,The argument type 'DialogTheme' can't be assigned to the parameter type 'DialogThemeData?'.,lib/theme/app_theme.dart,argument_type_not_assignable
+error,The named parameter 'headline1' isn't defined,lib/theme/app_theme.dart,undefined_named_parameter
+error,The named parameter 'headline4' isn't defined,lib/theme/app_theme.dart,undefined_named_parameter
+error,The named parameter 'headline5' isn't defined,lib/theme/app_theme.dart,undefined_named_parameter
+error,The named parameter 'headline6' isn't defined,lib/theme/app_theme.dart,undefined_named_parameter
+error,The named parameter 'bodyText1' isn't defined,lib/theme/app_theme.dart,undefined_named_parameter
+error,The named parameter 'bodyText2' isn't defined,lib/theme/app_theme.dart,undefined_named_parameter
+error,The named parameter 'subtitle1' isn't defined,lib/theme/app_theme.dart,undefined_named_parameter
+error,The named parameter 'subtitle2' isn't defined,lib/theme/app_theme.dart,undefined_named_parameter
+info,The constant name 'SUPPORTED_ROLES' isn't a lowerCamelCase identifier,lib/util/currentUserData.dart,constant_identifier_names
+info,The imported package 'http' isn't a dependency of the importing package,lib/util/request.dart,depend_on_referenced_packages
+info,The imported package 'http' isn't a dependency of the importing package,lib/util/request.dart,depend_on_referenced_packages
+info,The prefix 'Constants' isn't a lower_case_with_underscores identifier,lib/util/request.dart,library_prefixes
+info,Unnecessary 'this.' qualifier,lib/util/request.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/util/request.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/util/request.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/util/request.dart,unnecessary_this
+info,The local variable '_storage' starts with an underscore,lib/util/request.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_token' starts with an underscore,lib/util/request.dart,no_leading_underscores_for_local_identifiers
+info,Unnecessary 'this.' qualifier,lib/util/request.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/util/request.dart,unnecessary_this
+info,The local variable '_storage' starts with an underscore,lib/util/request.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_token' starts with an underscore,lib/util/request.dart,no_leading_underscores_for_local_identifiers
+info,Unnecessary 'this.' qualifier,lib/util/request.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/util/request.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/util/request.dart,unnecessary_this
+info,Unnecessary 'this.' qualifier,lib/util/request.dart,unnecessary_this
+info,The local variable '_storage' starts with an underscore,lib/util/request.dart,no_leading_underscores_for_local_identifiers
+info,The local variable '_token' starts with an underscore,lib/util/request.dart,no_leading_underscores_for_local_identifiers
+info,Unnecessary 'this.' qualifier,lib/util/request.dart,unnecessary_this
